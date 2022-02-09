@@ -7,32 +7,11 @@ function awardmoney(){
 function awardcard(id1,id2){
 	for(col=1;col<=id2;col++){
 		let card = Math.floor(Math.random() * player.data.allcard)
-			switch(card){
-				case 0:
-				player.data[id1+col] = new Decimal(1)
-				break
-				case 1:
-				player.data[id1+col] = new Decimal(2)
-				break
-				case 2:
-				player.data[id1+col] = new Decimal(3)
-				break
-				case 3:
-				player.data[id1+col] = new Decimal(4)
-				break
-				case 4:
-				player.data[id1+col] = new Decimal(5)
-				break
-				case 5:
-				player.data[id1+col] = new Decimal(6)
-				break
-				case 6:
-				player.data[id1+col] = new Decimal(7)
-				break
-				case 7:
-				player.data[id1+col] = new Decimal(8)
-				break
+		for(col2=0;col2<=player.data.allcard-1;col2++){
+			if(card==col2){
+				player.data[id1+col] = new Decimal(col2+1)
 			}
+		}
 	}
 	player.data.cardaward = false
 }
@@ -158,11 +137,52 @@ function getcard(id1){
 	player.data.start = false
 }
 
+/*
+function getcard(id1){
+	player.data.ps = new Decimal(player.data.psmax)
+	let cao = 3
+	for(col=1;col<=cao;col++){
+		if(player.data[id1+col].eq(0)){
+			let card = Math.floor(Math.random() * (player.data.allcard+1))
+				for(col2=1;col2<=player.data.allcard;col2++){
+					if(player.data.card[col2].gte(1) && card<=player.data.allcard){
+						player.data.[id1+col] = new Decimal(col2)
+						player.data.card[col2] = player.data.card[col2].sub(1)
+					}
+				}
+						default:
+						var cards = player.data.card
+						var nothing = true
+						for(i in cards){if(cards[i].gt(0)){nothing = false}}
+						if(nothing){
+							for(col2=1;col2<=player.data.allcard;col2++){
+								player.data.cardintermediary[col2] = new Decimal(player.data.carddead[col2])
+							}
+						}else{
+							col--
+						}
+				}
+		}else{
+			cao++
+		}
+	}
+	player.data.start = false
+}
+*/
+
 function recard(){
 	getcard("display")
 	var cards = player.data.card
 	var nothing = true
-	for(i in cards){if(cards[i].gt(0)){nothing = false}}
+	for(col=1;col<=20;col++){
+		let cards2 = player.data['display'+col]
+		if(cards2!=0){
+			nothing = false
+		}
+	}
+	for(i in cards){
+		if(cards[i].gt(0)){nothing = false}
+	}
 	if(nothing){
 		for(col=1;col<=player.data.allcard;col++){
 			player.data.card[col] = player.data.card[col].add(player.data.cardintermediary[col])
@@ -180,10 +200,12 @@ function recard(){
 	}else{
 	}
 	player.data.hp = player.data.hp.sub(player.data.deatkto)
+	player.data.hp = player.data.hp.add(player.data.effect[2])
 	player.data.de = player.data.de.div(2).floor()
 	player.data.dede = player.data.dede.div(2).floor()
 	if(player.data.effect[0].gt(0)){player.data.effect[0] = player.data.effect[0].sub(1)}
 	if(player.data.effect[1].gt(0)){player.data.effect[1] = player.data.effect[1].sub(1)}
+	if(player.data.effect[2].gt(0)){player.data.effect[2] = player.data.effect[2].sub(1)}
 }
 
 function atktode(id){
@@ -239,7 +261,7 @@ function retit(id1,id2){
 function redis(id1,id2){
 	if(player.data[id1+id2].eq(1)){return "对敌方造成 12 物理伤害<br>消耗:1 体力"}
 	if(player.data[id1+id2].eq(2)){return "增加 15 护甲<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(3)){return "恢复 9 血<br>消耗:2 体力"}
+	if(player.data[id1+id2].eq(3)){return "恢复 12 血,获得 3 恢复<br>消耗:2 体力"}
 	if(player.data[id1+id2].eq(4)){return "对敌方造成 15 魔法伤害<br>消耗:5 魔力"}
 	if(player.data[id1+id2].eq(5)){return "先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力"}
 	if(player.data[id1+id2].eq(6)){return "恢复 7 魔力<br>消耗:无"}
@@ -284,7 +306,8 @@ function reonc(id){
 	}
 	if(player.data['display'+id].eq(3)){
 		//治疗
-		attributes(9,0,-2,0,0,0)
+		attributes(12,0,-2,0,0,0)
+		player.data.effect[2] = player.data.effect[2].add(3)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[3] = player.data.carddead[3].add(1)
 		return
@@ -492,6 +515,17 @@ addLayer("tree-tab", {
 			progress(){return true},
 			baseStyle: {"background-color": "#d01118"},
 			fillStyle: {"background-color": "#d01118"},
+			textStyle: {"color": "#000000"}
+		},
+		eff2bar:{
+			display() {return "恢复 "+format(player.data.effect[2],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[2].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#00ff48"},
+			fillStyle: {"background-color": "#00ff48"},
 			textStyle: {"color": "#000000"}
 		},
 		moneybar:{
@@ -773,7 +807,7 @@ addLayer("tree-tab", {
 					]],
 				["bar", "moneybar"]
 				]],
-				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"]]],
+				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"]]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
 				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005]]],

@@ -43,9 +43,10 @@ addLayer("data", {
 		/*
 		id0:智慧:每一层使获得魔力时多获得1,每回合减少一层
 		id1:愤怒:每一层使物理伤害+1,每回合减少一层
+		id2:恢复:回合结束时恢复层级血量,每回合减少一层
 		*/
-		effect:[new Decimal(0),new Decimal(0),],
-		alleffect:new Decimal(2),
+		effect:[new Decimal(0),new Decimal(0),new Decimal(0),],
+		alleffect:new Decimal(3),
 		
 		barpx:new Decimal(581),
 		haveeff:new Decimal(0),
@@ -70,13 +71,13 @@ addLayer("data", {
 		id8:愤怒
 		*/
 		card:[new Decimal(0),
-		new Decimal(6),new Decimal(6),new Decimal(3),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)],
+		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)],
 		carddead:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)],
 		cardintermediary:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)],
 		cardmax:[new Decimal(0),
-		new Decimal(6),new Decimal(6),new Decimal(3),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)],
+		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)],
 		allcard:new Decimal(8),
 		
 		display1:new Decimal(0),
@@ -127,6 +128,7 @@ addLayer("data", {
 		if(player.data.de.gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[0].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[1].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
+		if(player.data.effect[2].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		player.data.barpx = new Decimal(584).sub(player.data.haveeff.mul(4)).div(Decimal.max(player.data.haveeff,1)).add(0.5).floor()
 		/*
 		var o = new Decimal(0)
