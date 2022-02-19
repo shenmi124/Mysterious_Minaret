@@ -44,20 +44,28 @@ addLayer("data", {
 		id0:智慧:每一层使获得魔力时多获得1,每回合减少一层
 		id1:愤怒:每一层使物理伤害+1,每回合减少一层
 		id2:恢复:回合结束时恢复层级血量,每回合减少一层
+		id3:中毒:回合结束减少层级血量,无视护甲,每回合减少一层,如果有恢复格外减少一层
+		id4:感染:中毒每回合加二层
 		*/
-		effect:[new Decimal(0),new Decimal(0),new Decimal(0),],
-		alleffect:new Decimal(3),
+		effect:[new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
+		alleffect:new Decimal(5),
 		
 		barpx:new Decimal(581),
 		haveeff:new Decimal(0),
 		
-		dehp:new Decimal(80),
-		dehpmax:new Decimal(80),
-		demp:new Decimal(5),
-		dempmax:new Decimal(5),
-		deatk:new Decimal(12),
+		dehp:new Decimal(30),
+		dehpmax:new Decimal(30),
+		demp:new Decimal(2),
+		dempmax:new Decimal(2),
+		deatk:new Decimal(6),
 		deatkto:new Decimal(0),
 		dede:new Decimal(0),
+		
+		/*
+		id0:无
+		id1:感染者:每回合给敌方附加1感染
+		*/
+		monster:new Decimal(0),
 		
 		/*
 		id0:无
@@ -129,6 +137,8 @@ addLayer("data", {
 		if(player.data.effect[0].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[1].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[2].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
+		if(player.data.effect[3].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
+		if(player.data.effect[4].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		player.data.barpx = new Decimal(584).sub(player.data.haveeff.mul(4)).div(Decimal.max(player.data.haveeff,1)).add(0.5).floor()
 		/*
 		var o = new Decimal(0)

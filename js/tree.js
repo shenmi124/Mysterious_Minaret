@@ -17,9 +17,10 @@ function awardcard(id1,id2){
 }
 
 function levelnew(){
-	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*10))+100)^(((player.data.level+1)/20)+1)
-	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*5)+5))^(((player.data.level+1)/18)+1)
-	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*3)+12))^(((player.data.level+1)/23)+1)
+	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)^(((player.data.level+1)/50)+1)
+	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*2)+2))^(((player.data.level+1)/25)+1)
+	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*2)+6))^(((player.data.level+1)/75)+1)
+	player.data.monster = new Decimal(Math.floor((Math.random() * 2)))
 	player.data.level = player.data.level.add(1)
 	player.data.dehp = new Decimal(newdehp)
 	player.data.dehpmax = new Decimal(newdehp)
@@ -47,131 +48,44 @@ function levelnew(){
 	player.data.de = new Decimal(0)
 }
 
-function getcard(id1){
-	player.data.ps = new Decimal(player.data.psmax)
-	let cao = 3
-	for(col=1;col<=cao;col++){
-			if(player.data[id1+col].eq(0)){
-				let card = Math.floor(Math.random() * (player.data.allcard+1))
-					switch(card){
-						case 0:
-						if(player.data.card[1].gte(1)){
-							player.data[id1+col] = new Decimal(1)
-							player.data.card[1] = player.data.card[1].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 1:
-						if(player.data.card[2].gte(1)){
-							player.data[id1+col] = new Decimal(2)
-							player.data.card[2] = player.data.card[2].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 2:
-						if(player.data.card[3].gte(1)){
-							player.data[id1+col] = new Decimal(3)
-							player.data.card[3] = player.data.card[3].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 3:
-						if(player.data.card[4].gte(1)){
-							player.data[id1+col] = new Decimal(4)
-							player.data.card[4] = player.data.card[4].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 4:
-						if(player.data.card[5].gte(1)){
-							player.data[id1+col] = new Decimal(5)
-							player.data.card[5] = player.data.card[5].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 5:
-						if(player.data.card[6].gte(1)){
-							player.data[id1+col] = new Decimal(6)
-							player.data.card[6] = player.data.card[6].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 6:
-						if(player.data.card[7].gte(1)){
-							player.data[id1+col] = new Decimal(7)
-							player.data.card[7] = player.data.card[7].sub(1)
-						}else{
-							col--
-						}
-						break
-						case 7:
-						if(player.data.card[8].gte(1)){
-							player.data[id1+col] = new Decimal(8)
-							player.data.card[8] = player.data.card[8].sub(1)
-						}else{
-							col--
-						}
-						break
-						default:
-						var cards = player.data.card
-						var nothing = true
-						for(i in cards){if(cards[i].gt(0)){nothing = false}}
-						if(nothing){
-							for(col2=1;col2<=player.data.allcard;col2++){
-								player.data.cardintermediary[col2] = new Decimal(player.data.carddead[col2])
-							}
-						}else{
-							col--
-						}
-					}
-			}else{
-				cao++
-			}
+function typemoster(){
+	if(player.data.monster.eq(1)){
+		player.data.effect[4] = player.data.effect[4].add(1)
 	}
-	player.data.start = false
 }
 
-/*
 function getcard(id1){
 	player.data.ps = new Decimal(player.data.psmax)
 	let cao = 3
 	for(col=1;col<=cao;col++){
 		if(player.data[id1+col].eq(0)){
-			let card = Math.floor(Math.random() * (player.data.allcard+1))
-				for(col2=1;col2<=player.data.allcard;col2++){
-					if(player.data.card[col2].gte(1) && card<=player.data.allcard){
-						player.data.[id1+col] = new Decimal(col2)
-						player.data.card[col2] = player.data.card[col2].sub(1)
-					}
+			let card = Math.floor(Math.random() * player.data.allcard)+1
+			var cards = player.data.card
+			var nothing = true
+			for(i in cards){if(cards[i].gt(0)){nothing = false}}
+			if(nothing){
+				for(col3=1;col3<=player.data.allcard;col3++){
+					player.data.cardintermediary[col3] = new Decimal(player.data.carddead[col3])
 				}
-						default:
-						var cards = player.data.card
-						var nothing = true
-						for(i in cards){if(cards[i].gt(0)){nothing = false}}
-						if(nothing){
-							for(col2=1;col2<=player.data.allcard;col2++){
-								player.data.cardintermediary[col2] = new Decimal(player.data.carddead[col2])
-							}
-						}else{
-							col--
-						}
+			}else if(player.data.card[card].lt(1)){
+				col--
+			}
+			for(col2=1;col2<=player.data.allcard;col2++){
+				if(player.data.card[col2].gte(1) && col2==card){
+					player.data[id1+col] = new Decimal(col2)
+					player.data.card[col2] = player.data.card[col2].sub(1)
 				}
+			}
 		}else{
 			cao++
 		}
 	}
 	player.data.start = false
 }
-*/
 
 function recard(){
 	getcard("display")
+	typemoster()
 	var cards = player.data.card
 	var nothing = true
 	for(col=1;col<=20;col++){
@@ -200,12 +114,32 @@ function recard(){
 	}else{
 	}
 	player.data.hp = player.data.hp.sub(player.data.deatkto)
+	player.data.hp = player.data.hp.sub(player.data.effect[3])
 	player.data.hp = player.data.hp.add(player.data.effect[2])
 	player.data.de = player.data.de.div(2).floor()
 	player.data.dede = player.data.dede.div(2).floor()
-	if(player.data.effect[0].gt(0)){player.data.effect[0] = player.data.effect[0].sub(1)}
-	if(player.data.effect[1].gt(0)){player.data.effect[1] = player.data.effect[1].sub(1)}
-	if(player.data.effect[2].gt(0)){player.data.effect[2] = player.data.effect[2].sub(1)}
+	//id0:智慧
+	if(player.data.effect[0].gt(0)){
+		player.data.effect[0] = player.data.effect[0].sub(1)
+	}
+	//id1:愤怒
+	if(player.data.effect[1].gt(0)){
+		player.data.effect[1] = player.data.effect[1].sub(1)
+	}
+	//id2:恢复
+	if(player.data.effect[2].gt(0)){
+		player.data.effect[2] = player.data.effect[2].sub(1)
+	}
+	//id3:中毒
+	if(player.data.effect[3].gt(0) && player.data.effect[2].gt(0)){
+		player.data.effect[3] = player.data.effect[3].sub(2)
+	}else if(player.data.effect[3].gt(0)){
+		player.data.effect[3] = player.data.effect[3].sub(1)
+	}
+	//id4:感染
+	if(player.data.effect[4].gt(0)){
+		player.data.effect[3] = player.data.effect[3].add(player.data.effect[4])
+	}
 }
 
 function atktode(id){
@@ -256,6 +190,9 @@ function retit(id1,id2){
 	if(player.data[id1+id2].eq(6)){return "魔力源泉"}
 	if(player.data[id1+id2].eq(7)){return "连斩"}
 	if(player.data[id1+id2].eq(8)){return "愤怒"}
+	if(player.data[id1+id2].eq(9)){return "传染"}
+	if(player.data[id1+id2].eq(10)){return "病原体"}
+	if(player.data[id1+id2].eq(11)){return "思考"}
 }
 
 function redis(id1,id2){
@@ -473,23 +410,23 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#fff200"},
 			textStyle: {"color": "#000000"}
 		},
-		debar:{
-			display() {return "防御 "+format(player.data.de,0)},	
-			direction: RIGHT,
-			width(){return player.data.barpx},
-			height: 25,
-			unlocked(){return player.data.de.gte(1)},
-			progress(){return true},
-			baseStyle: {"background-color": "#c3c3c3"},
-			fillStyle: {"background-color": "#c3c3c3"},
-			textStyle: {"color": "#000000"}
-		},
 		dedebar:{
 			display() {return "敌方防御 "+format(player.data.dede,0)},	
 			direction: RIGHT,
 			width: 500,
 			height: 25,
 			unlocked(){return player.data.dede.gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#c3c3c3"},
+			fillStyle: {"background-color": "#c3c3c3"},
+			textStyle: {"color": "#000000"}
+		},
+		debar:{
+			display() {return "防御 "+format(player.data.de,0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.de.gte(1)},
 			progress(){return true},
 			baseStyle: {"background-color": "#c3c3c3"},
 			fillStyle: {"background-color": "#c3c3c3"},
@@ -526,6 +463,28 @@ addLayer("tree-tab", {
 			progress(){return true},
 			baseStyle: {"background-color": "#00ff48"},
 			fillStyle: {"background-color": "#00ff48"},
+			textStyle: {"color": "#000000"}
+		},
+		eff3bar:{
+			display() {return "中毒 "+format(player.data.effect[3],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[3].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#0ab23f"},
+			fillStyle: {"background-color": "#0ab23f"},
+			textStyle: {"color": "#000000"}
+		},
+		eff4bar:{
+			display() {return "感染 "+format(player.data.effect[4],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[4].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#2ee5b1"},
+			fillStyle: {"background-color": "#2ee5b1"},
 			textStyle: {"color": "#000000"}
 		},
 		moneybar:{
@@ -797,6 +756,11 @@ addLayer("tree-tab", {
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
 				["bar", "dedebar"],
+				["display-text", function() {
+					let monster0 = player.data.monster.eq(0) ? "":""
+					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加1感染":""
+					return monster0 + monster1
+				}],
 				["row", [["clickable", 1001]]],
 				["row", [
 					["column",[
@@ -807,7 +771,7 @@ addLayer("tree-tab", {
 					]],
 				["bar", "moneybar"]
 				]],
-				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"]]],
+				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"]]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
 				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005]]],
@@ -816,14 +780,14 @@ addLayer("tree-tab", {
 			]],
 			["display-text", function() {
 			let card0 = "墓地:<br>"
-			let card1 = player.data.carddead[1].gte(1) || player.data.cardintermediary[1].gte(1) ? format(player.data.carddead[1],0)+" 攻击<br>":""
-			let card2 = player.data.carddead[2].gte(1) || player.data.cardintermediary[2].gte(1) ? format(player.data.carddead[2],0)+" 防御<br>":""
-			let card3 = player.data.carddead[3].gte(1) || player.data.cardintermediary[3].gte(1) ? format(player.data.carddead[3],0)+" 治疗<br>":""
-			let card4 = player.data.carddead[4].gte(1) || player.data.cardintermediary[4].gte(1) ? format(player.data.carddead[4],0)+" 魔法飞弹<br>":""
-			let card5 = player.data.carddead[5].gte(1) || player.data.cardintermediary[5].gte(1) ? format(player.data.carddead[5],0)+" 冥想<br>":""
-			let card6 = player.data.carddead[6].gte(1) || player.data.cardintermediary[6].gte(1) ? format(player.data.carddead[6],0)+" 魔力源泉<br>":""
-			let card7 = player.data.carddead[7].gte(1) || player.data.cardintermediary[7].gte(1) ? format(player.data.carddead[7],0)+" 连斩<br>":""
-			let card8 = player.data.carddead[8].gte(1) || player.data.cardintermediary[8].gte(1) ? format(player.data.carddead[8],0)+" 愤怒<br>":""
+			let card1 = player.data.carddead[1].gte(1) ? format(player.data.carddead[1],0)+" 攻击<br>":""
+			let card2 = player.data.carddead[2].gte(1) ? format(player.data.carddead[2],0)+" 防御<br>":""
+			let card3 = player.data.carddead[3].gte(1) ? format(player.data.carddead[3],0)+" 治疗<br>":""
+			let card4 = player.data.carddead[4].gte(1) ? format(player.data.carddead[4],0)+" 魔法飞弹<br>":""
+			let card5 = player.data.carddead[5].gte(1) ? format(player.data.carddead[5],0)+" 冥想<br>":""
+			let card6 = player.data.carddead[6].gte(1) ? format(player.data.carddead[6],0)+" 魔力源泉<br>":""
+			let card7 = player.data.carddead[7].gte(1) ? format(player.data.carddead[7],0)+" 连斩<br>":""
+			let card8 = player.data.carddead[8].gte(1) ? format(player.data.carddead[8],0)+" 愤怒<br>":""
 			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8
 			}],
 		]],
