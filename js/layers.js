@@ -48,10 +48,13 @@ addLayer("data", {
 		id4:感染:中毒每回合加二层
 		*/
 		effect:[new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
+		deeffect:[new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
 		alleffect:new Decimal(5),
 		
-		barpx:new Decimal(581),
+		barpx:new Decimal(584),
 		haveeff:new Decimal(0),
+		debarpx:new Decimal(502),
+		dehaveeff:new Decimal(0),
 		
 		dehp:new Decimal(30),
 		dehpmax:new Decimal(30),
@@ -133,13 +136,21 @@ addLayer("data", {
 			player.data.newlevel = true
 		}
 		player.data.haveeff = new Decimal(0)
+		player.data.dehaveeff = new Decimal(0)
 		if(player.data.de.gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[0].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[1].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[2].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[3].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 		if(player.data.effect[4].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
+		if(player.data.dede.gt(0)){player.data.haveeff = player.data.dehaveeff.add(1)}
+		if(player.data.deeffect[0].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
+		if(player.data.deeffect[1].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
+		if(player.data.deeffect[2].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
+		if(player.data.deeffect[3].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
+		if(player.data.deeffect[4].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
 		player.data.barpx = new Decimal(584).sub(player.data.haveeff.mul(4)).div(Decimal.max(player.data.haveeff,1)).add(0.5).floor()
+		player.data.debarpx = new Decimal(502).sub(player.data.dehaveeff.mul(4)).div(Decimal.max(player.data.dehaveeff,1)).add(0.5).floor()
 		/*
 		var o = new Decimal(0)
 		for(i=0;i<=8;i++){

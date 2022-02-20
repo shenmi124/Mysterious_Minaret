@@ -115,6 +115,7 @@ function recard(){
 	}
 	player.data.hp = player.data.hp.sub(player.data.deatkto)
 	player.data.hp = player.data.hp.sub(player.data.effect[3])
+	player.data.dehp = player.data.dehp.sub(player.data.deeffect[3])
 	player.data.hp = player.data.hp.add(player.data.effect[2])
 	player.data.de = player.data.de.div(2).floor()
 	player.data.dede = player.data.dede.div(2).floor()
@@ -136,9 +137,19 @@ function recard(){
 	}else if(player.data.effect[3].gt(0)){
 		player.data.effect[3] = player.data.effect[3].sub(1)
 	}
+	
+	if(player.data.deeffect[3].gt(0) && player.data.deeffect[2].gt(0)){
+		player.data.deeffect[3] = player.data.deeffect[3].sub(2)
+	}else if(player.data.deeffect[3].gt(0)){
+		player.data.deeffect[3] = player.data.deeffect[3].sub(1)
+	}
 	//id4:感染
 	if(player.data.effect[4].gt(0)){
 		player.data.effect[3] = player.data.effect[3].add(player.data.effect[4])
+	}
+	
+	if(player.data.deeffect[4].gt(0)){
+		player.data.deeffect[3] = player.data.deeffect[3].add(player.data.deeffect[4])
 	}
 }
 
@@ -344,6 +355,73 @@ addLayer("tree-tab", {
     previousTab: "",
     leftTab: true,
 	bars:{
+		dehpbar:{
+			display() {return "血量 "+format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)},	
+			direction: RIGHT,
+			width: 500,
+			height: 25,
+			unlocked(){return true},
+			progress(){return (player.data.dehp.div(player.data.dehpmax)).toNumber()},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#ec1c24"},
+			textStyle: {"color": "#000000"}
+		},
+		dempbar:{
+			display() {return "魔力 "+format(player.data.demp,0)+" / "+format(player.data.dempmax,0)},	
+			direction: RIGHT,
+			width: 248,
+			height: 25,
+			unlocked(){return true},
+			progress(){return (player.data.demp.div(player.data.dempmax)).toNumber()},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#00a8f3"},
+			textStyle: {"color": "#000000"}
+		},
+		deatkbar:{
+			display() {return "攻击 "+format(player.data.deatk,0)},	
+			direction: RIGHT,
+			width: 248,
+			height: 25,
+			unlocked(){return true},
+			progress(){return true},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#fff200"},
+			textStyle: {"color": "#000000"}
+		},
+		dedebar:{
+			display() {return "防御 "+format(player.data.dede,0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.dede.gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#c3c3c3"},
+			fillStyle: {"background-color": "#c3c3c3"},
+			textStyle: {"color": "#000000"}
+		},
+		deeff3bar:{
+			display() {return "中毒 "+format(player.data.deeffect[3],0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.deeffect[3].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#0ab23f"},
+			fillStyle: {"background-color": "#0ab23f"},
+			textStyle: {"color": "#000000"}
+		},
+		deeff4bar:{
+			display() {return "感染 "+format(player.data.deeffect[4],0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.deeffect[4].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#2ee5b1"},
+			fillStyle: {"background-color": "#2ee5b1"},
+			textStyle: {"color": "#000000"}
+		},
+		//↑敌方 ↓我方
 		hpbar:{
 			display() {return "血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0)},	
 			direction: RIGHT,
@@ -351,17 +429,6 @@ addLayer("tree-tab", {
 			height: 25,
 			unlocked(){return true},
 			progress(){return (player.data.hp.div(player.data.hpmax)).toNumber()},
-			baseStyle: {"background-color": "#FFFFFF"},
-			fillStyle: {"background-color": "#ec1c24"},
-			textStyle: {"color": "#000000"}
-		},
-		dehpbar:{
-			display() {return "敌方血量 "+format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)},	
-			direction: RIGHT,
-			width: 500,
-			height: 25,
-			unlocked(){return true},
-			progress(){return (player.data.dehp.div(player.data.dehpmax)).toNumber()},
 			baseStyle: {"background-color": "#FFFFFF"},
 			fillStyle: {"background-color": "#ec1c24"},
 			textStyle: {"color": "#000000"}
@@ -377,17 +444,6 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#00a8f3"},
 			textStyle: {"color": "#000000"}
 		},
-		dempbar:{
-			display() {return "敌方魔力 "+format(player.data.demp,0)+" / "+format(player.data.dempmax,0)},	
-			direction: RIGHT,
-			width: 248,
-			height: 25,
-			unlocked(){return true},
-			progress(){return (player.data.demp.div(player.data.dempmax)).toNumber()},
-			baseStyle: {"background-color": "#FFFFFF"},
-			fillStyle: {"background-color": "#00a8f3"},
-			textStyle: {"color": "#000000"}
-		},
 		psbar:{
 			display() {return "体力 "+format(player.data.ps,0)+" / "+format(player.data.psmax,0)},	
 			direction: RIGHT,
@@ -397,28 +453,6 @@ addLayer("tree-tab", {
 			progress(){return (player.data.ps.div(player.data.psmax)).toNumber()},
 			baseStyle: {"background-color": "#FFFFFF"},
 			fillStyle: {"background-color": "#fff200"},
-			textStyle: {"color": "#000000"}
-		},
-		deatkbar:{
-			display() {return "敌方攻击 "+format(player.data.deatk,0)},	
-			direction: RIGHT,
-			width: 248,
-			height: 25,
-			unlocked(){return true},
-			progress(){return true},
-			baseStyle: {"background-color": "#FFFFFF"},
-			fillStyle: {"background-color": "#fff200"},
-			textStyle: {"color": "#000000"}
-		},
-		dedebar:{
-			display() {return "敌方防御 "+format(player.data.dede,0)},	
-			direction: RIGHT,
-			width: 500,
-			height: 25,
-			unlocked(){return player.data.dede.gte(1)},
-			progress(){return true},
-			baseStyle: {"background-color": "#c3c3c3"},
-			fillStyle: {"background-color": "#c3c3c3"},
 			textStyle: {"color": "#000000"}
 		},
 		debar:{
@@ -500,17 +534,43 @@ addLayer("tree-tab", {
 		},
 	},
 	clickables:{
-		1001:{
-			canClick(){return false},
-			unlocked(){return true},
-			onClick(){return},
-			style() {return {'height': "250px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
-		},
 		1021:{
+			title:"把鼠标对准我查看全属性",
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			tooltip(){
+				let effde = player.data.de.gt(0) ? format(player.data.de,0)+"防御<br>":""
+				let eff0 = player.data.effect[0].gt(0) ? format(player.data.effect[0],0)+"智慧<br>":""
+				let eff1 = player.data.effect[1].gt(0) ? format(player.data.effect[1],0)+"愤怒<br>":""
+				let eff2 = player.data.effect[2].gt(0) ? format(player.data.effect[2],0)+"恢复<br>":""
+				let eff3 = player.data.effect[3].gt(0) ? format(player.data.effect[3],0)+"中毒<br>":""
+				let eff4 = player.data.effect[4].gt(0) ? format(player.data.effect[4],0)+"感染<br>":""
+				return effde + eff1 + eff2 + eff3 + eff4
+			}
+		},
+		1022:{
+			title:"把鼠标对准我查看全属性",
+			canClick(){return false},
+			unlocked(){return true},
+			onClick(){return},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			tooltip(){
+				let effde = player.data.dede.gt(0) ? format(player.data.dede,0)+"防御<br>":""
+				let eff0 = player.data.deeffect[0].gt(0) ? format(player.data.deeffect[0],0)+"智慧<br>":""
+				let eff1 = player.data.deeffect[1].gt(0) ? format(player.data.deeffect[1],0)+"愤怒<br>":""
+				let eff2 = player.data.deeffect[2].gt(0) ? format(player.data.deeffect[2],0)+"恢复<br>":""
+				let eff3 = player.data.deeffect[3].gt(0) ? format(player.data.deeffect[3],0)+"中毒<br>":""
+				let eff4 = player.data.deeffect[4].gt(0) ? format(player.data.deeffect[4],0)+"感染<br>":""
+				return effde + eff1 + eff2 + eff3 + eff4
+			}
+		},
+		1023:{
+			canClick(){return false},
+			unlocked(){return true},
+			onClick(){return},
+			style() {return {'height': "220px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
 		},
 		1002:{
 			title: "下一回合!<br><h6>恢复体力直到上限<br>向下取整保留一半的防御",
@@ -755,13 +815,15 @@ addLayer("tree-tab", {
 				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
+				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"]]],
 				["bar", "dedebar"],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
 					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加1感染":""
 					return monster0 + monster1
 				}],
-				["row", [["clickable", 1001]]],
+				["row", [["clickable", 1022]]],
+				["row", [["clickable", 1023]]],
 				["row", [
 					["column",[
 						["bar", "hpbar"],
