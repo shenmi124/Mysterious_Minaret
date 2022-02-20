@@ -169,3 +169,25 @@ addLayer("data", {
     row: "side",
     layerShown(){return false},
 })
+
+addLayer("pokedex", {
+    name: "pokedex",
+    symbol: "<h6>图鉴",
+	tooltip() { 
+		return `图鉴`
+	},
+    position: 11,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	tabFormat: [
+		["display-text", function() {return "图鉴会记录你已经遇到过的东西"}],
+		["display-text", function() {return "没做~呢↓~"}],
+	]
+})

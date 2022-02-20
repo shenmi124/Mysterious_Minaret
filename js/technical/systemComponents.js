@@ -133,13 +133,9 @@ var systemComponents = {
         <table>
             <tr>
                 <td><button class="opt" onclick="save()">保存</button></td>
-                <td><button class="opt" onclick="toggleOpt('autosave')">自动保存: {{ options.autosave?"YES":"NO" }}</button></td>
                 <td><button class="opt" onclick="hardReset()">重开</button></td>
-            </tr>
-            </tr>
-            <tr>
                 <td><button class="opt" onclick="switchTheme()">材质: {{ getThemeName() }}</button></td>
-                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量树: {{ options.hqTree?"ON":"OFF" }}</button></td>
+                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量节点: {{ options.hqTree?"ON":"OFF" }}</button></td>
 				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示横条: {{ options.forceTooltips?"ON":"OFF" }}</button></td>
 			</tr> 
         </table>`

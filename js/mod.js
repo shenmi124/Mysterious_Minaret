@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "神秘尖塔",
-	id: "8card!!!",
+	id: "8card```",
 	author: "辉影神秘",
 	pointsName: "",
 	modFiles: ["layers.js", "tree.js"],
