@@ -46,6 +46,9 @@ function levelnew(){
 	for(col=0;col<=player.data.alleffect;col++){
 		player.data.effect[col] = new Decimal(0)
 	}
+	for(col=0;col<=player.data.alleffect;col++){
+		player.data.deeffect[col] = new Decimal(0)
+	}
 	for(col=1;col<=player.data.allcard;col++){
 		player.data.card[col] = new Decimal(player.data.cardmax[col])
 		player.data.carddead[col] = new Decimal(0)
@@ -690,7 +693,7 @@ addLayer("tree-tab", {
 			},
 			canClick(){return true},
 			unlocked(){return !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == true},
-			onClick(){return getcard("display")},
+			onClick(){return getcard("display",3)},
 		},
 		1004:{
 			title: "钱!",
