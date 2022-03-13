@@ -240,18 +240,18 @@ function retit(id1,id2){
 }
 
 function redis(id1,id2){
-	if(player.data[id1+id2].eq(1)){return `对敌方造成<red id="red"> `+format(Decimal.add(12).add(player.data.effect[1]),0)+` 物理伤害</red><br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(1)){return `对敌方造成 <red id="red">12 物理伤害</red><br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(3)){return `恢复 12 血,获得 3 恢复<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
 	if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
-	if(player.data[id1+id2].eq(7)){return `对敌方造成 7 物理伤害3次<br>消耗:2 体力`}
+	if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">7 物理伤害</red>3次<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(9)){return `给敌方 3 中毒<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(10)){return `给双方 2 感染<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(12)){return `对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力`}
+	if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
 }
 
 function recan(id){
@@ -669,7 +669,7 @@ addLayer("tree-tab", {
 				let eff3 = player.data.effect[3].gt(0) ? format(player.data.effect[3],0)+"中毒<br>":""
 				let eff4 = player.data.effect[4].gt(0) ? format(player.data.effect[4],0)+"感染<br>":""
 				let eff5 = player.data.effect[5].gt(0) ? format(player.data.effect[5],0)+"眩晕<br>":""
-				return effde + eff1 + eff2 + eff3 + eff4 + eff5
+				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5
 			}
 		},
 		1022:{
@@ -686,7 +686,7 @@ addLayer("tree-tab", {
 				let eff3 = player.data.deeffect[3].gt(0) ? format(player.data.deeffect[3],0)+"中毒<br>":""
 				let eff4 = player.data.deeffect[4].gt(0) ? format(player.data.deeffect[4],0)+"感染<br>":""
 				let eff5 = player.data.deeffect[5].gt(0) ? format(player.data.deeffect[5],0)+"眩晕<br>":""
-				return effde + eff1 + eff2 + eff3 + eff4 + eff5
+				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5
 			}
 		},
 		1023:{

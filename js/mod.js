@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "神秘尖塔",
-	id: "8card```",
+	id: "12card!!!",
 	author: "辉影神秘",
 	pointsName: "",
 	modFiles: ["layers.js", "tree.js"],
@@ -13,12 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
+	num: "0.1a",
 	name: "辉影尖塔",
 }
 
 let changelog = `<h1>更新日志:</h1><br>
-	<h3>v0.0</h3><br>
+	<h3>v0.1</h3><br>
+	<li>完成了基础的战斗,奖励机制和精英怪
+	<li>更新至11张卡
 		`
 
 let winText = ``
