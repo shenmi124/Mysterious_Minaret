@@ -8,7 +8,7 @@ function effectdisplay(id){
 }
 
 function monsterdisplay(id){
-	if(id==0){return "感染者:每回合给敌方附加1感染<br><br>"+effectdisplay(4)}
+	if(id==0){return "感染者:消耗4魔力,给敌方附加1感染<br><br>"+effectdisplay(4)}
 	if(id==1){return "蛊梦师:每回合给敌方一张阻梦<br><br>"+card2display(0)}
 }
 
@@ -24,11 +24,25 @@ function carddisplay(id){
 	if(id == 8){return "传染:给敌方 3 中毒<br>消耗:1 体力<br><br>"+effectdisplay(3)}
 	if(id == 9){return "病原体:给双方 2 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
 	if(id == 10){return "思考:抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力<br><br>"+effectdisplay(0)}
+	if(id == 11){return "对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力<br><br>"+effectdisplay(5)}
 }
 
 function card2display(id){
 	if(id==0){return "阻梦:<br>每有1张在手上就少抽一张牌<br>消耗:1 体力<br><br>"}
 }
+
+function haveefffunction(id){
+	if(player.data.effect[id].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
+}
+
+function dehaveefffunction(id){
+	if(player.data.deeffect[id].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
+}
+
+function havecardfunction(id){
+	if(!player.data['display'+id].eq(0)){player.data.holdcard = player.data.holdcard.add(1)}
+}
+
 
 addLayer("afdian", {
     name: "afdian",
@@ -116,24 +130,27 @@ addLayer("data", {
 		id9:传染
 		id10:病原体
 		id11:思考
+		id12:重击
 		*/
 		card:[new Decimal(0),
 		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0)],
+		new Decimal(0),new Decimal(0),],
 		carddead:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),],
+		new Decimal(0),new Decimal(0),],
 		cardintermediary:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),],
+		new Decimal(0),new Decimal(0),],
 		cardmax:[new Decimal(0),
 		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),],
-		allcard:new Decimal(11),
+		new Decimal(0),new Decimal(0),],
+		allcard:new Decimal(12),
+		maxcard:new Decimal(10),
+		holdcard:new Decimal(0),
 		
 		display1:new Decimal(0),
 		display2:new Decimal(0),
@@ -181,20 +198,35 @@ addLayer("data", {
 		}
 		player.data.haveeff = new Decimal(0)
 		player.data.dehaveeff = new Decimal(0)
+		player.data.holdcard = new Decimal(0)
 		if(player.data.de.gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
-		if(player.data.effect[0].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
-		if(player.data.effect[1].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
-		if(player.data.effect[2].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
-		if(player.data.effect[3].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
-		if(player.data.effect[4].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
-		if(player.data.effect[5].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
+		haveefffunction(0)
+		haveefffunction(1)
+		haveefffunction(2)
+		haveefffunction(3)
+		haveefffunction(4)
+		haveefffunction(5)
 		if(player.data.dede.gt(0)){player.data.haveeff = player.data.dehaveeff.add(1)}
-		if(player.data.deeffect[0].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
-		if(player.data.deeffect[1].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
-		if(player.data.deeffect[2].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
-		if(player.data.deeffect[3].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
-		if(player.data.deeffect[4].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
-		if(player.data.deeffect[5].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
+		dehaveefffunction(0)
+		dehaveefffunction(1)
+		dehaveefffunction(2)
+		dehaveefffunction(3)
+		dehaveefffunction(4)
+		dehaveefffunction(5)
+		
+		havecardfunction(1)
+		havecardfunction(2)
+		havecardfunction(3)
+		havecardfunction(4)
+		havecardfunction(5)
+		havecardfunction(6)
+		havecardfunction(7)
+		havecardfunction(8)
+		havecardfunction(9)
+		havecardfunction(10)
+		havecardfunction(11)
+		havecardfunction(12)
+		
 		player.data.barpx = new Decimal(584).sub(player.data.haveeff.mul(4)).div(Decimal.max(player.data.haveeff,1)).add(0.5).floor()
 		player.data.debarpx = new Decimal(502).sub(player.data.dehaveeff.mul(4)).div(Decimal.max(player.data.dehaveeff,1)).add(0.5).floor()
 		/*
@@ -209,6 +241,7 @@ addLayer("data", {
 		player.data.cardmax[2] = new Decimal(2)
 		player.data.cardmax[3] = new Decimal(1)
 		*/
+		 wordStyle()
 	},
     color: "#FFFFFF",
     type: "none",
@@ -564,12 +597,19 @@ addLayer("pokedex_card_tab1", {
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
 			onClick(){player.pokedex.car1 = new Decimal(11)},
 		},
+		23:{
+			title:"重击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(12)},
+		},
 	},
 	tabFormat: [
 		["display-text", function() {return "卡牌图鉴"}],
 		["row", [["clickable", 11]]],
 		"blank",
-		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],["clickable", 22],]],
+		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],["clickable", 22],["clickable", 23],]],
 		"blank",
 		["display-text", function() {
 			let car0 = player.pokedex.car1.eq(1) ? carddisplay(0):""
@@ -583,7 +623,8 @@ addLayer("pokedex_card_tab1", {
 			let car8 = player.pokedex.car1.eq(9) ? carddisplay(8):""
 			let car9 = player.pokedex.car1.eq(10) ? carddisplay(9):""
 			let car10 = player.pokedex.car1.eq(11) ? carddisplay(10):""
-			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10
+			let car11 = player.pokedex.car1.eq(12) ? carddisplay(11):""
+			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10+car11
 		}],
 	]
 })

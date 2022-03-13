@@ -57,8 +57,9 @@ function levelnew(){
 }
 
 function typemoster(){
-	if(player.data.monster.eq(1)){
+	if(player.data.monster.eq(1) && player.data.demp.gte(4)){
 		player.data.effect[4] = player.data.effect[4].add(1)
+		player.data.demp = player.data.demp.sub(4)
 	}
 }
 
@@ -66,26 +67,29 @@ function getcard(id1,id2){
 	player.data.ps = new Decimal(player.data.psmax)
 	let cao = id2
 	for(col=1;col<=cao;col++){
-		if(player.data[id1+col].eq(0)){
-			let card = Math.floor(Math.random() * player.data.allcard)+1
-			var cards = player.data.card
-			var nothing = true
-			for(i in cards){if(cards[i].gt(0)){nothing = false}}
-			if(nothing){
-				for(col3=1;col3<=player.data.allcard;col3++){
-					player.data.cardintermediary[col3] = new Decimal(player.data.carddead[col3])
+		if(player.data.holdcard.lte(player.data.maxcard.sub(1))){
+			if(player.data[id1+col].eq(0)){
+				let card = Math.floor(Math.random() * player.data.allcard)+1
+				var cards = player.data.card
+				var nothing = true
+				for(i in cards){if(cards[i].gt(0)){nothing = false}}
+				if(nothing){
+					for(col3=1;col3<=player.data.allcard;col3++){
+						player.data.cardintermediary[col3] = new Decimal(player.data.carddead[col3])
+					}
+				}else if(player.data.card[card].lt(1)){
+					col--
 				}
-			}else if(player.data.card[card].lt(1)){
-				col--
-			}
-			for(col2=1;col2<=player.data.allcard;col2++){
-				if(player.data.card[col2].gte(1) && col2==card){
-					player.data[id1+col] = new Decimal(col2)
-					player.data.card[col2] = player.data.card[col2].sub(1)
+				for(col2=1;col2<=player.data.allcard;col2++){
+					if(player.data.card[col2].gte(1) && col2==card){
+						player.data[id1+col] = new Decimal(col2)
+						player.data.card[col2] = player.data.card[col2].sub(1)
+						player.data.holdcard = player.data.holdcard.add(1)
+					}
 				}
+			}else{
+				cao++
 			}
-		}else{
-			cao++
 		}
 	}
 	player.data.start = false
@@ -236,18 +240,18 @@ function retit(id1,id2){
 }
 
 function redis(id1,id2){
-	if(player.data[id1+id2].eq(1)){return "对敌方造成 12 物理伤害<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(2)){return "增加 15 护甲<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(3)){return "恢复 12 血,获得 3 恢复<br>消耗:2 体力"}
-	if(player.data[id1+id2].eq(4)){return "对敌方造成 15 魔法伤害<br>消耗:5 魔力"}
-	if(player.data[id1+id2].eq(5)){return "先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(6)){return "恢复 7 魔力<br>消耗:无"}
-	if(player.data[id1+id2].eq(7)){return "对敌方造成 7 物理伤害3次<br>消耗:2 体力"}
-	if(player.data[id1+id2].eq(8)){return "获得 3 力量<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(9)){return "给敌方 3 中毒<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(10)){return "给双方 2 感染<br>消耗:2 体力"}
-	if(player.data[id1+id2].eq(11)){return "抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力"}
-	if(player.data[id1+id2].eq(12)){return "对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力"}
+	if(player.data[id1+id2].eq(1)){return `对敌方造成<red id="red"> `+format(Decimal.add(12).add(player.data.effect[1]),0)+` 物理伤害</red><br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(3)){return `恢复 12 血,获得 3 恢复<br>消耗:2 体力`}
+	if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
+	if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
+	if(player.data[id1+id2].eq(7)){return `对敌方造成 7 物理伤害3次<br>消耗:2 体力`}
+	if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(9)){return `给敌方 3 中毒<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(10)){return `给双方 2 感染<br>消耗:2 体力`}
+	if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(12)){return `对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力`}
 }
 
 function recan(id){
@@ -370,6 +374,14 @@ function reonc(id){
 		player.data.carddead[11] = player.data.carddead[11].add(1)
 		return
 	}
+	if(player.data['display'+id].eq(12)){
+		//重击
+		player.data.deeffect[5] = player.data.deeffect[5].add(1)
+		attributes(0,0,-3,18,0,0)
+		player.data['display'+id] = new Decimal(0)
+		player.data.carddead[12] = player.data.carddead[12].add(1)
+		return
+	}
 }
 
 function recardonc(id){
@@ -415,6 +427,10 @@ function recardonc(id){
 	}
 	if(player.data['cardget'+id].eq(11)){
 		player.data.cardmax[11] = player.data.cardmax[11].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(12)){
+		player.data.cardmax[12] = player.data.cardmax[12].add(1)
 		player.data['cardget'+id] = new Decimal(0)
 	}
 }
@@ -640,7 +656,7 @@ addLayer("tree-tab", {
 	},
 	clickables:{
 		1021:{
-			title:"把鼠标对准我查看全属性",
+			title:`<other id="other1">把鼠标对准我查看全属性`,
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
@@ -657,7 +673,7 @@ addLayer("tree-tab", {
 			}
 		},
 		1022:{
-			title:"把鼠标对准我查看全属性",
+			title:`<other id="other1">把鼠标对准我查看全属性`,
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
@@ -907,7 +923,7 @@ addLayer("tree-tab", {
 	tabFormat: [
 		["row",[
 			["display-text", function() {
-			let card0 = "牌库:<br>"
+			let card0 = "牌库:("+format(player.data.holdcard,0)+"/"+format(player.data.maxcard,0)+")<br>"
 			let card1 = player.data.cardmax[1].gte(1) ? format(player.data.card[1],0)+"/"+format(player.data.cardmax[1],0)+" 攻击<br>":""
 			let card2 = player.data.cardmax[2].gte(1) ? format(player.data.card[2],0)+"/"+format(player.data.cardmax[2],0)+" 防御<br>":""
 			let card3 = player.data.cardmax[3].gte(1) ? format(player.data.card[3],0)+"/"+format(player.data.cardmax[3],0)+" 治疗<br>":""
@@ -919,9 +935,11 @@ addLayer("tree-tab", {
 			let card9 = player.data.cardmax[9].gte(1) ? format(player.data.card[9],0)+"/"+format(player.data.cardmax[9],0)+" 传染<br>":""
 			let card10 = player.data.cardmax[10].gte(1) ? format(player.data.card[10],0)+"/"+format(player.data.cardmax[10],0)+" 病原体<br>":""
 			let card11 = player.data.cardmax[11].gte(1) ? format(player.data.card[11],0)+"/"+format(player.data.cardmax[11],0)+" 思考<br>":""
-			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11
+			let card12 = player.data.cardmax[12].gte(1) ? format(player.data.card[12],0)+"/"+format(player.data.cardmax[12],0)+" 重击<br>":""
+			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12
 			}],
 			["column",[
+				["display-text", function() {return '<h6>(tip:左上角设置可以更换材质)'}],
 				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
@@ -929,7 +947,7 @@ addLayer("tree-tab", {
 				["bar", "dedebar"],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
-					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加1感染":""
+					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加1感染":""
 					return monster0 + monster1
 				}],
 				["row", [["clickable", 1022]]],
@@ -963,7 +981,8 @@ addLayer("tree-tab", {
 			let card9 = player.data.carddead[9].gte(1) ? format(player.data.carddead[9],0)+" 传染<br>":""
 			let card10 = player.data.carddead[10].gte(1) ? format(player.data.carddead[10],0)+" 病原体<br>":""
 			let card11 = player.data.carddead[11].gte(1) ? format(player.data.carddead[11],0)+" 思考<br>":""
-			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11
+			let card12 = player.data.carddead[12].gte(1) ? format(player.data.carddead[12],0)+" 重击<br>":""
+			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12
 			}],
 		]],
 	]

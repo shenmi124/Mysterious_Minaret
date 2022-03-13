@@ -29,8 +29,6 @@ var systemComponents = {
 				}
 				else {run(layers[layer].onClick, layers[layer])}
 			}"
-
-
 			v-bind:class="{
 				treeNode: tmp[layer].isLayer,
 				treeButton: !tmp[layer].isLayer,
@@ -135,8 +133,9 @@ var systemComponents = {
                 <td><button class="opt" onclick="save()">保存</button></td>
                 <td><button class="opt" onclick="hardReset()">重开</button></td>
                 <td><button class="opt" onclick="switchTheme()">材质: {{ getThemeName() }}</button></td>
-                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量节点: {{ options.hqTree?"ON":"OFF" }}</button></td>
-				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示横条: {{ options.forceTooltips?"ON":"OFF" }}</button></td>
+				<td><button class="opt" onclick="toggleOpt('switchWord')">文字荧光: {{ options.switchWord?"开":"关" }}</button></td>
+                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量节点: {{ options.hqTree?"开":"关" }}</button></td>
+				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示横条: {{ options.forceTooltips?"开":"关" }}</button></td>
 			</tr> 
         </table>`
     },

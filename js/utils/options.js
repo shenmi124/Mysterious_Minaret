@@ -14,6 +14,7 @@ function getStartOptions() {
 		forceOneTab: true,
 		oldStyle: false,
 		tooltipForcing: true,
+		switchWord:true,
 	}
 }
 
@@ -26,6 +27,8 @@ function toggleOpt(name) {
 		changeTreeQuality();
 	if (name == "oldStyle")
 		updateStyle();
+	if (name == "switchWord")
+		wordStyle();
 }
 var styleCooldown = 0;
 function updateStyle() {
@@ -41,6 +44,12 @@ function changeTreeQuality() {
 	document.body.style.setProperty('--hqProperty2b', on ? "0px 0px 20px var(--background)" : "");
 	document.body.style.setProperty('--hqProperty3', on ? "2px 2px 4px rgba(0, 0, 0, 0.25)" : "none");
 }
+
+function wordStyle(){
+	var on = options.switchWord;
+	document.body.style.setProperty('--px', on ? "5px" : "0px");
+}
+
 function toggleAuto(toggle) {
 	Vue.set(player[toggle[0]], [toggle[1]], !player[toggle[0]][toggle[1]]);
 	needCanvasUpdate=true

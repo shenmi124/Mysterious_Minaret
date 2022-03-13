@@ -1,0 +1,14 @@
+#other1 {
+	color: white;
+	text-shadow: 0 0 var(--px) var(--points);
+}
+
+#red {
+	color: red;
+	text-shadow: 0 0 var(--px) red;
+}
+
+#blue {
+	color: blue;
+	text-shadow: 0 0 var(--px) blue;
+}
