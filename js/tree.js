@@ -316,7 +316,7 @@ function redis(id1,id2){
 	if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
 	if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">7 物理伤害</red>3次<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(9)){return `给敌方 3 中毒<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 1 感染<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
