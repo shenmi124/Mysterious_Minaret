@@ -5,10 +5,14 @@ function effectdisplay(id){
 	if(id == 3){return "中毒:回合结束减少层级血量,无视护甲,每回合减少一层,如果有恢复格外减少一层<br><br>"}
 	if(id == 4){return "感染:中毒每回合加一层<br><br>"+effectdisplay(3)}
 	if(id == 5){return "眩晕:此回合无法攻击,抽排,每回合减少一层<br><br>"}
+	if(id == 6){return "魔力枯竭:此回合无法获得魔力,每回合减少一层<br><br>"}
+	if(id == 7){return "卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+"卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+effectdisplay(9)}
+	if(id == 8){return "卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 对应属性伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+"卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+effectdisplay(9)}
+	if(id == 9){return "焕:和效果 卐 搭配使用<br><br>"}
 }
 
 function monsterdisplay(id){
-	if(id==0){return "感染者:消耗4魔力,给敌方附加1感染<br><br>"+effectdisplay(4)}
+	if(id==0){return "感染者:消耗4魔力,给敌方附加1感染,每回合回复1魔力<br><br>"+effectdisplay(4)}
 	if(id==1){return "蛊梦师:每回合给敌方一张阻梦<br><br>"+card2display(0)}
 }
 
@@ -22,9 +26,15 @@ function carddisplay(id){
 	if(id == 6){return "连斩:对敌方造成 7 物理伤害3次<br>消耗:2 体力<br><br>"}
 	if(id == 7){return "愤怒:获得 3 力量<br>消耗:1 体力<br><br>"+effectdisplay(1)}
 	if(id == 8){return "传染:给敌方 3 中毒<br>消耗:1 体力<br><br>"+effectdisplay(3)}
-	if(id == 9){return "病原体:给双方 2 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
+	if(id == 9){return "病原体:给敌方 3 感染,我方 1 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
 	if(id == 10){return "思考:抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力<br><br>"+effectdisplay(0)}
-	if(id == 11){return "对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力<br><br>"+effectdisplay(5)}
+	if(id == 11){return "重击:对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力<br><br>"+effectdisplay(5)}
+	if(id == 12){return "回旋镖:对敌方造成 8 物理伤害并获得 1 回旋镖<br>消耗:1 体力<br><br>"}
+	if(id == 13){return "无中生有:恢复 1 体力和 1 魔力,造成 1 物理伤害和 1 魔法伤害,给敌方恢复 2 血<br>消耗:1 体力,1 魔力<br><br>"}
+	if(id == 14){return "烨:造成 x 魔法伤害,获得 5 魔力枯竭.给敌方 1 卍<br>消耗:x 魔力<br><br>"+effectdisplay(6)+effectdisplay(7)}
+	if(id == 15){return "灵能冲击:造成 15 魔法伤害,敌方获得 2 魔力枯竭<br>消耗:17 魔力<br><br>"+effectdisplay(6)}
+	if(id == 16){return "破魂打击:造成 x+5 魔法伤害,获得 2 魔力枯竭<br>消耗:x 魔力<br><br>"+effectdisplay(6)}
+	if(id == 17){return "魔能调换:恢复 1 体力<br>消耗:10 魔力<br><br>"}
 }
 
 function card2display(id){
@@ -93,10 +103,20 @@ addLayer("data", {
 		id3:中毒:回合结束减少层级血量,无视护甲,每回合减少一层,如果有恢复格外减少一层
 		id4:感染:中毒每回合加一层
 		id5:眩晕:此回合无法攻击,抽排,每回合减少一层
+		id6:魔力枯竭:此回合无法获得魔力,每回合减少一层
+		id7:卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐
+		id8:卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 卐 变为 效果 卍
+		id9:焕:和效果 卐 搭配使用
 		*/
-		effect:[new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
-		deeffect:[new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),],
-		alleffect:new Decimal(6),
+		effect:[
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		],
+		deeffect:[
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		],
+		alleffect:new Decimal(10),
 		
 		barpx:new Decimal(584),
 		haveeff:new Decimal(0),
@@ -135,20 +155,28 @@ addLayer("data", {
 		card:[new Decimal(0),
 		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),],
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
+		],
 		carddead:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),],
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
+		],
 		cardintermediary:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),],
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
+		],
 		cardmax:[new Decimal(0),
 		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),],
-		allcard:new Decimal(12),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
+		],
+		allcard:new Decimal(18),
 		maxcard:new Decimal(10),
 		holdcard:new Decimal(0),
 		
@@ -183,6 +211,9 @@ addLayer("data", {
 		cardaward:false,
 		newlevel:false,
 		level:new Decimal(0),
+		
+		wan:false,
+		dewan:false,
     }},
 	update(diff) {
 		if(player.data.hp.gt(player.data.hpmax)){player.data.hp = new Decimal(player.data.hpmax)}
@@ -206,6 +237,10 @@ addLayer("data", {
 		haveefffunction(3)
 		haveefffunction(4)
 		haveefffunction(5)
+		haveefffunction(6)
+		haveefffunction(7)
+		haveefffunction(8)
+		haveefffunction(9)
 		if(player.data.dede.gt(0)){player.data.haveeff = player.data.dehaveeff.add(1)}
 		dehaveefffunction(0)
 		dehaveefffunction(1)
@@ -213,6 +248,10 @@ addLayer("data", {
 		dehaveefffunction(3)
 		dehaveefffunction(4)
 		dehaveefffunction(5)
+		dehaveefffunction(6)
+		dehaveefffunction(7)
+		dehaveefffunction(8)
+		dehaveefffunction(9)
 		
 		havecardfunction(1)
 		havecardfunction(2)
@@ -375,12 +414,40 @@ addLayer("pokedex_effect", {
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
 			onClick(){player.pokedex.eff = new Decimal(6)},
 		},
+		18:{
+			title:"魔力枯竭",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.eff = new Decimal(7)},
+		},
+		19:{
+			title:"卍",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.eff = new Decimal(8)},
+		},
+		20:{
+			title:"卐",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.eff = new Decimal(9)},
+		},
+		21:{
+			title:"焕",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.eff = new Decimal(10)},
+		},
 	},
 	tabFormat: [
 		["display-text", function() {return "效果图鉴"}],
 		["row", [["clickable", 11]]],
 		"blank",
-		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],]],
+		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],]],
 		"blank",
 		["display-text", function() {
 			let eff0 = player.pokedex.eff.eq(1) ? effectdisplay(0):""
@@ -389,7 +456,11 @@ addLayer("pokedex_effect", {
 			let eff3 = player.pokedex.eff.eq(4) ? effectdisplay(3):""
 			let eff4 = player.pokedex.eff.eq(5) ? effectdisplay(4):""
 			let eff5 = player.pokedex.eff.eq(6) ? effectdisplay(5):""
-			return eff0+eff1+eff2+eff3+eff4+eff5
+			let eff6 = player.pokedex.eff.eq(7) ? effectdisplay(6):""
+			let eff7 = player.pokedex.eff.eq(8) ? effectdisplay(7):""
+			let eff8 = player.pokedex.eff.eq(9) ? effectdisplay(8):""
+			let eff9 = player.pokedex.eff.eq(10) ? effectdisplay(9):""
+			return eff0+eff1+eff2+eff3+eff4+eff5+eff6+eff7+eff8+eff9
 		}],
 	]
 })
@@ -604,12 +675,54 @@ addLayer("pokedex_card_tab1", {
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
 			onClick(){player.pokedex.car1 = new Decimal(12)},
 		},
+		24:{
+			title:"回旋镖",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(13)},
+		},
+		25:{
+			title:"无中生有",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(14)},
+		},
+		26:{
+			title:"烨",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(15)},
+		},
+		27:{
+			title:"灵能冲击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(16)},
+		},
+		28:{
+			title:"破魂打击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(17)},
+		},
+		29:{
+			title:"魔能调换",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(18)},
+		},
 	},
 	tabFormat: [
 		["display-text", function() {return "卡牌图鉴"}],
 		["row", [["clickable", 11]]],
 		"blank",
-		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],["clickable", 22],["clickable", 23],]],
+		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],["clickable", 26],["clickable", 27],["clickable", 28],["clickable", 29],]],
 		"blank",
 		["display-text", function() {
 			let car0 = player.pokedex.car1.eq(1) ? carddisplay(0):""
@@ -624,7 +737,13 @@ addLayer("pokedex_card_tab1", {
 			let car9 = player.pokedex.car1.eq(10) ? carddisplay(9):""
 			let car10 = player.pokedex.car1.eq(11) ? carddisplay(10):""
 			let car11 = player.pokedex.car1.eq(12) ? carddisplay(11):""
-			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10+car11
+			let car12 = player.pokedex.car1.eq(13) ? carddisplay(12):""
+			let car13 = player.pokedex.car1.eq(14) ? carddisplay(13):""
+			let car14 = player.pokedex.car1.eq(15) ? carddisplay(14):""
+			let car15 = player.pokedex.car1.eq(16) ? carddisplay(15):""
+			let car16 = player.pokedex.car1.eq(17) ? carddisplay(16):""
+			let car17 = player.pokedex.car1.eq(18) ? carddisplay(17):""
+			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10+car11+car12+car13+car14+car15+car16+car17
 		}],
 	]
 })

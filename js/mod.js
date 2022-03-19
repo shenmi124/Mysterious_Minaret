@@ -13,12 +13,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1a",
+	num: "0.11a",
 	name: "辉影尖塔",
 }
 
 let changelog = `<h1>更新日志:</h1><br>
-	<h3>v0.1</h3><br>
+	<h3>v0.11a</h3><br>
+	<li>更多卡牌,更多机制
+	<li>更新至18张卡<br>
+	<h3>v0.1a</h3><br>
 	<li>完成了基础的战斗,奖励机制和精英怪
 	<li>更新至11张卡
 		`

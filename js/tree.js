@@ -60,11 +60,14 @@ function typemoster(){
 	if(player.data.monster.eq(1) && player.data.demp.gte(4)){
 		player.data.effect[4] = player.data.effect[4].add(1)
 		player.data.demp = player.data.demp.sub(4)
+		player.data.demp = player.data.demp.add(1)
 	}
 }
 
 function getcard(id1,id2){
 	player.data.ps = new Decimal(player.data.psmax)
+	player.data.wan = false
+	player.data.dewan = false
 	let cao = id2
 	for(col=1;col<=cao;col++){
 		if(player.data.holdcard.lte(player.data.maxcard.sub(1))){
@@ -183,11 +186,50 @@ function recard(){
 	if(player.data.deeffect[5].gt(0)){
 		player.data.deeffect[5] = player.data.deeffect[5].sub(1)
 	}
+	//id6:魔力枯竭
+	if(player.data.effect[6].gt(0)){
+		player.data.effect[6] = player.data.effect[6].sub(1)
+	}
+	
+	if(player.data.deeffect[6].gt(0)){
+		player.data.deeffect[6] = player.data.deeffect[6].sub(1)
+	}
+	//id7:卍
+	if(player.data.effect[7].gt(0) && player.data.wan == false){
+		player.data.effect[8] = player.data.effect[7].add(player.data.effect[8])
+		player.data.effect[7] = new Decimal(0)
+		player.data.wan = true
+	}
+	
+	if(player.data.deeffect[7].gt(0) && player.data.dewan == false){
+		player.data.deeffect[8] = player.data.deeffect[7].add(player.data.deeffect[8])
+		player.data.deeffect[7] = new Decimal(0)
+		player.data.dewan = true
+	}
+	//id8:卐
+	if(player.data.effect[8].gt(0) && player.data.wan == false){
+		player.data.effect[7] = player.data.effect[8].add(player.data.effect[7])
+		player.data.effect[8] = new Decimal(0)
+		player.data.wan = true
+	}
+	
+	if(player.data.deeffect[8].gt(0) && player.data.dewan == false){
+		player.data.deeffect[7] = player.data.deeffect[8].add(player.data.deeffect[7])
+		player.data.deeffect[8] = new Decimal(0)
+		player.data.dewan = true
+	}
 }
 
 function atktode(id){
 	if(id > 0){
 		player.data.atkto = new Decimal(id).add(player.data.effect[1])
+		if(player.data.deeffect[9].gte(1) && player.data.deeffect[8].gte(1)){
+			player.data.atkto = player.data.atkto.add(3)
+			player.data.deeffect[9] = player.data.deeffect[9].sub(1)
+		}
+		if(player.data.deeffect[7].gte(1)){
+			player.data.deeffect[9] = player.data.deeffect[9].add(player.data.deeffect[7])
+		}
 	}else{
 		player.data.atkto = new Decimal(id)
 	}
@@ -203,7 +245,18 @@ function atktode(id){
 }
 
 function mtktode(id){
-	player.data.mtkto = new Decimal(id)
+	if(id > 0){
+		player.data.mtkto = new Decimal(id)
+		if(player.data.deeffect[9].gte(1) && player.data.deeffect[8].gte(1)){
+			player.data.mtkto = player.data.mtkto.add(3)
+			player.data.deeffect[9] = player.data.deeffect[9].sub(1)
+		}
+		if(player.data.deeffect[7].gte(1)){
+			player.data.deeffect[9] = player.data.deeffect[9].add(player.data.deeffect[7])
+		}
+	}else{
+		player.data.mtkto = new Decimal(id)
+	}
 	if(player.data.dede.gte(player.data.mtkto)){
 		player.data.dede = player.data.dede.sub(player.data.matkto)
 		player.data.mtkto = new Decimal(0)
@@ -215,10 +268,19 @@ function mtktode(id){
 	player.data.dehp = player.data.dehp.sub(player.data.mtkto)
 }
 
+function gethp(id){
+	if(id > 0){
+		player.data.hp = player.data.hp.add(id)
+	}else{
+		player.data.hp = player.data.hp.add(id)
+	}
+}
+
 function getmp(id){
 	if(id > 0){
-		let most_total_mp = id + player.data.effect[0]
-		player.data.mp = player.data.mp.add(most_total_mp)
+		if(player.data.effect[6].lte(0)){
+			player.data.mp = player.data.mp.add(id).add(player.data.effect[0])
+		}
 	}else{
 		player.data.mp = player.data.mp.add(id)
 	}
@@ -237,6 +299,12 @@ function retit(id1,id2){
 	if(player.data[id1+id2].eq(10)){return "病原体"}
 	if(player.data[id1+id2].eq(11)){return "思考"}
 	if(player.data[id1+id2].eq(12)){return "重击"}
+	if(player.data[id1+id2].eq(13)){return "回旋镖"}
+	if(player.data[id1+id2].eq(14)){return "无中生有"}
+	if(player.data[id1+id2].eq(15)){return "烨"}
+	if(player.data[id1+id2].eq(16)){return "灵能冲击"}
+	if(player.data[id1+id2].eq(17)){return "破魂打击"}
+	if(player.data[id1+id2].eq(18)){return "魔能调换"}
 }
 
 function redis(id1,id2){
@@ -249,9 +317,15 @@ function redis(id1,id2){
 	if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">7 物理伤害</red>3次<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(9)){return `给敌方 3 中毒<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(10)){return `给双方 2 感染<br>消耗:2 体力`}
+	if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 1 感染<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
+	if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">8 物理伤害</red>并获得 1 回旋镖<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
+	if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>消耗:x 魔力`}
+	if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">15 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
+	if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">x+5 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
+	if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
 }
 
 function recan(id){
@@ -268,13 +342,19 @@ function recan(id){
 		if(player.data['display'+id].eq(10)){return player.data.ps.gte(2)}
 		if(player.data['display'+id].eq(11)){return player.data.ps.gte(1)}
 		if(player.data['display'+id].eq(12)){return player.data.ps.gte(3)}
+		if(player.data['display'+id].eq(13)){return player.data.ps.gte(1)}
+		if(player.data['display'+id].eq(14)){return player.data.ps.gte(1)&&player.data.mp.gte(1)}
+		if(player.data['display'+id].eq(15)){return player.data.mp.gte(1)}
+		if(player.data['display'+id].eq(16)){return player.data.mp.gte(17)}
+		if(player.data['display'+id].eq(17)){return player.data.mp.gte(1)}
+		if(player.data['display'+id].eq(18)){return player.data.mp.gte(10)}
 	}else{
 		return false 
 	}
 }
 
 function attributes(id1,id2,id3,id4,id5,id6){
-	player.data.hp = player.data.hp.add(id1)
+	gethp(id1)
 	getmp(id2)
 	player.data.ps = player.data.ps.add(id3)
 	atktode(id4)
@@ -355,8 +435,8 @@ function reonc(id){
 	}
 	if(player.data['display'+id].eq(10)){
 		//病原体
-		player.data.deeffect[4] = player.data.deeffect[4].add(2)
-		player.data.effect[4] = player.data.effect[4].add(2)
+		player.data.deeffect[4] = player.data.deeffect[4].add(3)
+		player.data.effect[4] = player.data.effect[4].add(1)
 		attributes(0,0,-2,0,0,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[10] = player.data.carddead[10].add(1)
@@ -380,6 +460,56 @@ function reonc(id){
 		attributes(0,0,-3,18,0,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[12] = player.data.carddead[12].add(1)
+		return
+	}
+	if(player.data['display'+id].eq(13)){
+		//回旋镖
+		attributes(0,0,-1,8,0,0)
+		player.data['display'+id] = new Decimal(13)
+		player.data.carddead[13] = player.data.carddead[13].add(1)
+		return
+	}
+	if(player.data['display'+id].eq(14)){
+		//无中生有
+		attributes(-1,-1,-1,0,0,0)
+		attributes(1,1,1,1,1,0)
+		player.data.dehp = player.data.dehp.add(2)
+		player.data['display'+id] = new Decimal(0)
+		player.data.carddead[14] = player.data.carddead[14].add(1)
+		return
+	}
+	if(player.data['display'+id].eq(15)){
+		//烨
+		player.data.deeffect[7] = player.data.deeffect[7].add(1)
+		player.data.effect[6] = player.data.effect[6].add(5)
+		let a = player.data.mp
+		attributes(0,-a,0,0,a,0)
+		player.data['display'+id] = new Decimal(0)
+		player.data.carddead[15] = player.data.carddead[15].add(1)
+		return
+	}
+	if(player.data['display'+id].eq(16)){
+		//灵能冲击
+		player.data.deeffect[6] = player.data.deeffect[6].add(2)
+		attributes(0,-17,0,0,15,0)
+		player.data['display'+id] = new Decimal(0)
+		player.data.carddead[16] = player.data.carddead[16].add(1)
+		return
+	}
+	if(player.data['display'+id].eq(17)){
+		//破魂打击
+		player.data.effect[6] = player.data.effect[6].add(2)
+		let a = player.data.mp
+		attributes(0,-a,0,0,a+5,0)
+		player.data['display'+id] = new Decimal(0)
+		player.data.carddead[17] = player.data.carddead[17].add(1)
+		return
+	}
+	if(player.data['display'+id].eq(18)){
+		//魔能调换
+		attributes(0,-10,1,0,0,0)
+		player.data['display'+id] = new Decimal(0)
+		player.data.carddead[18] = player.data.carddead[18].add(1)
 		return
 	}
 }
@@ -431,6 +561,30 @@ function recardonc(id){
 	}
 	if(player.data['cardget'+id].eq(12)){
 		player.data.cardmax[12] = player.data.cardmax[12].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(13)){
+		player.data.cardmax[13] = player.data.cardmax[13].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(14)){
+		player.data.cardmax[14] = player.data.cardmax[14].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(15)){
+		player.data.cardmax[15] = player.data.cardmax[15].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(16)){
+		player.data.cardmax[16] = player.data.cardmax[16].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(17)){
+		player.data.cardmax[17] = player.data.cardmax[17].add(1)
+		player.data['cardget'+id] = new Decimal(0)
+	}
+	if(player.data['cardget'+id].eq(18)){
+		player.data.cardmax[18] = player.data.cardmax[18].add(1)
 		player.data['cardget'+id] = new Decimal(0)
 	}
 }
@@ -529,6 +683,50 @@ addLayer("tree-tab", {
 			progress(){return true},
 			baseStyle: {"background-color": "#fff3dd"},
 			fillStyle: {"background-color": "#fff3dd"},
+			textStyle: {"color": "#000000"}
+		},
+		deeff6bar:{
+			display() {return "魔力枯竭 "+format(player.data.deeffect[6],0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.deeffect[6].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ccfffd"},
+			fillStyle: {"background-color": "#ccfffd"},
+			textStyle: {"color": "#000000"}
+		},
+		deeff7bar:{
+			display() {return "卍 "+format(player.data.deeffect[7],0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.deeffect[7].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ec1b1b"},
+			fillStyle: {"background-color": "#ec1b1b"},
+			textStyle: {"color": "#000000"}
+		},
+		deeff8bar:{
+			display() {return "卐 "+format(player.data.deeffect[8],0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.deeffect[8].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ec6e1b"},
+			fillStyle: {"background-color": "#ec6e1b"},
+			textStyle: {"color": "#000000"}
+		},
+		deeff9bar:{
+			display() {return "焕 "+format(player.data.deeffect[9],0)},	
+			direction: RIGHT,
+			width(){return player.data.debarpx},
+			height: 25,
+			unlocked(){return player.data.deeffect[9].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ec531b"},
+			fillStyle: {"background-color": "#ec531b"},
 			textStyle: {"color": "#000000"}
 		},
 		//↑敌方 ↓我方
@@ -642,6 +840,50 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#fff3dd"},
 			textStyle: {"color": "#000000"}
 		},
+		eff6bar:{
+			display() {return "魔力枯竭 "+format(player.data.effect[6],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[6].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ccfffd"},
+			fillStyle: {"background-color": "#ccfffd"},
+			textStyle: {"color": "#000000"}
+		},
+		eff7bar:{
+			display() {return "卍 "+format(player.data.effect[7],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[7].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ec1b1b"},
+			fillStyle: {"background-color": "#ec1b1b"},
+			textStyle: {"color": "#000000"}
+		},
+		eff8bar:{
+			display() {return "卐 "+format(player.data.effect[8],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[8].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ec6e1b"},
+			fillStyle: {"background-color": "#ec6e1b"},
+			textStyle: {"color": "#000000"}
+		},
+		eff9bar:{
+			display() {return "焕 "+format(player.data.effect[9],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[9].gte(1)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ec531b"},
+			fillStyle: {"background-color": "#ec531b"},
+			textStyle: {"color": "#000000"}
+		},
 		moneybar:{
 			display() {return format(player.data.money,0)+"$"},	
 			direction: RIGHT,
@@ -669,7 +911,11 @@ addLayer("tree-tab", {
 				let eff3 = player.data.effect[3].gt(0) ? format(player.data.effect[3],0)+"中毒<br>":""
 				let eff4 = player.data.effect[4].gt(0) ? format(player.data.effect[4],0)+"感染<br>":""
 				let eff5 = player.data.effect[5].gt(0) ? format(player.data.effect[5],0)+"眩晕<br>":""
-				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5
+				let eff6 = player.data.effect[6].gt(0) ? format(player.data.effect[6],0)+"魔力枯竭<br>":""
+				let eff7 = player.data.effect[7].gt(0) ? format(player.data.effect[7],0)+"卍<br>":""
+				let eff8 = player.data.effect[8].gt(0) ? format(player.data.effect[8],0)+"卐<br>":""
+				let eff9 = player.data.effect[9].gt(0) ? format(player.data.effect[9],0)+"焕<br>":""
+				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9
 			}
 		},
 		1022:{
@@ -686,7 +932,11 @@ addLayer("tree-tab", {
 				let eff3 = player.data.deeffect[3].gt(0) ? format(player.data.deeffect[3],0)+"中毒<br>":""
 				let eff4 = player.data.deeffect[4].gt(0) ? format(player.data.deeffect[4],0)+"感染<br>":""
 				let eff5 = player.data.deeffect[5].gt(0) ? format(player.data.deeffect[5],0)+"眩晕<br>":""
-				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5
+				let eff6 = player.data.deeffect[6].gt(0) ? format(player.data.deeffect[6],0)+"魔力枯竭<br>":""
+				let eff7 = player.data.deeffect[7].gt(0) ? format(player.data.deeffect[7],0)+"卍<br>":""
+				let eff8 = player.data.deeffect[8].gt(0) ? format(player.data.deeffect[8],0)+"卐<br>":""
+				let eff9 = player.data.deeffect[9].gt(0) ? format(player.data.deeffect[9],0)+"焕<br>":""
+				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9
 			}
 		},
 		1023:{
@@ -936,18 +1186,24 @@ addLayer("tree-tab", {
 			let card10 = player.data.cardmax[10].gte(1) ? format(player.data.card[10],0)+"/"+format(player.data.cardmax[10],0)+" 病原体<br>":""
 			let card11 = player.data.cardmax[11].gte(1) ? format(player.data.card[11],0)+"/"+format(player.data.cardmax[11],0)+" 思考<br>":""
 			let card12 = player.data.cardmax[12].gte(1) ? format(player.data.card[12],0)+"/"+format(player.data.cardmax[12],0)+" 重击<br>":""
-			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12
+			let card13 = player.data.cardmax[13].gte(1) ? format(player.data.card[13],0)+"/"+format(player.data.cardmax[13],0)+" 回旋镖<br>":""
+			let card14 = player.data.cardmax[14].gte(1) ? format(player.data.card[14],0)+"/"+format(player.data.cardmax[14],0)+" 无中生有<br>":""
+			let card15 = player.data.cardmax[15].gte(1) ? format(player.data.card[15],0)+"/"+format(player.data.cardmax[15],0)+" 烨<br>":""
+			let card16 = player.data.cardmax[16].gte(1) ? format(player.data.card[16],0)+"/"+format(player.data.cardmax[16],0)+" 灵能冲击<br>":""
+			let card17 = player.data.cardmax[17].gte(1) ? format(player.data.card[17],0)+"/"+format(player.data.cardmax[17],0)+" 破魂打击<br>":""
+			let card18 = player.data.cardmax[18].gte(1) ? format(player.data.card[18],0)+"/"+format(player.data.cardmax[18],0)+" 魔能调换<br>":""
+			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12 + card13 + card14 + card15 + card16 + card17 + card18
 			}],
 			["column",[
 				["display-text", function() {return '<h6>(tip:左上角设置可以更换材质)'}],
 				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
-				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"],["bar", "deeff5bar"]]],
+				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"],["bar", "deeff5bar"],["bar", "deeff6bar"],["bar", "deeff7bar"],["bar", "deeff8bar"],["bar", "deeff9bar"]]],
 				["bar", "dedebar"],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
-					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加1感染":""
+					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加1感染,每回合回复1魔力":""
 					return monster0 + monster1
 				}],
 				["row", [["clickable", 1022]]],
@@ -961,7 +1217,7 @@ addLayer("tree-tab", {
 					]],
 				["bar", "moneybar"]
 				]],
-				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"]]],
+				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"],["bar", "eff6bar"],["bar", "eff7bar"],["bar", "eff8bar"],["bar", "eff9bar"]]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
 				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005]]],
@@ -982,7 +1238,13 @@ addLayer("tree-tab", {
 			let card10 = player.data.carddead[10].gte(1) ? format(player.data.carddead[10],0)+" 病原体<br>":""
 			let card11 = player.data.carddead[11].gte(1) ? format(player.data.carddead[11],0)+" 思考<br>":""
 			let card12 = player.data.carddead[12].gte(1) ? format(player.data.carddead[12],0)+" 重击<br>":""
-			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12
+			let card13 = player.data.carddead[13].gte(1) ? format(player.data.carddead[13],0)+" 回旋镖<br>":""
+			let card14 = player.data.carddead[14].gte(1) ? format(player.data.carddead[14],0)+" 无中生有<br>":""
+			let card15 = player.data.carddead[15].gte(1) ? format(player.data.carddead[15],0)+" 烨<br>":""
+			let card16 = player.data.carddead[16].gte(1) ? format(player.data.carddead[16],0)+" 灵能冲击<br>":""
+			let card17 = player.data.carddead[17].gte(1) ? format(player.data.carddead[17],0)+" 破魂打击<br>":""
+			let card18 = player.data.carddead[18].gte(1) ? format(player.data.carddead[18],0)+" 魔能调换<br>":""
+			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12 + card13 + card14 + card15 + card16 + card17 + card18
 			}],
 		]],
 	]
