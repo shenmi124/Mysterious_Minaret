@@ -60,9 +60,11 @@ function levelnew(){
 }
 
 function typemoster(){
-	if(player.data.monster.eq(1) && player.data.demp.gte(4)){
-		player.data.effect[4] = player.data.effect[4].add(1)
-		player.data.demp = player.data.demp.sub(4)
+	if(player.data.monster.eq(1)){
+		if(player.data.demp.gte(4)){
+			player.data.effect[4] = player.data.effect[4].add(1)
+			player.data.demp = player.data.demp.sub(4)
+		}
 		player.data.demp = player.data.demp.add(1)
 	}
 }
@@ -326,7 +328,7 @@ function redis(id1,id2){
 	if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
 	if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
-	if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">15 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
+	if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
 	if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
 	if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
 }
@@ -493,7 +495,7 @@ function reonc(id){
 	if(player.data['display'+id].eq(16)){
 		//灵能冲击
 		player.data.deeffect[6] = player.data.deeffect[6].add(2)
-		attributes(0,-17,0,0,15,0)
+		attributes(0,-17,0,0,36,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[16] = player.data.carddead[16].add(1)
 		return
