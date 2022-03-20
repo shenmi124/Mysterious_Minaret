@@ -320,9 +320,9 @@ function redis(id1,id2){
 	if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
-	if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">8 物理伤害</red>并获得 1 回旋镖<br>消耗:1 体力`}
+	if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
-	if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>消耗:x 魔力`}
+	if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
 	if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">15 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
 	if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">x+5 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
 	if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
@@ -466,7 +466,6 @@ function reonc(id){
 		//回旋镖
 		attributes(0,0,-1,8,0,0)
 		player.data['display'+id] = new Decimal(13)
-		player.data.carddead[13] = player.data.carddead[13].add(1)
 		return
 	}
 	if(player.data['display'+id].eq(14)){
@@ -485,7 +484,6 @@ function reonc(id){
 		let a = player.data.mp
 		attributes(0,-a,0,0,a,0)
 		player.data['display'+id] = new Decimal(0)
-		player.data.carddead[15] = player.data.carddead[15].add(1)
 		return
 	}
 	if(player.data['display'+id].eq(16)){
