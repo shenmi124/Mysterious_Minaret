@@ -17,9 +17,9 @@ function awardcard(id1,id2){
 }
 
 function levelnew(){
-	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)^(((player.data.level+1)/50)+1)
-	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*2)+2))^(((player.data.level+1)/25)+1)
-	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*2)+6))^(((player.data.level+1)/75)+1)
+	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)^(((player.data.level+1)/100)+1)
+	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*1)+2))^(((player.data.level+1)/75)+1)
+	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*2)+6))^(((player.data.level+1)/125)+1)
 	let monsterup = Math.floor((Math.random() * 5))
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 1)) + 1)
