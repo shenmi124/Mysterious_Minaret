@@ -470,7 +470,7 @@ function reonc(id){
 	}
 	if(player.data['display'+id].eq(13)){
 		//回旋镖
-		attributes(0,0,-1,8,0,0)
+		attributes(0,0,-1,10,0,0)
 		player.data['display'+id] = new Decimal(13)
 		return
 	}
