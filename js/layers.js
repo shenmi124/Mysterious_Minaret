@@ -26,7 +26,7 @@ function carddisplay(id){
 	if(id == 6){return "连斩:对敌方造成 7 物理伤害3次<br>消耗:2 体力<br><br>"}
 	if(id == 7){return "愤怒:获得 3 力量<br>消耗:1 体力<br><br>"+effectdisplay(1)}
 	if(id == 8){return "传染:给敌方 6 中毒<br>消耗:1 体力<br><br>"+effectdisplay(3)}
-	if(id == 9){return "病原体:给敌方 3 感染,我方 1 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
+	if(id == 9){return "病原体:给敌方 3 感染,我方 2 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
 	if(id == 10){return "思考:抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力<br><br>"+effectdisplay(0)}
 	if(id == 11){return "重击:对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力<br><br>"+effectdisplay(5)}
 	if(id == 12){return "回旋镖:对敌方造成 8 物理伤害并获得 1 回旋镖<br>消耗:1 体力<br><br>"}

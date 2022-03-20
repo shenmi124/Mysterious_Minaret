@@ -427,7 +427,7 @@ function reonc(id){
 	}
 	if(player.data['display'+id].eq(9)){
 		//传染
-		player.data.deeffect[3] = player.data.deeffect[3].add(3)
+		player.data.deeffect[3] = player.data.deeffect[3].add(6)
 		attributes(0,0,-1,0,0,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[9] = player.data.carddead[9].add(1)
@@ -436,7 +436,7 @@ function reonc(id){
 	if(player.data['display'+id].eq(10)){
 		//病原体
 		player.data.deeffect[4] = player.data.deeffect[4].add(3)
-		player.data.effect[4] = player.data.effect[4].add(1)
+		player.data.effect[4] = player.data.effect[4].add(2)
 		attributes(0,0,-2,0,0,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[10] = player.data.carddead[10].add(1)
