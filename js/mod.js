@@ -18,6 +18,8 @@ let VERSION = {
 }
 
 let changelog = `<h1>更新日志:</h1><br>
+	<h3>v0.12a</h3><br>
+	<li>修了8个bug<br>
 	<h3>v0.11a</h3><br>
 	<li>更多卡牌,更多机制
 	<li>更新至18张卡<br>

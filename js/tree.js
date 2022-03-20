@@ -17,9 +17,9 @@ function awardcard(id1,id2){
 }
 
 function levelnew(){
-	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)^(((player.data.level+1)/100)+1)
-	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*1)+2))^(((player.data.level+1)/75)+1)
-	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*2)+6))^(((player.data.level+1)/125)+1)
+	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)**(((player.data.level+1)/100)+1)
+	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*1)+2))**(((player.data.level+1)/75)+1)
+	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*2)+6))**(((player.data.level+1)/125)+1)
 	let monsterup = Math.floor((Math.random() * 5))
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 1)) + 1)
@@ -54,6 +54,9 @@ function levelnew(){
 		player.data.carddead[col] = new Decimal(0)
 	}
 	player.data.de = new Decimal(0)
+	player.data.ps = new Decimal(player.data.psmax)
+	player.data.wan = false
+	player.data.dewan = false
 }
 
 function typemoster(){
@@ -65,9 +68,6 @@ function typemoster(){
 }
 
 function getcard(id1,id2){
-	player.data.ps = new Decimal(player.data.psmax)
-	player.data.wan = false
-	player.data.dewan = false
 	let cao = id2
 	for(col=1;col<=cao;col++){
 		if(player.data.holdcard.lte(player.data.maxcard.sub(1))){
@@ -116,6 +116,9 @@ function enemy_action(){
 
 function our_action(){
 	getcard("display",3)
+	player.data.ps = new Decimal(player.data.psmax)
+	player.data.wan = false
+	player.data.dewan = false
 	var cards = player.data.card
 	var nothing = true
 	for(col=1;col<=20;col++){
@@ -444,6 +447,7 @@ function reonc(id){
 	}
 	if(player.data['display'+id].eq(11)){
 		//思考
+		attributes(0,0,-1,0,0,0)
 		getcard("display",1)
 		attributes(0,0,1,0,0,0)
 		if(player.data.effect[0].gt(0)){
@@ -498,7 +502,8 @@ function reonc(id){
 		//破魂打击
 		player.data.effect[6] = player.data.effect[6].add(2)
 		let a = player.data.mp
-		attributes(0,-a,0,0,a+5,0)
+		let b = player.data.mp.add(5)
+		attributes(0,-a,0,0,b,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[17] = player.data.carddead[17].add(1)
 		return
@@ -766,7 +771,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.de.gte(1)},
+			unlocked(){return player.data.de.gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#c3c3c3"},
 			fillStyle: {"background-color": "#c3c3c3"},
@@ -777,7 +782,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[0].gte(1)},
+			unlocked(){return player.data.effect[0].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#54d4ff"},
 			fillStyle: {"background-color": "#54d4ff"},
@@ -788,7 +793,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[1].gte(1)},
+			unlocked(){return player.data.effect[1].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#d01118"},
 			fillStyle: {"background-color": "#d01118"},
@@ -799,7 +804,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[2].gte(1)},
+			unlocked(){return player.data.effect[2].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#00ff48"},
 			fillStyle: {"background-color": "#00ff48"},
@@ -810,7 +815,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[3].gte(1)},
+			unlocked(){return player.data.effect[3].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#0ab23f"},
 			fillStyle: {"background-color": "#0ab23f"},
@@ -821,7 +826,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[4].gte(1)},
+			unlocked(){return player.data.effect[4].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#2ee5b1"},
 			fillStyle: {"background-color": "#2ee5b1"},
@@ -832,7 +837,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[5].gte(1)},
+			unlocked(){return player.data.effect[5].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#fff3dd"},
 			fillStyle: {"background-color": "#fff3dd"},
@@ -843,7 +848,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[6].gte(1)},
+			unlocked(){return player.data.effect[6].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#ccfffd"},
 			fillStyle: {"background-color": "#ccfffd"},
@@ -854,7 +859,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[7].gte(1)},
+			unlocked(){return player.data.effect[7].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#ec1b1b"},
 			fillStyle: {"background-color": "#ec1b1b"},
@@ -865,7 +870,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[8].gte(1)},
+			unlocked(){return player.data.effect[8].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#ec6e1b"},
 			fillStyle: {"background-color": "#ec6e1b"},
@@ -876,7 +881,7 @@ addLayer("tree-tab", {
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
-			unlocked(){return player.data.effect[9].gte(1)},
+			unlocked(){return player.data.effect[9].gt(0)},
 			progress(){return true},
 			baseStyle: {"background-color": "#ec531b"},
 			fillStyle: {"background-color": "#ec531b"},
