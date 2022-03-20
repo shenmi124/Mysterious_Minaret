@@ -33,7 +33,7 @@ function carddisplay(id){
 	if(id == 13){return "无中生有:恢复 1 体力和 1 魔力,造成 1 物理伤害和 1 魔法伤害,给敌方恢复 2 血<br>消耗:1 体力,1 魔力<br><br>"}
 	if(id == 14){return "烨:造成 x 魔法伤害,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力<br><br>"+effectdisplay(6)+effectdisplay(7)}
 	if(id == 15){return "灵能冲击:造成 15 魔法伤害,敌方获得 2 魔力枯竭<br>消耗:17 魔力<br><br>"+effectdisplay(6)}
-	if(id == 16){return "破魂打击:造成 x+5 魔法伤害,获得 2 魔力枯竭<br>消耗:x 魔力<br><br>"+effectdisplay(6)}
+	if(id == 16){return "破魂打击:造成 3x+8 魔法伤害,获得 2 魔力枯竭<br>消耗:x 魔力<br><br>"+effectdisplay(6)}
 	if(id == 17){return "魔能调换:恢复 1 体力<br>消耗:10 魔力<br><br>"}
 }
 

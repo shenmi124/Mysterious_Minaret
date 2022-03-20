@@ -327,7 +327,7 @@ function redis(id1,id2){
 	if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
 	if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
 	if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">15 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
-	if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">x+5 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
+	if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
 	if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
 }
 
@@ -502,7 +502,7 @@ function reonc(id){
 		//破魂打击
 		player.data.effect[6] = player.data.effect[6].add(2)
 		let a = player.data.mp
-		let b = player.data.mp.add(5)
+		let b = player.data.mp.mul(3).add(8)
 		attributes(0,-a,0,0,b,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[17] = player.data.carddead[17].add(1)
