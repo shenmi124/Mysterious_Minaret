@@ -23,7 +23,7 @@ function carddisplay(id){
 	if(id==3){return "魔法飞弹:<br>对敌方造成 15 魔法伤害<br>消耗:5 魔力<br><br>"}
 	if(id==4){return "冥想:<br>先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力<br><br>"+effectdisplay(0)}
 	if(id==5){return "魔力源泉:<br>恢复 7 魔力<br>消耗:无<br><br>"}
-	if(id == 6){return "连斩:对敌方造成 7 物理伤害3次<br>消耗:2 体力<br><br>"}
+	if(id == 6){return "连斩:对敌方造成 4 物理伤害5次<br>消耗:2 体力<br><br>"}
 	if(id == 7){return "愤怒:获得 3 力量<br>消耗:1 体力<br><br>"+effectdisplay(1)}
 	if(id == 8){return "传染:给敌方 6 中毒<br>消耗:1 体力<br><br>"+effectdisplay(3)}
 	if(id == 9){return "病原体:给敌方 3 感染,我方 2 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
@@ -96,18 +96,7 @@ addLayer("data", {
 		atkto:new Decimal(0),
 		mtkto:new Decimal(0),
 		
-		/*
-		id0:智慧:每一层使获得魔力时多获得1,每回合减少一层
-		id1:愤怒:每一层使物理伤害+1,每回合减少一层
-		id2:恢复:回合结束时恢复层级血量,每回合减少一层
-		id3:中毒:回合结束减少层级血量,无视护甲,每回合减少一层,如果有恢复格外减少一层
-		id4:感染:中毒每回合加一层
-		id5:眩晕:此回合无法攻击,抽排,每回合减少一层
-		id6:魔力枯竭:此回合无法获得魔力,每回合减少一层
-		id7:卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐
-		id8:卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 卐 变为 效果 卍
-		id9:焕:和效果 卐 搭配使用
-		*/
+		//效果
 		effect:[
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
@@ -131,27 +120,10 @@ addLayer("data", {
 		deatkto:new Decimal(0),
 		dede:new Decimal(0),
 		
-		/*
-		id0:无
-		id1:感染者:每回合给敌方附加1感染
-		*/
+		//怪物
 		monster:new Decimal(0),
 		
-		/*
-		id0:无
-		id1:攻击
-		id2:防御
-		id3:治疗
-		id4:魔法飞弹
-		id5:冥想
-		id6:魔力源泉
-		id7:连斩
-		id8:愤怒
-		id9:传染
-		id10:病原体
-		id11:思考
-		id12:重击
-		*/
+		//卡牌
 		card:[new Decimal(0),
 		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
@@ -180,6 +152,41 @@ addLayer("data", {
 		maxcard:new Decimal(10),
 		holdcard:new Decimal(0),
 		
+		//神器
+		Normal_Artifacts:[
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		],
+		Rare_Artifacts:[
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		],
+		Super_Rare_Artifacts:[
+		new Decimal(0),new Decimal(0),new Decimal(0),
+		],
+		Ultra_Rare_Artifacts:[
+		new Decimal(0),
+		],
+		
+		Normal_Artifacts_Sole:[
+		],
+		Rare_Artifacts_Sole:[
+		new Decimal(0),
+		],
+		Super_Rare_Artifacts_Sole:[
+		new Decimal(0),new Decimal(0),
+		],
+		Ultra_Rare_Artifacts_Sole:[
+		new Decimal(0),new Decimal(0),
+		],
+		all_Normal_Artifacts:new Decimal(4),
+		all_Rare_Artifacts:new Decimal(4),
+		all_Super_Rare_Artifacts:new Decimal(3),
+		all_Ultra_Rare_Artifacts:new Decimal(1),
+		
+		all_Normal_Artifacts_Sole:new Decimal(0),
+		all_Rare_Artifacts_Sole:new Decimal(2),
+		all_Super_Rare_Artifacts_Sole:new Decimal(2),
+		all_Ultra_Rare_Artifacts_Sole:new Decimal(2),
+		
 		display1:new Decimal(0),
 		display2:new Decimal(0),
 		display3:new Decimal(0),
@@ -205,11 +212,15 @@ addLayer("data", {
 		cardget2:new Decimal(0),
 		cardget3:new Decimal(0),
 		
+		artifactsawardrandom:new Decimal(0),
+		
 		start:true,
 		dedead:false,
 		moneyaward:false,
 		cardaward:false,
+		artifactsaward:false,
 		newlevel:false,
+		backdeckCD:false,
 		level:new Decimal(0),
 		
 		wan:false,
@@ -226,6 +237,10 @@ addLayer("data", {
 			player.data.cardaward = true
 			player.data.dedead = true
 			player.data.newlevel = true
+			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
+			if(player.data.artifactsawardrandom.lte(34)){
+				player.data.artifactsaward = true
+			}
 		}
 		player.data.haveeff = new Decimal(0)
 		player.data.dehaveeff = new Decimal(0)
@@ -280,7 +295,7 @@ addLayer("data", {
 		player.data.cardmax[2] = new Decimal(2)
 		player.data.cardmax[3] = new Decimal(1)
 		*/
-		 wordStyle()
+		wordStyle()
 	},
     color: "#FFFFFF",
     type: "none",
@@ -791,4 +806,77 @@ addLayer("pokedex_card_tab2", {
 			return car0
 		}],
 	]
+})
+
+addLayer("bag", {
+    name: "bag",
+    symbol: "<h6>背包",
+	tooltip() { 
+		return `背包`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		11:{
+			title:"返回战斗",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){showTab("none")},
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return "背包会存放你的物品"}],
+		["row", [["clickable", 11]]],
+		"blank",
+		["row", [
+			["display-text", function() {
+			let card0 = "<hr>牌库:<br>"
+			let card1 = player.data.cardmax[1].gte(1) ? format(player.data.cardmax[1],0)+" 攻击<br>":""
+			let card2 = player.data.cardmax[2].gte(1) ? format(player.data.cardmax[2],0)+" 防御<br>":""
+			let card3 = player.data.cardmax[3].gte(1) ? format(player.data.cardmax[3],0)+" 治疗<br>":""
+			let card4 = player.data.cardmax[4].gte(1) ? format(player.data.cardmax[4],0)+" 魔法飞弹<br>":""
+			let card5 = player.data.cardmax[5].gte(1) ? format(player.data.cardmax[5],0)+" 冥想<br>":""
+			let card6 = player.data.cardmax[6].gte(1) ? format(player.data.cardmax[6],0)+" 魔力源泉<br>":""
+			let card7 = player.data.cardmax[7].gte(1) ? format(player.data.cardmax[7],0)+" 连斩<br>":""
+			let card8 = player.data.cardmax[8].gte(1) ? format(player.data.cardmax[8],0)+" 愤怒<br>":""				
+			let card9 = player.data.cardmax[9].gte(1) ? format(player.data.cardmax[9],0)+" 传染<br>":""
+			let card10 = player.data.cardmax[10].gte(1) ? format(player.data.cardmax[10],0)+" 病原体<br>":""
+			let card11 = player.data.cardmax[11].gte(1) ? format(player.data.cardmax[11],0)+" 思考<br>":""
+			let card12 = player.data.cardmax[12].gte(1) ? format(player.data.cardmax[12],0)+" 重击<br>":""
+			let card13 = player.data.cardmax[13].gte(1) ? format(player.data.cardmax[13],0)+" 回旋镖<br>":""
+			let card14 = player.data.cardmax[14].gte(1) ? format(player.data.cardmax[14],0)+" 无中生有<br>":""
+			let card15 = player.data.cardmax[15].gte(1) ? format(player.data.cardmax[15],0)+" 烨<br>":""
+			let card16 = player.data.cardmax[16].gte(1) ? format(player.data.cardmax[16],0)+" 灵能冲击<br>":""
+			let card17 = player.data.cardmax[17].gte(1) ? format(player.data.cardmax[17],0)+" 破魂打击<br>":""
+			let card18 = player.data.cardmax[18].gte(1) ? format(player.data.cardmax[18],0)+" 魔能调换<br>":""
+			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12 + card13 + card14 + card15 + card16 + card17 + card18 + ""
+			}],
+			["display-text", function() {return '&nbsp'}],
+			["display-text", function() {
+			let artifact = "<hr>神器:<br>"
+			let N = "N(普通/Normal):<br>"
+			let N0 = player.data.Normal_Artifacts[0].gte(1) ? "红苹果("+format(player.data.Normal_Artifacts[0],0)+"):+"+format(player.data.Normal_Artifacts[0].mul(15),0)+"血上限<br>" : ""
+			let N1 = player.data.Normal_Artifacts[1].gte(1) ? "绿苹果("+format(player.data.Normal_Artifacts[1],0)+"):开局"+format(player.data.Normal_Artifacts[1].mul(2),0)+"恢复<br>" : ""
+			let N2 = player.data.Normal_Artifacts[2].gte(1) ? "蓝苹果("+format(player.data.Normal_Artifacts[2],0)+"):+"+format(player.data.Normal_Artifacts[2].mul(6),0)+"魔力上限<br>" : ""
+			let N3 = player.data.Normal_Artifacts[3].gte(1) ? "黄苹果("+format(player.data.Normal_Artifacts[3],0)+"):每有5$存于手上+"+format(player.data.Normal_Artifacts[3].mul(1),0)+"血上限<br>" : ""
+			let R = "<br>R(稀有/Rare):<br>"
+			let SR = "<br>SR(罕见/Super Rare):<br>"
+			let UR = "<br>UR(极少/Ultra Rare):<br>"
+			return artifact
+			+ N+N0+N1+N2+N3
+			+ R
+			+ SR
+			+ UR
+			}],
+		]],
+	],
 })

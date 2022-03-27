@@ -1,5 +1,5 @@
 // ************ Themes ************
-var themes = ["default", "aqua","TheGameTree","TheQuarkTree"]
+var themes = ["default","light","lightblue","aqua","TheGameTree"]
 
 var colors = {
 	default: {
@@ -32,15 +32,25 @@ var colors = {
 		background: "#053246",
 		background_tooltip: "rgba(0, 15, 31, 0.75)",
 	},
-	TheQuarkTree: {
-		1: "#bfdfff",
-		2: "#8fa7bf",
-		3: "#5f6f7f",
-		color: "#bfdfff",
-		points: "#dfefff",
+	lightblue: {
+		1: "#a0d5e6",
+		2: "#a0d5e6",
+		3: "#a0d5e6",
+		color: "#000000",
+		points: "#000000",
+		locked: "#a0d5e6",
+		background: "#a0d5e6",
+		background_tooltip: "rgba(0, 15, 31, 0.75)",
+	},
+	light: {
+		1: "#000000",
+		2: "#000000",
+		3: "#000000",
+		color: "#000000",
+		points: "#000000",
 		locked: "#c4a7b3",
-		background: "#001f3f",
-		background_tooltip: "rgba(255, 255, 255, 0.75)",
+		background: "#ffffff",
+		background_tooltip: "rgba(0, 15, 31, 0.75)",
 	},
 }
 

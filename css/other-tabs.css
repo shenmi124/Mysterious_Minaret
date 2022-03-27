@@ -9,7 +9,7 @@
 }
 
 #optionWheel:hover {
-	transform: rotate(360deg);
+	transform: rotate(30deg) scale(2, 2);
 }
 
 #info {
@@ -26,9 +26,33 @@
 }
 
 #info:hover {
+	transform: rotate(360deg);
+}
+
+#pokedex {
+	position: absolute;
+	top: 65px;
+	left: 93.5%;
+	cursor: pointer;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #02f2f2;
+}
+
+#pokedex:hover {
+	transform: rotate(7200deg) scale(1.2, 1.2);
+}
+
+#bag {
+	position: absolute;
+	top: 155px;
+	left: 93.5%;
+	cursor: pointer;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #02f2f2;
+}
+
+#bag:hover {
 	transform: scale(1.2, 1.2);
-	text-shadow: 5px 0 10px #02f2f2,
-              -3px 0 12px #02f2f2;
 }
 
 #discord {

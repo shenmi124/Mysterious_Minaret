@@ -412,9 +412,6 @@ var interval = setInterval(function() {
 	}
 	if (player.devSpeed) diff *= player.devSpeed
 	player.time = now
-	if (needCanvasUpdate){ resizeCanvas();
-		needCanvasUpdate = false;
-	}
 	tmp.scrolled = document.getElementById('treeTab') && document.getElementById('treeTab').scrollTop > 30
 	updateTemp();
 	updateOomps(diff);

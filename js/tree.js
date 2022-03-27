@@ -16,6 +16,42 @@ function awardcard(id1,id2){
 	player.data.cardaward = false
 }
 
+function awardartifacts(){
+	let fabric = Math.floor((Math.random() * 100))+1
+	if(fabric<=50){
+		let sole = Math.floor((Math.random() * 1))
+		if(sole==0){
+			let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
+			player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
+		}
+		if(sole==1){
+			for(col=0;col<=1;col++){
+				var cards = player.data.Normal_Artifacts_Sole
+				var nothing = false
+				for(row=0;row<=player.data.all_Normal_Artifacts;row++){
+					if(cards[row].lte(0)){nothing = true}
+				}
+				let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts_Sole))
+				if(player.data.Normal_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+					player.data.Normal_Artifacts_Sole[getartifacts] = player.data.Normal_Artifacts_Sole[getartifacts].add(1)
+				}else if(nothing==false){
+					let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
+					player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
+				}else{
+					col--
+				}
+			}
+		}
+	}else if(fabric<=80){
+		
+	}else if(fabric<=95){
+		
+	}else{
+		
+	}
+	player.data.artifactsaward = false
+}
+
 function levelnew(){
 	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)
 	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*1)+2))
@@ -37,6 +73,7 @@ function levelnew(){
 	player.data.start = true
 	player.data.moneyaward = false
 	player.data.cardaward = false
+	player.data.artifactsaward = false
 	for(col=1;col<=player.data.allcard;col++){
 		player.data['cardget'+col] = new Decimal(0)
 	}
@@ -57,6 +94,16 @@ function levelnew(){
 	player.data.ps = new Decimal(player.data.psmax)
 	player.data.wan = false
 	player.data.dewan = false
+	
+	//开局
+	let hpmaxadd0 = new Decimal(0)
+	let hpmaxadd1 = new Decimal(0)
+	let mpmaxadd0 = new Decimal(0)
+	if(player.data.Normal_Artifacts[0].gt(0)){hpmaxadd0 = player.data.Normal_Artifacts[0].mul(15)}
+	if(player.data.Normal_Artifacts[1].gt(0)){player.data.effect[2] = player.data.effect[1].add(player.data.Normal_Artifacts[1].mul(2))}
+	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(6)}
+	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(5).floor().mul(player.data.Normal_Artifacts[3])}
+	player.data.hpmax = new Decimal(100).add(hpmaxadd1)
 }
 
 function typemoster(){
@@ -139,6 +186,26 @@ function our_action(){
 			player.data.carddead[col] = new Decimal(0)
 		}
 	}
+	/*
+	var cards = player.data.card
+	var cards2 = player.data.cardintermediary
+	var nothing = true
+	for(i in cards){
+		for(o in cards2){		
+			if(cards[i].gt(0)&&cards2[o].lte(0)){nothing = false}
+		}
+	}
+	if(player.data.backdeckCD){
+		for(col=1;col<=player.data.allcard;col++){
+			player.data.card[col] = player.data.card[col].add(player.data.cardintermediary[col])
+			player.data.cardintermediary[col] = new Decimal(0)
+			player.data.carddead[col] = new Decimal(0)
+		}
+		player.data.backdeckCD = false
+	}else if(nothing){
+		player.data.backdeckCD = true
+	}
+	*/
 	player.data.hp = player.data.hp.sub(player.data.effect[3])
 	player.data.hp = player.data.hp.add(player.data.effect[2])
 	player.data.de = player.data.de.div(2).floor()
@@ -319,7 +386,7 @@ function redis(id1,id2){
 	if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
 	if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
-	if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">7 物理伤害</red>3次<br>消耗:2 体力`}
+	if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
 	if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
 	if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
@@ -415,9 +482,11 @@ function reonc(id){
 	}
 	if(player.data['display'+id].eq(7)){
 		//连斩
-		attributes(0,0,-2,7,0,0)
-		attributes(0,0,0,7,0,0)
-		attributes(0,0,0,7,0,0)
+		attributes(0,0,-2,4,0,0)
+		attributes(0,0,0,4,0,0)
+		attributes(0,0,0,4,0,0)
+		attributes(0,0,0,4,0,0)
+		attributes(0,0,0,4,0,0)
 		player.data['display'+id] = new Decimal(0)
 		player.data.carddead[7] = player.data.carddead[7].add(1)
 		return
@@ -951,7 +1020,7 @@ addLayer("tree-tab", {
 			style() {return {'height': "220px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
 		},
 		1002:{
-			title: "下一回合!<br><h6>恢复体力直到上限<br>向下取整保留一半的防御",
+			title: "下一回合!<br><h6>+3体力<br>÷2防御",
 			display() {
 			},
 			canClick(){return true},
@@ -1013,6 +1082,13 @@ addLayer("tree-tab", {
 			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true},
 			onClick(){return recardonc(this.id-1010)},
 			style() {return {'height': "200px",'width': '150px'}},
+		},
+		99:{
+			title(){return "获取神器"},
+			display(){return "50%N<br>30%R<br>15%SR<br>5%UR"},
+			canClick(){return true},
+			unlocked(){return player.data.artifactsaward == true && player.data.start == false },
+			onClick(){return awardartifacts()},
 		},
 		1:{
 			title(){return retit('display',this.id)},
@@ -1178,7 +1254,7 @@ addLayer("tree-tab", {
 	tabFormat: [
 		["row",[
 			["display-text", function() {
-			let card0 = "牌库:("+format(player.data.holdcard,0)+"/"+format(player.data.maxcard,0)+")<br>"
+			let card0 = "<hr>牌库:("+format(player.data.holdcard,0)+"/"+format(player.data.maxcard,0)+")<br>"
 			let card1 = player.data.cardmax[1].gte(1) ? format(player.data.card[1],0)+"/"+format(player.data.cardmax[1],0)+" 攻击<br>":""
 			let card2 = player.data.cardmax[2].gte(1) ? format(player.data.card[2],0)+"/"+format(player.data.cardmax[2],0)+" 防御<br>":""
 			let card3 = player.data.cardmax[3].gte(1) ? format(player.data.card[3],0)+"/"+format(player.data.cardmax[3],0)+" 治疗<br>":""
@@ -1201,16 +1277,16 @@ addLayer("tree-tab", {
 			}],
 			["column",[
 				["display-text", function() {return '<h6>(tip:左上角设置可以更换材质)'}],
-				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
-				["bar", "dehpbar"],
-				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
-				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"],["bar", "deeff5bar"],["bar", "deeff6bar"],["bar", "deeff7bar"],["bar", "deeff8bar"],["bar", "deeff9bar"]]],
-				["bar", "dedebar"],
+				["display-text", function() {return '<hr>你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
 					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加1感染,每回合回复1魔力":""
 					return monster0 + monster1
 				}],
+				["bar", "dehpbar"],
+				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
+				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"],["bar", "deeff5bar"],["bar", "deeff6bar"],["bar", "deeff7bar"],["bar", "deeff8bar"],["bar", "deeff9bar"]]],
+				["bar", "dedebar"],
 				["row", [["clickable", 1022]]],
 				["row", [["clickable", 1023]]],
 				["row", [
@@ -1225,12 +1301,12 @@ addLayer("tree-tab", {
 				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"],["bar", "eff6bar"],["bar", "eff7bar"],["bar", "eff8bar"],["bar", "eff9bar"]]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
-				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005]]],
+				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005],["clickable", 99]]],
 				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013]]],
 				["clickable", 1006]
 			]],
 			["display-text", function() {
-			let card0 = "墓地:<br>"
+			let card0 = "<hr>墓地:<br>"
 			let card1 = player.data.carddead[1].gte(1) ? format(player.data.carddead[1],0)+" 攻击<br>":""
 			let card2 = player.data.carddead[2].gte(1) ? format(player.data.carddead[2],0)+" 防御<br>":""
 			let card3 = player.data.carddead[3].gte(1) ? format(player.data.carddead[3],0)+" 治疗<br>":""
