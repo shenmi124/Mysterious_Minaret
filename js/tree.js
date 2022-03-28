@@ -43,7 +43,29 @@ function awardartifacts(){
 			}
 		}
 	}else if(fabric<=80){
-		
+		let sole = Math.floor((Math.random() * 1))
+		if(sole==0){
+			let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
+			player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
+		}
+		if(sole==1){
+			for(col=0;col<=1;col++){
+				var cards = player.data.Normal_Artifacts_Sole
+				var nothing = false
+				for(row=0;row<=player.data.all_Normal_Artifacts;row++){
+					if(cards[row].lte(0)){nothing = true}
+				}
+				let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts_Sole))
+				if(player.data.Normal_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+					player.data.Normal_Artifacts_Sole[getartifacts] = player.data.Normal_Artifacts_Sole[getartifacts].add(1)
+				}else if(nothing==false){
+					let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
+					player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
+				}else{
+					col--
+				}
+			}
+		}
 	}else if(fabric<=95){
 		
 	}else{

@@ -178,12 +178,12 @@ addLayer("data", {
 		new Decimal(0),
 		],
 		all_Normal_Artifacts:new Decimal(4),
-		all_Rare_Artifacts:new Decimal(4),
+		all_Rare_Artifacts:new Decimal(5),
 		all_Super_Rare_Artifacts:new Decimal(3),
 		all_Ultra_Rare_Artifacts:new Decimal(1),
 		
 		all_Normal_Artifacts_Sole:new Decimal(0),
-		all_Rare_Artifacts_Sole:new Decimal(2),
+		all_Rare_Artifacts_Sole:new Decimal(1),
 		all_Super_Rare_Artifacts_Sole:new Decimal(2),
 		all_Ultra_Rare_Artifacts_Sole:new Decimal(2),
 		
