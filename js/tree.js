@@ -103,7 +103,8 @@ function levelnew(){
 	if(player.data.Normal_Artifacts[1].gt(0)){player.data.effect[2] = player.data.effect[1].add(player.data.Normal_Artifacts[1].mul(2))}
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(6)}
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(5).floor().mul(player.data.Normal_Artifacts[3])}
-	player.data.hpmax = new Decimal(100).add(hpmaxadd1)
+	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1)
+	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
 }
 
 function typemoster(){
