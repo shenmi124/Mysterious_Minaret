@@ -157,7 +157,7 @@ addLayer("data", {
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		Rare_Artifacts:[
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		Super_Rare_Artifacts:[
 		new Decimal(0),new Decimal(0),new Decimal(0),
@@ -175,7 +175,7 @@ addLayer("data", {
 		new Decimal(0),new Decimal(0),
 		],
 		Ultra_Rare_Artifacts_Sole:[
-		new Decimal(0),new Decimal(0),
+		new Decimal(0),
 		],
 		all_Normal_Artifacts:new Decimal(4),
 		all_Rare_Artifacts:new Decimal(4),
@@ -869,11 +869,17 @@ addLayer("bag", {
 			let N2 = player.data.Normal_Artifacts[2].gte(1) ? "蓝苹果("+format(player.data.Normal_Artifacts[2],0)+"):+"+format(player.data.Normal_Artifacts[2].mul(6),0)+"魔力上限<br>" : ""
 			let N3 = player.data.Normal_Artifacts[3].gte(1) ? "黄苹果("+format(player.data.Normal_Artifacts[3],0)+"):每有5$存于手上+"+format(player.data.Normal_Artifacts[3].mul(1),0)+"血上限<br>" : ""
 			let R = "<br>R(稀有/Rare):<br>"
+			let R0 = player.data.Rare_Artifacts[0].gte(1) ? "智慧大脑("+format(player.data.Rare_Artifacts[0],0)+"):智慧效果+"+format(player.data.Rare_Artifacts[0].mul(2),0)+"2<br>" : ""
+			let R1 = player.data.Rare_Artifacts[1].gte(1) ? "预备攻击("+format(player.data.Rare_Artifacts[1],0)+"):开局造成"+format(player.data.Rare_Artifacts[1].mul(25),0)+"物理伤害<br>" : ""
+			let R2 = player.data.Rare_Artifacts[2].gte(1) ? "预备防御("+format(player.data.Rare_Artifacts[2],0)+"):回合结束每有4护甲恢复"+format(player.data.Rare_Artifacts[2],0)+"血<br>" : ""
+			let R3 = player.data.Rare_Artifacts[3].gte(1) ? "圣盾("+format(player.data.Rare_Artifacts[3],0)+"):每有5$存于手上+"+format(player.data.Rare_Artifacts[3].mul(1),0)+"血上限<br>" : ""
+			let R4 = player.data.Rare_Artifacts[4].gte(1) ? "蓝色药剂("+format(player.data.Rare_Artifacts[4],0)+"):每回合恢复"+format(player.data.Rare_Artifacts[4].mul(1),0)+"魔力<br>" : ""
+			let OR1 = player.data.Rare_Artifacts_Sole[0].gte(1) ? "死尸(唯一):中毒受到的伤害减半<br>" : ""
 			let SR = "<br>SR(罕见/Super Rare):<br>"
 			let UR = "<br>UR(极少/Ultra Rare):<br>"
 			return artifact
 			+ N+N0+N1+N2+N3
-			+ R
+			+ R+R0+R1+R2+R3+R4+OR1
 			+ SR
 			+ UR
 			}],

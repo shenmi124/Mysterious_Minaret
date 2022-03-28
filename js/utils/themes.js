@@ -40,7 +40,7 @@ var colors = {
 		points: "#000000",
 		locked: "#a0d5e6",
 		background: "#a0d5e6",
-		background_tooltip: "rgba(0, 15, 31, 0.75)",
+		background_tooltip: "rgba(255, 255, 255, 0.75)",
 	},
 	light: {
 		1: "#000000",
@@ -50,7 +50,7 @@ var colors = {
 		points: "#000000",
 		locked: "#c4a7b3",
 		background: "#ffffff",
-		background_tooltip: "rgba(0, 15, 31, 0.75)",
+		background_tooltip: "rgba(255, 255, 255, 0.75)",
 	},
 }
 
@@ -65,6 +65,15 @@ function changeTheme() {
 
 function getThemeName() {
 	return options.theme? options.theme : "default";
+}
+
+function CNThemeName(){
+	theme0 = options.theme=="default" ? "经典" : ""
+	theme1 = options.theme=="aqua" ? "海蓝" : ""
+	theme2 = options.theme=="TheGameTree" ? "游戏树特殊页面" : ""
+	theme3 = options.theme=="lightblue" ? "亮蓝" : ""
+	theme4 = options.theme=="light" ? "纯白" : ""
+	return theme0 + theme1 + theme2 + theme3 + theme4
 }
 
 function switchTheme() {

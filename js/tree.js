@@ -105,6 +105,10 @@ function levelnew(){
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(5).floor().mul(player.data.Normal_Artifacts[3])}
 	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1)
 	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
+	
+	let startatk = player.data.Rare_Artifacts[1].gte(1) ? player.data.Rare_Artifacts[1].mul(25) : 0
+	let startde = player.data.Rare_Artifacts[2].gte(1) ? player.data.Rare_Artifacts[2].mul(20) : 0
+	attributes(0,0,0,startatk,0,0)
 }
 
 function typemoster(){
@@ -165,6 +169,11 @@ function enemy_action(){
 }
 
 function our_action(){
+	//回合结束
+	let overdetohp = player.data.Rare_Artifacts[3].gte(1) ? player.data.de.div(4).floor().mul(player.data.Rare_Artifacts[3]) : 0
+	let overmpadd = player.data.Rare_Artifacts[4].gte(1) ? player.data.Rare_Artifacts[4] : 0
+	player.data.hp = player.data.hp.add(overdetohp)
+	
 	getcard("display",3)
 	player.data.ps = new Decimal(player.data.psmax)
 	player.data.wan = false
@@ -207,7 +216,8 @@ function our_action(){
 		player.data.backdeckCD = true
 	}
 	*/
-	player.data.hp = player.data.hp.sub(player.data.effect[3])
+	//回合结束
+	player.data.Rare_Artifacts_Sole[0].gte(1) ? player.data.hp = player.data.hp.sub(player.data.effect[3]).div(2).floor : player.data.hp = player.data.hp.sub(player.data.effect[3])
 	player.data.hp = player.data.hp.add(player.data.effect[2])
 	player.data.de = player.data.de.div(2).floor()
 }
@@ -352,7 +362,8 @@ function gethp(id){
 function getmp(id){
 	if(id > 0){
 		if(player.data.effect[6].lte(0)){
-			player.data.mp = player.data.mp.add(id).add(player.data.effect[0])
+			let getmpadd = player.data.Rare_Artifacts[0].gte(1) ? player.data.Rare_Artifacts[0].mul(2).add(1) : 1
+			player.data.mp = player.data.mp.add(id).add(player.data.effect[0].mul(getmpadd))
 		}
 	}else{
 		player.data.mp = player.data.mp.add(id)
@@ -1018,7 +1029,7 @@ addLayer("tree-tab", {
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "220px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
+			style() {return {'height': "180px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
 		},
 		1002:{
 			title: "下一回合!<br><h6>+3体力<br>÷2防御",
@@ -1277,7 +1288,16 @@ addLayer("tree-tab", {
 			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12 + card13 + card14 + card15 + card16 + card17 + card18
 			}],
 			["column",[
-				["display-text", function() {return '<h6>(tip:左上角设置可以更换材质)'}],
+				["display-text", function() {
+					let themestart = '<h6>(tip:你有5种不同的背景可以换(包括亮色),当前背景:'
+					let themelast = ')'
+					let theme0 = options.theme=="default" ? "经典" : ""
+					let theme1 = options.theme=="aqua" ? "海蓝" : ""
+					let theme2 = options.theme=="TheGameTree" ? "游戏树特殊页面" : ""
+					let theme3 = options.theme=="lightblue" ? "亮蓝" : ""
+					let theme4 = options.theme=="light" ? "纯白" : ""
+					return themestart + theme0 + theme1 + theme2 + theme3 + theme4 + themelast
+				}],
 				["display-text", function() {return '<hr>你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""

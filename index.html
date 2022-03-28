@@ -57,10 +57,10 @@
 				{{VERSION.withoutName}}</div>
 			<button
 			v-if="((player.navTab == 'none' && (tmp[player.tab].row == 'side' || tmp[player.tab].row == 'otherside' || player[player.tab].prevTab)) || player[player.navTab]?.prevTab)"				class="other-back overlayThing" onclick="goBack(player.navTab == 'none' ? player.tab : player.navTab)">←</button>
-			<img id="optionWheel" class="overlayThing" v-if="player.tab!='options-tab'" src="options_wheel.png" onclick="showTab('options-tab')"></img>
+			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
-			<img id="pokedex" class="overlayThing" src="pokedex.png" onclick="showTab('pokedex')"></img>
-			<img id="bag" class="overlayThing" src="bag.png" onclick="showTab('bag')"></img>
+			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
+			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
 		</div>
 		
 		<div v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen)" id="treeTab"  onscroll="resizeCanvas()" 
@@ -72,16 +72,6 @@
 			<bg :layer="player.navTab == 'none' ? player.tab : player.navTab" ></bg>
 		</div>
 
-		<!-- Popups -->
-		<div class="popup-container">
-			<transition-group name="fade">
-				<div v-for="popup,index in activePopups" class="popup" v-bind:class="popup.type"
-					v-bind:key="'p' + popup.id" v-on:click="() => {activePopups.splice(index, 1)}" v-bind:style="popup.color ? {'background-color': popup.color} : {}">
-					<h3>{{popup.title}}</h3><br>
-					<h2 v-html="popup.message"></h2>
-				</div>
-			</transition-group>
-		</div>
 		<div class="particle-container">
 				<div v-for="particle,index in particles">
 					<particle :data="particle" :index="index" v-bind:key="'b' + particle.id"></particle>

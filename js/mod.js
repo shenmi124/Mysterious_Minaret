@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "神秘尖塔",
-	id: "12card!!!and0.13a",
+	id: "12card!!!and0.131a",
 	author: "辉影神秘",
 	pointsName: "",
 	modFiles: ["layers.js", "tree.js"],
@@ -13,11 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.13a",
+	num: "0.131a",
 	name: "辉影尖塔",
 }
 
 let changelog = `<h1>更新日志:</h1><br>
+	<h3>v0.131a</h3><br>
+	<li>完成了6个R神器<br>
+	<li>优化UI,细节和背景<br>
 	<h3>v0.13a</h3><br>
 	<li>完成了神器的基础机制和4个N神器<br>
 	<li>平衡游戏,优化UI和动画,新细节和背景<br>
