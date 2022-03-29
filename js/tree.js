@@ -290,7 +290,7 @@ function our_action(){
 	}
 	*/
 	//回合结束
-	player.data.Rare_Artifacts_Sole[0].gte(1) ? player.data.hp = player.data.hp.sub(player.data.effect[3]).div(2).floor : player.data.hp = player.data.hp.sub(player.data.effect[3])
+	player.data.Rare_Artifacts_Sole[0].gte(1) ? player.data.hp = player.data.hp.sub(player.data.effect[3].div(2).floor()) : player.data.hp = player.data.hp.sub(player.data.effect[3])
 	player.data.hp = player.data.hp.add(player.data.effect[2])
 }
 
@@ -316,10 +316,10 @@ function recard(){
 		player.data.effect[1] = player.data.effect[1].sub(1)
 	}
 	//id2:恢复
-	if(player.data.effect[3].gt(0) && player.data.Ultra_Rare_Artifacts_Sole[0].gt(0)){
-		if(player.data.effect[3].lte(player.data.hpmax.mul(0.15))){
+	if(player.data.Ultra_Rare_Artifacts_Sole[0].gt(0)){
+		if(player.data.effect[2].lte(player.data.hpmax.mul(0.15))){
 			player.data.effect[2] = player.data.effect[2].add(2)
-		}else{
+		}else if(player.data.effect[2].gt(0)){
 			player.data.effect[2] = player.data.effect[2].sub(1)
 		}
 	}else if(player.data.effect[2].gt(0)){

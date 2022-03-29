@@ -169,7 +169,7 @@ addLayer("data", {
 		Normal_Artifacts_Sole:[
 		],
 		Rare_Artifacts_Sole:[
-		new Decimal(0),
+		new Decimal(1),
 		],
 		Super_Rare_Artifacts_Sole:[
 		new Decimal(0),new Decimal(0),
