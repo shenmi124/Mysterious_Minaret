@@ -18,6 +18,8 @@ let VERSION = {
 }
 
 let changelog = `<h1>更新日志:</h1><br>
+	<h3>v0.132a</h3><br>
+	<li>完成了神器<br>
 	<h3>v0.131a</h3><br>
 	<li>完成了6个R神器<br>
 	<li>优化UI,细节和背景<br>

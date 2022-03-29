@@ -45,19 +45,19 @@ function awardartifacts(){
 	}else if(fabric<=80){
 		let sole = Math.floor((Math.random() * 1))
 		if(sole==0){
-			let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
+			let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
 			player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
 		}
 		if(sole==1){
 			for(col=0;col<=1;col++){
-				var cards = player.data.Normal_Artifacts_Sole
+				var cards = player.data.Rare_Artifacts_Sole
 				var nothing = false
-				for(row=0;row<=player.data.all_Normal_Artifacts;row++){
+				for(row=0;row<=player.data.all_Rare_Artifacts;row++){
 					if(cards[row].lte(0)){nothing = true}
 				}
 				let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts_Sole))
-				if(player.data.Normal_Artifacts_Sole[getartifacts].lte(0)&&nothing){
-					player.data.Normal_Artifacts_Sole[getartifacts] = player.data.Normal_Artifacts_Sole[getartifacts].add(1)
+				if(player.data.Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+					player.data.Rare_Artifacts_Sole[getartifacts] = player.data.Rare_Artifacts_Sole[getartifacts].add(1)
 				}else if(nothing==false){
 					let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
 					player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
@@ -67,9 +67,53 @@ function awardartifacts(){
 			}
 		}
 	}else if(fabric<=95){
-		
+		let sole = Math.floor((Math.random() * 1))
+		if(sole==0){
+			let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
+			player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
+		}
+		if(sole==1){
+			for(col=0;col<=1;col++){
+				var cards = player.data.Super_Rare_Artifacts_Sole
+				var nothing = false
+				for(row=0;row<=player.data.all_Super_Rare_Artifacts;row++){
+					if(cards[row].lte(0)){nothing = true}
+				}
+				let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts_Sole))
+				if(player.data.Super_Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+					player.data.Super_Rare_Artifacts_Sole[getartifacts] = player.data.Super_Rare_Artifacts_Sole[getartifacts].add(1)
+				}else if(nothing==false){
+					let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
+					player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
+				}else{
+					col--
+				}
+			}
+		}
 	}else{
-		
+		let sole = Math.floor((Math.random() * 1))
+		if(sole==0){
+			let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
+			player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
+		}
+		if(sole==1){
+			for(col=0;col<=1;col++){
+				var cards = player.data.Ultra_Rare_Artifacts_Sole
+				var nothing = false
+				for(row=0;row<=player.data.all_Ultra_Rare_Artifacts;row++){
+					if(cards[row].lte(0)){nothing = true}
+				}
+				let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts_Sole))
+				if(player.data.Ultra_Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+					player.data.Ultra_Rare_Artifacts_Sole[getartifacts] = player.data.Ultra_Rare_Artifacts_Sole[getartifacts].add(1)
+				}else if(nothing==false){
+					let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
+					player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
+				}else{
+					col--
+				}
+			}
+		}
 	}
 	player.data.artifactsaward = false
 }
@@ -118,19 +162,26 @@ function levelnew(){
 	player.data.dewan = false
 	
 	//开局
+	if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(55).mul(player.data.Ultra_Rare_Artifacts[0]))}
+	if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(165).mul(player.data.Ultra_Rare_Artifacts[0]))}
 	let hpmaxadd0 = new Decimal(0)
 	let hpmaxadd1 = new Decimal(0)
 	let mpmaxadd0 = new Decimal(0)
+	let psmaxadd0 = new Decimal(0)
 	if(player.data.Normal_Artifacts[0].gt(0)){hpmaxadd0 = player.data.Normal_Artifacts[0].mul(15)}
 	if(player.data.Normal_Artifacts[1].gt(0)){player.data.effect[2] = player.data.effect[1].add(player.data.Normal_Artifacts[1].mul(2))}
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(6)}
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(5).floor().mul(player.data.Normal_Artifacts[3])}
-	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1)
+	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
+	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2)
 	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
+	player.data.psmax = new Decimal(30).add(psmaxadd0)
 	
 	let startatk = player.data.Rare_Artifacts[1].gte(1) ? player.data.Rare_Artifacts[1].mul(25) : 0
 	let startde = player.data.Rare_Artifacts[2].gte(1) ? player.data.Rare_Artifacts[2].mul(20) : 0
 	attributes(0,0,0,startatk,0,0)
+	
+	if(player.data.Super_Rare_Artifacts[2].gt(0)){player.data.deeffect[4] = player.data.deeffect[4].add(player.data.Super_Rare_Artifacts[2])}
 }
 
 function typemoster(){
@@ -241,7 +292,6 @@ function our_action(){
 	//回合结束
 	player.data.Rare_Artifacts_Sole[0].gte(1) ? player.data.hp = player.data.hp.sub(player.data.effect[3]).div(2).floor : player.data.hp = player.data.hp.sub(player.data.effect[3])
 	player.data.hp = player.data.hp.add(player.data.effect[2])
-	player.data.de = player.data.de.div(2).floor()
 }
 
 function recard(){
@@ -250,6 +300,12 @@ function recard(){
 	}
 	if(player.data.deeffect[5].lte(0)){
 		enemy_action()
+	}
+	//护盾
+	if(player.data.Super_Rare_Artifacts_Sole[1].gt(0)){
+		player.data.de = player.data.de.sub(1)
+	}else{
+		player.data.de = player.data.de.div(2).floor()
 	}
 	//id0:智慧
 	if(player.data.effect[0].gt(0)){
@@ -260,11 +316,19 @@ function recard(){
 		player.data.effect[1] = player.data.effect[1].sub(1)
 	}
 	//id2:恢复
-	if(player.data.effect[2].gt(0)){
+	if(player.data.effect[3].gt(0) && player.data.Ultra_Rare_Artifacts_Sole[0].gt(0)){
+		if(player.data.effect[3].lte(player.data.hpmax.mul(0.15))){
+			player.data.effect[2] = player.data.effect[2].add(2)
+		}else{
+			player.data.effect[2] = player.data.effect[2].sub(1)
+		}
+	}else if(player.data.effect[2].gt(0)){
 		player.data.effect[2] = player.data.effect[2].sub(1)
 	}
 	//id3:中毒
-	if(player.data.effect[3].gt(0) && player.data.effect[2].gt(0)){
+	if(player.data.effect[3].gt(0) && player.data.Super_Rare_Artifacts_Sole[1].gt(0)){
+		player.data.effect[3] = player.data.effect[3].div(2).floor()
+	}if(player.data.effect[3].gt(0) && player.data.effect[2].gt(0)){
 		player.data.effect[3] = player.data.effect[3].sub(2)
 	}else if(player.data.effect[3].gt(0)){
 		player.data.effect[3] = player.data.effect[3].sub(1)
@@ -338,6 +402,7 @@ function atktode(id){
 	}else{
 		player.data.atkto = new Decimal(id)
 	}
+	if(player.data.Super_Rare_Artifacts[1]){player.data.hp = player.data.hp.add(player.data.atkto.div(4).floor().mul(player.data.Super_Rare_Artifacts[1]))}
 	if(player.data.dede.gte(player.data.atkto)){
 		player.data.dede = player.data.dede.sub(player.data.atkto)
 		player.data.atkto = new Decimal(0)
@@ -345,8 +410,8 @@ function atktode(id){
 		player.data.atkto = player.data.atkto.sub(player.data.dede)
 		player.data.dede = new Decimal(0)
 	}else{
+		player.data.dehp = player.data.dehp.sub(player.data.atkto)
 	}
-	player.data.dehp = player.data.dehp.sub(player.data.atkto)
 }
 
 function mtktode(id){
