@@ -175,7 +175,7 @@ function levelnew(){
 	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
 	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2)
 	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
-	player.data.psmax = new Decimal(30).add(psmaxadd0)
+	player.data.psmax = new Decimal(3).add(psmaxadd0)
 	
 	let startatk = player.data.Rare_Artifacts[1].gte(1) ? player.data.Rare_Artifacts[1].mul(25) : 0
 	let startde = player.data.Rare_Artifacts[2].gte(1) ? player.data.Rare_Artifacts[2].mul(20) : 0
