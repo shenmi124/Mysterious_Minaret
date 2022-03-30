@@ -119,9 +119,9 @@ function awardartifacts(){
 }
 
 function levelnew(){
-	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*8))+30)
-	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*1)+2))
-	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*2)+6))
+	let newdehp = Math.floor((Math.random() * ((player.data.level+1)*4))+30).floor()
+	let newdemp = Math.floor((Math.random() * ((player.data.level+1)*0.5)+2)).floor()
+	let newdeatk = Math.floor((Math.random() * ((player.data.level+1)*1)+6)).floor()
 	let monsterup = Math.floor((Math.random() * 5))
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 1)) + 1)
@@ -157,7 +157,6 @@ function levelnew(){
 		player.data.carddead[col] = new Decimal(0)
 	}
 	player.data.de = new Decimal(0)
-	player.data.ps = new Decimal(player.data.psmax)
 	player.data.wan = false
 	player.data.dewan = false
 	
@@ -182,6 +181,9 @@ function levelnew(){
 	attributes(0,0,0,startatk,0,0)
 	
 	if(player.data.Super_Rare_Artifacts[2].gt(0)){player.data.deeffect[4] = player.data.deeffect[4].add(player.data.Super_Rare_Artifacts[2])}
+	
+	player.data.ps = new Decimal(player.data.psmax)
+	player.data.mp = new Decimal(player.data.mpmax)
 }
 
 function typemoster(){
