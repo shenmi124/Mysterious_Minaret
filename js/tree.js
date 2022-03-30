@@ -119,9 +119,9 @@ function awardartifacts(){
 }
 
 function levelnew(){
-	let newdehp = new Decimal(Math.floor((Math.random() * ((player.data.level+1)*4))+30)).floor()
-	let newdemp =  new Decimal(Math.floor((Math.random() * ((player.data.level+1)*0.5)+2))).floor()
-	let newdeatk =  new Decimal(Math.floor((Math.random() * ((player.data.level+1)*1)+6))).floor()
+	let newdehp = new Decimal(30).add(Math.random() * player.data.level.add(1).mul(32)).floor()
+	let newdemp =  new Decimal(4).add(Math.random() * player.data.level.add(1).mul(4)).floor()
+	let newdeatk =  new Decimal(6).add(Math.random() * player.data.level.add(1).mul(9)).floor()
 	let monsterup =  Math.floor((Math.random() * 5))
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 1)) + 1)
