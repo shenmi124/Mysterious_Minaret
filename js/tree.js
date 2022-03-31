@@ -17,100 +17,102 @@ function awardcard(id1,id2){
 }
 
 function awardartifacts(){
-	let fabric = Math.floor((Math.random() * 100))+1
-	if(fabric<=50){
-		let sole = Math.floor((Math.random() * 1))
-		if(sole==0){
-			let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
-			player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
-		}
-		if(sole==1){
-			for(col=0;col<=1;col++){
-				var cards = player.data.Normal_Artifacts_Sole
-				var nothing = false
-				for(row=0;row<=player.data.all_Normal_Artifacts;row++){
-					if(cards[row].lte(0)){nothing = true}
-				}
-				let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts_Sole))
-				if(player.data.Normal_Artifacts_Sole[getartifacts].lte(0)&&nothing){
-					player.data.Normal_Artifacts_Sole[getartifacts] = player.data.Normal_Artifacts_Sole[getartifacts].add(1)
-				}else if(nothing==false){
-					let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
-					player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
-				}else{
-					col--
+	for(cao=0;cao<=0;cao++){
+		let fabric = Math.floor((Math.random() * 100))+1
+		if(fabric<=50){
+			let sole = Math.floor((Math.random() * 1))
+			if(sole==0){
+				let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
+				player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
+			}
+			if(sole==1){
+				for(col=0;col<=1;col++){
+					var cards = player.data.Normal_Artifacts_Sole
+					var nothing = false
+					for(row=0;row<=player.data.all_Normal_Artifacts_Sole;row++){
+						if(cards[row].lte(0)){nothing = true}
+					}
+					let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts_Sole))
+					if(player.data.Normal_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+						player.data.Normal_Artifacts_Sole[getartifacts] = player.data.Normal_Artifacts_Sole[getartifacts].add(1)
+					}else if(nothing==false){
+						let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
+						player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
+					}else{
+						col--
+					}
 				}
 			}
-		}
-	}else if(fabric<=80){
-		let sole = Math.floor((Math.random() * 1))
-		if(sole==0){
-			let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
-			player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
-		}
-		if(sole==1){
-			for(col=0;col<=1;col++){
-				var cards = player.data.Rare_Artifacts_Sole
-				var nothing = false
-				for(row=0;row<=player.data.all_Rare_Artifacts;row++){
-					if(cards[row].lte(0)){nothing = true}
-				}
-				let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts_Sole))
-				if(player.data.Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
-					player.data.Rare_Artifacts_Sole[getartifacts] = player.data.Rare_Artifacts_Sole[getartifacts].add(1)
-				}else if(nothing==false){
-					let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
-					player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
-				}else{
-					col--
+		}else if(fabric<=80){
+			let sole = Math.floor((Math.random() * 2))
+			if(sole==0){
+				let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
+				player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
+			}
+			if(sole==1){
+				for(col=0;col<=1;col++){
+					var cards = player.data.Rare_Artifacts_Sole
+					var nothing = false
+					for(row in cards){
+						if(cards[row].lte(0)){nothing = true}
+					}
+					let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts_Sole))
+					if(player.data.Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+						player.data.Rare_Artifacts_Sole[getartifacts] = player.data.Rare_Artifacts_Sole[getartifacts].add(1)
+					}else if(nothing==false){
+						let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
+						player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
+					}else{
+						col--
+					}
 				}
 			}
-		}
-	}else if(fabric<=95){
-		let sole = Math.floor((Math.random() * 1))
-		if(sole==0){
-			let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
-			player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
-		}
-		if(sole==1){
-			for(col=0;col<=1;col++){
-				var cards = player.data.Super_Rare_Artifacts_Sole
-				var nothing = false
-				for(row=0;row<=player.data.all_Super_Rare_Artifacts;row++){
-					if(cards[row].lte(0)){nothing = true}
-				}
-				let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts_Sole))
-				if(player.data.Super_Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
-					player.data.Super_Rare_Artifacts_Sole[getartifacts] = player.data.Super_Rare_Artifacts_Sole[getartifacts].add(1)
-				}else if(nothing==false){
-					let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
-					player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
-				}else{
-					col--
+		}else if(fabric<=95){
+			let sole = Math.floor((Math.random() * 2))
+			if(sole==0){
+				let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
+				player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
+			}
+			if(sole==1){
+				for(col=0;col<=1;col++){
+					var cards = player.data.Super_Rare_Artifacts_Sole
+					var nothing = false
+					for(row in cards){
+						if(cards[row].lte(0)){nothing = true}
+					}
+					let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts_Sole))
+					if(player.data.Super_Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+						player.data.Super_Rare_Artifacts_Sole[getartifacts] = player.data.Super_Rare_Artifacts_Sole[getartifacts].add(1)
+					}else if(nothing==false){
+						let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
+						player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
+					}else{
+						col--
+					}
 				}
 			}
-		}
-	}else{
-		let sole = Math.floor((Math.random() * 1))
-		if(sole==0){
-			let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
-			player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
-		}
-		if(sole==1){
-			for(col=0;col<=1;col++){
-				var cards = player.data.Ultra_Rare_Artifacts_Sole
-				var nothing = false
-				for(row=0;row<=player.data.all_Ultra_Rare_Artifacts;row++){
-					if(cards[row].lte(0)){nothing = true}
-				}
-				let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts_Sole))
-				if(player.data.Ultra_Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
-					player.data.Ultra_Rare_Artifacts_Sole[getartifacts] = player.data.Ultra_Rare_Artifacts_Sole[getartifacts].add(1)
-				}else if(nothing==false){
-					let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
-					player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
-				}else{
-					col--
+		}else{
+			let sole = Math.floor((Math.random() * 2))
+			if(sole==0){
+				let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
+				player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
+			}
+			if(sole==1){
+				for(col=0;col<=1;col++){
+					var cards = player.data.Ultra_Rare_Artifacts_Sole
+					var nothing = false
+					for(row in cards){
+						if(cards[row].lte(0)){nothing = true}
+					}
+					let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts_Sole))
+					if(player.data.Ultra_Rare_Artifacts_Sole[getartifacts].lte(0)&&nothing){
+						player.data.Ultra_Rare_Artifacts_Sole[getartifacts] = player.data.Ultra_Rare_Artifacts_Sole[getartifacts].add(1)
+					}else if(nothing==false){
+						let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
+						player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
+					}else{
+						col--
+					}
 				}
 			}
 		}
@@ -178,7 +180,7 @@ function levelnew(){
 	
 	let startatk = player.data.Rare_Artifacts[1].gte(1) ? player.data.Rare_Artifacts[1].mul(25) : 0
 	let startde = player.data.Rare_Artifacts[2].gte(1) ? player.data.Rare_Artifacts[2].mul(20) : 0
-	attributes(0,0,0,startatk,0,0)
+	attributes(0,0,0,startatk,0,startde)
 	
 	if(player.data.Super_Rare_Artifacts[2].gt(0)){player.data.deeffect[4] = player.data.deeffect[4].add(player.data.Super_Rare_Artifacts[2])}
 	
@@ -246,8 +248,9 @@ function enemy_action(){
 function our_action(){
 	//回合结束
 	let overdetohp = player.data.Rare_Artifacts[3].gte(1) ? player.data.de.div(4).floor().mul(player.data.Rare_Artifacts[3]) : 0
-	let overmpadd = player.data.Rare_Artifacts[4].gte(1) ? player.data.Rare_Artifacts[4] : 0
+	let overmpadd = player.data.Rare_Artifacts[4].gte(1) ? player.data.Rare_Artifacts[4].mul(3) : 0
 	player.data.hp = player.data.hp.add(overdetohp)
+	player.data.mp = player.data.mp.add(overmpadd)
 	
 	getcard("display",3)
 	player.data.ps = new Decimal(player.data.psmax)
@@ -451,7 +454,7 @@ function gethp(id){
 function getmp(id){
 	if(id > 0){
 		if(player.data.effect[6].lte(0)){
-			let getmpadd = player.data.Rare_Artifacts[0].gte(1) ? player.data.Rare_Artifacts[0].mul(2).add(1) : 1
+			let getmpadd = player.data.Rare_Artifacts[0].gte(1) ? player.data.Rare_Artifacts[0].mul(1).add(1) : 1
 			player.data.mp = player.data.mp.add(id).add(player.data.effect[0].mul(getmpadd))
 		}
 	}else{
