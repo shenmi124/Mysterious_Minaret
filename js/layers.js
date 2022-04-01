@@ -100,12 +100,14 @@ addLayer("data", {
 		effect:[
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),
 		],
 		deeffect:[
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),
 		],
-		alleffect:new Decimal(10),
+		alleffect:new Decimal(12),
 		
 		barpx:new Decimal(584),
 		haveeff:new Decimal(0),
@@ -241,9 +243,10 @@ addLayer("data", {
 			player.data.dedead = true
 			player.data.newlevel = true
 			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
-			if(player.data.artifactsawardrandom.lte(34)){
+			if(player.data.artifactsawardrandom.lte(100)){
 				player.data.artifactsaward = true
 			}
+			player.data.effect[11] = new Decimal(0)
 		}
 		if(player.data.hp.lte(0) && player.data.Ultra_Rare_Artifacts_Sole[1].gt(0) && player.data.Ultra_Rare_Artifacts_Sole1==false){
 			player.data.hp = new Decimal(player.data.hpmax).div(2).floor()
@@ -263,6 +266,8 @@ addLayer("data", {
 		haveefffunction(7)
 		haveefffunction(8)
 		haveefffunction(9)
+		haveefffunction(10)
+		haveefffunction(11)
 		if(player.data.dede.gt(0)){player.data.haveeff = player.data.dehaveeff.add(1)}
 		dehaveefffunction(0)
 		dehaveefffunction(1)
@@ -274,6 +279,8 @@ addLayer("data", {
 		dehaveefffunction(7)
 		dehaveefffunction(8)
 		dehaveefffunction(9)
+		dehaveefffunction(10)
+		dehaveefffunction(11)
 		
 		havecardfunction(1)
 		havecardfunction(2)

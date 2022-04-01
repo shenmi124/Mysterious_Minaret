@@ -26,7 +26,7 @@ function awardartifacts(){
 				player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
 			}
 			if(sole==1){
-				for(col=0;col<=1;col++){
+				for(col=0;col<=0;col++){
 					var cards = player.data.Normal_Artifacts_Sole
 					var nothing = false
 					for(row=0;row<=player.data.all_Normal_Artifacts_Sole;row++){
@@ -50,7 +50,7 @@ function awardartifacts(){
 				player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
 			}
 			if(sole==1){
-				for(col=0;col<=1;col++){
+				for(col=0;col<=0;col++){
 					var cards = player.data.Rare_Artifacts_Sole
 					var nothing = false
 					for(row in cards){
@@ -74,7 +74,7 @@ function awardartifacts(){
 				player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
 			}
 			if(sole==1){
-				for(col=0;col<=1;col++){
+				for(col=0;col<=0;col++){
 					var cards = player.data.Super_Rare_Artifacts_Sole
 					var nothing = false
 					for(row in cards){
@@ -98,7 +98,7 @@ function awardartifacts(){
 				player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
 			}
 			if(sole==1){
-				for(col=0;col<=1;col++){
+				for(col=0;col<=0;col++){
 					var cards = player.data.Ultra_Rare_Artifacts_Sole
 					var nothing = false
 					for(row in cards){
@@ -392,6 +392,12 @@ function recard(){
 		player.data.deeffect[8] = new Decimal(0)
 		player.data.dewan = true
 	}
+	//id9:焕
+	//id10:布朗魔术
+	//id11:混乱
+	if(player.data.effect[11].gt(0)){
+		player.data.effect[11] = player.data.effect[11].sub(1)
+	}
 }
 
 function atktode(id){
@@ -463,45 +469,53 @@ function getmp(id){
 }
 
 function retit(id1,id2){
-	if(player.data[id1+id2].eq(1)){return "攻击"}
-	if(player.data[id1+id2].eq(2)){return "防御"}
-	if(player.data[id1+id2].eq(3)){return "治疗"}
-	if(player.data[id1+id2].eq(4)){return "魔力飞弹"}
-	if(player.data[id1+id2].eq(5)){return "冥想"}
-	if(player.data[id1+id2].eq(6)){return "魔力源泉"}
-	if(player.data[id1+id2].eq(7)){return "连斩"}
-	if(player.data[id1+id2].eq(8)){return "愤怒"}
-	if(player.data[id1+id2].eq(9)){return "传染"}
-	if(player.data[id1+id2].eq(10)){return "病原体"}
-	if(player.data[id1+id2].eq(11)){return "思考"}
-	if(player.data[id1+id2].eq(12)){return "重击"}
-	if(player.data[id1+id2].eq(13)){return "回旋镖"}
-	if(player.data[id1+id2].eq(14)){return "无中生有"}
-	if(player.data[id1+id2].eq(15)){return "烨"}
-	if(player.data[id1+id2].eq(16)){return "灵能冲击"}
-	if(player.data[id1+id2].eq(17)){return "破魂打击"}
-	if(player.data[id1+id2].eq(18)){return "魔能调换"}
+	if(player.data.effect[11].lte(0)){
+		if(player.data[id1+id2].eq(1)){return "攻击"}
+		if(player.data[id1+id2].eq(2)){return "防御"}
+		if(player.data[id1+id2].eq(3)){return "治疗"}
+		if(player.data[id1+id2].eq(4)){return "魔力飞弹"}
+		if(player.data[id1+id2].eq(5)){return "冥想"}
+		if(player.data[id1+id2].eq(6)){return "魔力源泉"}
+		if(player.data[id1+id2].eq(7)){return "连斩"}
+		if(player.data[id1+id2].eq(8)){return "愤怒"}
+		if(player.data[id1+id2].eq(9)){return "传染"}
+		if(player.data[id1+id2].eq(10)){return "病原体"}
+		if(player.data[id1+id2].eq(11)){return "思考"}
+		if(player.data[id1+id2].eq(12)){return "重击"}
+		if(player.data[id1+id2].eq(13)){return "回旋镖"}
+		if(player.data[id1+id2].eq(14)){return "无中生有"}
+		if(player.data[id1+id2].eq(15)){return "烨"}
+		if(player.data[id1+id2].eq(16)){return "灵能冲击"}
+		if(player.data[id1+id2].eq(17)){return "破魂打击"}
+		if(player.data[id1+id2].eq(18)){return "魔能调换"}
+	}else{
+		return `???`
+	}
 }
 
 function redis(id1,id2){
-	if(player.data[id1+id2].eq(1)){return `对敌方造成 <red id="red">12 物理伤害</red><br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(3)){return `恢复 12 血,获得 3 恢复<br>消耗:2 体力`}
-	if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
-	if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
-	if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
-	if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
-	if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
-	if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
-	if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
-	if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
-	if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
-	if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
-	if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
+	if(player.data.effect[11].lte(0)){
+		if(player.data[id1+id2].eq(1)){return `对敌方造成 <red id="red">12 物理伤害</red><br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(3)){return `恢复 12 血,获得 3 恢复<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
+		if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
+		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
+		if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
+		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
+		if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
+		if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
+		if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
+	}else{
+		return `???`
+	}
 }
 
 function recan(id){
@@ -909,34 +923,34 @@ addLayer("tree-tab", {
 		},
 		//↑敌方 ↓我方
 		hpbar:{
-			display() {return "血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0)},	
+			display() {return player.data.effect[11].lte(0) ? "血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0) : "血量 ??? / ???"},	
 			direction: RIGHT,
 			width: 500,
 			height: 25,
 			unlocked(){return true},
-			progress(){return (player.data.hp.div(player.data.hpmax)).toNumber()},
+			progress(){return player.data.effect[11].lte(0) ? (player.data.hp.div(player.data.hpmax)).toNumber() : true},
 			baseStyle: {"background-color": "#FFFFFF"},
 			fillStyle: {"background-color": "#ec1c24"},
 			textStyle: {"color": "#000000"}
 		},
 		mpbar:{
-			display() {return "魔力 "+format(player.data.mp,0)+" / "+format(player.data.mpmax,0)},	
+			display() {return player.data.effect[11].lte(0) ? "魔力 "+format(player.data.mp,0)+" / "+format(player.data.mpmax,0) : "魔力 ??? / ???"},	
 			direction: RIGHT,
 			width: 248,
 			height: 25,
 			unlocked(){return true},
-			progress(){return (player.data.mp.div(player.data.mpmax)).toNumber()},
+			progress(){return player.data.effect[11].lte(0) ? (player.data.mp.div(player.data.mpmax)).toNumber() : true},
 			baseStyle: {"background-color": "#FFFFFF"},
 			fillStyle: {"background-color": "#00a8f3"},
 			textStyle: {"color": "#000000"}
 		},
 		psbar:{
-			display() {return "体力 "+format(player.data.ps,0)+" / "+format(player.data.psmax,0)},	
+			display() {return player.data.effect[11].lte(0) ? "体力 "+format(player.data.ps,0)+" / "+format(player.data.psmax,0) : "体力 ??? / ???"},	
 			direction: RIGHT,
 			width: 248,
 			height: 25,
 			unlocked(){return true},
-			progress(){return (player.data.ps.div(player.data.psmax)).toNumber()},
+			progress(){return player.data.effect[11].lte(0) ? (player.data.ps.div(player.data.psmax)).toNumber() : true},
 			baseStyle: {"background-color": "#FFFFFF"},
 			fillStyle: {"background-color": "#fff200"},
 			textStyle: {"color": "#000000"}
@@ -1062,6 +1076,28 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#ec531b"},
 			textStyle: {"color": "#000000"}
 		},
+		eff10bar:{
+			display() {return "布朗魔法 "+format(player.data.effect[10],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[10].gt(0)},
+			progress(){return true},
+			baseStyle: {"background-color": "#fffbf2"},
+			fillStyle: {"background-color": "#fffbf2"},
+			textStyle: {"color": "#000000"}
+		},
+		eff11bar:{
+			display() {return "混乱 "+format(player.data.effect[11],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[11].gt(0)},
+			progress(){return true},
+			baseStyle: {"background-color": "#3b3b3b"},
+			fillStyle: {"background-color": "#3b3b3b"},
+			textStyle: {"color": "#000000"}
+		},
 		moneybar:{
 			display() {return format(player.data.money,0)+"$"},	
 			direction: RIGHT,
@@ -1093,7 +1129,9 @@ addLayer("tree-tab", {
 				let eff7 = player.data.effect[7].gt(0) ? format(player.data.effect[7],0)+"卍<br>":""
 				let eff8 = player.data.effect[8].gt(0) ? format(player.data.effect[8],0)+"卐<br>":""
 				let eff9 = player.data.effect[9].gt(0) ? format(player.data.effect[9],0)+"焕<br>":""
-				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9
+				let eff10 = player.data.effect[10].gt(0) ? format(player.data.effect[10],0)+"布朗魔法<br>":""
+				let eff11 = player.data.effect[11].gt(0) ? format(player.data.effect[11],0)+"混乱<br>":""
+				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9 + eff10 + eff11
 			}
 		},
 		1022:{
@@ -1114,7 +1152,9 @@ addLayer("tree-tab", {
 				let eff7 = player.data.deeffect[7].gt(0) ? format(player.data.deeffect[7],0)+"卍<br>":""
 				let eff8 = player.data.deeffect[8].gt(0) ? format(player.data.deeffect[8],0)+"卐<br>":""
 				let eff9 = player.data.deeffect[9].gt(0) ? format(player.data.deeffect[9],0)+"焕<br>":""
-				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9
+				let eff10 = player.data.deeffect[10].gt(0) ? format(player.data.deeffect[10],0)+"布朗魔法<br>":""
+				let eff11 = player.data.deeffect[11].gt(0) ? format(player.data.deeffect[11],0)+"混乱<br>":""
+				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9 + eff10 + eff11
 			}
 		},
 		1023:{
@@ -1393,8 +1433,11 @@ addLayer("tree-tab", {
 				["display-text", function() {return '<hr>你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
-					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加1感染,每回合回复1魔力":""
-					return monster0 + monster1
+					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加2感染,每回合回复1魔力<br>*2.25血":""
+					let monster2 = player.data.monster.eq(1) ? "蛊梦师:每回合给敌方一张阻梦":""
+					let monster3 = player.data.monster.eq(1) ? "野蛮人:攻击有25%的几率造成晕眩1<br>*1.3血,*1.15攻击":""
+					let monster4 = player.data.monster.eq(1) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*2血":""
+					return monster0 + monster1 + monster2 + monster3 + monster4
 				}],
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
@@ -1411,7 +1454,7 @@ addLayer("tree-tab", {
 					]],
 				["bar", "moneybar"]
 				]],
-				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"],["bar", "eff6bar"],["bar", "eff7bar"],["bar", "eff8bar"],["bar", "eff9bar"]]],
+				["row", [["bar", "debar"],["bar", "eff0bar"],["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"],["bar", "eff6bar"],["bar", "eff7bar"],["bar", "eff8bar"],["bar", "eff9bar"],["bar", "eff10bar"],["bar", "eff11bar"]]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
 				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005],["clickable", 99]]],
