@@ -242,7 +242,7 @@ addLayer("data", {
 			player.data.dedead = true
 			player.data.newlevel = true
 			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
-			if(player.data.artifactsawardrandom.lte(100)){
+			if(player.data.artifactsawardrandom.lte(40)){
 				player.data.artifactsaward = true
 			}
 			player.data.effect[11] = new Decimal(0)
