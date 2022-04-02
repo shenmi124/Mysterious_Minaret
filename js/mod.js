@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "神秘尖塔",
-	id: "12card!!!and0.134a",
+	id: "12card!!!and0.14a",
 	author: "辉影神秘",
 	pointsName: "",
 	modFiles: ["layers.js", "tree.js"],
@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.134a",
-	name: "辉影尖塔",
+	num: "0.14a",
+	name: "神秘尖塔",
 }
 
 let changelog = `<h1>更新日志:</h1><br>
+	<h3>v0.14a</h3><br>
+	<li>分数系统<br>
 	<h3>v0.134a</h3><br>
 	<li>修了一堆bug和一个巨明显我却几个月没看出问题的bug<br>
 	<h3>v0.132a</h3><br>

@@ -781,6 +781,44 @@ function recardonc(id){
 	}
 }
 
+function ResetPoint(){
+	let poi4 = new Decimal(0)
+	for(col=1;col<=player.data.all_Normal_Artifacts;col++){
+		poi4 += player.data.Normal_Artifacts[col] * 20
+	}
+	for(col=1;col<=player.data.all_Rare_Artifacts;col++){
+		poi4 += player.data.Rare_Artifacts[col] * 50
+	}
+	for(col=1;col<=player.data.all_Super_Rare_Artifacts;col++){
+		poi4 += player.data.Super_Rare_Artifacts[col] * 120
+	}
+	for(col=1;col<=player.data.all_Ultra_Rare_Artifacts;col++){
+		poi4 += player.data.Ultra_Rare_Artifacts[col] * 250
+	}
+	for(col=1;col<=player.data.all_Normal_Artifacts_Sole;col++){
+		poi4 += player.data.Normal_Artifacts_Sole[col] * 20
+	}
+	for(col=1;col<=player.data.all_Rare_Artifacts_Sole;col++){
+		poi4 += player.data.Rare_Artifacts_Sole[col] * 50
+	}
+	for(col=1;col<=player.data.all_Super_Rare_Artifacts_Sole;col++){
+		poi4 += player.data.Super_Rare_Artifacts_Sole[col] * 120
+	}
+	for(col=1;col<=player.data.all_Ultra_Rare_Artifacts_Sole;col++){
+		poi4 += player.data.Ultra_Rare_Artifacts_Sole[col] * 250
+	}
+	let poi1 = player.data.level.mul(1000)
+	let poi2 = player.data.money.mul(15)
+	let poi3 = player.data.hpmax.div(15).add(player.data.mpmax.div(4.5)).add(player.data.psmax.div(0.45))
+	let poi8 = player.data.maxcard.mul(80)
+	player.point.points = new Decimal(poi1).add(poi2).add(poi3).add(poi4).add(poi8).floor()
+	if(player.point.points.gte(player.point.top_points)){
+		player.point.tob_points = new Decimal(player.point.points)
+	}
+	player.point.last_points = new Decimal(player.point.points)
+	layerDataReset("data")
+}
+
 var layoutInfo = {
     startTab: "none",
     startNavTab: "tree-tab",
@@ -1161,7 +1199,7 @@ addLayer("tree-tab", {
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "180px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
+			style() {return {'height': "170px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
 		},
 		1002:{
 			title: "下一回合!<br><h6>+3体力<br>÷2防御",
@@ -1184,7 +1222,7 @@ addLayer("tree-tab", {
 			display() {
 			},
 			canClick(){return true},
-			unlocked(){return player.data.moneyaward == true && player.data.start == false},
+			unlocked(){return player.data.moneyaward == true && player.data.start == false && player.data.hp.gt(0)},
 			onClick(){return awardmoney()},
 		},
 		1005:{
@@ -1192,7 +1230,7 @@ addLayer("tree-tab", {
 			display() {
 			},
 			canClick(){return true},
-			unlocked(){return player.data.cardaward == true && player.data.start == false},
+			unlocked(){return player.data.cardaward == true && player.data.start == false && player.data.hp.gt(0)},
 			onClick(){return awardcard("cardget",3)},
 		},
 		1006:{
@@ -1200,14 +1238,20 @@ addLayer("tree-tab", {
 			display() {
 			},
 			canClick(){return true},
-			unlocked(){return player.data.newlevel == true},
+			unlocked(){return player.data.newlevel == true && player.data.hp.gt(0)},
 			onClick(){return levelnew()},
+		},
+		1007:{
+			title: "重新开始并统计分数",
+			canClick(){return true},
+			unlocked(){return player.data.hp.lte(0)},
+			onClick(){return ResetPoint()},
 		},
 		1011:{
 			title(){return "获得"+retit("cardget",this.id-1010)},
 			display(){return redis("cardget",this.id-1010)},
 			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
 			onClick(){return recardonc(this.id-1010)},
 			style() {return {'height': "200px",'width': '150px'}},
 		},
@@ -1215,7 +1259,7 @@ addLayer("tree-tab", {
 			title(){return "获得"+retit("cardget",this.id-1010)},
 			display(){return redis("cardget",this.id-1010)},
 			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
 			onClick(){return recardonc(this.id-1010)},
 			style() {return {'height': "200px",'width': '150px'}},
 		},
@@ -1223,7 +1267,7 @@ addLayer("tree-tab", {
 			title(){return "获得"+retit("cardget",this.id-1010)},
 			display(){return redis("cardget",this.id-1010)},
 			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
 			onClick(){return recardonc(this.id-1010)},
 			style() {return {'height': "200px",'width': '150px'}},
 		},
@@ -1231,7 +1275,7 @@ addLayer("tree-tab", {
 			title(){return "获取神器"},
 			display(){return "50%N<br>30%R<br>15%SR<br>5%UR"},
 			canClick(){return true},
-			unlocked(){return player.data.artifactsaward == true && player.data.start == false },
+			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
 			onClick(){return awardartifacts()},
 		},
 		1:{
@@ -1430,13 +1474,14 @@ addLayer("tree-tab", {
 					let theme4 = options.theme=="light" ? "纯白" : ""
 					return themestart + theme0 + theme1 + theme2 + theme3 + theme4 + themelast
 				}],
-				["display-text", function() {return '<hr>你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
+				["display-text", function() {return '<hr>你的最高分是:'+format(player.point.tob_points,0)+'.你上次的得分是:'+format(player.point.last_points,0)+'.'}],
+				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
 					let monster1 = player.data.monster.eq(1) ? "感染者:消耗4魔力,给敌方附加2感染,每回合回复1魔力<br>*2.25血":""
-					let monster2 = player.data.monster.eq(1) ? "蛊梦师:每回合给敌方一张阻梦":""
-					let monster3 = player.data.monster.eq(1) ? "野蛮人:攻击有25%的几率造成晕眩1<br>*1.3血,*1.15攻击":""
-					let monster4 = player.data.monster.eq(1) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*2血":""
+					let monster2 = player.data.monster.eq(2) ? "蛊梦师:每回合给敌方一张阻梦":""
+					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有25%的几率造成晕眩1<br>*1.3血,*1.15攻击":""
+					let monster4 = player.data.monster.eq(4) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*2血":""
 					return monster0 + monster1 + monster2 + monster3 + monster4
 				}],
 				["bar", "dehpbar"],
@@ -1458,7 +1503,7 @@ addLayer("tree-tab", {
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
 				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005],["clickable", 99]]],
-				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013]]],
+				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013],["clickable", 1007]]],
 				["clickable", 1006]
 			]],
 			["display-text", function() {

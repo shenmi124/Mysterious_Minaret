@@ -53,7 +53,6 @@ function havecardfunction(id){
 	if(!player.data['display'+id].eq(0)){player.data.holdcard = player.data.holdcard.add(1)}
 }
 
-
 addLayer("afdian", {
     name: "afdian",
     symbol: "A",
@@ -127,7 +126,7 @@ addLayer("data", {
 		
 		//卡牌
 		card:[new Decimal(0),
-		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
+		new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),
@@ -145,7 +144,7 @@ addLayer("data", {
 		new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		cardmax:[new Decimal(0),
-		new Decimal(7),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
+		new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),
@@ -310,6 +309,25 @@ addLayer("data", {
 		player.data.cardmax[3] = new Decimal(1)
 		*/
 		wordStyle()
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return false},
+})
+
+addLayer("point", {
+    name: "point",
+    symbol: " ",
+    position: 11,
+    startData() { return {
+        unlocked: true,
+		
+		points:new Decimal(0),
+		top_points:new Decimal(0),
+		last_points:new Decimal(0),
+    }},
+	update(diff) {
 	},
     color: "#FFFFFF",
     type: "none",
