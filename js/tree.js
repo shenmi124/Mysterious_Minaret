@@ -13,7 +13,10 @@ function awardcard(id1,id2){
 	for(col=1;col<=id2;col++){
 		let card = Math.floor(Math.random() * player.data.allcard)
 		for(col2=0;col2<=player.data.allcard-1;col2++){
-			if(card==col2){
+			//+1
+			if(card==18){
+				col--
+			}else if(card==col2){
 				player.data[id1+col] = new Decimal(col2+1)
 			}
 		}
