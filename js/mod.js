@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "神秘尖塔",
-	id: "12card!!!and0.14a",
+	id: "12card!!!and0.141a",
 	author: "辉影神秘",
 	pointsName: "",
 	modFiles: ["layers.js", "tree.js"],
@@ -13,11 +13,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.14a",
+	num: "0.141a",
 	name: "神秘尖塔",
 }
 
 let changelog = `<h1>更新日志:</h1><br>
+	<h3>v0.141a</h3><br>
+	<li>5个精英怪<br>
+	<li>墓地返还牌库机制更改<br>
+	<li>修了一些bug并平衡游戏<br>
 	<h3>v0.14a</h3><br>
 	<li>分数系统<br>
 	<h3>v0.134a</h3><br>
@@ -33,11 +37,11 @@ let changelog = `<h1>更新日志:</h1><br>
 	<h3>v0.12a</h3><br>
 	<li>修了8个bug<br>
 	<h3>v0.11a</h3><br>
-	<li>更多卡牌,更多机制
+	<li>更多卡牌,更多机制<br>
 	<li>更新至18张卡<br>
 	<h3>v0.1a</h3><br>
-	<li>完成了基础的战斗,奖励机制和精英怪
-	<li>更新至11张卡
+	<li>完成了基础的战斗,奖励机制和精英怪<br>
+	<li>更新至11张卡<br>
 		`
 
 let winText = ``

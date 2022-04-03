@@ -12,7 +12,7 @@ function effectdisplay(id){
 }
 
 function monsterdisplay(id){
-	if(id==0){return "感染者:消耗4魔力,给敌方附加1感染,每回合回复1魔力<br><br>"+effectdisplay(4)}
+	if(id==0){return "感染者:每回合给敌方附加1感染<br><br>"+effectdisplay(4)}
 	if(id==1){return "蛊梦师:每回合给敌方一张阻梦<br><br>"+card2display(0)}
 }
 
@@ -129,27 +129,27 @@ addLayer("data", {
 		new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		carddead:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		cardintermediary:[new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		cardmax:[new Decimal(0),
 		new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
-		allcard:new Decimal(18),
+		allcard:new Decimal(19),
 		maxcard:new Decimal(10),
 		holdcard:new Decimal(0),
 		
@@ -226,6 +226,8 @@ addLayer("data", {
 		
 		wan:false,
 		dewan:false,
+		eff10times:new Decimal(0),
+		effect10effect:false,
 		
 		hpmaxadd2:new Decimal(0),
 		Ultra_Rare_Artifacts_Sole1:false,
