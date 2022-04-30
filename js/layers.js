@@ -194,7 +194,7 @@ addLayer("data", {
 		allcard:new Decimal(51),
 		maxcard:new Decimal(10),
 		holdcard:new Decimal(0),
-		removals:new Decimal(1),
+		removals:new Decimal(0),
 		remove_removals:true,
 		
 		//神器
