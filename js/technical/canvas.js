@@ -1,6 +1,8 @@
 var canvas;
 var ctx;
 
+window.addEventListener("resize", (_=>resizeCanvas()));
+
 function retrieveCanvasData() {
 	let treeCanv = document.getElementById("treeCanvas")
 	let treeTab = document.getElementById("treeTab")
@@ -10,7 +12,34 @@ function retrieveCanvasData() {
 	return true;
 }
 
+function resizeCanvas() {
+	if (!retrieveCanvasData()) return
+	canvas.width = 0;
+    canvas.height = 0;
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+		drawTree();
+}
+
+
 var colors_theme
+
+function drawTree() {
+	if (!retrieveCanvasData()) return;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	for (layer in layers){
+		if (tmp[layer].layerShown == true && tmp[layer].branches){
+			for (branch in tmp[layer].branches)
+				{
+					drawTreeBranch(layer, tmp[layer].branches[branch])
+				}
+		}
+		drawComponentBranches(layer, tmp[layer].upgrades, "upgrade-")
+		drawComponentBranches(layer, tmp[layer].buyables, "buyable-")
+		drawComponentBranches(layer, tmp[layer].clickables, "clickable-")
+
+	}
+}
 
 function drawComponentBranches(layer, data, prefix) {
 	for(id in data) {

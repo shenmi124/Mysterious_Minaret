@@ -9,7 +9,7 @@ var colors = {
 		color: "#dfdfdf",
 		points: "#ffffff",
 		locked: "#bf8f8f",
-		background: "#0f0f0f",
+		background: "#404040",
 		background_tooltip: "rgba(0, 0, 0, 0.75)",
 	},
 	aqua: {
@@ -49,7 +49,7 @@ var colors = {
 		color: "#000000",
 		points: "#000000",
 		locked: "#c4a7b3",
-		background: "#ffffff",
+		background: "#f7f7f7",
 		background_tooltip: "rgba(255, 255, 255, 0.75)",
 	},
 }

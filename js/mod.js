@@ -1,6 +1,6 @@
 let modInfo = {
 	name: "神秘尖塔",
-	id: "12card!!!and0.141a",
+	id: "Mysterious_Minaret",
 	author: "辉影神秘",
 	pointsName: "",
 	modFiles: ["layers.js", "tree.js"],
@@ -18,28 +18,36 @@ let VERSION = {
 }
 
 let changelog = `<h1>更新日志:</h1><br>
-	<h3>v0.141a</h3><br>
+	<h3>v0.1β</h3><br>
+	<li>平衡游戏<br>
+	<li>修复蓝色药剂在有魔力枯竭下依然可以恢复魔力的bug<br>
+	<li>修复防御破坏不会受到额外伤害的bug<br>
+	<li>更新至51张卡<br>
+	<li>一些精英怪和神器<br>
+	<li>细节修改,设置UI极大更改<br>
+	<li>开始公测!<br>
+	<h3>v0.141α</h3><br>
 	<li>5个精英怪<br>
 	<li>墓地返还牌库机制更改<br>
 	<li>修了一些bug并平衡游戏<br>
-	<h3>v0.14a</h3><br>
+	<h3>v0.14α</h3><br>
 	<li>分数系统<br>
 	<h3>v0.134a</h3><br>
 	<li>修了一堆bug和一个巨明显我却几个月没看出问题的bug<br>
 	<h3>v0.132a</h3><br>
 	<li>完成了神器<br>
-	<h3>v0.131a</h3><br>
+	<h3>v0.131α</h3><br>
 	<li>完成了6个R神器<br>
 	<li>优化UI,细节和背景<br>
-	<h3>v0.13a</h3><br>
+	<h3>v0.13α</h3><br>
 	<li>完成了神器的基础机制和4个N神器<br>
 	<li>平衡游戏,优化UI和动画,新细节和背景<br>
-	<h3>v0.12a</h3><br>
+	<h3>v0.12α</h3><br>
 	<li>修了8个bug<br>
-	<h3>v0.11a</h3><br>
+	<h3>v0.11α</h3><br>
 	<li>更多卡牌,更多机制<br>
 	<li>更新至18张卡<br>
-	<h3>v0.1a</h3><br>
+	<h3>v0.1α</h3><br>
 	<li>完成了基础的战斗,奖励机制和精英怪<br>
 	<li>更新至11张卡<br>
 		`

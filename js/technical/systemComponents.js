@@ -108,16 +108,29 @@ var systemComponents = {
         <h3>{{VERSION.withName}}</h3>
         <span v-if="modInfo.author">
             <br>
-            Made by {{modInfo.author}}	
+            {{modInfo.author}} 制作
         </span>
         <br>
         模组树 <a v-bind:href="'https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md'" target="_blank" class="link" v-bind:style = "{'font-size': '14px', 'display': 'inline'}" >{{TMT_VERSION.tmtNum}}</a> 由 Acamaeda 制作
-        <br>
-        声望树由 Jacorb 和 Aarex 制作
-		<br><br>
-		<div class="link" onclick="showTab('changelog-tab')">更新日志</div><br>
         <a class="link" href="https://discord.gg/F3xveHV" target="_blank" v-bind:style="modInfo.discordLink ? {'font-size': '16px'} : {}">模组树 Discord</a><br>
         <a class="link" href="http://discord.gg/wwQfgPa" target="_blank" v-bind:style="{'font-size': '16px'}">主要声望树服务器</a><br>
+		<br><br>
+		<div class="link" onclick="showTab('changelog-tab')">更新日志</div><br>
+		<br><br>
+		<a class="link" onclick="showTab('afdian')">跳转捐助界面 Jump directly to the donation page</a><br>
+		<a class="link" href="https://afdian.net/@Mysterious124" target="_blank">直接跳转捐助网页 Jump directly to the donation page</a><br>
+		<big>QQ群:688646311</big>
+		<big>邮箱(e-mail) 67265011@qq.com</big><br>
+		<big>↑你可以在这里把你的想法告诉我(尤其是多语言化,我会帮你找办法) You can tell me what you think here (especially multilingual, I will help you find a way)</big><br>
+		<br><br>
+		特别感谢(排名不分先后)(如要改名联系作者):<br>
+		屑见手青 (为图鉴子项补全内容)<br>
+		QwQe308 (虽然本作没有实际他的帮助,但因为他我才能做出像这样的作品.我的TMT的启蒙老师)<br>
+		<br><br>
+		捐助感谢(按金额)(如要改名联系作者):<br>
+		奶他酱<br>
+		爱发电用户_5XbC<br>
+		从来不虚何必兄<br>
 		<br><br>
     `
     },
@@ -126,12 +139,21 @@ var systemComponents = {
         template: `
         <table>
             <tr>
+				<td><big><big>存档</td>
                 <td><button class="opt" onclick="save()">保存</button></td>
-                <td><button class="opt" onclick="hardReset()">重开</button></td>
+                <td><button class="opt" onclick="rehardReset()">硬重置</button></td>
+				<td><button class="opt" onclick="softReset()">软重置</button></td>
+			</tr>
+			<br>
+			<tr>
+				<td><big><big>画面</td>
                 <td><button class="opt" onclick="switchTheme()">材质: {{ CNThemeName() }}</button></td>
 				<td><button class="opt" onclick="toggleOpt('switchWord')">文字荧光: {{ options.switchWord?"开":"关" }}</button></td>
-                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量节点: {{ options.hqTree?"开":"关" }}</button></td>
-				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示横条: {{ options.forceTooltips?"开":"关" }}</button></td>
+			</tr>
+			<br>
+			<tr>
+				<td><big><big>操作</td>
+				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示悬浮框: {{ options.forceTooltips?"开":"关" }}</button></td>
 			</tr> 
         </table>`
     },

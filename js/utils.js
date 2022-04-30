@@ -3,7 +3,7 @@
 function respecBuyables(layer) {
 	if (!layers[layer].buyables) return
 	if (!layers[layer].buyables.respec) return
-	if (!player[layer].noRespecConfirm && !confirm(tmp[layer].buyables.respecMessage || "Are you sure you want to respec? This will force you to do a \"" + (tmp[layer].name ? tmp[layer].name : layer) + "\" reset as well!")) return
+	if (!player[layer].noRespecConfirm && !confirm(tmp[layer].buyables.respecMessage || "你确定要软重置吗?那样你本局游戏就会重置.且无法获得任何")) return
 	run(layers[layer].buyables.respec, layers[layer].buyables)
 	updateBuyableTemp(layer)
 	document.activeElement.blur()

@@ -1,0 +1,281 @@
+function retit(id1,id2){
+	let special0 = ""
+	let special1 = player.data['display'+id2+'copy']==false ? "" : "<small><small>复制"
+	if(player.data.effect[11].lte(0)){
+		if(player.data[id1+id2].eq(1)){return special0+"攻击"+special1}
+		if(player.data[id1+id2].eq(2)){return special0+"防御"+special1}
+		if(player.data[id1+id2].eq(3)){return special0+"治疗"+special1}
+		if(player.data[id1+id2].eq(4)){return special0+"魔力飞弹"+special1}
+		if(player.data[id1+id2].eq(5)){return special0+"冥想"+special1}
+		if(player.data[id1+id2].eq(6)){return special0+"魔力再生"+special1}
+		if(player.data[id1+id2].eq(7)){return special0+"连斩"+special1}
+		if(player.data[id1+id2].eq(8)){return special0+"愤怒"+special1}
+		if(player.data[id1+id2].eq(9)){return special0+"传染"+special1}
+		if(player.data[id1+id2].eq(10)){return special0+"病原体"+special1}
+		if(player.data[id1+id2].eq(11)){return special0+"思考"+special1}
+		if(player.data[id1+id2].eq(12)){return special0+"重击"+special1}
+		if(player.data[id1+id2].eq(13)){return special0+"回旋镖"+special1}
+		if(player.data[id1+id2].eq(14)){return special0+"无中生有"+special1}
+		if(player.data[id1+id2].eq(15)){return special0+"烨"+special1}
+		if(player.data[id1+id2].eq(16)){return special0+"灵能冲击"+special1}
+		if(player.data[id1+id2].eq(17)){return special0+"破魂打击"+special1}
+		if(player.data[id1+id2].eq(18)){return special0+"魔能调换"+special1}
+		if(player.data[id1+id2].eq(19)){return special0+"阻梦"+special1}
+		if(player.data[id1+id2].eq(20)){return special0+"毒素扩散"+special1}
+		if(player.data[id1+id2].eq(21)){return special0+"血清"+special1}
+		if(player.data[id1+id2].eq(22)){return special0+"隐秘扩散"+special1}
+		if(player.data[id1+id2].eq(23)){return special0+"病毒爆发"+special1}
+		if(player.data[id1+id2].eq(24)){return special0+"墓地增生"+special1}
+		if(player.data[id1+id2].eq(25)){return special0+"肉体再生"+special1}
+		if(player.data[id1+id2].eq(26)){return special0+"重构"+special1}
+		if(player.data[id1+id2].eq(27)){return special0+"嗜血斩"+special1}
+		if(player.data[id1+id2].eq(28)){return special0+"自信"+special1}
+		if(player.data[id1+id2].eq(29)){return special0+"魔力源泉"+special1}
+		if(player.data[id1+id2].eq(30)){return special0+"治疗术"+special1}
+		if(player.data[id1+id2].eq(31)){return special0+"绷带"+special1}
+		if(player.data[id1+id2].eq(32)){return special0+"卡牌魔法"+special1}
+		if(player.data[id1+id2].eq(33)){return special0+"献祭"+special1}
+		if(player.data[id1+id2].eq(34)){return special0+"天平"+special1}
+		if(player.data[id1+id2].eq(35)){return special0+"墓地衍生"+special1}
+		if(player.data[id1+id2].eq(36)){return special0+"滴血"+special1}
+		if(player.data[id1+id2].eq(37)){return special0+"破财消灾"+special1}
+		if(player.data[id1+id2].eq(38)){return special0+"灵魂吸取"+special1}
+		if(player.data[id1+id2].eq(39)){return special0+"魔法结晶"+special1}
+		if(player.data[id1+id2].eq(40)){return special0+"提取器"+special1}
+		if(player.data[id1+id2].eq(41)){return special0+"应急干粮"+special1}
+		if(player.data[id1+id2].eq(42)){return special0+"老千"+special1}
+		if(player.data[id1+id2].eq(43)){return special0+"破釜沉舟"+special1}
+		if(player.data[id1+id2].eq(44)){return special0+"能量护盾"+special1}
+		if(player.data[id1+id2].eq(45)){return special0+"不定性病毒"+special1}
+		if(player.data[id1+id2].eq(46)){return special0+"格挡"+special1}
+		if(player.data[id1+id2].eq(47)){return special0+"急救"+special1}
+		if(player.data[id1+id2].eq(48)){return special0+"背刺"+special1}
+		if(player.data[id1+id2].eq(49)){return special0+"蔓延"+special1}
+		if(player.data[id1+id2].eq(50)){return special0+"聚集"+special1}
+		if(player.data[id1+id2].eq(51)){return special0+"再生"+special1}
+	}else{
+		return `???`
+	}
+}
+
+function redis(id1,id2){
+	if(player.data.effect[11].lte(0)){
+		if(player.data[id1+id2].eq(1)){return `对敌方造成 <red id="red">12 物理伤害</red><br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(3)){return `恢复 12 血,获得 3 恢复<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
+		if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
+		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
+		if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
+		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
+		if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
+		if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
+		if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
+		if(player.data[id1+id2].eq(19)){return `每有一张阻梦在手上就少抽一种牌<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(20)){return `使敌人中毒层数翻倍,抽1张牌<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(21)){return `为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(22)){return `使敌人获得等同于中毒层数的中毒,如果敌人中毒层数＞15则抽2张牌<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(23)){return `清除敌人所有中毒层数,每清除1层造成<red id="red">4 物理伤害</red><br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(24)){return `先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力`}
+		if(player.data[id1+id2].eq(25)){return `恢复自己损失血量/3的生命<br>消耗:11 魔力`}
+		if(player.data[id1+id2].eq(26)){return `将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3护甲<br>消耗:15 魔力`}
+		if(player.data[id1+id2].eq(27)){return `造成<red id="red">(自己损失血量*敌方损失血量)/50的物理伤害</red><br>消耗:3 体力`}
+		if(player.data[id1+id2].eq(28)){return `造成<red id="red">5*持有手牌的物理伤害</red><br>消耗:1体力`}
+		if(player.data[id1+id2].eq(29)){return `获得2魔力恢复效果<br>消耗:无`}
+		if(player.data[id1+id2].eq(30)){return `恢复20血<br>消耗:13 魔力`}
+		if(player.data[id1+id2].eq(31)){return `恢复4血并获得5恢复,5护甲<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(32)){return `将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:1体力,5 魔力`}
+		if(player.data[id1+id2].eq(33)){return `随机获得以下效果中的其中二个①获得7力量②获得7减伤③获得7体力<br>消耗:42 血`}
+		if(player.data[id1+id2].eq(34)){return `按比例重新分配血,魔力,体力<br>移除<br>消耗:无`}
+		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
+		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:3 血`}
+		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的$的物理伤害</red><br>消耗:20% $`}
+		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">10 魔法伤害</blue>,如果此伤害杀死了敌人,敌人5%的最多血量永久增加到你身上<br>消耗:10 魔力`}
+		if(player.data[id1+id2].eq(39)){return `恢复30法力<br>移除<br>消耗:无`}
+		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血`}
+		if(player.data[id1+id2].eq(41)){return `恢复5血和1体力<br>移除<br>消耗:无`}
+		if(player.data[id1+id2].eq(42)){return `50%获得抽取3张卡,50%减去15血<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(43)){return `血量低于3%时可以使用,造成300伤害,永久移除这张卡<br>消耗:无`}
+		if(player.data[id1+id2].eq(44)){return `获得20护甲<br>消耗:8 魔力`}
+		if(player.data[id1+id2].eq(45)){return `50%给敌方+5感染,50%给我方+3感染<br>消耗:无`}
+		if(player.data[id1+id2].eq(46)){return `获得17防御,2易伤<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(47)){return `恢复50血<br>移除<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(48)){return `75%造成 <red id="red">36 物理伤害</red>,25%造成 <red id="red">4 物理伤害</red><br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(49)){return `在手牌中添加一张蔓延,此卡不会使用后进入墓地<br>消耗:无`}
+		if(player.data[id1+id2].eq(50)){return `恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>消耗:1 体力,3 魔力,10 血`}
+		if(player.data[id1+id2].eq(51)){return `恢复层数*2,恢复恢复层数的血量<br>消耗:10 魔力`}
+	}else{
+		return `???`
+	}
+}
+
+	clickables:{
+		11:{
+			title:"返回",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){showTab("pokedex_card")},
+		},
+		12:{
+			title:"攻击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(1)},
+		},
+		13:{
+			title:"防御",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(2)},
+		},
+		14:{
+			title:"治疗",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(3)},
+		},
+		15:{
+			title:"魔法飞弹",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(4)},
+		},
+		16:{
+			title:"冥想",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(5)},
+		},
+		17:{
+			title:"魔力源泉",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(6)},
+		},
+		18:{
+			title:"连斩",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(7)},
+		},
+		19:{
+			title:"愤怒",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(8)},
+		},
+		20:{
+			title:"传染",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(9)},
+		},
+		21:{
+			title:"病原体",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(10)},
+		},
+		22:{
+			title:"思考",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(11)},
+		},
+		23:{
+			title:"重击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(12)},
+		},
+		24:{
+			title:"回旋镖",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(13)},
+		},
+		25:{
+			title:"无中生有",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(14)},
+		},
+		26:{
+			title:"烨",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(15)},
+		},
+		27:{
+			title:"灵能冲击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(16)},
+		},
+		28:{
+			title:"破魂打击",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(17)},
+		},
+		29:{
+			title:"魔能调换",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(18)},
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return "卡牌图鉴"}],
+		["row", [["clickable", 11]]],
+		"blank",
+		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],["clickable", 26],["clickable", 27],["clickable", 28],["clickable", 29],]],
+		"blank",
+		["display-text", function() {
+			let car0 = player.pokedex.car1.eq(1) ? carddisplay(0):""
+			let car1 = player.pokedex.car1.eq(2) ? carddisplay(1):""
+			let car2 = player.pokedex.car1.eq(3) ? carddisplay(2):""
+			let car3 = player.pokedex.car1.eq(4) ? carddisplay(3):""
+			let car4 = player.pokedex.car1.eq(5) ? carddisplay(4):""
+			let car5 = player.pokedex.car1.eq(6) ? carddisplay(5):""
+			let car6 = player.pokedex.car1.eq(7) ? carddisplay(6):""
+			let car7 = player.pokedex.car1.eq(8) ? carddisplay(7):""
+			let car8 = player.pokedex.car1.eq(9) ? carddisplay(8):""
+			let car9 = player.pokedex.car1.eq(10) ? carddisplay(9):""
+			let car10 = player.pokedex.car1.eq(11) ? carddisplay(10):""
+			let car11 = player.pokedex.car1.eq(12) ? carddisplay(11):""
+			let car12 = player.pokedex.car1.eq(13) ? carddisplay(12):""
+			let car13 = player.pokedex.car1.eq(14) ? carddisplay(13):""
+			let car14 = player.pokedex.car1.eq(15) ? carddisplay(14):""
+			let car15 = player.pokedex.car1.eq(16) ? carddisplay(15):""
+			let car16 = player.pokedex.car1.eq(17) ? carddisplay(16):""
+			let car17 = player.pokedex.car1.eq(18) ? carddisplay(17):""
+			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10+car11+car12+car13+car14+car15+car16+car17
+		}],
+	]
