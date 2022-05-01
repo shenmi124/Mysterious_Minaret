@@ -388,7 +388,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		eff10bar:{
-			display() {return "布朗魔法 "+format(player.data.effect[10],0)+"("+format(this.eff10c(),0)+")"},	
+			display() {return "布朗魔术 "+format(player.data.effect[10],0)+"("+format(this.eff10c(),0)+")"},	
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
