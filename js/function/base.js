@@ -206,6 +206,7 @@ function getdeeffect(id,id2){
 function softReset(){
 	if (!!confirm("你确定要软重置吗?那样你本局游戏就会重置.且无法获得任何东西.")){
 		layerDataReset('data')
+		layerDataReset('point')
 		showTab('none')
 	}
 }
