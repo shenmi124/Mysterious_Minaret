@@ -361,7 +361,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(23)){
 			//病毒爆发
-			attributes(0,0,-1,player.data.effect[3].mul(4),0,0,"card")
+			attributes(0,0,-1,player.data.deeffect[3].mul(4),0,0,"card")
 			player.data.deeffect[3] = new Decimal(0)
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,23,true,true)
