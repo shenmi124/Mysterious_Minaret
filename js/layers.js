@@ -13,7 +13,7 @@ function effectdisplay(id){
 	if(id == 11){return"混乱:看不见血,体力,魔力,卡牌名字,卡牌效果,卡牌消耗<br><br>"}
 	if(id == 12){return"魔力再生:回话结束恢复层级魔力<br><br>"}
 	if(id == 13){return"减伤:减少对应层级伤害,每次受到伤害减少一层<br><br>"}
-	if(id == 14){return"凝血:当消耗血量时优先消耗凝血<br><br>"}
+	if(id == 14){return"凝血:当消耗卡牌血量时优先消耗凝血<br><br>"}
 	if(id == 15){return"易伤:受到伤害时格外受到伤害,每次受到伤害减少一层<br><br>"}
 }
 
@@ -585,15 +585,32 @@ addLayer("pokedex_effect", {
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
 			onClick(){player.pokedex.eff = new Decimal(14)},
 		},
+		26:{
+			title:"凝血",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.eff = new Decimal(15)},
+		},
+		27:{
+			title:"易伤",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.eff = new Decimal(16)},
+		},
 	},
 	tabFormat: [
 		["display-text", function() {return "效果图鉴"}],
 		["row", [["clickable", 11]]],
 		"blank",
 		["row", [
-		["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],
-		["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],
-		["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],
+			["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],
+			["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],
+		]],
+		["row", [
+			["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],["clickable", 26],
+			["clickable", 27],
 		]],
 		"blank",
 		["display-text", function() {
@@ -611,7 +628,9 @@ addLayer("pokedex_effect", {
 			let eff11 = player.pokedex.eff.eq(12) ? effectdisplay(11):""
 			let eff12 = player.pokedex.eff.eq(13) ? effectdisplay(12):""
 			let eff13 = player.pokedex.eff.eq(14) ? effectdisplay(13):""
-			return eff0+eff1+eff2+eff3+eff4+eff5+eff6+eff7+eff8+eff9+eff10+eff11+eff12+eff13
+			let eff14 = player.pokedex.eff.eq(15) ? effectdisplay(14):""
+			let eff15 = player.pokedex.eff.eq(16) ? effectdisplay(15):""
+			return eff0+eff1+eff2+eff3+eff4+eff5+eff6+eff7+eff8+eff9+eff10+eff11+eff12+eff13+eff14+eff15
 		}],
 	]
 })
@@ -901,12 +920,255 @@ addLayer("pokedex_card_tab1", {
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
 			onClick(){player.pokedex.car1 = new Decimal(18)},
 		},
+		31:{
+			title:"毒素扩散",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(20)},
+		},
+		32:{
+			title:"血清",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(21)},
+		},
+		33:{
+			title:"隐秘扩散",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(22)},
+		},
+		34:{
+			title:"病毒爆发",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(23)},
+		},
+		35:{
+			title:"墓地增生",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(24)},
+		},
+		36:{
+			title:"肉体再生",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(25)},
+		},
+		37:{
+			title:"重构",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(26)},
+		},
+		38:{
+			title:"嗜血斩",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(27)},
+		},
+		39:{
+			title:"自信",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(28)},
+		},
+		40:{
+			title:"魔力源泉",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(29)},
+		},
+		41:{
+			title:"治疗术",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(30)},
+		},
+		42:{
+			title:"绷带",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(31)},
+		},
+		43:{
+			title:"卡牌魔法",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(32)},
+		},
+		44:{
+			title:"献祭",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(33)},
+		},
+		45:{
+			title:"天平",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(34)},
+		},
+		46:{
+			title:"墓地衍生",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(35)},
+		},
+		47:{
+			title:"滴血",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(36)},
+		},
+		48:{
+			title:"破财消灾",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(37)},
+		},
+		49:{
+			title:"灵魂吸取",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(38)},
+		},
+		50:{
+			title:"魔法结晶",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(39)},
+		},
+		51:{
+			title:"提取器",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(40)},
+		},
+		52:{
+			title:"应急干粮",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(41)},
+		},
+		53:{
+			title:"老千",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(42)},
+		},
+		54:{
+			title:"破釜沉舟",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(43)},
+		},
+		55:{
+			title:"能量护盾",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(44)},
+		},
+		56:{
+			title:"不定性病毒",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(45)},
+		},
+		57:{
+			title:"格挡",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(46)},
+		},
+		58:{
+			title:"急救",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(47)},
+		},
+		59:{
+			title:"背刺",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(48)},
+		},
+		60:{
+			title:"蔓延",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(49)},
+		},
+		61:{
+			title:"聚集",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(50)},
+		},
+		62:{
+			title:"再生",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
+			onClick(){player.pokedex.car1 = new Decimal(51)},
+		},
 	},
 	tabFormat: [
 		["display-text", function() {return "卡牌图鉴"}],
 		["row", [["clickable", 11]]],
 		"blank",
-		["row", [["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],["clickable", 26],["clickable", 27],["clickable", 28],["clickable", 29],]],
+		["row", [
+			["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],
+			["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20],["clickable", 21],
+		]],
+		["row", [
+			["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],["clickable", 26],
+			["clickable", 27],["clickable", 28],["clickable", 29],["clickable", 31],["clickable", 32],
+		]],
+		["row", [	
+			["clickable", 33],["clickable", 34],["clickable", 35],["clickable", 36],["clickable", 37],
+			["clickable", 38],["clickable", 39],["clickable", 40],["clickable", 41],["clickable", 42],
+		]],
+		["row", [	
+			["clickable", 43],["clickable", 44],["clickable", 45],["clickable", 46],["clickable", 47],
+			["clickable", 48],["clickable", 49],["clickable", 50],["clickable", 51],["clickable", 52],
+		]],
+		["row", [	
+			["clickable", 53],["clickable", 54],["clickable", 55],["clickable", 56],["clickable", 57],
+			["clickable", 58],["clickable", 59],["clickable", 60],["clickable", 61],["clickable", 62],
+		]],
 		"blank",
 		["display-text", function() {
 			let car0 = player.pokedex.car1.eq(1) ? carddisplay(0):""
@@ -927,7 +1189,40 @@ addLayer("pokedex_card_tab1", {
 			let car15 = player.pokedex.car1.eq(16) ? carddisplay(15):""
 			let car16 = player.pokedex.car1.eq(17) ? carddisplay(16):""
 			let car17 = player.pokedex.car1.eq(18) ? carddisplay(17):""
-			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10+car11+car12+car13+car14+car15+car16+car17
+			let car18 = player.pokedex.car1.eq(19) ? carddisplay(18):""
+			let car19 = player.pokedex.car1.eq(20) ? carddisplay(19):""
+			let car20 = player.pokedex.car1.eq(21) ? carddisplay(20):""
+			let car21 = player.pokedex.car1.eq(22) ? carddisplay(21):""
+			let car22 = player.pokedex.car1.eq(23) ? carddisplay(22):""
+			let car23 = player.pokedex.car1.eq(24) ? carddisplay(23):""
+			let car24 = player.pokedex.car1.eq(25) ? carddisplay(24):""
+			let car25 = player.pokedex.car1.eq(26) ? carddisplay(25):""
+			let car26 = player.pokedex.car1.eq(27) ? carddisplay(26):""
+			let car27 = player.pokedex.car1.eq(28) ? carddisplay(27):""
+			let car28 = player.pokedex.car1.eq(29) ? carddisplay(28):""
+			let car29 = player.pokedex.car1.eq(30) ? carddisplay(29):""
+			let car30 = player.pokedex.car1.eq(31) ? carddisplay(30):""
+			let car31 = player.pokedex.car1.eq(32) ? carddisplay(31):""
+			let car32 = player.pokedex.car1.eq(33) ? carddisplay(32):""
+			let car33 = player.pokedex.car1.eq(34) ? carddisplay(33):""
+			let car34 = player.pokedex.car1.eq(35) ? carddisplay(34):""
+			let car35 = player.pokedex.car1.eq(36) ? carddisplay(35):""
+			let car36 = player.pokedex.car1.eq(37) ? carddisplay(36):""
+			let car37 = player.pokedex.car1.eq(38) ? carddisplay(37):""
+			let car38 = player.pokedex.car1.eq(39) ? carddisplay(38):""
+			let car39 = player.pokedex.car1.eq(40) ? carddisplay(39):""
+			let car40 = player.pokedex.car1.eq(41) ? carddisplay(40):""
+			let car41 = player.pokedex.car1.eq(42) ? carddisplay(41):""
+			let car42 = player.pokedex.car1.eq(43) ? carddisplay(42):""
+			let car43 = player.pokedex.car1.eq(44) ? carddisplay(43):""
+			let car44 = player.pokedex.car1.eq(45) ? carddisplay(44):""
+			let car45 = player.pokedex.car1.eq(46) ? carddisplay(45):""
+			let car46 = player.pokedex.car1.eq(47) ? carddisplay(46):""
+			let car47 = player.pokedex.car1.eq(48) ? carddisplay(47):""
+			let car48 = player.pokedex.car1.eq(49) ? carddisplay(48):""
+			let car49 = player.pokedex.car1.eq(50) ? carddisplay(49):""
+			let car50 = player.pokedex.car1.eq(51) ? carddisplay(50):""
+			return car0+car1+car2+car3+car4+car5+car6+car7+car8+car9+car10+car11+car12+car13+car14+car15+car16+car17+car18+car19+car20+car21+car22+car23+car24+car25+car26+car27+car28+car29+car30+car31+car32+car33+car34+car35+car36+car37+car38+car39+car40+car41+car42+car43+car44+car45+car46+car47+car48+car49+car50
 		}],
 	]
 })

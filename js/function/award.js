@@ -1,4 +1,5 @@
 function awardmoney(){
+	save()
 	if(player.data.monster!=0){
 		let money = Math.floor(Math.random() * 150)+40
 		player.data.money = player.data.money.add(money)
@@ -10,6 +11,7 @@ function awardmoney(){
 }
 
 function awardcard(id1,id2){
+	save()
 	for(col=1;col<=id2;col++){
 		let card = Math.floor(Math.random() * player.data.allcard)
 		for(col2=0;col2<=player.data.allcard-1;col2++){
@@ -24,6 +26,7 @@ function awardcard(id1,id2){
 }
 
 function awardartifacts(){
+	save()
 	for(cao=0;cao<=0;cao++){
 		let fabric = Math.floor((Math.random() * 100))+1
 		if(fabric<=50){
