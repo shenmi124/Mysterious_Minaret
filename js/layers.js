@@ -302,6 +302,7 @@ addLayer("data", {
 		a:new Decimal(0),
     }},
 	update(diff) {
+		save()
 		if(player.data.hp.gt(player.data.hpmax)){player.data.hp = new Decimal(player.data.hpmax)}
 		if(player.data.mp.gt(player.data.mpmax)){player.data.mp = new Decimal(player.data.mpmax)}
 		if(player.data.ps.gt(player.data.psmax)){player.data.ps = new Decimal(player.data.psmax)}
@@ -454,7 +455,7 @@ addLayer("pokedex", {
 		},
 	},
 	tabFormat: [
-		["display-text", function() {return "图鉴会记录游戏中的东西"}],
+		["display-text", function() {return "图鉴会记录游戏中的东西<br>(图鉴不一定记录完全)"}],
 		["row", [["clickable", 11]]],
 		"blank",
 		["row", [["clickable", 12]]],
