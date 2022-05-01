@@ -597,7 +597,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(38)){
 			//灵魂吸取
-			attributes(0,-15,0,0,10,0,"card")
+			attributes(0,-10,0,0,10,0,"card")
 			player.data.hpmax = player.data.hpmax.add(10)
 			attributes(10,0,0,0,0,0)
 			player.data.dehpmax = player.data.dehpmax.sub(10)
