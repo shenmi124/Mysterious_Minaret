@@ -450,9 +450,9 @@ addLayer("tree-tab", {
 			height: 25,
 			unlocked(){return player.data.effect[15].gt(0)},
 			progress(){return true},
-			baseStyle: {"background-color": "#6a1723"},
-			fillStyle: {"background-color": "#6a1723"},
-			textStyle: {"color": "#FFFFFF"}
+			baseStyle: {"background-color": "#b8b8b8"},
+			fillStyle: {"background-color": "#b8b8b8"},
+			textStyle: {"color": "#000000"}
 		},
 		moneybar:{
 			display() {return format(player.data.money,0)+"$"},	
