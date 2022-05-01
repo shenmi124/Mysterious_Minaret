@@ -490,6 +490,7 @@ addLayer("tree-tab", {
 				let eff12 = player.data.effect[12].gt(0) ? format(player.data.effect[12],0)+"魔力再生<br>":""
 				let eff13 = player.data.effect[13].gt(0) ? format(player.data.effect[13],0)+"减伤<br>":""
 				let eff14 = player.data.effect[14].gt(0) ? format(player.data.effect[14],0)+"凝血<br>":""
+				let eff15 = player.data.effect[15].gt(0) ? format(player.data.effect[15],0)+"易伤<br>":""
 				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9 + eff10 + eff11 + eff12 + eff13 + eff14
 			}
 		},
@@ -516,6 +517,7 @@ addLayer("tree-tab", {
 				let eff12 = player.data.deeffect[12].gt(0) ? format(player.data.deeffect[12],0)+"魔力再生<br>":""
 				let eff13 = player.data.effect[13].gt(0) ? format(player.data.effect[13],0)+"减伤<br>":""
 				let eff14 = player.data.effect[14].gt(0) ? format(player.data.effect[14],0)+"凝血<br>":""
+				let eff15 = player.data.effect[15].gt(0) ? format(player.data.effect[15],0)+"易伤<br>":""
 				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9 + eff10 + eff11 + eff12 + eff13 + eff14
 			}
 		},
