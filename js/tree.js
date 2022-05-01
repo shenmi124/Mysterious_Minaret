@@ -515,7 +515,7 @@ addLayer("tree-tab", {
 			style() {return {'height': "170px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
 		},
 		1002:{
-			title: "下一回合!<br><h6>+3体力<br>÷2防御",
+			title: "下一回合!<br><h6>+3体力<br>÷2护甲",
 			display() {
 			},
 			canClick(){return true},
