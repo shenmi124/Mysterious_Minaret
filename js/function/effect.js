@@ -126,4 +126,10 @@ function recard(){
 	//id13:减伤
 	//id14:凝血
 	//id15:易伤
+	
+	//怪物
+	if(player.data.deeffect[5].lte(0) && player.data.effect10effect == false){
+		let eff5 = new Decimal(Math.floor((Math.random() * 100)) + 1)
+		if(eff5<=25){player.data.effect[5] = player.data.effect[5].add(1)}
+	}
 }

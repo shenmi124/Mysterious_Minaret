@@ -18,12 +18,12 @@ function effectdisplay(id){
 }
 
 function monsterdisplay(id){
-	if(id==0){return "感染者:每回合给敌方附加1感染<br>*2.25血<br><br>"+effectdisplay(4)}
+	if(id==0){return "感染者:每回合给敌方附加1感染<br>*1.65血<br><br>"+effectdisplay(4)}
 	if(id==1){return "蛊梦师:每回合给敌方一张阻梦<br><br>"+card2display(0)}
 	if(id==2){return "野蛮人:攻击有25%的概率造成晕眩2<br>*1.3血,*1.15攻击<br><br>"+effectdisplay(5)}
-	if(id==3){return "截:初始攻击2，每攻击一次攻击翻倍<br>*2血<br><br>"}
-	if(id==4){return "狂战士:血量低于30%每回合格外攻击2次<br>*1.4血,*1.4攻击<br><br>"}
-	if(id==5){return "混乱者:每回合给予对方2混乱与3中毒<br><br>"+effectdisplay(11)+effectdisplay(3)}
+	if(id==3){return "截:初始攻击2，每攻击一次攻击翻倍<br>*1.45血<br><br>"}
+	if(id==4){return "狂战士:血量低于30%每回合格外攻击1次<br>*1.4血,*1.4攻击<br><br>"}
+	if(id==5){return "混乱者:每回合给予对方2混乱与3中毒<br>*0.75血<br><br>"+effectdisplay(11)+effectdisplay(3)}
 }
 
 function carddisplay(id){

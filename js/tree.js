@@ -1,15 +1,15 @@
 function levelnew(){
 	let monsterup =  Math.floor((Math.random() * 4))
-	let newdehp = new Decimal(30).add(Math.random() * player.data.level.add(1).mul(32)).floor()
-	let newdemp =  new Decimal(4).add(Math.random() * player.data.level.add(1).mul(4)).floor()
-	let newdeatk =  new Decimal(6).add(Math.random() * player.data.level.add(1).mul(9)).floor()
+	let newdehp = new Decimal(30).add(Math.random() * player.data.level.add(1).mul(16)).floor()
+	let newdemp =  new Decimal(4).add(Math.random() * player.data.level.add(1).mul(2)).floor()
+	let newdeatk =  new Decimal(6).add(Math.random() * player.data.level.add(1).mul(4.5)).floor()
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
 	}else{
 		player.data.monster = new Decimal(0)
 	}
 	if(player.data.monster.eq(1)){
-		newdehp = newdehp.mul(2.25).floor()
+		newdehp = newdehp.mul(1.65).floor()
 	}
 	if(player.data.monster.eq(3)){
 		newdehp = newdehp.mul(1.3).floor()
@@ -22,6 +22,9 @@ function levelnew(){
 	if(player.data.monster.eq(5)){
 		newdehp = newdehp.mul(1.4).floor()
 		newdeatk = newdeatk.mul(1.4).floor()
+	}
+	if(player.data.monster.eq(6)){
+		newdehp = newdehp.mul(0.75).floor()
 	}
 	player.data.level = player.data.level.add(1)
 	player.data.dehp = new Decimal(newdehp)
@@ -851,12 +854,12 @@ addLayer("tree-tab", {
 				["bar", "dedebar"],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
-					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加2感染<br>*2.25血":""
+					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加2感染<br>*1.65血":""
 					let monster2 = player.data.monster.eq(2) ? "蛊梦师:每回合给敌方一张阻梦":""
-					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有25%的几率造成晕眩2<br>*1.3血,*1.15攻击":""
+					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有25%的几率造成晕眩1在双方行动之后<br>*1.3血,*1.15攻击":""
 					let monster4 = player.data.monster.eq(4) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*1.45血":""
-					let monster5 = player.data.monster.eq(5) ? "狂战士:血量低于30%时每回合格外攻击2次<br>*1.4血,*1.4攻击":""
-					let monster6 = player.data.monster.eq(6) ? "混乱者:每回合给予对方2混乱与3中毒":""
+					let monster5 = player.data.monster.eq(5) ? "狂战士:血量低于30%时每回合格外攻击1次<br>*1.4血,*1.4攻击":""
+					let monster6 = player.data.monster.eq(6) ? "混乱者:每回合给予对方2混乱与3中毒<br>*0.75血":""
 					return monster0 + monster1 + monster2 + monster3 + monster4 + monster5 + monster6
 				}],
 				["row", [["clickable", 1022]]],

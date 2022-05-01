@@ -13,11 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.0.8b",
+	num: "0.1.0.10b",
 	name: "神秘尖塔",
 }
 
 let changelog = `<h1>更新日志:</h1><br>
+	<h3>v0.1.0.10β</h3><br>
+	<li>修复8个bug<br>
+	<li>补充图鉴,平衡游戏(包括但不限于:感染者,混乱者血量乘数降低,狂战士,野蛮人特殊效果削弱,敌人属性成长减半,提高攻击的攻击,治疗的治疗量,嗜血斩,天平除数更高,治疗术会获得恢复)<br>
 	<h3>v0.1β</h3><br>
 	<li>平衡游戏<br>
 	<li>修复蓝色药剂在有魔力枯竭下依然可以恢复魔力的bug<br>
