@@ -443,6 +443,17 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#6a1723"},
 			textStyle: {"color": "#FFFFFF"}
 		},
+		eff15bar:{
+			display() {return "易伤 "+format(player.data.effect[15],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[15].gt(0)},
+			progress(){return true},
+			baseStyle: {"background-color": "#6a1723"},
+			fillStyle: {"background-color": "#6a1723"},
+			textStyle: {"color": "#FFFFFF"}
+		},
 		moneybar:{
 			display() {return format(player.data.money,0)+"$"},	
 			direction: RIGHT,
@@ -861,7 +872,7 @@ addLayer("tree-tab", {
 				["bar", "debar"],["bar", "eff0bar"],
 				["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"],
 				["bar", "eff6bar"],["bar", "eff7bar"],["bar", "eff8bar"],["bar", "eff9bar"],["bar", "eff10bar"],
-				["bar", "eff11bar"],["bar", "eff12bar"],["bar", "eff13bar"],["bar", "eff14bar"]
+				["bar", "eff11bar"],["bar", "eff12bar"],["bar", "eff13bar"],["bar", "eff14bar"],["bar", "eff15bar"]
 				]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
