@@ -27,13 +27,6 @@ function our_action(){
 	}else if(nothing){
 		player.data.backdeckCD = true
 	}
-
-	//回合结束
-	player.data.Rare_Artifacts_Sole[0].gte(1) ? attributes(player.data.effect[3].div(2).floor(),0,0,0,0,0) : attributes(player.data.effect[3],0,0,0,0,0)
-	attributes(player.data.effect[2],0,0,0,0,0)
-	player.data.card40eff14 = false
-	player.data.effect[14] = player.data.effect[14].add(player.data.card40geteff14)
-	player.data.card40geteff14 = new Decimal(0)
 }
 
 function typemoster(){

@@ -13,6 +13,12 @@ function recard(){
 		player.data.eff10times = player.data.eff10times.add(1)
 	}
 	
+	player.data.Rare_Artifacts_Sole[0].gte(1) ? attributes(-player.data.effect[3].div(2).floor(),0,0,0,0,0) : attributes(-player.data.effect[3],0,0,0,0,0)
+	attributes(player.data.effect[2],0,0,0,0,0)
+	player.data.card40eff14 = false
+	player.data.effect[14] = player.data.effect[14].add(player.data.card40geteff14)
+	player.data.card40geteff14 = new Decimal(0)
+	
 	if(player.data.deeffect[5].lte(0) && player.data.effect10effect == false){
 		enemy_action()
 	}
