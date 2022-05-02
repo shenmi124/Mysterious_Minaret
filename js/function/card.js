@@ -281,7 +281,6 @@ function reonc(id){
 		if(player.data['display'+id].eq(13)){
 			//回旋镖
 			attributes(0,0,-1,10,0,0,"card")
-			player.data['display'+id] = new Decimal(13)
 			return
 		}
 		if(player.data['display'+id].eq(14)){
