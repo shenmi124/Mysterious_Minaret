@@ -729,7 +729,7 @@ function reonc(id){
 			//再生
 			attributes(0,-10,0,0,0,0,"card")
 			player.data.effect[2] = player.data.effect[2].mul(2)
-			attributes(player.data.effect[1],0,0,0,0,0)
+			attributes(player.data.effect[2],0,0,0,0,0)
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,51,true,true)
 			return
