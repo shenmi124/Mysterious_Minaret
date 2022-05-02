@@ -91,7 +91,6 @@ function levelnew(){
 	if(player.data.Super_Rare_Artifacts[2].gt(0)){player.data.deeffect[4] = player.data.deeffect[4].add(player.data.Super_Rare_Artifacts[2])}
 	
 	player.data.ps = new Decimal(player.data.psmax)
-	player.data.mp = new Decimal(player.data.mpmax)
 }
 
 var layoutInfo = {
