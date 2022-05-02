@@ -492,7 +492,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(29)){
 			//魔力源泉
-			attributes(0,0,-1,0,0,0,"card")
+			attributes(0,0,0,0,0,0,"card")
 			geteffect(12,2)
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,29,false,true)
