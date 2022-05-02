@@ -150,7 +150,7 @@ function recan(id){
 		if(player.data['display'+id].eq(30)){return card_consumption(0,13,0)}
 		if(player.data['display'+id].eq(31)){return card_consumption(1,0,0)}
 		if(player.data['display'+id].eq(32)){return card_consumption(1,5,0)}
-		if(player.data['display'+id].eq(33)){return card_consumption(0,0,12)}
+		if(player.data['display'+id].eq(33)){return card_consumption(0,0,42)}
 		if(player.data['display'+id].eq(34)){return true}
 		if(player.data['display'+id].eq(35)){return card_consumption(1,8,0)}
 		if(player.data['display'+id].eq(36)){return card_consumption(1,0,7)}
