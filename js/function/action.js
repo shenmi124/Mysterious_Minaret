@@ -1,8 +1,6 @@
 function enemy_action(){
 	typemoster()
 	enemy_attack_action(0)
-	player.data.dehp = player.data.dehp.sub(player.data.deeffect[3])
-	player.data.dede = player.data.dede.div(2).floor()
 }
 
 function our_action(){

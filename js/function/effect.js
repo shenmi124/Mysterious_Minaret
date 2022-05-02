@@ -13,7 +13,6 @@ function recard(){
 		player.data.eff10times = player.data.eff10times.add(1)
 	}
 	
-	player.data.Rare_Artifacts_Sole[0].gte(1) ? attributes(-player.data.effect[3].div(2).floor(),0,0,0,0,0) : attributes(-player.data.effect[3],0,0,0,0,0)
 	attributes(player.data.effect[2],0,0,0,0,0)
 	player.data.card40eff14 = false
 	player.data.effect[14] = player.data.effect[14].add(player.data.card40geteff14)
@@ -31,6 +30,8 @@ function recard(){
 	}else{
 		player.data.de = player.data.de.div(2).floor()
 	}
+	
+	player.data.dede = player.data.dede.div(2).floor()
 	//id0:智慧
 	if(player.data.effect[0].gt(0)){
 		geteffect(0,-1)
@@ -58,12 +59,15 @@ function recard(){
 	}else if(player.data.effect[3].gt(0)){
 		geteffect(3,-1)
 	}
+	player.data.Rare_Artifacts_Sole[0].gte(1) ? attributes(-player.data.effect[3].div(2).floor(),0,0,0,0,0) : attributes(-player.data.effect[3],0,0,0,0,0)
+	
 	
 	if(player.data.deeffect[3].gt(0) && player.data.deeffect[2].gt(0)){
 		getdeeffect(3,-2)
 	}else if(player.data.deeffect[3].gt(0)){
 		getdeeffect(3,-1)
 	}
+	player.data.dehp = player.data.dehp.sub(player.data.deeffect[3])
 	//id4:感染
 	if(player.data.effect[4].gt(0)){
 		geteffect(3,player.data.effect[4])
