@@ -82,7 +82,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(20)){return `使敌人中毒层数翻倍,抽1张牌<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(21)){return `为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(22)){return `使敌人获得等同于中毒层数的中毒,如果敌人中毒层数＞15则抽2张牌<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(23)){return `清除敌人所有中毒层数,每清除1层造成<red id="red">4 物理伤害</red><br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(23)){return `清除敌人所有中毒层数,每清除1层造成<red id="red"> 4 物理伤害</red><br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(24)){return `先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力`}
 		if(player.data[id1+id2].eq(25)){return `恢复自己损失血量/3的生命<br>消耗:11 魔力`}
 		if(player.data[id1+id2].eq(26)){return `将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3护甲<br>消耗:15 魔力`}
