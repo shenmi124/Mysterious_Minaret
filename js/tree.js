@@ -41,7 +41,9 @@ function levelnew(){
 	player.data.artifactsaward = false
 	player.data.holdcard = new Decimal(0)
 	player.data.removals = new Decimal(0)
-	player.data.remove_removals == false
+	player.data.remove_removals = false
+	player.data.card40eff14 = false
+	player.data.card40geteff14 = new Decimal(0)
 	for(col=1;col<=player.data.allcard;col++){
 		player.data['cardget'+col] = new Decimal(0)
 	}
