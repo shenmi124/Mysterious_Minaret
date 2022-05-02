@@ -358,7 +358,7 @@ addLayer("data", {
 		if(player.data.ps.gt(player.data.psmax)){player.data.ps = new Decimal(player.data.psmax)}
 		if(player.data.dehp.gt(player.data.dehpmax)){player.data.dehp = new Decimal(player.data.dehpmax)}
 		if(player.data.demp.gt(player.data.dempmax)){player.data.demp = new Decimal(player.data.dempmax)}
-		if(player.data.dehp.lte(0) && player.data.dedead == false){
+		if(player.data.dehp.lte(0) && player.data.dedead == false && player.data.hp.gt(0)){
 			showTab("over")
 			player.data.moneyaward = true
 			player.data.cardaward = true
