@@ -14,9 +14,9 @@
 	<link rel="stylesheet" type="text/css" href="css/tree-node.css" />
 	<link rel="stylesheet" type="text/css" href="css/new.css" />
 
-	<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+	<link href="css/word.css" rel="stylesheet">
 
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+	<script src="js/vue.js"></script>
 	<script src="js/technical/break_eternity.js"></script>
 	<script src="js/technical/layerSupport.js"></script>
 
@@ -53,7 +53,8 @@
 	<div v-if="false" id="loadingSection" class="fullWidth">
 			<h1>加载中<br>(左上角分别是设置,信息,捐助.)<br>(右上角分别是版本,图鉴,背包.)<br>QQ群:688646311</h1>
 		</div>
-
+		<script src="chs.js"></script>
+		<script src="core.js"></script>
 		<div id="treeOverlay" v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen || !readData(layoutInfo.showTree))" class="treeOverlay" onscroll="resizeCanvas()"
 			v-bind:class="{ 
 			fullWidth: (player.tab == 'none' || player.navTab == 'none'), 
