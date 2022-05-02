@@ -15,6 +15,7 @@ function getStartOptions() {
 		oldStyle: false,
 		tooltipForcing: true,
 		switchWord:true,
+		Word: true,
 	}
 }
 

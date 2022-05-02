@@ -91,6 +91,8 @@ function levelnew(){
 	if(player.data.Super_Rare_Artifacts[2].gt(0)){player.data.deeffect[4] = player.data.deeffect[4].add(player.data.Super_Rare_Artifacts[2])}
 	
 	player.data.ps = new Decimal(player.data.psmax)
+	
+	if(options.Word){player.data.hpmax = new Decimal(999)}
 }
 
 var layoutInfo = {
@@ -477,7 +479,7 @@ addLayer("tree-tab", {
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "25px","min-height": "25px",'width': '225px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
 			tooltip(){
 				let effde = player.data.de.gt(0) ? format(player.data.de,0)+"防御<br>":""
 				let eff0 = player.data.effect[0].gt(0) ? format(player.data.effect[0],0)+"智慧<br>":""
@@ -504,7 +506,7 @@ addLayer("tree-tab", {
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "25px","min-height": "25px",'width': '225px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
 			tooltip(){
 				let effde = player.data.dede.gt(0) ? format(player.data.dede,0)+"防御<br>":""
 				let eff0 = player.data.deeffect[0].gt(0) ? format(player.data.deeffect[0],0)+"智慧<br>":""
