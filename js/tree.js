@@ -272,7 +272,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		debar:{
-			display() {return "防御 "+format(player.data.de,0)},	
+			display() {return "护甲 "+format(player.data.de,0)},	
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
