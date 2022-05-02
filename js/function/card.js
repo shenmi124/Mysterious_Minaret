@@ -557,7 +557,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(34)){
 			//天平
-			let first = (player.data.hp/player.data.hpmax+player.data.mp/player.data.mpmax+player.data.ps/player.data.psmax)/4.5
+			let first = (player.data.hp/player.data.hpmax+player.data.mp/player.data.mpmax+player.data.ps/player.data.psmax)/3.3
 			let gethp = first*player.data.hpmax
 			let getmp = first*player.data.mpmax
 			let getps = first*player.data.psmax
