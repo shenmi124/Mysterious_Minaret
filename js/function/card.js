@@ -345,7 +345,7 @@ function reonc(id){
 		if(player.data['display'+id].eq(21)){
 			//血清
 			attributes(0,0,-1,0,0,0,"card")
-			player.data.deeffect[3] = player.data.deeffect[3].add(3)
+			getdeeffect(3,3)
 			player.data.hp = player.data.hp.add(player.data.deeffect[3])
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,21,true,true)
@@ -353,7 +353,11 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(22)){
 			//隐秘扩散
-			attributes(0,0,-1,0,0,0,"card")
+			attributes(0,0,-2,0,0,0,"card")
+			player.data.deeffect[3] = player.data.deeffect[3].mul(2)
+			if(player.data.deeffect[3].gte(15)){
+				getcard("display",2)
+			}
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,22,true,true)
 			return
