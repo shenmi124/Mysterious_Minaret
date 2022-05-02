@@ -128,7 +128,7 @@ function recard(){
 	//id15:易伤
 	
 	//怪物
-	if(player.data.deeffect[5].lte(0) && player.data.effect10effect == false){
+	if(player.data.deeffect[5].lte(0) && player.data.effect10effect == false && player.data.monster.eq(3)){
 		let eff5 = new Decimal(Math.floor((Math.random() * 100)) + 1)
 		if(eff5<=25){player.data.effect[5] = player.data.effect[5].add(1)}
 	}

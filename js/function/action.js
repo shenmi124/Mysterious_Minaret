@@ -49,8 +49,7 @@ function typemoster(){
 	}
 	
 	if(player.data.monster.eq(3)){
-		let eff5 = new Decimal(Math.floor((Math.random() * 100)) + 1)
-		if(eff5<=25){player.data.effect[5] = player.data.effect[5].add(2)}
+
 	}
 	
 	if(player.data.monster.eq(4)){

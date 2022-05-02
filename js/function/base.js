@@ -217,3 +217,11 @@ function rehardReset(){
 		showTab('none')
 	}
 }
+
+function backnone(){
+	if(player.data.dedead == true){
+		showTab("over")
+	}else{
+		showTab("none")
+	}
+}

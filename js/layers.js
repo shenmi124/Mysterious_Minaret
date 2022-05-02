@@ -73,9 +73,20 @@ addLayer("afdian", {
     type: "none",
     row: "side",
     layerShown(){return true},
+	clickables:{
+		11:{
+			title:"返回游戏",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){showTab("none")},
+		},
+	},
 	tabFormat: [
         "main-display",
         "prestige-button",
+		"clickables",
+		"blank",
         ["display-text", function() {return `<a class="link" href="https://afdian.net/@Mysterious124" target="_blank">点我跳转到捐助页面 Jump directly to the donation page</a>`}],
 		["display-text", function() {return `<br><br><big><big>↑↑↑我唯一的收入来源 my only source of income↑↑↑`}],
 		["display-text", function() {return `<big><big>请给我捐一些钱,谢谢 Please donate some money to me, thank you`}],
@@ -134,6 +145,8 @@ addLayer("data", {
 		deatk:new Decimal(6),
 		deatkto:new Decimal(0),
 		dede:new Decimal(0),
+		
+		
 		
 		//怪物
 		monster:new Decimal(0),
@@ -278,12 +291,16 @@ addLayer("data", {
 		cardget3:new Decimal(0),
 		
 		artifactsawardrandom:new Decimal(0),
+		storeawardrandom:new Decimal(0),
 		
 		start:true,
 		dedead:false,
+		
 		moneyaward:false,
 		cardaward:false,
 		artifactsaward:false,
+		storeaward:false,
+		
 		newlevel:false,
 		backdeckCD:false,
 		level:new Decimal(0),
@@ -309,14 +326,19 @@ addLayer("data", {
 		if(player.data.dehp.gt(player.data.dehpmax)){player.data.dehp = new Decimal(player.data.dehpmax)}
 		if(player.data.demp.gt(player.data.dempmax)){player.data.demp = new Decimal(player.data.dempmax)}
 		if(player.data.dehp.lte(0) && player.data.dedead == false){
+			showTab("over")
 			player.data.moneyaward = true
 			player.data.cardaward = true
 			player.data.dedead = true
 			player.data.newlevel = true
 			player.data.remove_removals = false
 			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
+			player.data.storeawardrandom = new Decimal(Math.floor((Math.random() * 100)))
 			if(player.data.artifactsawardrandom.lte(40)){
 				player.data.artifactsaward = true
+			}
+			if(player.data.storeawardrandom.lte(20)){
+				player.data.storeaward = true
 			}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(55).mul(player.data.Ultra_Rare_Artifacts[0]))}
 			player.data.effect[11] = new Decimal(0)
@@ -426,11 +448,11 @@ addLayer("pokedex", {
     layerShown(){return true},
 	clickables:{
 		11:{
-			title:"返回战斗",
+			title:"返回游戏",
 			canClick(){return true},
 			unlocked(){return true},
 			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
-			onClick(){showTab("none")},
+			onClick(){backnone()},
 		},
 		12:{
 			title:"效果图鉴",
@@ -1291,11 +1313,11 @@ addLayer("bag", {
     layerShown(){return true},
 	clickables:{
 		11:{
-			title:"返回战斗",
+			title:"返回游戏",
 			canClick(){return true},
 			unlocked(){return true},
 			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
-			onClick(){showTab("none")},
+			onClick(){backnone()},
 		},
 	},
 	tabFormat: [
@@ -1390,6 +1412,156 @@ addLayer("bag", {
 			+UR+UR0+OUR0+OUR1
 			}],
 		]],
+	],
+})
+
+addLayer("over", {
+    name: "over",
+    symbol: "<h6>过度",
+	tooltip() { 
+		return `过度`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		2:{
+			title: "钱!",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.moneyaward == true && player.data.start == false && player.data.hp.gt(0)},
+			onClick(){return awardmoney()},
+		},
+		3:{
+			title: "牌!",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.cardaward == true && player.data.start == false && player.data.hp.gt(0)},
+			onClick(){return awardcard("cardget",3)},
+		},
+		4:{
+			title: "下一关!<br><h6>到达下一关无法再获得本关的钱和牌",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return levelnew()},
+		},
+		1011:{
+			title(){return "获得"+retit("cardget",this.id-1010)},
+			display(){return redis("cardget",this.id-1010)},
+			canClick(){return true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return recardonc(this.id-1010)},
+			style() {return {'height': "200px",'width': '150px'}},
+		},
+		1012:{
+			title(){return "获得"+retit("cardget",this.id-1010)},
+			display(){return redis("cardget",this.id-1010)},
+			canClick(){return true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return recardonc(this.id-1010)},
+			style() {return {'height': "200px",'width': '150px'}},
+		},
+		1013:{
+			title(){return "获得"+retit("cardget",this.id-1010)},
+			display(){return redis("cardget",this.id-1010)},
+			canClick(){return true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return recardonc(this.id-1010)},
+			style() {return {'height': "200px",'width': '150px'}},
+		},
+		99:{
+			title(){return "获取神器"},
+			display(){return "50%N<br>30%R<br>15%SR<br>5%UR"},
+			canClick(){return true},
+			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
+			onClick(){return awardartifacts()},
+		},
+	},
+	bars:{
+		hpbar:{
+			display() {
+				let dis1 = "你的血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0)
+				return dis1
+			},	
+			direction: RIGHT,
+			width: 500,
+			height: 25,
+			unlocked(){return true},
+			progress(){return player.data.effect[11].lte(0) ? (player.data.hp.div(player.data.hpmax)).toNumber() : true},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#ec1c24"},
+			textStyle: {"color": "#000000"}
+		},
+		dehpbar:{
+			display() {return "敌方血量 "+format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)},	
+			direction: RIGHT,
+			width: 500,
+			height: 25,
+			unlocked(){return true},
+			progress(){return (player.data.dehp.div(player.data.dehpmax)).toNumber()},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#ec1c24"},
+			textStyle: {"color": "#000000"}
+		},
+		moneybar:{
+			display() {return format(player.data.money,0)+"$"},	
+			direction: RIGHT,
+			width: 76,
+			height: 54,
+			unlocked(){return true},
+			progress(){return true},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#FFFFFF"},
+			textStyle: {"color": "#000000"}
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return `
+			<div id="treeOverlay" v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen || !readData(layoutInfo.showTree))" class="treeOverlay" onscroll="resizeCanvas()"
+			v-bind:class="{ 
+			fullWidth: (player.tab == 'none' || player.navTab == 'none'), 
+			col: (player.tab !== 'none' && player.navTab !== 'none'), 
+			left: (player.tab !== 'none' && player.navTab !== 'none')}"
+			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
+			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
+				v0.1.0.10b</div>
+			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
+			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
+			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
+			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
+			<img id="afdian" class="overlayThing" src="png/afdian.png" onclick="showTab('afdian')"></img>
+			</div>
+		`}],
+		"blank",
+		"blank",
+		"blank",
+		["row", [
+			["column",[
+				["bar", "hpbar"],
+				["bar", "dehpbar"],
+			]],
+			["bar", "moneybar"],
+		]],
+		"blank",
+		"blank",
+		"blank",
+		["clickable", 4],
+		"blank",
+		"blank",
+		"blank",
+		["row", [["clickable", 2],["clickable", 3],["clickable", 99]]],
+		["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013]]],
 	],
 })
 

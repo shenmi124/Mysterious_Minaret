@@ -1,4 +1,5 @@
 function levelnew(){
+	showTab('none')
 	let monsterup =  Math.floor((Math.random() * 4))
 	let newdehp = new Decimal(30).add(Math.random() * player.data.level.add(1).mul(16)).floor()
 	let newdemp =  new Decimal(4).add(Math.random() * player.data.level.add(1).mul(2)).floor()
@@ -530,15 +531,7 @@ addLayer("tree-tab", {
 			onClick(){return},
 			style() {return {'height': "170px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
 		},
-		1002:{
-			title: "下一回合!<br><h6>+3体力<br>÷2护甲",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
-			onClick(){return recard()},
-		},
-		1003:{
+		1001:{
 			title: "开始!",
 			display() {
 			},
@@ -546,29 +539,13 @@ addLayer("tree-tab", {
 			unlocked(){return !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == true},
 			onClick(){return getcard("display",3)},
 		},
-		1004:{
-			title: "钱!",
+		1002:{
+			title: "下一回合!<br><h6>+3体力<br>÷2护甲",
 			display() {
 			},
 			canClick(){return true},
-			unlocked(){return player.data.moneyaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardmoney()},
-		},
-		1005:{
-			title: "牌!",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return player.data.cardaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardcard("cardget",3)},
-		},
-		1006:{
-			title: "下一关!<br><h6>到达下一关无法再获得本关的钱和牌",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return levelnew()},
+			unlocked(){return !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
+			onClick(){return recard()},
 		},
 		1007:{
 			title: "重新开始并统计分数",
@@ -584,37 +561,6 @@ addLayer("tree-tab", {
 				player.data.removals = new Decimal(0)
 				player.data.remove_removals == false
 			},
-		},
-		1011:{
-			title(){return "获得"+retit("cardget",this.id-1010)},
-			display(){return redis("cardget",this.id-1010)},
-			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return recardonc(this.id-1010)},
-			style() {return {'height': "200px",'width': '150px'}},
-		},
-		1012:{
-			title(){return "获得"+retit("cardget",this.id-1010)},
-			display(){return redis("cardget",this.id-1010)},
-			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return recardonc(this.id-1010)},
-			style() {return {'height': "200px",'width': '150px'}},
-		},
-		1013:{
-			title(){return "获得"+retit("cardget",this.id-1010)},
-			display(){return redis("cardget",this.id-1010)},
-			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return recardonc(this.id-1010)},
-			style() {return {'height': "200px",'width': '150px'}},
-		},
-		99:{
-			title(){return "获取神器"},
-			display(){return "50%N<br>30%R<br>15%SR<br>5%UR"},
-			canClick(){return true},
-			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardartifacts()},
 		},
 		1:{
 			title(){return retit('display',this.id)},
@@ -881,9 +827,8 @@ addLayer("tree-tab", {
 				]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
-				["row", [["clickable", 1002],["clickable", 1003],["clickable", 1004],["clickable", 1005],["clickable", 99]]],
+				["row", [["clickable", 1001],["clickable", 1002],["clickable", 99]]],
 				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013],["clickable", 1007],["clickable", 1024]]],
-				["clickable", 1006]
 			]],
 			["display-text", function() {
 			let card0 = "<hr>墓地:<br>"

@@ -65,7 +65,6 @@ var systemComponents = {
 	'layer-tab': {
 		props: ['layer', 'back', 'spacing', 'embedded'],
 		template: `<div v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {}]" class="noBackground">
-		<div v-if="back"><button v-bind:class="back == 'big' ? 'other-back' : 'back'" v-on:click="goBack(layer)">←</button></div>
 		<div v-if="!tmp[layer].tabFormat">
 			<div v-if="spacing" v-bind:style="{'height': spacing}" :key="this.$vnode.key + '-spacing'"></div>
 			<infobox v-if="tmp[layer].infoboxes" :layer="layer" :data="Object.keys(tmp[layer].infoboxes)[0]":key="this.$vnode.key + '-info'"></infobox>
@@ -103,6 +102,8 @@ var systemComponents = {
     'info-tab': {
         template: `
         <div>
+		<div class="link" onclick="backnone()"><big><big>返回游戏</big></big></div><br>
+		<br>
         <h2>{{modInfo.name}}</h2>
         <br>
         <h3>{{VERSION.withName}}</h3>
@@ -138,6 +139,11 @@ var systemComponents = {
     'options-tab': {
         template: `
         <table>
+			<tr>
+				<td><big><big>返回</td>
+				<td><button class="opt" onclick="backnone()">返回游戏</button></td>
+			</tr>
+			<br>
             <tr>
 				<td><big><big>存档</td>
                 <td><button class="opt" onclick="save()">保存</button></td>
@@ -154,16 +160,9 @@ var systemComponents = {
 			<tr>
 				<td><big><big>操作</td>
 				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示悬浮框: {{ options.forceTooltips?"开":"关" }}</button></td>
-			</tr> 
+			</tr>
         </table>`
     },
-
-    'back-button': {
-        template: `
-        <button v-bind:class="back" onclick="goBack()">←</button>
-        `
-    },
-
 
 	'tooltip' : {
 		props: ['text'],
