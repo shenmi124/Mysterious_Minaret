@@ -479,7 +479,7 @@ addLayer("tree-tab", {
 			onClick(){return},
 			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
 			tooltip(){
-				let effde = player.data.de.gt(0) ? format(player.data.de,0)+"防御<br>":""
+				let effde = player.data.de.gt(0) ? format(player.data.de,0)+"护甲<br>":""
 				let eff0 = player.data.effect[0].gt(0) ? format(player.data.effect[0],0)+"智慧<br>":""
 				let eff1 = player.data.effect[1].gt(0) ? format(player.data.effect[1],0)+"力量<br>":""
 				let eff2 = player.data.effect[2].gt(0) ? format(player.data.effect[2],0)+"恢复<br>":""
@@ -506,7 +506,7 @@ addLayer("tree-tab", {
 			onClick(){return},
 			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
 			tooltip(){
-				let effde = player.data.dede.gt(0) ? format(player.data.dede,0)+"防御<br>":""
+				let effde = player.data.dede.gt(0) ? format(player.data.dede,0)+"护甲<br>":""
 				let eff0 = player.data.deeffect[0].gt(0) ? format(player.data.deeffect[0],0)+"智慧<br>":""
 				let eff1 = player.data.deeffect[1].gt(0) ? format(player.data.deeffect[1],0)+"力量<br>":""
 				let eff2 = player.data.deeffect[2].gt(0) ? format(player.data.deeffect[2],0)+"恢复<br>":""
