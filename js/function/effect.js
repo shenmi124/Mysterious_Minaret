@@ -92,7 +92,7 @@ function recard(){
 	if(player.data.deeffect[6].gt(0)){
 		getdeeffect(6,-1)
 	}
-	//id7:卍
+	//id7:焱
 	if(player.data.effect[7].gt(0) && player.data.wan == false){
 		geteffect(8,player.data.effect[7])
 		player.data.effect[7] = new Decimal(0)
@@ -104,7 +104,7 @@ function recard(){
 		player.data.deeffect[7] = new Decimal(0)
 		player.data.dewan = true
 	}
-	//id8:卐
+	//id8:炎
 	if(player.data.effect[8].gt(0) && player.data.wan == false){
 		geteffect(7,player.data.effect[8])
 		player.data.effect[8] = new Decimal(0)

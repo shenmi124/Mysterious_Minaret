@@ -6,8 +6,8 @@ function effectdisplay(id){
 	if(id == 4){return "感染:中毒每回合加一层<br><br>"+effectdisplay(3)}
 	if(id == 5){return "眩晕:此回合无法攻击,抽排,每回合减少一层<br><br>"}
 	if(id == 6){return "魔力枯竭:此回合无法获得魔力,每回合减少一层<br><br>"}
-	if(id == 7){return "卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+"卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+effectdisplay(9)}
-	if(id == 8){return "卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 对应属性伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+"卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+effectdisplay(9)}
+	if(id == 7){return "焱:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+"卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+effectdisplay(9)}
+	if(id == 8){return "炎:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 对应属性伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+"卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+effectdisplay(9)}
 	if(id == 9){return "焕:和效果 卐 搭配使用<br><br>"}
 	if(id == 10){return"布朗魔术:达到2时格外行动一回合,之后触发条件*2<br><br>"}
 	if(id == 11){return"混乱:看不见血,体力,魔力,卡牌名字,卡牌效果,卡牌消耗<br><br>"}
@@ -258,9 +258,10 @@ addLayer("data", {
 		],
 		
 		Normal_Artifacts_Sole:[
+		new Decimal(0),
 		],
 		Rare_Artifacts_Sole:[
-		new Decimal(0),
+		new Decimal(0),new Decimal(0),
 		],
 		Super_Rare_Artifacts_Sole:[
 		new Decimal(0),new Decimal(0),
@@ -345,6 +346,7 @@ addLayer("data", {
 		card26recard:new Decimal(0),
 		card40eff14:false,
 		card40geteff14:new Decimal(0),
+		card38hpmax:new Decimal(0),
 		
 		hpmaxadd2:new Decimal(0),
 		Ultra_Rare_Artifacts_Sole1:false,
@@ -367,13 +369,14 @@ addLayer("data", {
 			player.data.remove_removals = false
 			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
 			player.data.storeawardrandom = new Decimal(Math.floor((Math.random() * 100)))
-			if(player.data.artifactsawardrandom.lte(40)){
+			if(player.data.artifactsawardrandom.lte(25)){
 				player.data.artifactsaward = true
 			}
 			if(player.data.storeawardrandom.lte(20)){
 				player.data.storeaward = true
 			}
-			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(55).mul(player.data.Ultra_Rare_Artifacts[0]))}
+			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(35).mul(player.data.Ultra_Rare_Artifacts[0]))}
+			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(80).mul(player.data.Ultra_Rare_Artifacts[0]))}
 			player.data.effect[11] = new Decimal(0)
 		}
 		if(player.data.hp.lte(0) && player.data.Ultra_Rare_Artifacts_Sole[1].gt(0) && player.data.Ultra_Rare_Artifacts_Sole1==false){
@@ -1421,27 +1424,29 @@ addLayer("bag", {
 			let N1 = player.data.Normal_Artifacts[1].gte(1) ? "绿苹果("+format(player.data.Normal_Artifacts[1],0)+"):开局"+format(player.data.Normal_Artifacts[1].mul(2),0)+"恢复<br>" : ""
 			let N2 = player.data.Normal_Artifacts[2].gte(1) ? "蓝苹果("+format(player.data.Normal_Artifacts[2],0)+"):+"+format(player.data.Normal_Artifacts[2].mul(6),0)+"魔力上限<br>" : ""
 			let N3 = player.data.Normal_Artifacts[3].gte(1) ? "黄苹果("+format(player.data.Normal_Artifacts[3],0)+"):每有10$存于手上+"+format(player.data.Normal_Artifacts[3].mul(1),0)+"血上限<br>" : ""
+			let ON0 = player.data.Normal_Artifacts_Sole[0].gte(1) ? "坏苹果(唯一):Bad Apple?敌方初始血量减少5%<br>" : ""
 			let R = "<br>R(稀有/Rare):<br>"
 			let R0 = player.data.Rare_Artifacts[0].gte(1) ? "智慧大脑("+format(player.data.Rare_Artifacts[0],0)+"):智慧效果+"+format(player.data.Rare_Artifacts[0].mul(1),0)+"<br>" : ""
 			let R1 = player.data.Rare_Artifacts[1].gte(1) ? "预备攻击("+format(player.data.Rare_Artifacts[1],0)+"):开局造成"+format(player.data.Rare_Artifacts[1].mul(25),0)+"物理伤害<br>" : ""
 			let R2 = player.data.Rare_Artifacts[2].gte(1) ? "预备防御("+format(player.data.Rare_Artifacts[2],0)+"):开局获得"+format(player.data.Rare_Artifacts[2].mul(20),0)+"护甲<br>" : ""
 			let R3 = player.data.Rare_Artifacts[3].gte(1) ? "圣盾("+format(player.data.Rare_Artifacts[3],0)+"):回合结束每有4护甲恢复+"+format(player.data.Rare_Artifacts[3].mul(1),0)+"血<br>" : ""
 			let R4 = player.data.Rare_Artifacts[4].gte(1) ? "蓝色药剂("+format(player.data.Rare_Artifacts[4],0)+"):每回合恢复"+format(player.data.Rare_Artifacts[4].mul(3),0)+"魔力<br>" : ""
-			let OR1 = player.data.Rare_Artifacts_Sole[0].gte(1) ? "死尸(唯一):中毒受到的伤害减半<br>" : ""
+			let OR0 = player.data.Rare_Artifacts_Sole[0].gte(1) ? "死尸(唯一):中毒受到的伤害减半<br>" : ""
+			let OR1 = player.data.Rare_Artifacts_Sole[1].gte(1) ? "牌套(唯一):手牌上限+4<br>" : ""
 			let SR = "<br>SR(罕见/Super Rare):<br>"
 			let SR0 = player.data.Super_Rare_Artifacts[0].gte(1) ? "体力药剂("+format(player.data.Super_Rare_Artifacts[0],0)+"):+"+format(player.data.Super_Rare_Artifacts[0].mul(1),0)+"体力上限<br>" : ""
 			let SR1 = player.data.Super_Rare_Artifacts[1].gte(1) ? "吸血鬼尖牙("+format(player.data.Super_Rare_Artifacts[1],0)+"):物理攻击每造成3伤害恢复"+format(player.data.Super_Rare_Artifacts[1].mul(1),0)+"血<br>" : ""
 			let SR2 = player.data.Super_Rare_Artifacts[2].gte(1) ? "感染性疾病("+format(player.data.Super_Rare_Artifacts[2],0)+"):开局给敌方"+format(player.data.Super_Rare_Artifacts[2],0)+"感染<br>" : ""
-			let OSR1 = player.data.Super_Rare_Artifacts_Sole[0].gte(1) ? "感染性抗体(唯一):你的中毒数量每回合减半,向下取整,恢复不再影响中毒数量减少<br>" : ""
-			let OSR2 = player.data.Super_Rare_Artifacts_Sole[1].gte(1) ? "坚毅之盾(唯一):护甲每回合只减少1<br>" : ""
+			let OSR0 = player.data.Super_Rare_Artifacts_Sole[0].gte(1) ? "感染性抗体(唯一):你的中毒数量每回合减半,向下取整,恢复不再影响中毒数量减少<br>" : ""
+			let OSR1 = player.data.Super_Rare_Artifacts_Sole[1].gte(1) ? "坚毅之盾(唯一):护甲每回合只减少1<br>" : ""
 			let UR = "<br>UR(极少/Ultra Rare):<br>"
 			let UR0 = player.data.Ultra_Rare_Artifacts[0].gte(1) ? "吸血鬼之心("+format(player.data.Ultra_Rare_Artifacts[0],0)+"):每杀死1名敌人+"+format(player.data.Ultra_Rare_Artifacts[0].mul(35),0)+"血上限并恢复"+format(player.data.Ultra_Rare_Artifacts[0].mul(65),0)+"血<br>" : ""
 			let OUR0 = player.data.Ultra_Rare_Artifacts_Sole[0].gte(1) ? "再生生命体(唯一):恢复效果在最大生命的25%前不会减少且每回合获得4恢复<br>" : ""
 			let OUR1 = player.data.Ultra_Rare_Artifacts_Sole[1].gte(1) ? player.data.Ultra_Rare_Artifacts_Sole1==false ? "顽强生命体(唯一)(未使用):死亡时以50%的血上限的血恢复<br>" : "顽强生命体(唯一)(已使用):死亡时以50%的血上限的血恢复<br>" : ""
 			return artifact
-			+N+N0+N1+N2+N3
-			+R+R0+R1+R2+R3+R4+OR1
-			+SR+SR0+SR1+SR2+OSR1+OSR2
+			+N+N0+N1+N2+N3+ON0
+			+R+R0+R1+R2+R3+R4+OR0+OR1
+			+SR+SR0+SR1+SR2+OSR0+OSR1
 			+UR+UR0+OUR0+OUR1
 			}],
 		]],
@@ -1568,7 +1573,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.1.19b</div>
+				v0.1.1.23b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>

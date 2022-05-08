@@ -69,25 +69,25 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(10)){return `给敌方 5 感染,我方 2 感染<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
 		if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
-		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力`}
+		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 4 魔力枯竭.给敌方 2 焱<br>销毁<br>消耗:x 魔力`}
 		if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
 		if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
 		if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
 		if(player.data[id1+id2].eq(19)){return `每有一张阻梦在手上就少抽一种牌<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(20)){return `使敌人中毒层数翻倍,抽1张牌<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(20)){return `使敌人中毒层数翻倍,抽1张牌<br>消耗:3 体力`}
 		if(player.data[id1+id2].eq(21)){return `为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(22)){return `使敌人获得等同于中毒层数的中毒,如果敌人中毒层数＞15则抽2张牌<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(22)){return `为敌人添加5层中毒,如果敌人中毒层数＞15则抽2张牌<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(23)){return `清除敌人所有中毒层数,每清除1层造成<red id="red"> 4 物理伤害</red><br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(24)){return `先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力`}
 		if(player.data[id1+id2].eq(25)){return `恢复自己损失血量/3的生命<br>消耗:11 魔力`}
 		if(player.data[id1+id2].eq(26)){return `将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3护甲<br>消耗:15 魔力`}
-		if(player.data[id1+id2].eq(27)){return `造成<red id="red">(自己损失血量*敌方损失血量)/150的物理伤害</red><br>消耗:3 体力`}
-		if(player.data[id1+id2].eq(28)){return `造成<red id="red">5*持有手牌的物理伤害</red><br>消耗:1体力`}
+		if(player.data[id1+id2].eq(27)){return `造成<red id="red">min((自己损失血量*敌方损失血量)/150的物理伤害,200)</red><br>消耗:3 体力`}
+		if(player.data[id1+id2].eq(28)){return `造成<red id="red">8*持有手牌的物理伤害</red><br>消耗:1体力`}
 		if(player.data[id1+id2].eq(29)){return `获得2魔力恢复效果<br>消耗:无`}
 		if(player.data[id1+id2].eq(30)){return `恢复20血,获得 5 恢复<br>消耗:13 魔力`}
 		if(player.data[id1+id2].eq(31)){return `恢复4血并获得5恢复,5护甲<br>消耗:1 体力`}
@@ -97,12 +97,12 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
 		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7 血`}
 		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的$的物理伤害</red><br>消耗:20% $`}
-		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">10 魔法伤害</blue>,并吸取同等血量上限(临时),<br>消耗:15 魔力`}
+		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">10 魔法伤害</blue>,并永久吸取同等血量上限,<br>消耗:15 魔力`}
 		if(player.data[id1+id2].eq(39)){return `恢复30法力<br>移除<br>消耗:无`}
 		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血`}
 		if(player.data[id1+id2].eq(41)){return `恢复5血和1体力<br>移除<br>消耗:无`}
 		if(player.data[id1+id2].eq(42)){return `50%获得抽取3张卡,50%减去15血<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(43)){return `血量低于3%时可以使用,造成300伤害,永久移除这张卡<br>消耗:无`}
+		if(player.data[id1+id2].eq(43)){return `血量低于5%时可以使用,造成300伤害,永久移除这张卡<br>消耗:无`}
 		if(player.data[id1+id2].eq(44)){return `获得20护甲<br>消耗:8 魔力`}
 		if(player.data[id1+id2].eq(45)){return `50%给敌方+5感染,50%给我方+3感染<br>消耗:无`}
 		if(player.data[id1+id2].eq(46)){return `获得17防御,2易伤<br>消耗:1 体力`}
@@ -160,7 +160,7 @@ function recan(id){
 		if(player.data['display'+id].eq(40)){return card_consumption(0,0,5)}
 		if(player.data['display'+id].eq(41)){return true}
 		if(player.data['display'+id].eq(42)){return card_consumption(1,0,0)}
-		if(player.data['display'+id].eq(43)){return player.data.hpmax.mul(0.03).gte(player.data.hp)}
+		if(player.data['display'+id].eq(43)){return player.data.hpmax.mul(0.05).gte(player.data.hp)}
 		if(player.data['display'+id].eq(44)){return card_consumption(0,8,0)}
 		if(player.data['display'+id].eq(45)){return true}
 		if(player.data['display'+id].eq(46)){return card_consumption(1,0,0)}
@@ -242,7 +242,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(9)){
 			//传染
-			player.data.deeffect[3] = player.data.deeffect[3].add(6)
+			getdeeffect(3,6)
 			attributes(0,0,-1,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,9,true,true)
@@ -250,8 +250,8 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(10)){
 			//病原体
-			player.data.deeffect[4] = player.data.deeffect[4].add(5)
-			player.data.effect[4] = player.data.effect[4].add(2)
+			getdeeffect(4,3)
+			geteffect(4,2)
 			attributes(0,0,-2,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,10,true,true)
@@ -294,8 +294,8 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(15)){
 			//烨
-			player.data.deeffect[7] = player.data.deeffect[7].add(1)
-			player.data.effect[6] = player.data.effect[6].add(5)
+			player.data.deeffect[7] = player.data.deeffect[7].add(2)
+			player.data.effect[6] = player.data.effect[6].add(4)
 			let a = player.data.mp
 			attributes(0,-a,0,0,a,0,"card")
 			card_usage(id,15,true,true)
@@ -335,7 +335,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(20)){
 			//毒素扩散
-			attributes(0,0,-1,0,0,0,"card")
+			attributes(0,0,-3,0,0,0,"card")
 			player.data.deeffect[3] = player.data.deeffect[3].mul(2)
 			getcard("display",1)
 			player.data['display'+id] = new Decimal(0)
@@ -354,7 +354,7 @@ function reonc(id){
 		if(player.data['display'+id].eq(22)){
 			//隐秘扩散
 			attributes(0,0,-2,0,0,0,"card")
-			player.data.deeffect[3] = player.data.deeffect[3].mul(2)
+			getdeeffect(3,5)
 			if(player.data.deeffect[3].gte(15)){
 				getcard("display",2)
 			}
@@ -471,7 +471,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(27)){
 			//嗜血斩
-			attributes(0,0,-3,player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150).floor(),0,0,"card")
+			attributes(0,0,-3,Decimal.min(player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150),200).floor(),0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,27,true,true)
 			return
@@ -482,7 +482,7 @@ function reonc(id){
 			for(col=1;col<=20;col++){
 				if(player.data['display'+col].eq(0)){
 				}else{
-					cardatk += 5
+					cardatk += 8
 				}
 			}
 			attributes(0,0,-1,cardatk,0,0,"card")
@@ -602,7 +602,7 @@ function reonc(id){
 		if(player.data['display'+id].eq(38)){
 			//灵魂吸取
 			attributes(0,-10,0,0,10,0,"card")
-			player.data.hpmax = player.data.hpmax.add(10)
+			player.data.card38hpmax = player.data.card38hpmax.add(10)
 			attributes(10,0,0,0,0,0)
 			player.data.dehpmax = player.data.dehpmax.sub(10)
 			player.data['display'+id] = new Decimal(0)

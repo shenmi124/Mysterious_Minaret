@@ -1,9 +1,9 @@
 function levelnew(){
 	showTab('none')
 	let monsterup =  Math.floor((Math.random() * 4))
-	let newdehp = new Decimal(30).add(Math.random() * player.data.level.add(1).mul(16)).floor()
-	let newdemp =  new Decimal(4).add(Math.random() * player.data.level.add(1).mul(2)).floor()
-	let newdeatk =  new Decimal(6).add(Math.random() * player.data.level.add(1).mul(4.5)).floor()
+	let newdehp = new Decimal(30).add(player.data.level.mul(8)).add(Math.random() * player.data.level.mul(6).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
+	let newdemp =  new Decimal(4).add(player.data.level.mul(0.5)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
+	let newdeatk =  new Decimal(6).add(player.data.level.mul(2.5)).add(Math.random() * player.data.level.mul(1.5).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
 	}else{
@@ -70,7 +70,6 @@ function levelnew(){
 	player.data.dewan = false
 	
 	//开局
-	if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(65).mul(player.data.Ultra_Rare_Artifacts[0]))}
 	let hpmaxadd0 = new Decimal(0)
 	let hpmaxadd1 = new Decimal(0)
 	let mpmaxadd0 = new Decimal(0)
@@ -80,7 +79,7 @@ function levelnew(){
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(6)}
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(10).floor().mul(player.data.Normal_Artifacts[3])}
 	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
-	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2)
+	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1000)).add(player.data.card38hpmax)
 	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
 	player.data.psmax = new Decimal(3).add(psmaxadd0)
 	
@@ -91,6 +90,8 @@ function levelnew(){
 	if(player.data.Super_Rare_Artifacts[2].gt(0)){player.data.deeffect[4] = player.data.deeffect[4].add(player.data.Super_Rare_Artifacts[2])}
 	
 	player.data.ps = new Decimal(player.data.psmax)
+	
+	player.data.maxcard = new Decimal(10).add(player.data.Rare_Artifacts_Sole[1].mul(4))
 }
 
 var layoutInfo = {
@@ -360,7 +361,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		eff7bar:{
-			display() {return "卍 "+format(player.data.effect[7],0)},	
+			display() {return "焱 "+format(player.data.effect[7],0)},	
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
@@ -371,7 +372,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		eff8bar:{
-			display() {return "卐 "+format(player.data.effect[8],0)},	
+			display() {return "炎 "+format(player.data.effect[8],0)},	
 			direction: RIGHT,
 			width(){return player.data.barpx},
 			height: 25,
@@ -487,8 +488,8 @@ addLayer("tree-tab", {
 				let eff4 = player.data.effect[4].gt(0) ? format(player.data.effect[4],0)+"感染<br>":""
 				let eff5 = player.data.effect[5].gt(0) ? format(player.data.effect[5],0)+"眩晕<br>":""
 				let eff6 = player.data.effect[6].gt(0) ? format(player.data.effect[6],0)+"魔力枯竭<br>":""
-				let eff7 = player.data.effect[7].gt(0) ? format(player.data.effect[7],0)+"卍<br>":""
-				let eff8 = player.data.effect[8].gt(0) ? format(player.data.effect[8],0)+"卐<br>":""
+				let eff7 = player.data.effect[7].gt(0) ? format(player.data.effect[7],0)+"焱<br>":""
+				let eff8 = player.data.effect[8].gt(0) ? format(player.data.effect[8],0)+"炎<br>":""
 				let eff9 = player.data.effect[9].gt(0) ? format(player.data.effect[9],0)+"焕<br>":""
 				let eff10 = player.data.effect[10].gt(0) ? format(player.data.effect[10],0)+"布朗魔法<br>":""
 				let eff11 = player.data.effect[11].gt(0) ? format(player.data.effect[11],0)+"混乱<br>":""
@@ -514,8 +515,8 @@ addLayer("tree-tab", {
 				let eff4 = player.data.deeffect[4].gt(0) ? format(player.data.deeffect[4],0)+"感染<br>":""
 				let eff5 = player.data.deeffect[5].gt(0) ? format(player.data.deeffect[5],0)+"眩晕<br>":""
 				let eff6 = player.data.deeffect[6].gt(0) ? format(player.data.deeffect[6],0)+"魔力枯竭<br>":""
-				let eff7 = player.data.deeffect[7].gt(0) ? format(player.data.deeffect[7],0)+"卍<br>":""
-				let eff8 = player.data.deeffect[8].gt(0) ? format(player.data.deeffect[8],0)+"卐<br>":""
+				let eff7 = player.data.deeffect[7].gt(0) ? format(player.data.deeffect[7],0)+"焱<br>":""
+				let eff8 = player.data.deeffect[8].gt(0) ? format(player.data.deeffect[8],0)+"炎<br>":""
 				let eff9 = player.data.deeffect[9].gt(0) ? format(player.data.deeffect[9],0)+"焕<br>":""
 				let eff10 = player.data.deeffect[10].gt(0) ? format(player.data.deeffect[10],0)+"布朗魔法<br>":""
 				let eff11 = player.data.deeffect[11].gt(0) ? format(player.data.deeffect[11],0)+"混乱<br>":""
@@ -833,7 +834,7 @@ addLayer("tree-tab", {
 			]],
 			["display-text", function() {
 			let card0 = "<hr>墓地:<br>"
-			let card1 = tabFormatDeadCard(1,"攻击")
+			let card1 = tabFormatDeadCard(1,"辉影神秘")
 			let card2 = tabFormatDeadCard(2,"防御")
 			let card3 = tabFormatDeadCard(3,"治疗")
 			let card4 = tabFormatDeadCard(4,"魔法飞弹")

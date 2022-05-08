@@ -5,26 +5,7 @@ function enemy_action(){
 
 function our_action(){
 	getcard("display",3)
-	player.data.ps = new Decimal(player.data.psmax)
-
-	var cards = player.data.card
-	var cards2 = player.data.cardintermediary
-	var nothing = true
-	for(i in cards){
-		for(o in cards2){		
-			if(cards[i].gt(0)&&cards2[o].lte(0)){nothing = false}
-		}
-	}
-	if(player.data.backdeckCD){
-		for(col=1;col<=player.data.allcard;col++){
-			player.data.card[col] = player.data.card[col].add(player.data.cardintermediary[col])
-			player.data.cardintermediary[col] = new Decimal(0)
-			player.data.carddead[col] = new Decimal(0)
-		}
-		player.data.backdeckCD = false
-	}else if(nothing){
-		player.data.backdeckCD = true
-	}
+	player.data.ps = new Decimal(player.data.ps).add(3)
 }
 
 function typemoster(){
