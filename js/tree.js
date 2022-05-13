@@ -1,9 +1,9 @@
 function levelnew(){
 	showTab('none')
 	let monsterup =  Math.floor((Math.random() * 4))
-	let newdehp = new Decimal(30).add(player.data.level.mul(8)).add(Math.random() * player.data.level.mul(6).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
+	let newdehp = new Decimal(30).add(player.data.level.mul(5)).add(Math.random() * player.data.level.mul(6).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
 	let newdemp =  new Decimal(4).add(player.data.level.mul(0.5)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
-	let newdeatk =  new Decimal(6).add(player.data.level.mul(2.5)).add(Math.random() * player.data.level.mul(1.5).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
+	let newdeatk =  new Decimal(6).add(player.data.level.mul(2)).add(Math.random() * player.data.level.mul(1.5).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
 	}else{
@@ -77,9 +77,9 @@ function levelnew(){
 	if(player.data.Normal_Artifacts[0].gt(0)){hpmaxadd0 = player.data.Normal_Artifacts[0].mul(15)}
 	if(player.data.Normal_Artifacts[1].gt(0)){player.data.effect[2] = player.data.effect[1].add(player.data.Normal_Artifacts[1].mul(2))}
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(6)}
-	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(10).floor().mul(player.data.Normal_Artifacts[3])}
+	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(30).floor().mul(player.data.Normal_Artifacts[3])}
 	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
-	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1000)).add(player.data.card38hpmax)
+	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1500)).add(player.data.card38hpmax)
 	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
 	player.data.psmax = new Decimal(3).add(psmaxadd0)
 	
