@@ -92,6 +92,45 @@ function dehaveefffunction(id){
 	if(player.data.deeffect[id].gt(0)){player.data.dehaveeff = player.data.dehaveeff.add(1)}
 }
 
+function store_card(){
+	player.data.storeaward = true
+	player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card11_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card11_canClick = true
+	player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card12_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card12_canClick = true
+	player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card13_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card13_canClick = true
+	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card14_canClick = true
+	player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card21_canClick = true
+	player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card22_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card22_canClick = true
+	player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card23_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card23_canClick = true
+	player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card24_canClick = true
+}
+
+function restore_card(){
+	if(player.data.store_card11.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card12.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card13.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card14.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card21.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card22.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card23.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card24.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+}
+
 addLayer("afdian", {
     name: "afdian",
     symbol: "A",
@@ -380,6 +419,7 @@ addLayer("data", {
     }},
 	update(diff) {
 		save()
+		restore_card()
 		if(player.data.hp.gt(player.data.hpmax)){player.data.hp = new Decimal(player.data.hpmax)}
 		if(player.data.mp.gt(player.data.mpmax)){player.data.mp = new Decimal(player.data.mpmax)}
 		if(player.data.ps.gt(player.data.psmax)){player.data.ps = new Decimal(player.data.psmax)}
@@ -398,31 +438,7 @@ addLayer("data", {
 				player.data.artifactsaward = true
 			}
 			if(player.data.storeawardrandom.lte(20)){
-				player.data.storeaward = true
-				player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card11_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card11_canClick = true
-				player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card12_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card12_canClick = true
-				player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card13_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card13_canClick = true
-				player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card14_canClick = true
-				player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card21_canClick = true
-				player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card22_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card22_canClick = true
-				player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card23_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card23_canClick = true
-				player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
-				player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
-				player.data.store_card24_canClick = true
+				store_card()
 			}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(35).mul(player.data.Ultra_Rare_Artifacts[0]))}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(80).mul(player.data.Ultra_Rare_Artifacts[0]))}
@@ -1630,7 +1646,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.2.24b</div>
+				v0.1.2.25b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
