@@ -324,6 +324,31 @@ addLayer("data", {
 		cardget2:new Decimal(0),
 		cardget3:new Decimal(0),
 		
+		store_card11:new Decimal(0),
+		store_card11_cost:new Decimal(0),
+		store_card11_canClick:true,
+		store_card12:new Decimal(0),
+		store_card12_cost:new Decimal(0),
+		store_card12_canClick:true,
+		store_card13:new Decimal(0),
+		store_card13_cost:new Decimal(0),
+		store_card13_canClick:true,
+		store_card14:new Decimal(0),
+		store_card14_cost:new Decimal(0),
+		store_card14_canClick:true,
+		store_card21:new Decimal(0),
+		store_card21_cost:new Decimal(0),
+		store_card21_canClick:true,
+		store_card22:new Decimal(0),
+		store_card22_cost:new Decimal(0),
+		store_card22_canClick:true,
+		store_card23:new Decimal(0),
+		store_card23_cost:new Decimal(0),
+		store_card23_canClick:true,
+		store_card24:new Decimal(0),
+		store_card24_cost:new Decimal(0),
+		store_card24_canClick:true,
+		
 		artifactsawardrandom:new Decimal(0),
 		storeawardrandom:new Decimal(0),
 		
@@ -374,6 +399,30 @@ addLayer("data", {
 			}
 			if(player.data.storeawardrandom.lte(20)){
 				player.data.storeaward = true
+				player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card11_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card11_canClick = true
+				player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card12_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card12_canClick = true
+				player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card13_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card13_canClick = true
+				player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card14_canClick = true
+				player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card21_canClick = true
+				player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card22_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card22_canClick = true
+				player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card23_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card23_canClick = true
+				player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+				player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+				player.data.store_card24_canClick = true
 			}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(35).mul(player.data.Ultra_Rare_Artifacts[0]))}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(80).mul(player.data.Ultra_Rare_Artifacts[0]))}
@@ -1494,6 +1543,14 @@ addLayer("over", {
 			unlocked(){return player.data.newlevel == true && player.data.hp.gt(0)},
 			onClick(){return levelnew()},
 		},
+		5:{
+			title: "前往商店",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.storeaward == true && player.data.hp.gt(0)},
+			onClick(){return showTab("store")},
+		},
 		1011:{
 			title(){return "获得"+retit("cardget",this.id-1010)},
 			display(){return redis("cardget",this.id-1010)},
@@ -1573,7 +1630,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.1.23b</div>
+				v0.1.2.24b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1599,8 +1656,157 @@ addLayer("over", {
 		"blank",
 		"blank",
 		["row", [["clickable", 2],["clickable", 3],["clickable", 99]]],
+		["clickable", 5],
 		["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013]]],
 	],
+})
+
+addLayer("store", {
+    name: "store",
+    symbol: "<h6>商店",
+	tooltip() { 
+		return `商店`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		1:{
+			title:"返回",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){backnone()},
+		},
+		11:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		12:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		13:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		14:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		21:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		22:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		23:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		24:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return `这里是商店<br>你可以买些东西<br><big>你有<yellow id="yellow">`+format(player.data.money,0)+`\$`}],
+		"blank",
+		["row", [["clickable", 1]]],
+		"blank",
+		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14]]],
+		"blank",
+		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24]]],
+	]
 })
 
 /*

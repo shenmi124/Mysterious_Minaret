@@ -39,6 +39,7 @@ function levelnew(){
 	player.data.moneyaward = false
 	player.data.cardaward = false
 	player.data.artifactsaward = false
+	player.data.storeaward = false
 	player.data.holdcard = new Decimal(0)
 	player.data.removals = new Decimal(0)
 	player.data.remove_removals = false
@@ -834,7 +835,7 @@ addLayer("tree-tab", {
 			]],
 			["display-text", function() {
 			let card0 = "<hr>墓地:<br>"
-			let card1 = tabFormatDeadCard(1,"辉影神秘")
+			let card1 = tabFormatDeadCard(1,"攻击")
 			let card2 = tabFormatDeadCard(2,"防御")
 			let card3 = tabFormatDeadCard(3,"治疗")
 			let card4 = tabFormatDeadCard(4,"魔法飞弹")

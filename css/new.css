@@ -13,6 +13,11 @@
 	text-shadow: 0 0 var(--px) blue;
 }
 
+#yellow {
+	color: yellow;
+	text-shadow: 0 0 var(--px) yellow;
+}
+
 #talent_crystal_id {
 	color: purple;
 	text-shadow: 0 0 var(--px) purple;
