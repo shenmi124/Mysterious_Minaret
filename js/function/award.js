@@ -46,7 +46,7 @@ function awardartifacts(){
 						let getartifacts = Math.floor((Math.random() * player.data.all_Normal_Artifacts))
 						player.data.Normal_Artifacts[getartifacts] = player.data.Normal_Artifacts[getartifacts].add(1)
 					}else{
-						col--
+						cao--
 					}
 				}
 			}
@@ -70,7 +70,7 @@ function awardartifacts(){
 						let getartifacts = Math.floor((Math.random() * player.data.all_Rare_Artifacts))
 						player.data.Rare_Artifacts[getartifacts] = player.data.Rare_Artifacts[getartifacts].add(1)
 					}else{
-						col--
+						cao--
 					}
 				}
 			}
@@ -94,7 +94,7 @@ function awardartifacts(){
 						let getartifacts = Math.floor((Math.random() * player.data.all_Super_Rare_Artifacts))
 						player.data.Super_Rare_Artifacts[getartifacts] = player.data.Super_Rare_Artifacts[getartifacts].add(1)
 					}else{
-						col--
+						cao--
 					}
 				}
 			}
@@ -118,7 +118,7 @@ function awardartifacts(){
 						let getartifacts = Math.floor((Math.random() * player.data.all_Ultra_Rare_Artifacts))
 						player.data.Ultra_Rare_Artifacts[getartifacts] = player.data.Ultra_Rare_Artifacts[getartifacts].add(1)
 					}else{
-						col--
+						cao--
 					}
 				}
 			}

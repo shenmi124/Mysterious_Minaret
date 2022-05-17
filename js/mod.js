@@ -13,7 +13,7 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.2.26b",
+	num: "0.1.2.27b",
 	name: "神秘尖塔",
 }
 
