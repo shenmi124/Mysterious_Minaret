@@ -603,6 +603,7 @@ function reonc(id){
 			//灵魂吸取
 			attributes(0,-10,0,0,10,0,"card")
 			player.data.card38hpmax = player.data.card38hpmax.add(10)
+			player.data.hpmax = player.data.hpmax.add(10)
 			attributes(10,0,0,0,0,0)
 			player.data.dehpmax = player.data.dehpmax.sub(10)
 			player.data['display'+id] = new Decimal(0)
