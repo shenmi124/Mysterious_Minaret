@@ -94,41 +94,41 @@ function dehaveefffunction(id){
 
 function store_card(){
 	player.data.storeaward = true
-	player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card11_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card11_canClick = true
-	player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card12_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card12_canClick = true
-	player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card13_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card13_canClick = true
-	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card14_canClick = true
-	player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card21_canClick = true
-	player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card22_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card22_canClick = true
-	player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card23_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card23_canClick = true
-	player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))
+	player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card24_canClick = true
 }
 
 function restore_card(){
-	if(player.data.store_card11.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card12.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card13.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card14.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card21.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card22.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card23.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
-	if(player.data.store_card24.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard.add(1))))} 
+	if(player.data.store_card11.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card12.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card13.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card14.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card21.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card22.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card23.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card24.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
 }
 
 addLayer("afdian", {
