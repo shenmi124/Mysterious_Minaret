@@ -661,14 +661,14 @@ addLayer("pokedex_effect", {
 			onClick(){player.pokedex.eff = new Decimal(7)},
 		},
 		19:{
-			title:"卍",
+			title:"焱",
 			canClick(){return true},
 			unlocked(){return true},
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
 			onClick(){player.pokedex.eff = new Decimal(8)},
 		},
 		20:{
-			title:"卐",
+			title:"炎",
 			canClick(){return true},
 			unlocked(){return true},
 			style() {return {'height': "50px","min-height": "50px",'width': '50px'}},
