@@ -1,6 +1,6 @@
 function recard(){
 	//回合结束
-	let overdetohp = player.data.Rare_Artifacts[3].gte(1) ? player.data.de.div(3).floor().mul(player.data.Rare_Artifacts[3]) : 0
+	let overdetohp = player.data.Rare_Artifacts[3].gte(1) ? player.data.de.div(2).floor().mul(player.data.Rare_Artifacts[3]) : 0
 	let overmpadd = player.data.Rare_Artifacts[4].gte(1) ? player.data.Rare_Artifacts[4].mul(3) : 0
 	attributes(overdetohp,0,0,0,0,0)
 	attributes(0,overmpadd,0,0,0,0)
@@ -42,7 +42,7 @@ function recard(){
 	}
 	//id2:恢复
 	if(player.data.Ultra_Rare_Artifacts_Sole[0].gt(0)){
-		if(player.data.effect[2].lte(player.data.hpmax.mul(0.25))){
+		if(player.data.effect[2].lte(player.data.hpmax.mul(0.15))){
 			geteffect(2,3)
 		}else if(player.data.effect[2].gt(0)){
 			geteffect(2,-1)
@@ -51,10 +51,7 @@ function recard(){
 		player.data.effect[2] = player.data.effect[2].sub(1)
 	}
 	//id3:中毒
-	if(player.data.effect[3].gt(0) && player.data.Super_Rare_Artifacts_Sole[1].gt(0)){
-		let subeff = player.data.effect[3].div(2).floor()
-		geteffect(3,-subeff)
-	}if(player.data.effect[3].gt(0) && player.data.effect[2].gt(0)){
+	if(player.data.effect[3].gt(0) && player.data.effect[2].gt(0)){
 		geteffect(3,-2)
 	}else if(player.data.effect[3].gt(0)){
 		geteffect(3,-1)
@@ -69,7 +66,9 @@ function recard(){
 	}
 	player.data.dehp = player.data.dehp.sub(player.data.deeffect[3])
 	//id4:感染
-	if(player.data.effect[4].gt(0)){
+	if(player.data.effect[4].gt(0) && player.data.Super_Rare_Artifacts_Sole[1].gt(0)){
+		player.data.hp = player.data.hp.sub(player.data.effect[4])
+	}else if(player.data.effect[4].gt(0)){
 		geteffect(3,player.data.effect[4])
 	}
 	
