@@ -143,22 +143,31 @@ function getcard(id1,id2){
 	}
 	for(col=1;col<=cao;col++){
 		if(player.data.holdcard.lt(player.data.maxcard)){
-			var card = Math.floor(Math.random() * player.data.allcard)+1
 			if(player.data[id1+col].eq(0)){
+				var card = Math.floor(Math.random() * player.data.allcard)+1
+				var cards = player.data.card
+				var nothing = true
+				if(player.data.card[card].lt(1)){
+					col--
+				}
+				for(col2=1;col2<=player.data.allcard;col2++){
+					
+					if(player.data.card[col2].gte(1) && col2==card){
+						player.data[id1+col] = new Decimal(col2)
+						player.data.card[col2] = player.data.card[col2].sub(1)
+						player.data.holdcard = player.data.holdcard.add(1)
+					}
+				}
 				for(i in cards){if(cards[i].gt(0)){nothing = false}}
 				if(nothing){
 					for(col3=1;col3<=player.data.allcard;col3++){
 						player.data.cardintermediary[col3] = new Decimal(player.data.carddead[col3])
 						player.data.backdeckCD = true
 					}
-				}else if(player.data.card[card].lt(1)){
-					col--
 				}
 			}else{
 				cao++
 			}
-			var cards = player.data.card
-			var nothing = true
 			if(player.data.backdeckCD){
 				for(col4=1;col4<=player.data.allcard;col4++){
 					player.data.card[col4] = player.data.card[col].add(player.data.cardintermediary[col4])
@@ -166,13 +175,6 @@ function getcard(id1,id2){
 					player.data.carddead[col4] = new Decimal(0)
 				}
 				player.data.backdeckCD = false
-			}
-			for(col2=1;col2<=player.data.allcard;col2++){
-				if(player.data.card[col2].gte(1) && col2==card){
-					player.data[id1+col] = new Decimal(col2)
-					player.data.card[col2] = player.data.card[col2].sub(1)
-					player.data.holdcard = player.data.holdcard.add(1)
-				}
 			}
 		}
 	}
