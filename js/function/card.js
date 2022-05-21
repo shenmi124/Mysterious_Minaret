@@ -117,7 +117,9 @@ function redis(id1,id2){
 }
 
 function recan(id){
-	if(player.data.effect[5].lte(0)){
+	if(player.data.removals.gt(0)){
+		return true
+	}else if(player.data.effect[5].lte(0)){
 		if(player.data['display'+id].eq(1)){return card_consumption(1,0,0)}
 		if(player.data['display'+id].eq(2)){return card_consumption(1,0,0)}
 		if(player.data['display'+id].eq(3)){return card_consumption(2,0,0)}
