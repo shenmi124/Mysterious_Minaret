@@ -66,7 +66,7 @@ function recard(){
 	}
 	player.data.dehp = player.data.dehp.sub(player.data.deeffect[3])
 	//id4:感染
-	if(player.data.effect[4].gt(0) && player.data.Super_Rare_Artifacts_Sole[1].gt(0)){
+	if(player.data.effect[4].gt(0) && player.data.Super_Rare_Artifacts_Sole[0].gt(0)){
 		player.data.hp = player.data.hp.sub(player.data.effect[4])
 	}else if(player.data.effect[4].gt(0)){
 		geteffect(3,player.data.effect[4])
