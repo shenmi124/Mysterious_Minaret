@@ -33,51 +33,51 @@ function carddisplay(id){
 	if(id==3){return "魔法飞弹:<br>对敌方造成 15 魔法伤害<br>消耗:5 魔力<br><br>"}
 	if(id==4){return "冥想:<br>先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力<br><br>"+effectdisplay(0)}
 	if(id==5){return "魔力再生:<br>恢复 7 魔力<br>消耗:无<br><br>"}
-	if(id == 6){return "连斩:对敌方造成 4 物理伤害5次<br>消耗:2 体力<br><br>"}
-	if(id == 7){return "愤怒:获得 3 力量<br>消耗:1 体力<br><br>"+effectdisplay(1)}
-	if(id == 8){return "传染:给敌方 6 中毒<br>消耗:1 体力<br><br>"+effectdisplay(3)}
-	if(id == 9){return "病原体:给敌方 4 感染,我方 2 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
-	if(id == 10){return "思考:抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力<br><br>"+effectdisplay(0)}
-	if(id == 11){return "重击:对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力<br><br>"+effectdisplay(5)}
-	if(id == 12){return "回旋镖:对敌方造成 10 物理伤害并获得 1 回旋镖<br>销毁<br>消耗:1 体力<br><br>"}
-	if(id == 13){return "无中生有:恢复 1 体力和 1 魔力,造成 1 物理伤害和 1 魔法伤害,给敌方恢复 2 血<br>消耗:1 体力,1 魔力<br><br>"}
-	if(id == 14){return "烨:造成 x 魔法伤害,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力<br><br>"+effectdisplay(6)+effectdisplay(7)}
-	if(id == 15){return "灵能冲击:造成 36 魔法伤害,敌方获得 2 魔力枯竭<br>消耗:17 魔力<br><br>"+effectdisplay(6)}
-	if(id == 16){return "破魂打击:造成 3x+8 魔法伤害,获得 2 魔力枯竭<br>消耗:x 魔力<br><br>"+effectdisplay(6)}
-	if(id == 17){return "魔能调换:恢复 1 体力<br>消耗:10 魔力<br><br>"}
-	if(id == 18){return "阻梦:每有一张阻梦在手上就少抽一种牌<br>消耗:1 体力<br><br>"}
-	if(id == 19){return "毒素扩散:使敌人中毒层数翻倍,抽1张牌<br>消耗:1 体力<br><br>"+effectdisplay(3)}
-	if(id == 20){return "血清:为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:1 体力"+effectdisplay(3)}
-	if(id == 21){return "隐秘扩散:使敌人获得等同于中毒层数的中毒,如果敌人中毒层数＞15则抽2张牌<br>消耗:2 体力<br><br>"+effectdisplay(3)}
-	if(id == 22){return "病毒爆发:清除敌人所有中毒层数,每清除1层造成 4 物理伤害<br>消耗:1 体力<br><br>"+effectdisplay(3)}
-	if(id == 23){return "墓地增生:先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力<br><br>"}
-	if(id == 24){return "肉体再生:恢复自己损失血量/3的生命<br>消耗:11 魔力<br><br>"}
-	if(id == 25){return "重构:将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3防御<br>消耗:15 魔力<br><br>"}
-	if(id == 26){return "嗜血斩:造成(自己损失血量*敌方损失血量)/150的物理伤害<br>消耗:3 体力<br><br>"}
-	if(id == 27){return "自信:造成5*持有手牌的物理伤害<br>消耗:1体力<br><br>"}
-	if(id == 28){return "魔力源泉:获得2魔力再生效果<br>消耗:无<br><br>"+effectdisplay(12)}
-	if(id == 29){return "治疗术:恢复20血,获得 5 恢复<br>消耗:13 魔力<br><br>"}
-	if(id == 30){return "绷带:恢复4血并获得5恢复,5护甲<br>消耗:1 体力<br><br>"+effectdisplay(2)}
-	if(id == 31){return "卡牌魔法:将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:1体力,5 魔力<br><br>"}
-	if(id == 32){return "献祭:随机获得以下效果中的其中二个①获得7力量②获得7减伤③获得7体力<br>消耗:42 血<br><br>"+effectdisplay(1)+effectdisplay(13)}
-	if(id == 33){return "天平:按降低的比例重新分配血,魔力,体力<br>移除<br>消耗:无<br><br>"}
-	if(id == 34){return "墓地衍生:使墓地中的牌*2<br>消耗:1 体力,8 魔力<br><br>"}
-	if(id == 35){return "滴血:移除任意最多3张牌<br>消耗:3 血<br><br>"}
-	if(id == 36){return "破财消灾:造成 15%拥有的$的物理伤害<br>消耗:20% $<br><br>"}
-	if(id == 37){return "灵魂吸取:造成 10 魔法伤害,如果此伤害杀死了敌人,敌人5%的最多血量永久增加到你身上<br>消耗:10 魔力<br><br>"}
-	if(id == 38){return "魔法结晶:恢复30法力<br>移除<br>消耗:无<br><br>"}
-	if(id == 39){return "提取器:使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血<br><br>"+effectdisplay(14)}
-	if(id == 40){return "应急干粮:恢复5血和1体力<br>移除<br>消耗:无<br><br>"}
-	if(id == 41){return "老千:50%获得抽取3张卡,50%减去15血<br>消耗:1 体力<br><br>"}
-	if(id == 42){return "破釜沉舟:血量低于3%时可以使用,造成300伤害,永久移除这张卡<br>消耗:无<br><br>"}
-	if(id == 43){return "能量护盾:获得20防御<br>消耗:8 魔力<br><br>"}
-	if(id == 44){return "不定性病毒:50%给敌方+5感染,50%给我方+3感染<br>消耗:无<br><br>"+effectdisplay(4)}
-	if(id == 45){return "格挡:获得17防御,2易伤<br>消耗:1 体力<br><br>"+effectdisplay(15)}
-	if(id == 46){return "急救:恢复50血<br>移除<br>消耗:2 体力<br><br>"}
-	if(id == 47){return "背刺:75%造成 36 物理伤害,25%造成 4 物理伤害<br>消耗:2 体力<br><br>"}
-	if(id == 48){return "蔓延:在手牌中添加一张蔓延,此卡不会使用后进入墓地<br>消耗:无<br><br>"}
-	if(id == 49){return "聚集:恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>消耗:1 体力,3 魔力,10 血<br><br>"}
-	if(id == 50){return "再生:恢复层数*2,恢复恢复层数的血量<br>消耗:10 魔力<br><br>"+effectdisplay(2)}
+	if(id == 6){return "连斩:<br>对敌方造成 4 物理伤害5次<br>消耗:2 体力<br><br>"}
+	if(id == 7){return "愤怒:<br>获得 3 力量<br>消耗:1 体力<br><br>"+effectdisplay(1)}
+	if(id == 8){return "传染:<br>给敌方 6 中毒<br>消耗:1 体力<br><br>"+effectdisplay(3)}
+	if(id == 9){return "病原体:<br>给敌方 3 感染,我方 2 感染<br>消耗:2 体力<br><br>"+effectdisplay(4)}
+	if(id == 10){return "思考:<br>抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力<br><br>"+effectdisplay(0)}
+	if(id == 11){return "重击:<br>对敌方造成 18 物理伤害并附带 1 眩晕<br>消耗:3 体力<br><br>"+effectdisplay(5)}
+	if(id == 12){return "回旋镖:<br>对敌方造成 10 物理伤害并获得 1 回旋镖<br>销毁<br>消耗:1 体力<br><br>"}
+	if(id == 13){return "无中生有:<br>恢复 1 体力和 1 魔力,造成 1 物理伤害和 1 魔法伤害,给敌方恢复 2 血<br>消耗:1 体力,1 魔力<br><br>"}
+	if(id == 14){return "烨:<br>造成 x 魔法伤害,获得 5 魔力枯竭.给敌方 1 卍<br>销毁<br>消耗:x 魔力<br><br>"+effectdisplay(6)+effectdisplay(7)}
+	if(id == 15){return "灵能冲击:<br>造成 36 魔法伤害,敌方获得 2 魔力枯竭<br>消耗:17 魔力<br><br>"+effectdisplay(6)}
+	if(id == 16){return "破魂打击:<br>造成 3x+8 魔法伤害,获得 2 魔力枯竭<br>消耗:x 魔力<br><br>"+effectdisplay(6)}
+	if(id == 17){return "魔能调换:<br>恢复 1 体力<br>消耗:10 魔力<br><br>"}
+	if(id == 18){return "阻梦:<br>每有一张阻梦在手上就少抽一种牌<br>消耗:1 体力<br><br>"}
+	if(id == 19){return "毒素扩散:<br>使敌人中毒层数翻倍,抽1张牌<br>消耗:1 体力<br><br>"+effectdisplay(3)}
+	if(id == 20){return "血清:<br>为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:1 体力"+effectdisplay(3)}
+	if(id == 21){return "隐秘扩散:<br>使敌人获得等同于中毒层数的中毒,如果敌人中毒层数＞15则抽2张牌<br>消耗:2 体力<br><br>"+effectdisplay(3)}
+	if(id == 22){return "病毒爆发:<br>清除敌人所有中毒层数,每清除1层造成 4 物理伤害<br>消耗:1 体力<br><br>"+effectdisplay(3)}
+	if(id == 23){return "墓地增生:<br>先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力<br><br>"}
+	if(id == 24){return "肉体再生:<br>恢复自己损失血量/3的生命<br>消耗:11 魔力<br><br>"}
+	if(id == 25){return "重构:<br>将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3防御<br>消耗:15 魔力<br><br>"}
+	if(id == 26){return "嗜血斩:<br>造成(自己损失血量*敌方损失血量)/150的物理伤害<br>消耗:3 体力<br><br>"}
+	if(id == 27){return "自信:<br>造成5*持有手牌的物理伤害<br>消耗:1体力<br><br>"}
+	if(id == 28){return "魔力源泉:<br>获得2魔力再生效果<br>消耗:无<br><br>"+effectdisplay(12)}
+	if(id == 29){return "治疗术:<br>恢复20血,获得 5 恢复<br>消耗:13 魔力<br><br>"}
+	if(id == 30){return "绷带:<br>恢复4血并获得5恢复,5护甲<br>消耗:1 体力<br><br>"+effectdisplay(2)}
+	if(id == 31){return "卡牌魔法:<br>将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:1体力,5 魔力<br><br>"}
+	if(id == 32){return "献祭:<br>随机获得以下效果中的其中二个①获得7力量②获得7减伤③获得7体力<br>消耗:42 血<br><br>"+effectdisplay(1)+effectdisplay(13)}
+	if(id == 33){return "天平:<br>按降低的比例重新分配血,魔力,体力<br>移除<br>消耗:无<br><br>"}
+	if(id == 34){return "墓地衍生:<br>使墓地中的牌*2<br>消耗:1 体力,8 魔力<br><br>"}
+	if(id == 35){return "滴血:<br>移除任意最多3张牌<br>消耗:3 血<br><br>"}
+	if(id == 36){return "破财消灾:<br>造成 15%拥有的$的物理伤害<br>消耗:20% $<br><br>"}
+	if(id == 37){return "灵魂吸取:<br>造成 10 魔法伤害,如果此伤害杀死了敌人,敌人5%的最多血量永久增加到你身上<br>消耗:10 魔力<br><br>"}
+	if(id == 38){return "魔法结晶:<br>恢复30法力<br>移除<br>消耗:无<br><br>"}
+	if(id == 39){return "提取器:<br>使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血<br><br>"+effectdisplay(14)}
+	if(id == 40){return "应急干粮:<br>恢复5血和1体力<br>移除<br>消耗:无<br><br>"}
+	if(id == 41){return "老千:<br>50%获得抽取3张卡,50%减去15血<br>消耗:1 体力<br><br>"}
+	if(id == 42){return "破釜沉舟:<br>血量低于3%时可以使用,造成300伤害,永久移除这张卡<br>消耗:无<br><br>"}
+	if(id == 43){return "能量护盾:<br>获得20防御<br>消耗:8 魔力<br><br>"}
+	if(id == 44){return "不定性病毒:<br>50%给敌方+5感染,50%给我方+3感染<br>消耗:无<br><br>"+effectdisplay(4)}
+	if(id == 45){return "格挡:<br>获得17防御,2易伤<br>消耗:1 体力<br><br>"+effectdisplay(15)}
+	if(id == 46){return "急救:<br>恢复50血<br>移除<br>消耗:2 体力<br><br>"}
+	if(id == 47){return "背刺:<br>75%造成 36 物理伤害,25%造成 4 物理伤害<br>消耗:2 体力<br><br>"}
+	if(id == 48){return "蔓延:<br>在手牌中添加一张蔓延,此卡不会使用后进入墓地<br>消耗:无<br><br>"}
+	if(id == 49){return "聚集:<br>恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>消耗:1 体力,3 魔力,10 血<br><br>"}
+	if(id == 50){return "再生:<br>恢复层数*2,恢复恢复层数的血量<br>消耗:10 魔力<br><br>"+effectdisplay(2)}
 }
 
 function card2display(id){
