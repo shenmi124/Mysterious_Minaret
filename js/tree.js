@@ -76,7 +76,7 @@ function levelnew(){
 	let mpmaxadd0 = new Decimal(0)
 	let psmaxadd0 = new Decimal(0)
 	if(player.data.Normal_Artifacts[0].gt(0)){hpmaxadd0 = player.data.Normal_Artifacts[0].mul(45)}
-	if(player.data.Normal_Artifacts[1].gt(0)){player.data.effect[1] = player.data.effect[1].add(player.data.Normal_Artifacts[1].mul(6))}
+	if(player.data.Normal_Artifacts[1].gt(0)){player.data.effect[2] = player.data.effect[2].add(player.data.Normal_Artifacts[1].mul(6))}
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(9)}
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(10).floor().mul(player.data.Normal_Artifacts[3])}
 	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
