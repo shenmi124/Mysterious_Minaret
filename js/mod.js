@@ -23,6 +23,7 @@ let changelog = `
 	<h3>v0.1.2.34β</h3><br>
 	<li>现在获得神器会有提示了<br>
 	<li>平衡游戏<br>
+	<li>修复bug<br>
 	<h3>v0.1.2.30β</h3><br>
 	<li>修复巨大bug<br>
 	<li>平衡神器<br>
