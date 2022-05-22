@@ -3,7 +3,7 @@ function levelnew(){
 	let monsterup =  Math.floor((Math.random() * 4))
 	let newdehp = new Decimal(30).add(player.data.level.mul(5)).add(Math.random() * player.data.level.mul(6).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
 	let newdemp =  new Decimal(4).add(player.data.level.mul(0.5)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
-	let newdeatk =  new Decimal(6).add(player.data.level.mul(0.75)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1.25).add(player.data.level.div(100)))).floor()
+	let newdeatk =  new Decimal(6).add(player.data.level.mul(1)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1.5).add(player.data.level.div(100)))).floor()
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
 	}else{
@@ -251,6 +251,136 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#ec1c24"},
 			textStyle: {"color": "#000000"}
 		},
+		deadbar1:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 97,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(1) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(1) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar2:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 96,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(2) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(2) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar3:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 97,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(3) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(3) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar4:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 96,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(4) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(4) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar5:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 97,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(5) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(5) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar6:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 97,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(6) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(6) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar7:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 96,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(7) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(7) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar8:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 97,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(8) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(8) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar9:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 96,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(9) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(9) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
+		deadbar10:{
+			display() {
+				return 
+			},	
+			direction: RIGHT,
+			width: 97,
+			height: 5,
+			unlocked(){return player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)},
+			progress(){return player.data.Special_Artifacts0.gte(10) ? true : false},
+			baseStyle(){return player.data.Special_Artifacts0.gte(10) ? {"background-color": "#3e3e3e"} : {"background-color": "#FFFFFF00"}},
+			fillStyle: {"background-color": "#3e3e3e"},
+			textStyle: {"color": "#000000"}
+		},
 		mpbar:{
 			display() {return player.data.effect[11].lte(0) ? "魔力 "+format(player.data.mp,0)+" / "+format(player.data.mpmax,0) : "魔力 ??? / ???"},	
 			direction: RIGHT,
@@ -465,7 +595,13 @@ addLayer("tree-tab", {
 			display() {return format(player.data.money,0)+"$"},	
 			direction: RIGHT,
 			width: 76,
-			height: 54,
+			height(){
+				let a = 54
+				let b = player.data.Special_Artifacts[0].gt(0) ? 9 : 0
+				let c = player.data.Special_Artifacts[1].gt(0)&&player.data.Special_Artifacts[0].gt(0) ? 9 : 0
+				let fin = a+b+c
+				return fin
+			},
 			unlocked(){return true},
 			progress(){return true},
 			baseStyle: {"background-color": "#FFFFFF"},
@@ -816,6 +952,8 @@ addLayer("tree-tab", {
 				["row", [
 					["column",[
 						["bar", "hpbar"],
+						["row", [["bar", "deadbar1"],["bar", "deadbar2"],["bar", "deadbar3"],["bar", "deadbar4"],["bar", "deadbar5"]]],
+						["row", [["bar", "deadbar6"],["bar", "deadbar7"],["bar", "deadbar8"],["bar", "deadbar9"],["bar", "deadbar10"]]],
 							["row", [
 								["bar", "mpbar"],["bar", "psbar"]
 							]],

@@ -121,14 +121,14 @@ function store_card(){
 }
 
 function restore_card(){
-	if(player.data.store_card11.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
-	if(player.data.store_card12.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
-	if(player.data.store_card13.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
-	if(player.data.store_card14.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
-	if(player.data.store_card21.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
-	if(player.data.store_card22.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card11.eq(19)){player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card12.eq(19)){player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card13.eq(19)){player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card14.eq(19)){player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card21.eq(19)){player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card22.eq(19)){player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
 	if(player.data.store_card23.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
-	if(player.data.store_card24.eq(19)){player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
+	if(player.data.store_card24.eq(19)){player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
 }
 
 addLayer("afdian", {
@@ -308,6 +308,9 @@ addLayer("data", {
 		Ultra_Rare_Artifacts_Sole:[
 		new Decimal(0),new Decimal(0),
 		],
+		Special_Artifacts:[
+		new Decimal(0),new Decimal(0),
+		],
 		all_Normal_Artifacts:new Decimal(4),
 		all_Rare_Artifacts:new Decimal(5),
 		all_Super_Rare_Artifacts:new Decimal(3),
@@ -414,6 +417,7 @@ addLayer("data", {
 		
 		hpmaxadd2:new Decimal(0),
 		Ultra_Rare_Artifacts_Sole1:false,
+		Special_Artifacts0:new Decimal(0),
 		
 		a:new Decimal(0),
     }},
@@ -442,10 +446,21 @@ addLayer("data", {
 			}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(35).mul(player.data.Ultra_Rare_Artifacts[0]))}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(50).mul(player.data.Ultra_Rare_Artifacts[0]))}
+			if(player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0) && player.data.Special_Artifacts0.lt(10)){
+				player.data.Special_Artifacts0 = player.data.Special_Artifacts0.add(1)
+			}else if(player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts0.lt(5)){
+				player.data.Special_Artifacts0 = player.data.Special_Artifacts0.add(1)
+			}
 			player.data.effect[11] = new Decimal(0)
 		}
-		if(player.data.hp.lte(0) && player.data.Ultra_Rare_Artifacts_Sole[1].gt(0) && player.data.Ultra_Rare_Artifacts_Sole1==false){
-			player.data.hp = new Decimal(player.data.hpmax).mul(0.3).floor()
+		if(player.data.hp.lte(0) && player.data.Special_Artifacts0.gte(4) && player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)){
+			player.data.Special_Artifacts0 = player.data.Special_Artifacts0.sub(4)
+			player.data.hp = new Decimal(player.data.hpmax).mul(0.2).floor()
+		}else if(player.data.hp.lte(0) && player.data.Special_Artifacts0.gte(5) && player.data.Special_Artifacts[0].gt(0)){
+			player.data.Special_Artifacts0 = player.data.Special_Artifacts0.sub(5)
+			player.data.hp = new Decimal(player.data.hpmax).mul(0.2).floor()
+		}else if(player.data.hp.lte(0) && player.data.Ultra_Rare_Artifacts_Sole[1].gt(0) && player.data.Ultra_Rare_Artifacts_Sole1==false){
+			player.data.hp = new Decimal(player.data.hpmax).mul(0.5).floor()
 			player.data.Ultra_Rare_Artifacts_Sole1 = true
 		}
 		player.data.haveeff = new Decimal(0)
@@ -1507,12 +1522,16 @@ addLayer("bag", {
 			let UR = "<br>UR(极少/Ultra Rare):<br>"
 			let UR0 = player.data.Ultra_Rare_Artifacts[0].gte(1) ? "吸血鬼之心("+format(player.data.Ultra_Rare_Artifacts[0],0)+"):每杀死1名敌人+"+format(player.data.Ultra_Rare_Artifacts[0].mul(35),0)+"血上限(此效果最大1000)并恢复"+format(player.data.Ultra_Rare_Artifacts[0].mul(50),0)+"血<br>" : ""
 			let OUR0 = player.data.Ultra_Rare_Artifacts_Sole[0].gte(1) ? "再生生命体(唯一):恢复效果在最大生命的15%前不会减少且每回合获得4恢复<br>" : ""
-			let OUR1 = player.data.Ultra_Rare_Artifacts_Sole[1].gte(1) ? player.data.Ultra_Rare_Artifacts_Sole1==false ? "顽强生命体(唯一)(未使用):死亡时以30%的血上限的血恢复<br>" : "顽强生命体(唯一)(已使用):死亡时以50%的血上限的血恢复<br>" : ""
+			let OUR1 = player.data.Ultra_Rare_Artifacts_Sole[1].gte(1) ? player.data.Ultra_Rare_Artifacts_Sole1==false ? "顽强生命体(唯一)(未使用):死亡时以50%的血上限的血恢复<br>" : "顽强生命体(唯一)(已使用):死亡时以50%的血上限的血恢复<br>" : ""
+			let SP = "<br>SP(特殊/Special):<br>"
+			let SP0 = player.data.Special_Artifacts[0].gte(1) ? "不死者进度条:在你血量的下方获得一个特殊的进度条,每杀死一个敌人将累计1格.你死亡的时候将用5格进度抵消本次死亡并恢复20%的血量<br>" : ""
+			let SP1 = player.data.Special_Artifacts[1].gte(1) ? "不死者进度条:不死者进度条上限+5,死亡只会消耗4格进度<br>" : ""
 			return artifact
 			+N+N0+N1+N2+N3+ON0
 			+R+R0+R1+R2+R3+R4+OR0+OR1
 			+SR+SR0+SR1+SR2+OSR0+OSR1
 			+UR+UR0+OUR0+OUR1
+			+SP+SP0+SP1
 			}],
 		]],
 	],
@@ -1592,8 +1611,7 @@ addLayer("over", {
 			style() {return {'height': "200px",'width': '150px'}},
 		},
 		99:{
-			title(){return "获取神器"},
-			display(){return "50%N<br>30%R<br>15%SR<br>5%UR"},
+			title(){return "宝箱!"},
 			canClick(){return true},
 			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
 			onClick(){return awardartifacts()},
