@@ -3,7 +3,7 @@ function levelnew(){
 	let monsterup =  Math.floor((Math.random() * 4))
 	let newdehp = new Decimal(30).add(player.data.level.mul(5)).add(Math.random() * player.data.level.mul(6).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
 	let newdemp =  new Decimal(4).add(player.data.level.mul(0.5)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
-	let newdeatk =  new Decimal(6).add(player.data.level.mul(1)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1.5).add(player.data.level.div(100)))).floor()
+	let newdeatk =  new Decimal(6).add(player.data.level.mul(1)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1.25).add(player.data.level.div(100)))).floor()
 	if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
 	}else{

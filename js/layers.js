@@ -131,6 +131,15 @@ function restore_card(){
 	if(player.data.store_card24.eq(19)){player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)} 
 }
 
+function deleter(input,toDelete){
+	var output = []
+	for(i in input){
+		i = input[Number(i)]
+		if(!toDelete.includes(i)) output.push(i)
+	}
+	return output
+}
+
 addLayer("afdian", {
     name: "afdian",
     symbol: "A",
@@ -1664,7 +1673,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.2.32b</div>
+				v0.1.2.34b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1842,6 +1851,221 @@ addLayer("store", {
 		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24]]],
 	]
 })
+
+addLayer("mil", {
+    name: "mil",
+    position: 12,
+    startData() { return {
+        unlocked: true,
+		m1:new Decimal(1),
+		m2:new Decimal(1),
+		m3:new Decimal(1),
+		m4:new Decimal(1),
+		m5:new Decimal(1),
+		m6:new Decimal(1),
+		m7:new Decimal(1),
+		m8:new Decimal(1),
+		m9:new Decimal(1),
+		m10:new Decimal(1),
+		m11:new Decimal(1),
+		m12:new Decimal(1),
+		m13:new Decimal(1),
+		m14:new Decimal(1),
+		m15:new Decimal(1),
+		m16:new Decimal(1),
+		m17:new Decimal(1),
+		m18:new Decimal(1),
+    }},
+	update(diff) {
+		if(hasMilestone("mil",1)){
+			player.mil.milestones = deleter(player.mil.milestones,["1"])
+			player.mil.m1 = player.mil.m1.add(1)
+		}
+		if(hasMilestone("mil",2)){
+			player.mil.milestones = deleter(player.mil.milestones,["2"])
+			player.mil.m2 = player.mil.m2.add(1)
+		}
+		if(hasMilestone("mil",3)){
+			player.mil.milestones = deleter(player.mil.milestones,["3"])
+			player.mil.m3 = player.mil.m3.add(1)
+		}
+		if(hasMilestone("mil",4)){
+			player.mil.milestones = deleter(player.mil.milestones,["4"])
+			player.mil.m4 = player.mil.m4.add(1)
+		}
+		if(hasMilestone("mil",5)){
+			player.mil.milestones = deleter(player.mil.milestones,["5"])
+			player.mil.m5 = player.mil.m5.add(1)
+		}
+		if(hasMilestone("mil",6)){
+			player.mil.milestones = deleter(player.mil.milestones,["6"])
+			player.mil.m6 = player.mil.m6.add(1)
+		}
+		if(hasMilestone("mil",7)){
+			player.mil.milestones = deleter(player.mil.milestones,["7"])
+			player.mil.m7 = player.mil.m7.add(1)
+		}
+		if(hasMilestone("mil",8)){
+			player.mil.milestones = deleter(player.mil.milestones,["8"])
+			player.mil.m8 = player.mil.m8.add(1)
+		}
+		if(hasMilestone("mil",9)){
+			player.mil.milestones = deleter(player.mil.milestones,["9"])
+			player.mil.m9 = player.mil.m9.add(1)
+		}
+		if(hasMilestone("mil",10)){
+			player.mil.milestones = deleter(player.mil.milestones,["10"])
+			player.mil.m10 = player.mil.m10.add(1)
+		}
+		if(hasMilestone("mil",11)){
+			player.mil.milestones = deleter(player.mil.milestones,["11"])
+			player.mil.m11 = player.mil.m11.add(1)
+		}
+		if(hasMilestone("mil",12)){
+			player.mil.milestones = deleter(player.mil.milestones,["12"])
+			player.mil.m12 = player.mil.m12.add(1)
+		}
+		if(hasMilestone("mil",13)){
+			player.mil.milestones = deleter(player.mil.milestones,["13"])
+			player.mil.m13 = player.mil.m13.add(1)
+		}
+		if(hasMilestone("mil",14)){
+			player.mil.milestones = deleter(player.mil.milestones,["14"])
+			player.mil.m14 = player.mil.m14.add(1)
+		}
+		if(hasMilestone("mil",15)){
+			player.mil.milestones = deleter(player.mil.milestones,["15"])
+			player.mil.m15 = player.mil.m15.add(1)
+		}
+		if(hasMilestone("mil",16)){
+			player.mil.milestones = deleter(player.mil.milestones,["16"])
+			player.mil.m16 = player.mil.m16.add(1)
+		}
+		if(hasMilestone("mil",17)){
+			player.mil.milestones = deleter(player.mil.milestones,["17"])
+			player.mil.m17 = player.mil.m17.add(1)
+		}
+		if(hasMilestone("mil",18)){
+			player.mil.milestones = deleter(player.mil.milestones,["18"])
+			player.mil.m18 = player.mil.m7.add(1)
+		}
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	milestones: {
+		1: {
+			requirementDescription: "红苹果<br><h6>+45血上限",
+			done() {
+				return player.data.Normal_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		2: {
+			requirementDescription: "绿苹果<br><h6>开局+6恢复",
+			done() {
+				return player.data.Normal_Artifacts[1].gte(player.mil['m'+this.id])
+			},
+		},
+		3: {
+			requirementDescription: "蓝苹果<br><h6>+9魔力上限",
+			done() {
+				return player.data.Normal_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
+		4: {
+			requirementDescription: "黄苹果<br><h6>每有10$存于手上+1血上限",
+			done() {
+				return player.data.Normal_Artifacts[3].gte(player.mil['m'+this.id])
+			},
+		},
+		5: {
+			requirementDescription: "智慧大脑<br><h6>智慧效果+1",
+			done() {
+				return player.data.Rare_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		6: {
+			requirementDescription: "预备攻击<br><h6>开局造成35物理伤害",
+			done() {
+				return player.data.Rare_Artifacts[1].gte(player.mil['m'+this.id])
+			},
+		},
+		7: {
+			requirementDescription: "圣盾<br><h6>回合结束每有2护甲恢复1血",
+			done() {
+				return player.data.Rare_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
+		8: {
+			requirementDescription: "蓝色药剂<br><h6>每回合恢复3魔力",
+			done() {
+				return player.data.Rare_Artifacts[3].gte(player.mil['m'+this.id])
+			},
+		},
+		9: {
+			requirementDescription: "死尸(唯一)<br><h6>中毒受到的伤害减半",
+			done() {
+				return player.data.Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
+			},
+		},
+		10: {
+			requirementDescription: "牌套(唯一)<br><h6>手牌上限+4",
+			done() {
+				return player.data.Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
+			},
+		},
+		11: {
+			requirementDescription: "体力药剂<br><h6>+1体力上限",
+			done() {
+				return player.data.Super_Rare_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		12: {
+			requirementDescription: "吸血鬼尖牙<br><h6>物理攻击每造成2伤害恢复1血",
+			done() {
+				return player.data.Super_Rare_Artifacts[1].gte(player.mil['m'+this.id])
+			},
+		},
+		13: {
+			requirementDescription: "感染性疾病<br><h6>开局给敌方2感染",
+			done() {
+				return player.data.Super_Rare_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
+		14: {
+			requirementDescription: "感染性抗体(唯一)<br><h6>感染会直接对你造成伤害而不会获得中毒",
+			done() {
+				return player.data.Super_Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
+			},
+		},
+		15: {
+			requirementDescription: "坚毅之盾<br><h6>护甲每回合只减少1",
+			done() {
+				return player.data.Super_Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
+			},
+		},
+		16: {
+			requirementDescription: "吸血鬼之心<br><h6>每杀死1名敌人+35血上限(此效果最大1000)并恢复50血",
+			done() {
+				return player.data.Ultra_Rare_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		17: {
+			requirementDescription: "再生生命体<br><h6>恢复效果在最大生命的15%前不会减少且每回合获得4恢复",
+			done() {
+				return player.data.Ultra_Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
+			},
+		},
+		18: {
+			requirementDescription: "顽强生命体<br><h6>死亡时以50%的血上限的血恢复",
+			done() {
+				return player.data.Ultra_Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
+			},
+		},
+	},
+})
+
 
 /*
 addLayer("talent_crystal", {
