@@ -55,6 +55,19 @@
 	transform: scale(1.2, 1.2);
 }
 
+#trophy {
+	position: absolute;
+	top: 245px;
+	left: 93.5%;
+	cursor: pointer;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #02f2f2;
+}
+
+#trophy:hover {
+	transform: scale(1.2, 1.2);
+}
+
 #talent_crystal {
 	position: absolute;
 	top: 245px;

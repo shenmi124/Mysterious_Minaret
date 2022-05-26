@@ -80,8 +80,8 @@ function levelnew(){
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(9)}
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(10).floor().mul(player.data.Normal_Artifacts[3])}
 	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
-	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1000)).add(player.data.card38hpmax)
-	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
+	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1000)).add(player.data.card38hpmax).add(player.a.hpmax)
+	player.data.mpmax = new Decimal(30).add(mpmaxadd0).add(player.a.mpmax)
 	player.data.psmax = new Decimal(3).add(psmaxadd0)
 	
 	let startatk = player.data.Rare_Artifacts[1].gte(1) ? player.data.Rare_Artifacts[1].mul(35) : 0
@@ -930,7 +930,7 @@ addLayer("tree-tab", {
 					let theme4 = options.theme=="light" ? "纯白" : ""
 					return themestart + theme0 + theme1 + theme2 + theme3 + theme4 + themelast
 				}],
-				["display-text", function() {return 'QQ群:688646311|左上角设置,信息,捐助|右上角版本,图鉴,背包'}],
+				["display-text", function() {return 'QQ群:688646311|左上角设置,信息,捐助|右上角版本,图鉴,背包,成就'}],
 				["display-text", function() {return '<hr>你的最高分是:'+format(player.point.tob_points,0)+'.你上次的得分是:'+format(player.point.last_points,0)+'.'}],
 				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
 				["bar", "dehpbar"],

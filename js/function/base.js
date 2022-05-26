@@ -215,19 +215,22 @@ function getdeeffect(id,id2){
 }
 
 function softReset(){
-	if (!!confirm("你确定要软重置吗?那样你本局游戏就会重置.且无法获得任何东西.")){
+	if (!!confirm("你确定要软重置吗?那样你本局游戏就会重置.且无法获得分数.成就,总分将保留")){
 		layerDataReset('data')
 		layerDataReset('mil')
-		layerDataReset('point')
 		showTab('none')
 	}
 }
 
 function rehardReset(){
-	if (!!confirm("你确定要硬重置吗?这样你将失去一切!!!或许你可以尝试软重置.")){
-		layerDataReset('data')
-		layerDataReset('mil')
-		showTab('none')
+	if (!!confirm("你确定要硬重置吗?这样你将失去一切!!!或许你可以尝试软重置.成就,总分也会重置!!!")){
+		if (!!confirm("这个存档将永远失去!(很长时间!)")){
+			layerDataReset('data')
+			layerDataReset('mil')
+			layerDataReset('point')
+			layerDataReset('a')
+			showTab('none')
+		}
 	}
 }
 

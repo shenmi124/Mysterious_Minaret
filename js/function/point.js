@@ -36,5 +36,7 @@ function ResetPoint(){
 	}
 	player.point.last_points = new Decimal(player.point.points)
 	/*player.talent_crystal.points = player.talent_crystal.points.add(player.point.points.div(10000).floor())*/
-	layerDataReset("data")
+	layerDataReset('data')
+	layerDataReset('mil')
+	showTab('none')
 }

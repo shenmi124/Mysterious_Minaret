@@ -13,13 +13,18 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.2.34b",
+	num: "0.1.3.38b",
 	name: "神秘尖塔",
 }
 
 let changelog = `
 	<div class="link" onclick="backnone()"><big><big>返回游戏</big></big></div><br>
 	<h1>更新日志:</h1><br>
+	<h3>v0.1.3.38β</h3><br>
+	<li>更新成就系统<br>
+	<li>平衡游戏<br>
+	<li>修复bug<br>
+	<li>优化游戏,现在除了第一次打开游戏之后都能十几毫秒加载出来<br>
 	<h3>v0.1.2.34β</h3><br>
 	<li>现在获得神器会有提示了<br>
 	<li>平衡游戏<br>

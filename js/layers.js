@@ -95,28 +95,28 @@ function dehaveefffunction(id){
 function store_card(){
 	player.data.storeaward = true
 	player.data.store_card11 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card11_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card11_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card11_canClick = true
 	player.data.store_card12 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card12_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card12_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card12_canClick = true
 	player.data.store_card13 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card13_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card13_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card13_canClick = true
 	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card14_canClick = true
 	player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card21_canClick = true
 	player.data.store_card22 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card22_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card22_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card22_canClick = true
 	player.data.store_card23 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card23_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card23_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card23_canClick = true
 	player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
+	player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100).sub(player.a.cheap)
 	player.data.store_card24_canClick = true
 }
 
@@ -540,7 +540,7 @@ addLayer("point", {
         unlocked: true,
 		
 		points:new Decimal(0),
-		top_points:new Decimal(0),
+		tob_points:new Decimal(0),
 		last_points:new Decimal(0),
     }},
 	update(diff) {
@@ -1673,7 +1673,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.2.34b</div>
+				v0.1.3.38b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -2065,6 +2065,243 @@ addLayer("mil", {
 		},
 	},
 })
+
+addLayer("a", {
+    name: "Achievement",
+    symbol: "A",
+    position: 3,
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+		hpmax: new Decimal(0),
+    }},
+    color: "FFFFFF",
+    resource: "Achievement",
+    type: "none",
+    row: "side", 
+    layerShown(){return true},
+	achievementPopups: true,
+	clickables: {
+		1:{
+			title:"返回游戏",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){backnone()},
+		},
+	},
+    achievements: {
+        11: {
+            name: "血牛I",
+            done() {
+                return player.data.hpmax.gte(200)
+				},
+            tooltip() {
+                return "血牛I<br>血上限达到200<br>奖励:到达关卡1时+1血上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(1)
+            },
+        },
+		12: {
+            name: "血牛II",
+            done() {
+                return player.data.hpmax.gte(500)
+				},
+            tooltip() {
+                return "血牛II<br>血上限达到500<br>奖励:到达关卡1时开局+4血上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(4)
+            },
+        },
+		13: {
+            name: "血牛III",
+            done() {
+                return player.data.hpmax.gte(800)
+				},
+            tooltip() {
+                return "血牛III<br>血上限达到800<br>奖励:到达关卡1时开局+15血上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(15)
+            },
+        },
+		14: {
+            name: "血牛IV",
+            done() {
+                return player.data.hpmax.gte(1000)
+				},
+            tooltip() {
+                return "血牛IV<br>血上限达到1000<br>奖励:到达关卡1时开局+30血上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(30)
+            },
+        },
+		15: {
+            name: "血牛V",
+            done() {
+                return player.data.hpmax.gte(2000)
+				},
+            tooltip() {
+                return "血牛V<br>血上限达到2000<br>奖励:到达关卡1时开局+50血上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(50)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+        21: {
+            name: "魔法池I",
+            done() {
+                return player.data.mpmax.gte(40)
+				},
+            tooltip() {
+                return "魔法池I<br>魔力上限达到40<br>奖励:到达关卡1时+1魔力上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.mpmax  = player.a.mpmax.add(1)
+            },
+        },
+        22: {
+            name: "魔法池II",
+            done() {
+                return player.data.mpmax.gte(60)
+				},
+            tooltip() {
+                return "魔法池II<br>魔力上限达到60<br>奖励:到达关卡1时+3魔力上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.mpmax  = player.a.mpmax.add(3)
+            },
+        },
+        23: {
+            name: "魔法池III",
+            done() {
+                return player.data.mpmax.gte(100)
+				},
+            tooltip() {
+                return "魔法池III<br>魔力上限达到100<br>奖励:到达关卡1时+6魔力上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.mpmax  = player.a.mpmax.add(6)
+            },
+        },
+        24: {
+            name: "魔法池IV",
+            done() {
+                return player.data.mpmax.gte(200)
+				},
+            tooltip() {
+                return "魔法池IV<br>魔力上限达到200<br>奖励:到达关卡1时+10魔力上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.mpmax  = player.a.mpmax.add(10)
+            },
+        },
+        25: {
+            name: "魔法池V",
+            done() {
+                return player.data.mpmax.gte(500)
+				},
+            tooltip() {
+                return "魔法池V<br>魔力上限达到500<br>奖励:到达关卡1时+20魔力上限";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.mpmax  = player.a.mpmax.add(20)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+		31: {
+            name: "腰缠万贯I",
+            done() {
+                return player.data.money.gte(1000)
+				},
+            tooltip() {
+                return "腰缠万贯I<br>获得1000$<br>奖励:商店便宜1$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.cheap  = player.a.cheap.add(1)
+            },
+        },
+		32: {
+            name: "腰缠万贯II",
+            done() {
+                return player.data.money.gte(2000)
+				},
+            tooltip() {
+                return "腰缠万贯II<br>获得2000$<br>奖励:商店便宜2$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.cheap  = player.a.cheap.add(2)
+            },
+        },
+		33: {
+            name: "腰缠万贯III",
+            done() {
+                return player.data.money.gte(5000)
+				},
+            tooltip() {
+                return "腰缠万贯III<br>获得5000$<br>奖励:商店便宜3$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.cheap  = player.a.cheap.add(3)
+            },
+        },
+		34: {
+            name: "腰缠万贯IV",
+            done() {
+                return player.data.money.gte(10000)
+				},
+            tooltip() {
+                return "腰缠万贯IV<br>获得10000$<br>奖励:商店便宜4$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.cheap  = player.a.cheap.add(4)
+            },
+        },
+		35: {
+            name: "腰缠万贯V",
+            done() {
+                return player.data.money.gte(25000)
+				},
+            tooltip() {
+                return "腰缠万贯V<br>获得25000$<br>奖励:商店便宜5$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.cheap  = player.a.cheap.add(5)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+    },
+	tabFormat: [
+        ["display-text",
+            function() { return `你总共获得了 ${player.a.achievements.length} 个成就` },
+            { "color": 'yellow', "font-size": "32px", "font-family": "Comic Sans MS" }],
+        ["row", [["clickable", 1]]],
+        "blank",
+        "blank",
+        "blank",
+        "achievements",
+    ],
+})
+
 
 
 /*

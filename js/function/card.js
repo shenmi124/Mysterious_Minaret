@@ -71,7 +71,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">18 物理伤害</red>并附带 1 眩晕<br>消耗:3 体力`}
+		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">28 物理伤害</red>并附带 1 眩晕<br>移除<br>消耗:3 体力`}
 		if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>销毁<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 1 <red id="red">物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
 		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 4 魔力枯竭.给敌方 2 焱<br>销毁<br>消耗:x 魔力`}
@@ -86,30 +86,30 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(24)){return `先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力`}
 		if(player.data[id1+id2].eq(25)){return `恢复自己损失血量/3的生命<br>消耗:11 魔力`}
 		if(player.data[id1+id2].eq(26)){return `将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3护甲<br>消耗:15 魔力`}
-		if(player.data[id1+id2].eq(27)){return `造成<red id="red">min((自己损失血量*敌方损失血量)/150的物理伤害,200)</red><br>消耗:3 体力`}
+		if(player.data[id1+id2].eq(27)){return `造成<red id="red">min((自己损失血量*敌方损失血量)/150的物理伤害,200)</red><br>现在能造成 <red id="red">`+format(Decimal.min(player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150),200).floor(),0)+` 物理伤害</red><br>消耗:3 体力`}
 		if(player.data[id1+id2].eq(28)){return `造成<red id="red">8*持有手牌的物理伤害</red><br>消耗:1体力`}
 		if(player.data[id1+id2].eq(29)){return `获得2魔力恢复效果<br>消耗:无`}
 		if(player.data[id1+id2].eq(30)){return `恢复20血,获得 5 恢复<br>消耗:13 魔力`}
 		if(player.data[id1+id2].eq(31)){return `恢复4血并获得5恢复,5护甲<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(32)){return `将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:1体力,5 魔力`}
 		if(player.data[id1+id2].eq(33)){return `随机获得以下效果中的其中二个①获得7力量②获得7减伤③获得7体力<br>消耗:42 血`}
-		if(player.data[id1+id2].eq(34)){return `按降低的比例重新分配血,魔力,体力<br>移除<br>消耗:无`}
+		if(player.data[id1+id2].eq(34)){return `按降低的比例重新分配血,魔力,体力<br>移除<br>现在的比例为`+format((player.data.hp/player.data.hpmax+player.data.mp/player.data.mpmax+player.data.ps/player.data.psmax)/3.3,2)+`<br>消耗:无`}
 		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
 		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7 血`}
 		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的$的物理伤害</red><br>消耗:20% $`}
 		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">10 魔法伤害</blue>,并永久吸取同等血量上限,<br>消耗:15 魔力`}
-		if(player.data[id1+id2].eq(39)){return `恢复30法力<br>移除<br>消耗:无`}
+		if(player.data[id1+id2].eq(39)){return `恢复15法力<br>移除<br>消耗:无`}
 		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血`}
 		if(player.data[id1+id2].eq(41)){return `恢复5血和1体力<br>移除<br>消耗:无`}
 		if(player.data[id1+id2].eq(42)){return `50%获得抽取3张卡,50%减去15血<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(43)){return `血量低于5%时可以使用,造成300伤害,永久移除这张卡<br>消耗:无`}
 		if(player.data[id1+id2].eq(44)){return `获得20护甲<br>消耗:8 魔力`}
 		if(player.data[id1+id2].eq(45)){return `50%给敌方+5感染,50%给我方+3感染<br>消耗:无`}
-		if(player.data[id1+id2].eq(46)){return `获得17防御,2易伤<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(47)){return `恢复50血<br>移除<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(46)){return `获得24防御,2易伤<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(47)){return `恢复50血<br>永久移除这张卡<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(48)){return `75%造成 <red id="red">36 物理伤害</red>,25%造成 <red id="red">4 物理伤害</red><br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(49)){return `在手牌中添加一张蔓延,此卡不会使用后进入墓地<br>消耗:无`}
-		if(player.data[id1+id2].eq(50)){return `恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>消耗:1 体力,3 魔力,10 血`}
+		if(player.data[id1+id2].eq(50)){return `恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>当前恢复量`+format(player.data.hp.mul(player.data.mp).mul(player.data.ps).div(500).floor(),0)+`<br>消耗:1 体力,3 魔力,10 血`}
 		if(player.data[id1+id2].eq(51)){return `恢复层数*2,恢复恢复层数的血量<br>消耗:10 魔力`}
 	}else{
 		return `???`
@@ -275,9 +275,9 @@ function reonc(id){
 		if(player.data['display'+id].eq(12)){
 			//重击
 			player.data.deeffect[5] = player.data.deeffect[5].add(1)
-			attributes(0,0,-3,18,0,0,"card")
+			attributes(0,0,-3,28,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
-			card_usage(id,12,true,true)
+			card_usage(id,12,false,true)
 			return
 		}
 		if(player.data['display'+id].eq(13)){
@@ -453,7 +453,6 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(26)){
 			//重构
-			player.data.card26recard = new Decimal(0)
 			attributes(0,-15,0,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,26,true,true)
@@ -463,12 +462,11 @@ function reonc(id){
 					player.data.card[player.data['display'+card26col]] = player.data.card[player.data['display'+card26col]].add(1)
 					player.data['display'+card26col] = new Decimal(0)
 					attributes(0,0,0,0,0,3)
-					player.data.card26recard = player.data.card26recard.add(1)
+					player.data.holdcard = player.data.holdcard.sub(1)
+					getcard("display",1)
 				}
 				player.data['display'+card26col+'copy'] = false
 			}
-			player.data.holdcard = new Decimal(0)
-			getcard("display",player.data.card26recard)
 			return
 		}
 		if(player.data['display'+id].eq(27)){
@@ -614,7 +612,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(39)){
 			//魔法结晶
-			attributes(0,30,0,0,0,0,"card")
+			attributes(0,15,0,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,15,false,true)
 			return
@@ -651,7 +649,7 @@ function reonc(id){
 			//破釜沉舟
 			attributes(0,0,0,300,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
-			card_usage(id,43,true,true)
+			card_usage(id,43,false,true)
 			player.data.cardmax[43] = player.data.cardmax[43].sub(1)
 			return
 		}
@@ -677,8 +675,8 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(46)){
 			//格挡
-			attributes(0,0,-1,0,0,17,"card")
-			geteffect(15,1)
+			attributes(0,0,-1,0,0,24,"card")
+			geteffect(15,2)
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,46,true,true)
 			return
@@ -688,6 +686,7 @@ function reonc(id){
 			attributes(50,0,-2,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,46,false,true)
+			player.data.cardmax[47] = player.data.cardmax[47].sub(1)
 			return
 		}
 		if(player.data['display'+id].eq(48)){
