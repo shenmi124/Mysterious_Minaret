@@ -2074,6 +2074,12 @@ addLayer("a", {
         unlocked: true,
 		points: new Decimal(0),
 		hpmax: new Decimal(0),
+		mpmax: new Decimal(0),
+		cheap: new Decimal(0),
+		gain_point: new Decimal(0),
+		ha1:new Decimal(0),
+		ha2:new Decimal(0),
+		ha5:new Decimal(0),
     }},
     color: "FFFFFF",
     resource: "Achievement",
@@ -2089,15 +2095,22 @@ addLayer("a", {
 			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
 			onClick(){backnone()},
 		},
+		2:{
+			title:"查看总成就加成",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){showTab("a_add")},
+		},
 	},
     achievements: {
         11: {
             name: "血牛I",
             done() {
-                return player.data.hpmax.gte(200)
+                return player.data.hpmax.gte(150)
 				},
             tooltip() {
-                return "血牛I<br>血上限达到200<br>奖励:到达关卡1时+1血上限";
+                return "血牛I<br>血上限达到150<br>奖励:到达关卡1时+1血上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2107,10 +2120,10 @@ addLayer("a", {
 		12: {
             name: "血牛II",
             done() {
-                return player.data.hpmax.gte(500)
+                return player.data.hpmax.gte(300)
 				},
             tooltip() {
-                return "血牛II<br>血上限达到500<br>奖励:到达关卡1时开局+4血上限";
+                return "血牛II<br>血上限达到300<br>奖励:到达关卡1时开局+4血上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2120,10 +2133,10 @@ addLayer("a", {
 		13: {
             name: "血牛III",
             done() {
-                return player.data.hpmax.gte(800)
+                return player.data.hpmax.gte(750)
 				},
             tooltip() {
-                return "血牛III<br>血上限达到800<br>奖励:到达关卡1时开局+15血上限";
+                return "血牛III<br>血上限达到750<br>奖励:到达关卡1时开局+15血上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2133,10 +2146,10 @@ addLayer("a", {
 		14: {
             name: "血牛IV",
             done() {
-                return player.data.hpmax.gte(1000)
+                return player.data.hpmax.gte(800)
 				},
             tooltip() {
-                return "血牛IV<br>血上限达到1000<br>奖励:到达关卡1时开局+30血上限";
+                return "血牛IV<br>血上限达到800<br>奖励:到达关卡1时开局+30血上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2146,10 +2159,10 @@ addLayer("a", {
 		15: {
             name: "血牛V",
             done() {
-                return player.data.hpmax.gte(2000)
+                return player.data.hpmax.gte(1500)
 				},
             tooltip() {
-                return "血牛V<br>血上限达到2000<br>奖励:到达关卡1时开局+50血上限";
+                return "血牛V<br>血上限达到1500<br>奖励:到达关卡1时开局+50血上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2160,10 +2173,10 @@ addLayer("a", {
         21: {
             name: "魔法池I",
             done() {
-                return player.data.mpmax.gte(40)
+                return player.data.mpmax.gte(35)
 				},
             tooltip() {
-                return "魔法池I<br>魔力上限达到40<br>奖励:到达关卡1时+1魔力上限";
+                return "魔法池I<br>魔力上限达到35<br>奖励:到达关卡1时+1魔力上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2173,10 +2186,10 @@ addLayer("a", {
         22: {
             name: "魔法池II",
             done() {
-                return player.data.mpmax.gte(60)
+                return player.data.mpmax.gte(50)
 				},
             tooltip() {
-                return "魔法池II<br>魔力上限达到60<br>奖励:到达关卡1时+3魔力上限";
+                return "魔法池II<br>魔力上限达到50<br>奖励:到达关卡1时+3魔力上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2186,10 +2199,10 @@ addLayer("a", {
         23: {
             name: "魔法池III",
             done() {
-                return player.data.mpmax.gte(100)
+                return player.data.mpmax.gte(70)
 				},
             tooltip() {
-                return "魔法池III<br>魔力上限达到100<br>奖励:到达关卡1时+6魔力上限";
+                return "魔法池III<br>魔力上限达到70<br>奖励:到达关卡1时+6魔力上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2199,10 +2212,10 @@ addLayer("a", {
         24: {
             name: "魔法池IV",
             done() {
-                return player.data.mpmax.gte(200)
+                return player.data.mpmax.gte(100)
 				},
             tooltip() {
-                return "魔法池IV<br>魔力上限达到200<br>奖励:到达关卡1时+10魔力上限";
+                return "魔法池IV<br>魔力上限达到100<br>奖励:到达关卡1时+10魔力上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2212,10 +2225,10 @@ addLayer("a", {
         25: {
             name: "魔法池V",
             done() {
-                return player.data.mpmax.gte(500)
+                return player.data.mpmax.gte(250)
 				},
             tooltip() {
-                return "魔法池V<br>魔力上限达到500<br>奖励:到达关卡1时+20魔力上限";
+                return "魔法池V<br>魔力上限达到250<br>奖励:到达关卡1时+20魔力上限";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2226,10 +2239,10 @@ addLayer("a", {
 		31: {
             name: "腰缠万贯I",
             done() {
-                return player.data.money.gte(1000)
+                return player.data.money.gte(500)
 				},
             tooltip() {
-                return "腰缠万贯I<br>获得1000$<br>奖励:商店便宜1$";
+                return "腰缠万贯I<br>获得500$<br>奖励:商店便宜1$";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2239,10 +2252,10 @@ addLayer("a", {
 		32: {
             name: "腰缠万贯II",
             done() {
-                return player.data.money.gte(2000)
+                return player.data.money.gte(1000)
 				},
             tooltip() {
-                return "腰缠万贯II<br>获得2000$<br>奖励:商店便宜2$";
+                return "腰缠万贯II<br>获得1000$<br>奖励:商店便宜2$";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2252,10 +2265,10 @@ addLayer("a", {
 		33: {
             name: "腰缠万贯III",
             done() {
-                return player.data.money.gte(5000)
+                return player.data.money.gte(2000)
 				},
             tooltip() {
-                return "腰缠万贯III<br>获得5000$<br>奖励:商店便宜3$";
+                return "腰缠万贯III<br>获得2000$<br>奖励:商店便宜3$";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2265,10 +2278,10 @@ addLayer("a", {
 		34: {
             name: "腰缠万贯IV",
             done() {
-                return player.data.money.gte(10000)
+                return player.data.money.gte(5000)
 				},
             tooltip() {
-                return "腰缠万贯IV<br>获得10000$<br>奖励:商店便宜4$";
+                return "腰缠万贯IV<br>获得5000$<br>奖励:商店便宜4$";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2278,10 +2291,10 @@ addLayer("a", {
 		35: {
             name: "腰缠万贯V",
             done() {
-                return player.data.money.gte(25000)
+                return player.data.money.gte(10000)
 				},
             tooltip() {
-                return "腰缠万贯V<br>获得25000$<br>奖励:商店便宜5$";
+                return "腰缠万贯V<br>获得10000$<br>奖励:商店便宜5$";
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
@@ -2289,20 +2302,230 @@ addLayer("a", {
             },
 			style() {return {'border-color': "#f75056" }}
         },
+		41: {
+            name: "高手I",
+            done() {
+                return player.point.tob_points.gte(5000)
+				},
+            tooltip() {
+                return "高手I<br>最高分达到5000<br>奖励:分数结算+1%";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+        },
+		42: {
+            name: "高手II",
+            done() {
+                return player.point.tob_points.gte(10000)
+				},
+            tooltip() {
+                return "高手I<br>最高分达到10000<br>奖励:分数结算+1%";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+        },
+		43: {
+            name: "高手III",
+            done() {
+                return player.point.tob_points.gte(25000)
+				},
+            tooltip() {
+                return "高手III<br>最高分达到25000<br>奖励:分数结算+1%";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+        },
+		44: {
+            name: "高手IV",
+            done() {
+                return player.point.tob_points.gte(50000)
+				},
+            tooltip() {
+                return "高手IV<br>最高分达到50000<br>奖励:分数结算+2%";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+        },
+		45: {
+            name: "高手V",
+            done() {
+                return player.point.tob_points.gte(100000)
+				},
+            tooltip() {
+                return "高手V<br>最高分达到100000<br>奖励:分数结算+5%";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+		//你知道吗，你正在偷看隐藏成就，停下！
+		//You know what, you're peeking at hidden achievements, stop!
+		101: {
+            name: "第一个总是很简单",
+            done() {
+                return player.a.ha1.gte(1)
+			},
+            tooltip() {
+                return hasAchievement("a",101) ? "第一个总是很简单<br>你只需要点击一下这个成就<br>奖励:分数结算+1%" : "这是个隐藏成就"
+            },
+			canClick(){return true},
+			onClick(){return player.a.ha1 = player.a.ha1.add(1)},
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		102: {
+            name: "第二个就不那么简单了",
+            done() {
+                return player.a.ha2.gte(100)
+			},
+            tooltip() {
+                return hasAchievement("a",102) ? "第二个就不那么简单了<br>你只需要点击100下这个成就<br>奖励:分数结算+2%" : "这是个隐藏成就"
+            },
+			canClick(){return true},
+			onClick(){return player.a.ha2 = player.a.ha2.add(1)},
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(2)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		103: {
+            name: "图鉴是个谎言",
+            done() {
+                return player.tab=="pokedex"
+			},
+            tooltip() {
+                return hasAchievement("a",103) ? "图鉴是个谎言<br>看看图鉴<br>事实上图鉴和实际卡牌属性并不相同<br>奖励:分数结算+1%" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.gain_point  = player.a.gain_point.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		104: {
+            name: "你是认真的吗?",
+            done() {
+                return player.data.level.eq(0) && player.data.hp.lte(0)
+			},
+            tooltip() {
+                return hasAchievement("a",104) ? "你是认真的吗?<br>在关卡0时死亡<br>你可知道你可以使用牌?还是说你故意这么做的<br>奖励:到达关卡1时+1血上限" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		105: {
+            name: "嗜血成疾",
+            done() {
+                return player.a.ha5.gte(200) && player.data.Super_Rare_Artifacts[1].gte(2)
+			},
+            tooltip() {
+                return hasAchievement("a",105) ? "嗜血成疾<br>用嗜血斩打出200攻击并通过吸血鬼尖牙吸取至少等量的血量<br>西方恶魔<br>奖励:到达关卡1时+4血上限" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+				player.a.hpmax  = player.a.hpmax.add(4)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
     },
 	tabFormat: [
         ["display-text",
             function() { return `你总共获得了 ${player.a.achievements.length} 个成就` },
             { "color": 'yellow', "font-size": "32px", "font-family": "Comic Sans MS" }],
+		["display-text",function(){return `你可以在设置打开/关闭成就加成`},],
+        ["row", [["clickable", 1]]],
+		["row", [["clickable", 2]]],
+        "blank",
+        "blank",
+        "blank",
+		["row", [["achievement", 11],["achievement", 12],["achievement", 13],["achievement", 14],["achievement", 15]]],
+		["row", [["achievement", 21],["achievement", 22],["achievement", 23],["achievement", 24],["achievement", 25]]],
+		["row", [["achievement", 31],["achievement", 32],["achievement", 33],["achievement", 34],["achievement", 35]]],
+		["row", [["achievement", 41],["achievement", 42],["achievement", 43],["achievement", 44],["achievement", 45]]],
+		["row", [["achievement", 101],["clickable", 101],["achievement", 102],["clickable", 102],["achievement", 103],["achievement", 104],["achievement", 105]]],
+    ],
+})
+
+addLayer("a_add", {
+    name: "Achievement Addition",
+    symbol: "AA",
+    position: 3,
+    startData() { return {
+        unlocked: true,
+    }},
+    color: "FFFFFF",
+    resource: "Achievement",
+    type: "none",
+    row: "side", 
+    layerShown(){return true},
+	update(diff) {
+		player.a.hpmax = new Decimal(0)
+		if(hasAchievement("a",11)){player.a.hpmax = player.a.hpmax.add(1)}
+		if(hasAchievement("a",12)){player.a.hpmax = player.a.hpmax.add(4)}
+		if(hasAchievement("a",13)){player.a.hpmax = player.a.hpmax.add(15)}
+		if(hasAchievement("a",14)){player.a.hpmax = player.a.hpmax.add(30)}
+		if(hasAchievement("a",15)){player.a.hpmax = player.a.hpmax.add(50)}
+		if(hasAchievement("a",104)){player.a.hpmax = player.a.hpmax.add(1)}
+		if(hasAchievement("a",105)){player.a.hpmax = player.a.hpmax.add(4)}
+		player.a.mpmax = new Decimal(0)
+		if(hasAchievement("a",21)){player.a.mpmax = player.a.mpmax.add(1)}
+		if(hasAchievement("a",22)){player.a.mpmax = player.a.mpmax.add(3)}
+		if(hasAchievement("a",23)){player.a.mpmax = player.a.mpmax.add(6)}
+		if(hasAchievement("a",24)){player.a.mpmax = player.a.mpmax.add(10)}
+		if(hasAchievement("a",25)){player.a.mpmax = player.a.mpmax.add(20)}
+		player.a.cheap = new Decimal(0)
+		if(hasAchievement("a",31)){player.a.cheap = player.a.cheap.add(1)}
+		if(hasAchievement("a",32)){player.a.cheap = player.a.cheap.add(2)}
+		if(hasAchievement("a",33)){player.a.cheap = player.a.cheap.add(3)}
+		if(hasAchievement("a",34)){player.a.cheap = player.a.cheap.add(4)}
+		if(hasAchievement("a",35)){player.a.cheap = player.a.cheap.add(5)}
+		player.a.gain_point = new Decimal(0)
+		if(hasAchievement("a",41)){player.a.gain_point = player.a.gain_point.add(1)}
+		if(hasAchievement("a",42)){player.a.gain_point = player.a.gain_point.add(1)}
+		if(hasAchievement("a",43)){player.a.gain_point = player.a.gain_point.add(1)}
+		if(hasAchievement("a",44)){player.a.gain_point = player.a.gain_point.add(2)}
+		if(hasAchievement("a",45)){player.a.gain_point = player.a.gain_point.add(5)}
+		if(hasAchievement("a",101)){player.a.gain_point = player.a.gain_point.add(1)}
+		if(hasAchievement("a",102)){player.a.gain_point = player.a.gain_point.add(2)}
+		if(hasAchievement("a",103)){player.a.gain_point = player.a.gain_point.add(1)}
+	},
+	clickables: {
+		1:{
+			title:"返回成就",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){showTab("a")},
+		},
+	},
+	tabFormat: [
         ["row", [["clickable", 1]]],
         "blank",
         "blank",
         "blank",
-        "achievements",
+		["display-text",function(){return player.a.hpmax.gt(0) ? `<big><big>血量加成(关卡1生效):+`+format(player.a.hpmax,0) : ``},],
+		["display-text",function(){return player.a.mpmax.gt(0) ? `<big><big>魔力加成(关卡1生效):+`+format(player.a.mpmax,0) : ``},],
+		["display-text",function(){return player.a.cheap.gt(0) ? `<big><big>商店价格:-`+format(player.a.cheap,0)+`$` : ``},],
+		["display-text",function(){return player.a.gain_point.gt(0) ? `<big><big>分数加成:+`+format(player.a.gain_point,0)+`%` : ``},],
     ],
 })
-
-
 
 /*
 addLayer("talent_crystal", {

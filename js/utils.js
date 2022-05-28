@@ -118,6 +118,14 @@ function clickClickable(layer, id) {
 	updateClickableTemp(layer)
 }
 
+function clickAchievements(layer, id) {
+	if (!player[layer].unlocked || tmp[layer].deactivated) return
+	if (!tmp[layer].achievements[id].unlocked) return
+	if (!tmp[layer].achievements[id].canClick) return
+
+	run(layers[layer].achievements[id].onClick, layers[layer].achievements[id])
+}
+
 function clickGrid(layer, id) {
 	if (!player[layer].unlocked  || tmp[layer].deactivated) return
 	if (!run(layers[layer].grid.getUnlocked, layers[layer].grid, id)) return

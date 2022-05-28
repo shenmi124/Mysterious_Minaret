@@ -30,7 +30,7 @@ function ResetPoint(){
 	let poi2 = player.data.money.mul(15)
 	let poi3 = player.data.hpmax.div(15).add(player.data.mpmax.div(4.5)).add(player.data.psmax.div(0.45))
 	let poi8 = player.data.maxcard.mul(80)
-	player.point.points = new Decimal(poi1).add(poi2).add(poi3).add(poi4).add(poi8).floor()
+	player.point.points = new Decimal(poi1).add(poi2).add(poi3).add(poi4).add(poi8).mul(player.a.gain_point.div(100).add(1)).floor()
 	if(player.point.points.gte(player.point.tob_points)){
 		player.point.tob_points = new Decimal(player.point.points)
 	}

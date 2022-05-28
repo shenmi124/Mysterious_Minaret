@@ -472,6 +472,7 @@ function reonc(id){
 		if(player.data['display'+id].eq(27)){
 			//嗜血斩
 			attributes(0,0,-3,Decimal.min(player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150),200).floor(),0,0,"card")
+			player.a.ha5 = new Decimal.min(player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150),200).floor()
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,27,true,true)
 			return
