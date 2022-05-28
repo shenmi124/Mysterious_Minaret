@@ -234,6 +234,14 @@ function rehardReset(){
 	}
 }
 
+function a_softReset(){
+	if (!!confirm("改变此选项会进行一次软重置?那样你本局游戏就会重置.且无法获得分数.成就,总分将保留")){
+		layerDataReset('data')
+		layerDataReset('mil')
+		toggleOpt('a_addition')
+	}
+}
+
 function backnone(){
 	if(player.data.dedead == true){
 		showTab("over")

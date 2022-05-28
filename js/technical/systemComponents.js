@@ -162,6 +162,11 @@ var systemComponents = {
 				<td><big><big>操作</td>
 				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">按住shift点击永久显示悬浮框: {{ options.forceTooltips?"开":"关" }}</button></td>
 			</tr>
+			<br>
+			<tr>
+				<td><big><big>特殊</td>
+				<td><button class="opt" onclick="a_softReset()">成就属性加成: {{ options.a_addition?"开":"关" }}</button></td>
+			</tr>
         </table>`
     },
 

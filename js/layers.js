@@ -1673,7 +1673,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.3.38b</div>
+				v0.1.3.41b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -2449,7 +2449,7 @@ addLayer("a", {
         ["display-text",
             function() { return `你总共获得了 ${player.a.achievements.length} 个成就` },
             { "color": 'yellow', "font-size": "32px", "font-family": "Comic Sans MS" }],
-		["display-text",function(){return `你可以在设置打开/关闭成就加成`},],
+		["display-text",function(){return `<big>你可以在设置打开/关闭成就加成`},],
         ["row", [["clickable", 1]]],
 		["row", [["clickable", 2]]],
         "blank",
