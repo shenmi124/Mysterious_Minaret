@@ -1674,12 +1674,13 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.3.42b</div>
+				v0.1.3.44b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
 			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
 			<img id="afdian" class="overlayThing" src="png/afdian.png" onclick="showTab('afdian')"></img>
+			<img id="trophy" class="overlayThing" src="png/trophy.png" onclick="showTab('a')"></img>
 			</div>
 		`}],
 		"blank",
