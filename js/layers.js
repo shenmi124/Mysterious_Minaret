@@ -1673,7 +1673,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.3.41b</div>
+				v0.1.3.42b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1875,6 +1875,7 @@ addLayer("mil", {
 		m16:new Decimal(1),
 		m17:new Decimal(1),
 		m18:new Decimal(1),
+		m19:new Decimal(1),
     }},
 	update(diff) {
 		if(hasMilestone("mil",1)){
@@ -1947,7 +1948,11 @@ addLayer("mil", {
 		}
 		if(hasMilestone("mil",18)){
 			player.mil.milestones = deleter(player.mil.milestones,["18"])
-			player.mil.m18 = player.mil.m7.add(1)
+			player.mil.m18 = player.mil.m18.add(1)
+		}
+		if(hasMilestone("mil",19)){
+			player.mil.milestones = deleter(player.mil.milestones,["19"])
+			player.mil.m19 = player.mil.m19.add(1)
 		}
 	},
     color: "#FFFFFF",
@@ -1991,16 +1996,22 @@ addLayer("mil", {
 				return player.data.Rare_Artifacts[1].gte(player.mil['m'+this.id])
 			},
 		},
+		19: {
+			requirementDescription: "预备防御<br><h6>开局获得35护甲",
+			done() {
+				return player.data.Rare_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
 		7: {
 			requirementDescription: "圣盾<br><h6>回合结束每有2护甲恢复1血",
 			done() {
-				return player.data.Rare_Artifacts[2].gte(player.mil['m'+this.id])
+				return player.data.Rare_Artifacts[3].gte(player.mil['m'+this.id])
 			},
 		},
 		8: {
 			requirementDescription: "蓝色药剂<br><h6>每回合恢复3魔力",
 			done() {
-				return player.data.Rare_Artifacts[3].gte(player.mil['m'+this.id])
+				return player.data.Rare_Artifacts[4].gte(player.mil['m'+this.id])
 			},
 		},
 		9: {
