@@ -6,9 +6,9 @@ function effectdisplay(id){
 	if(id == 4){return "感染:中毒每回合加一层<br><br>"+effectdisplay(3)}
 	if(id == 5){return "眩晕:此回合无法攻击,抽排,每回合减少一层<br><br>"}
 	if(id == 6){return "魔力枯竭:此回合无法获得魔力,每回合减少一层<br><br>"}
-	if(id == 7){return "焱:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+"卐:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+effectdisplay(9)}
-	if(id == 8){return "炎:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 对应属性伤害,回合结束将所有效果 卐 变为 效果 卍<br><br>"+"卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 卍 变为 效果 卐<br><br>"+effectdisplay(9)}
-	if(id == 9){return "焕:和效果 卐 搭配使用<br><br>"}
+	if(id == 7){return "焱:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 焱 变为 效果 炎<br><br>"+"炎:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 物理伤害,回合结束将所有效果 炎 变为 效果 焱<br><br>"+effectdisplay(9)}
+	if(id == 8){return "炎:敌方每次被攻击时若有焕则移除 1 焕并格外造成 3 对应属性伤害,回合结束将所有效果 炎 变为 效果 焱<br><br>"+"卍:敌方每次被攻击时给予敌方 1 焕,回合结束将所有效果 焱 变为 效果 炎<br><br>"+effectdisplay(9)}
+	if(id == 9){return "焕:和效果 炎 搭配使用<br><br>"}
 	if(id == 10){return"布朗魔术:达到2时格外行动一回合,之后触发条件*2<br><br>"}
 	if(id == 11){return"混乱:看不见血,体力,魔力,卡牌名字,卡牌效果,卡牌消耗<br><br>"}
 	if(id == 12){return"魔力再生:回话结束恢复层级魔力<br><br>"}
@@ -2449,7 +2449,7 @@ addLayer("a", {
                 return player.a.ha5.gte(200) && player.data.Super_Rare_Artifacts[1].gte(2)
 			},
             tooltip() {
-                return hasAchievement("a",105) ? "嗜血成疾<br>用嗜血斩打出200攻击并通过吸血鬼尖牙吸取至少等量的血量<br>西方恶魔<br>奖励:到达关卡1时+4血上限" : "这是个隐藏成就"
+                return hasAchievement("a",105) ? "嗜血成疾<br>用嗜血斩打出200攻击并通过吸血鬼尖牙吸取至少等量的血量<br>奖励:到达关卡1时+4血上限" : "这是个隐藏成就"
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)
