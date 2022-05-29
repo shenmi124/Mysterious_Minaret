@@ -445,6 +445,7 @@ addLayer("data", {
 			player.data.dedead = true
 			player.data.newlevel = true
 			player.data.remove_removals = false
+			player.data.start = false
 			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
 			player.data.storeawardrandom = new Decimal(Math.floor((Math.random() * 100)))
 			if(player.data.artifactsawardrandom.lte(25)){
