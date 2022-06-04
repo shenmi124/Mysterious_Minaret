@@ -1,5 +1,5 @@
 function card_consumption(ps,mp,hp){
-	return player.data.ps.gte(ps) && player.data.mp.gte(mp) && player.data.hp.gte(Decimal.add(hp).add(1))
+	return player.data.ps.gte(ps) && player.data.mp.gte(mp) && player.data.hp.gte(Decimal.add(hp).add(1).sub(player.data.effect[14]))
 }
 
 function attributes(hp,mp,ps,atk,mtk,de,sytlehp){

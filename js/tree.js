@@ -80,8 +80,8 @@ function levelnew(){
 	if(player.data.Normal_Artifacts[2].gt(0)){mpmaxadd0 = player.data.Normal_Artifacts[2].mul(9)}
 	if(player.data.Normal_Artifacts[3].gt(0)){hpmaxadd1 = player.data.money.div(10).floor().mul(player.data.Normal_Artifacts[3])}
 	if(player.data.Super_Rare_Artifacts[0].gt(0)){psmaxadd0 = player.data.Super_Rare_Artifacts[0]}
-	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1000)).add(player.data.card38hpmax).add(player.a.hpmax)
-	player.data.mpmax = new Decimal(30).add(mpmaxadd0).add(player.a.mpmax)
+	player.data.hpmax = new Decimal(100).add(hpmaxadd0).add(hpmaxadd1).add(player.data.hpmaxadd2.min(1000)).add(player.data.card38hpmax)
+	player.data.mpmax = new Decimal(30).add(mpmaxadd0)
 	player.data.psmax = new Decimal(3).add(psmaxadd0)
 	
 	let startatk = player.data.Rare_Artifacts[1].gte(1) ? player.data.Rare_Artifacts[1].mul(35) : 0
@@ -93,6 +93,152 @@ function levelnew(){
 	player.data.ps = new Decimal(player.data.psmax)
 	
 	player.data.maxcard = new Decimal(10).add(player.data.Rare_Artifacts_Sole[1].mul(4))
+}
+
+function carddeg(i){
+	var all_amount = player.data.holdcard
+	var deg = i
+	for(col3=1;col3<=20;col3++){
+		if(col3 == i){
+			col3 = 999
+		}else if(player.data['display'+col3].eq(0)){
+			deg = deg.sub(1)
+		}
+	}
+	for(col2=1;col2<=20;col2++){
+		if(col2 == i){
+			if(deg.eq(all_amount.add(1).div(2))){
+				return `rotate(0deg)`
+			}else if(deg.lte(all_amount.mul(0.5))){
+				let a = all_amount.div(2).sub(deg).mul(7)
+				return `rotate(${Decimal.add(0).sub(a)}deg)`
+			}else if(deg.gte(all_amount.mul(0.5))){
+				let a = deg.sub(all_amount.add(2).div(2)).mul(7)
+				return `rotate(${Decimal.add(0).add(a)}deg)`
+			}
+		}
+	}
+}
+
+function cardtop(i){
+	var all_amount = player.data.holdcard
+	var deg = i
+	for(col3=1;col3<=20;col3++){
+		if(col3 == i){
+			col3 = 999
+		}else if(player.data['display'+col3].eq(0)){
+			deg = deg.sub(1)
+		}
+	}
+	for(col2=1;col2<=20;col2++){
+		if(col2 == i){
+			if(deg.eq(all_amount.add(1).div(2))){
+				return `0px`
+			}else if(deg.lte(all_amount.mul(0.5))){
+				let a = all_amount.div(2).sub(deg).mul(30)
+				let b = all_amount.div(2).sub(deg).floor()
+				if(b==1){b = -10}
+				if(b==2){b = -5}
+				if(b==3){b = 20}
+				if(b==4){b = 60}
+				return `${Decimal.add(0).add(a).add(b)}px`
+			}else if(deg.gte(all_amount.mul(0.5))){
+				let a = deg.sub(all_amount.add(2).div(2)).mul(30)
+				let b = deg.sub(all_amount.add(2).div(2)).floor()
+				if(b==1){b = -10}
+				if(b==2){b = -5}
+				if(b==3){b = 20}
+				if(b==4){b = 60}
+				return `${Decimal.add(0).add(a).add(b)}px`
+			}
+		}
+	}
+}
+
+function rotateDeg(){
+	var rotateDeg1 = carddeg(new Decimal(1))
+	var rotateDeg2 = carddeg(new Decimal(2))
+	var rotateDeg3 = carddeg(new Decimal(3))
+	var rotateDeg4 = carddeg(new Decimal(4))
+	var rotateDeg5 = carddeg(new Decimal(5))
+	var rotateDeg6 = carddeg(new Decimal(6))
+	var rotateDeg7 = carddeg(new Decimal(7))
+	var rotateDeg8 = carddeg(new Decimal(8))
+	var rotateDeg9 = carddeg(new Decimal(9))
+	var rotateDeg10 = carddeg(new Decimal(10))
+	var rotateDeg11 = carddeg(new Decimal(11))
+	var rotateDeg12 = carddeg(new Decimal(12))
+	var rotateDeg13 = carddeg(new Decimal(13))
+	var rotateDeg14 = carddeg(new Decimal(14))
+	var rotateDeg15 = carddeg(new Decimal(15))
+	var rotateDeg16 = carddeg(new Decimal(16))
+	var rotateDeg17 = carddeg(new Decimal(17))
+	var rotateDeg18 = carddeg(new Decimal(18))
+	var rotateDeg19 = carddeg(new Decimal(19))
+	var rotateDeg20 = carddeg(new Decimal(20))
+	document.body.style.setProperty("--styleRotateDeg1", rotateDeg1);
+	document.body.style.setProperty("--styleRotateDeg2", rotateDeg2);
+	document.body.style.setProperty("--styleRotateDeg3", rotateDeg3);
+	document.body.style.setProperty("--styleRotateDeg4", rotateDeg4);
+	document.body.style.setProperty("--styleRotateDeg5", rotateDeg5);
+	document.body.style.setProperty("--styleRotateDeg6", rotateDeg6);
+	document.body.style.setProperty("--styleRotateDeg7", rotateDeg7);
+	document.body.style.setProperty("--styleRotateDeg8", rotateDeg8);
+	document.body.style.setProperty("--styleRotateDeg9", rotateDeg9);
+	document.body.style.setProperty("--styleRotateDeg10", rotateDeg10);
+	document.body.style.setProperty("--styleRotateDeg11", rotateDeg11);
+	document.body.style.setProperty("--styleRotateDeg12", rotateDeg12);
+	document.body.style.setProperty("--styleRotateDeg13", rotateDeg13);
+	document.body.style.setProperty("--styleRotateDeg14", rotateDeg14);
+	document.body.style.setProperty("--styleRotateDeg15", rotateDeg15);
+	document.body.style.setProperty("--styleRotateDeg16", rotateDeg16);
+	document.body.style.setProperty("--styleRotateDeg17", rotateDeg17);
+	document.body.style.setProperty("--styleRotateDeg18", rotateDeg18);
+	document.body.style.setProperty("--styleRotateDeg19", rotateDeg19);
+	document.body.style.setProperty("--styleRotateDeg20", rotateDeg20);
+}
+
+function retateTop(){
+	var rotateTop1 = cardtop(new Decimal(1))
+	var rotateTop2 = cardtop(new Decimal(2))
+	var rotateTop3 = cardtop(new Decimal(3))
+	var rotateTop4 = cardtop(new Decimal(4))
+	var rotateTop5 = cardtop(new Decimal(5))
+	var rotateTop6 = cardtop(new Decimal(6))
+	var rotateTop7 = cardtop(new Decimal(7))
+	var rotateTop8 = cardtop(new Decimal(8))
+	var rotateTop9 = cardtop(new Decimal(9))
+	var rotateTop10 = cardtop(new Decimal(10))
+	var rotateTop11 = cardtop(new Decimal(11))
+	var rotateTop12 = cardtop(new Decimal(12))
+	var rotateTop13 = cardtop(new Decimal(13))
+	var rotateTop14 = cardtop(new Decimal(14))
+	var rotateTop15 = cardtop(new Decimal(15))
+	var rotateTop16 = cardtop(new Decimal(16))
+	var rotateTop17 = cardtop(new Decimal(17))
+	var rotateTop18 = cardtop(new Decimal(18))
+	var rotateTop19 = cardtop(new Decimal(19))
+	var rotateTop20 = cardtop(new Decimal(20))
+	document.body.style.setProperty("--styleRotateTop1", rotateTop1);
+	document.body.style.setProperty("--styleRotateTop2", rotateTop2);
+	document.body.style.setProperty("--styleRotateTop3", rotateTop3);
+	document.body.style.setProperty("--styleRotateTop4", rotateTop4);
+	document.body.style.setProperty("--styleRotateTop5", rotateTop5);
+	document.body.style.setProperty("--styleRotateTop6", rotateTop6);
+	document.body.style.setProperty("--styleRotateTop7", rotateTop7);
+	document.body.style.setProperty("--styleRotateTop8", rotateTop8);
+	document.body.style.setProperty("--styleRotateTop9", rotateTop9);
+	document.body.style.setProperty("--styleRotateTop10", rotateTop10);
+	document.body.style.setProperty("--styleRotateTop11", rotateTop11);
+	document.body.style.setProperty("--styleRotateTop12", rotateTop12);
+	document.body.style.setProperty("--styleRotateTop13", rotateTop13);
+	document.body.style.setProperty("--styleRotateTop14", rotateTop14);
+	document.body.style.setProperty("--styleRotateTop15", rotateTop15);
+	document.body.style.setProperty("--styleRotateTop16", rotateTop16);
+	document.body.style.setProperty("--styleRotateTop17", rotateTop17);
+	document.body.style.setProperty("--styleRotateTop18", rotateTop18);
+	document.body.style.setProperty("--styleRotateTop19", rotateTop19);
+	document.body.style.setProperty("--styleRotateTop20", rotateTop20);
 }
 
 var layoutInfo = {
@@ -664,12 +810,6 @@ addLayer("tree-tab", {
 				return effde + eff0 + eff1 + eff2 + eff3 + eff4 + eff5 + eff6 + eff7 + eff8 + eff9 + eff10 + eff11 + eff12 + eff13 + eff14
 			}
 		},
-		1023:{
-			canClick(){return false},
-			unlocked(){return true},
-			onClick(){return},
-			style() {return {'height': "170px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00" }},
-		},
 		1001:{
 			title: "开始!",
 			display() {
@@ -707,7 +847,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg1)', 'top': 'var(--styleRotateTop1)'}},
 		},
 		2:{
 			title(){return retit('display',this.id)},
@@ -715,7 +855,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg2)', 'top': 'var(--styleRotateTop2)'}},
 		},
 		3:{
 			title(){return retit('display',this.id)},
@@ -723,7 +863,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg3)', 'top': 'var(--styleRotateTop3)'}},
 		},
 		4:{
 			title(){return retit('display',this.id)},
@@ -731,7 +871,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg4)', 'top': 'var(--styleRotateTop4)'}},
 		},
 		5:{
 			title(){return retit('display',this.id)},
@@ -739,7 +879,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg5)', 'top': 'var(--styleRotateTop5)'}},
 		},
 		6:{
 			title(){return retit('display',this.id)},
@@ -747,7 +887,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg6)', 'top': 'var(--styleRotateTop6)'}},
 		},
 		7:{
 			title(){return retit('display',this.id)},
@@ -755,7 +895,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg7)', 'top': 'var(--styleRotateTop7)'}},
 		},
 		8:{
 			title(){return retit('display',this.id)},
@@ -763,7 +903,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg8)', 'top': 'var(--styleRotateTop8)'}},
 		},
 		9:{
 			title(){return retit('display',this.id)},
@@ -771,7 +911,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg9)', 'top': 'var(--styleRotateTop9)'}},
 		},
 		10:{
 			title(){return retit('display',this.id)},
@@ -779,7 +919,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg10)', 'top': 'var(--styleRotateTop10)'}},
 		},
 		11:{
 			title(){return retit('display',this.id)},
@@ -787,7 +927,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg11)', 'top': 'var(--styleRotateTop11)'}},
 		},
 		12:{
 			title(){return retit('display',this.id)},
@@ -795,7 +935,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg12)', 'top': 'var(--styleRotateTop12)'}},
 		},
 		13:{
 			title(){return retit('display',this.id)},
@@ -803,7 +943,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg13)', 'top': 'var(--styleRotateTop13)'}},
 		},
 		14:{
 			title(){return retit('display',this.id)},
@@ -811,7 +951,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg14)', 'top': 'var(--styleRotateTop14)'}},
 		},
 		15:{
 			title(){return retit('display',this.id)},
@@ -819,7 +959,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg15)', 'top': 'var(--styleRotateTop15)'}},
 		},
 		16:{
 			title(){return retit('display',this.id)},
@@ -827,7 +967,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg16)', 'top': 'var(--styleRotateTop16)'}},
 		},
 		17:{
 			title(){return retit('display',this.id)},
@@ -835,7 +975,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg17)', 'top': 'var(--styleRotateTop17)'}},
 		},
 		18:{
 			title(){return retit('display',this.id)},
@@ -843,7 +983,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg18)', 'top': 'var(--styleRotateTop18)'}},
 		},
 		19:{
 			title(){return retit('display',this.id)},
@@ -851,7 +991,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg19)', 'top': 'var(--styleRotateTop19)'}},
 		},
 		20:{
 			title(){return retit('display',this.id)},
@@ -859,7 +999,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px'}},
+			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg20)', 'top': 'var(--styleRotateTop20)'}},
 		},
 	},
 	tabFormat: [
@@ -948,7 +1088,7 @@ addLayer("tree-tab", {
 					return monster0 + monster1 + monster2 + monster3 + monster4 + monster5 + monster6
 				}],
 				["row", [["clickable", 1022]]],
-				["row", [["clickable", 1023]]],
+				["blank", '170px'],
 				["row", [
 					["column",[
 						["bar", "hpbar"],
@@ -968,6 +1108,7 @@ addLayer("tree-tab", {
 				]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
+				["blank", '70px'],
 				["row", [["clickable", 1001],["clickable", 1002],["clickable", 99]]],
 				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013],["clickable", 1007],["clickable", 1024]]],
 			]],
