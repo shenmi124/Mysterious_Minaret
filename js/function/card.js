@@ -300,6 +300,7 @@ function reonc(id){
 			player.data.effect[6] = player.data.effect[6].add(4)
 			let a = player.data.mp
 			attributes(0,-a,0,0,a,0,"card")
+			player.data['display'+id] = new Decimal(0)
 			card_usage(id,15,true,true)
 			return
 		}
