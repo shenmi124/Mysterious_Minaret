@@ -109,10 +109,10 @@ function carddeg(i){
 		if(col2 == i){
 			if(deg.eq(all_amount.add(1).div(2))){
 				return `rotate(0deg)`
-			}else if(deg.lte(all_amount.mul(0.5))){
+			}else if(deg.lt(all_amount.mul(0.5))){
 				let a = all_amount.div(2).sub(deg).mul(7)
 				return `rotate(${Decimal.add(0).sub(a)}deg)`
-			}else if(deg.gte(all_amount.mul(0.5))){
+			}else if(deg.gt(all_amount.mul(0.5))){
 				let a = deg.sub(all_amount.add(2).div(2)).mul(7)
 				return `rotate(${Decimal.add(0).add(a)}deg)`
 			}
@@ -123,35 +123,39 @@ function carddeg(i){
 function cardtop(i){
 	var all_amount = player.data.holdcard
 	var deg = i
-	for(col3=1;col3<=20;col3++){
-		if(col3 == i){
-			col3 = 999
-		}else if(player.data['display'+col3].eq(0)){
-			deg = deg.sub(1)
-		}
-	}
-	for(col2=1;col2<=20;col2++){
-		if(col2 == i){
-			if(deg.eq(all_amount.add(1).div(2))){
-				return `0px`
-			}else if(deg.lte(all_amount.mul(0.5))){
-				let a = all_amount.div(2).sub(deg).mul(30)
-				let b = all_amount.div(2).sub(deg).floor()
-				if(b==1){b = -10}
-				if(b==2){b = -5}
-				if(b==3){b = 20}
-				if(b==4){b = 60}
-				return `${Decimal.add(0).add(a).add(b)}px`
-			}else if(deg.gte(all_amount.mul(0.5))){
-				let a = deg.sub(all_amount.add(2).div(2)).mul(30)
-				let b = deg.sub(all_amount.add(2).div(2)).floor()
-				if(b==1){b = -10}
-				if(b==2){b = -5}
-				if(b==3){b = 20}
-				if(b==4){b = 60}
-				return `${Decimal.add(0).add(a).add(b)}px`
+	if(tmp[this.layer].clickables[i].unlocked){
+		for(col3=1;col3<=20;col3++){
+			if(col3 == i){
+				col3 = 999
+			}else if(player.data['display'+col3].eq(0)){
+				deg = deg.sub(1)
 			}
 		}
+		for(col2=1;col2<=20;col2++){
+			if(col2 == i){
+				if(deg.eq(all_amount.add(1).div(2))){
+					return `0px`
+				}else if(deg.lte(all_amount.mul(0.5))){
+					let a = all_amount.div(2).sub(deg).mul(30)
+					let b = all_amount.div(2).sub(deg).floor()
+					if(b==1){b = -10}
+					if(b==2){b = -5}
+					if(b==3){b = 20}
+					if(b==4){b = 60}
+					return `${Decimal.add(0).add(a).add(b)}px`
+				}else if(deg.gte(all_amount.mul(0.5))){
+					let a = deg.sub(all_amount.add(2).div(2)).mul(30)
+					let b = deg.sub(all_amount.add(2).div(2)).floor()
+					if(b==1){b = -10}
+					if(b==2){b = -5}
+					if(b==3){b = 20}
+					if(b==4){b = 60}
+					return `${Decimal.add(0).add(a).add(b)}px`
+				}
+			}
+		}
+	}else{
+		return `250px`
 	}
 }
 
