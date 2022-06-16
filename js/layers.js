@@ -160,12 +160,10 @@ addLayer("afdian", {
 			canClick(){return true},
 			unlocked(){return true},
 			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
-			onClick(){showTab("none")},
+			onClick(){backnone()},
 		},
 	},
 	tabFormat: [
-        "main-display",
-        "prestige-button",
 		"clickables",
 		"blank",
         ["display-text", function() {return `<a class="link" href="https://afdian.net/@Mysterious124" target="_blank">点我跳转到捐助页面 Jump directly to the donation page</a>`}],
@@ -174,8 +172,6 @@ addLayer("afdian", {
 		["display-text", function() {return `<big><big>感谢游玩的游戏 think you playing`}],
 		["display-text", function() {return `<big><big>邮箱(e-mail) 67265011@qq.com`}],
 		["display-text", function() {return `<big><big>↑你可以在这里把你的想法告诉我(尤其是多语言化,我会帮你找办法) You can tell me what you think here (especially multilingual, I will help you find a way)↑`}],
-        "blank",
-        "upgrades"
     ]
 })
 
@@ -318,7 +314,7 @@ addLayer("data", {
 		new Decimal(0),new Decimal(0),
 		],
 		Special_Artifacts:[
-		new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		all_Normal_Artifacts:new Decimal(4),
 		all_Rare_Artifacts:new Decimal(5),
@@ -370,6 +366,7 @@ addLayer("data", {
 		display18copy:false,
 		display19copy:false,
 		display20copy:false,
+		alldisplay:new Decimal(20),
 		
 		cardget1:new Decimal(0),
 		cardget2:new Decimal(0),
@@ -401,7 +398,6 @@ addLayer("data", {
 		store_card24_canClick:true,
 		
 		artifactsawardrandom:new Decimal(0),
-		storeawardrandom:new Decimal(0),
 		
 		start:true,
 		dedead:false,
@@ -412,6 +408,7 @@ addLayer("data", {
 		storeaward:false,
 		
 		newlevel:false,
+		newmap:false,
 		backdeckCD:false,
 		level:new Decimal(0),
 		
@@ -429,6 +426,8 @@ addLayer("data", {
 		Special_Artifacts0:new Decimal(0),
 		
 		themes_light:false,
+		
+		initialize:false,
     }},
 	update(diff) {
 		save()
@@ -447,12 +446,8 @@ addLayer("data", {
 			player.data.remove_removals = false
 			player.data.start = false
 			player.data.artifactsawardrandom = new Decimal(Math.floor((Math.random() * 100)))
-			player.data.storeawardrandom = new Decimal(Math.floor((Math.random() * 100)))
-			if(player.data.artifactsawardrandom.lte(25)){
+			if(player.data.artifactsawardrandom.lte(5)){
 				player.data.artifactsaward = true
-			}
-			if(player.data.storeawardrandom.lte(20)){
-				store_card()
 			}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hpmaxadd2 = player.data.hpmaxadd2.add(Decimal.add(35).mul(player.data.Ultra_Rare_Artifacts[0]))}
 			if(player.data.Ultra_Rare_Artifacts[0].gt(0)){player.data.hp = player.data.hp.add(Decimal.add(50).mul(player.data.Ultra_Rare_Artifacts[0]))}
@@ -462,6 +457,9 @@ addLayer("data", {
 				player.data.Special_Artifacts0 = player.data.Special_Artifacts0.add(1)
 			}
 			player.data.effect[11] = new Decimal(0)
+			if(!player.data.monster.eq(0)){
+				player.data.artifactsaward = true
+			}
 		}
 		if(player.data.hp.lte(0) && player.data.Special_Artifacts0.gte(4) && player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)){
 			player.data.Special_Artifacts0 = player.data.Special_Artifacts0.sub(4)
@@ -540,6 +538,1476 @@ addLayer("data", {
     type: "none",
     row: "side",
     layerShown(){return false},
+})
+
+addLayer("over", {
+    name: "over",
+    symbol: "<h6>过度",
+	tooltip() { 
+		return `过度`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		2:{
+			title: "钱!",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.moneyaward == true && player.data.start == false && player.data.hp.gt(0)},
+			onClick(){return awardmoney()},
+		},
+		3:{
+			title: "牌!",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.cardaward == true && player.data.start == false && player.data.hp.gt(0)},
+			onClick(){return awardcard("cardget",3)},
+		},
+		4:{
+			title: "去往下一层!<br><h6>到达下一层无法再获得本关的钱和牌",
+			display() {
+			},
+			canClick(){return true},
+			unlocked(){return player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return layernew()},
+		},
+		1011:{
+			title(){return "获得"+retit("cardget",this.id-1010)},
+			display(){return redis("cardget",this.id-1010)},
+			canClick(){return true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return recardonc(this.id-1010)},
+			style() {return {'height': "200px",'width': '150px'}},
+		},
+		1012:{
+			title(){return "获得"+retit("cardget",this.id-1010)},
+			display(){return redis("cardget",this.id-1010)},
+			canClick(){return true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return recardonc(this.id-1010)},
+			style() {return {'height': "200px",'width': '150px'}},
+		},
+		1013:{
+			title(){return "获得"+retit("cardget",this.id-1010)},
+			display(){return redis("cardget",this.id-1010)},
+			canClick(){return true},
+			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
+			onClick(){return recardonc(this.id-1010)},
+			style() {return {'height': "200px",'width': '150px'}},
+		},
+		99:{
+			title(){return "宝箱!"},
+			canClick(){return true},
+			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
+			onClick(){return awardartifacts()},
+		},
+	},
+	bars:{
+		hpbar:{
+			display() {
+				let dis1 = "你的血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0)
+				return dis1
+			},	
+			direction: RIGHT,
+			width: 500,
+			height: 25,
+			unlocked(){return true},
+			progress(){return player.data.effect[11].lte(0) ? (player.data.hp.div(player.data.hpmax)).toNumber() : true},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#ec1c24"},
+			textStyle: {"color": "#000000"}
+		},
+		dehpbar:{
+			display() {return "敌方血量 "+format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)},	
+			direction: RIGHT,
+			width: 500,
+			height: 25,
+			unlocked(){return true},
+			progress(){return (player.data.dehp.div(player.data.dehpmax)).toNumber()},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#ec1c24"},
+			textStyle: {"color": "#000000"}
+		},
+		moneybar:{
+			display() {return format(player.data.money,0)+"$"},	
+			direction: RIGHT,
+			width: 76,
+			height: 54,
+			unlocked(){return true},
+			progress(){return true},
+			baseStyle: {"background-color": "#FFFFFF"},
+			fillStyle: {"background-color": "#FFFFFF"},
+			textStyle: {"color": "#000000"}
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return `
+			<div id="treeOverlay" v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen || !readData(layoutInfo.showTree))" class="treeOverlay" onscroll="resizeCanvas()"
+			v-bind:class="{ 
+			fullWidth: (player.tab == 'none' || player.navTab == 'none'), 
+			col: (player.tab !== 'none' && player.navTab !== 'none'), 
+			left: (player.tab !== 'none' && player.navTab !== 'none')}"
+			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
+			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
+				v0.1.5.50b</div>
+			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
+			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
+			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
+			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
+			<img id="afdian" class="overlayThing" src="png/afdian.png" onclick="showTab('afdian')"></img>
+			<img id="trophy" class="overlayThing" src="png/trophy.png" onclick="showTab('a')"></img>
+			</div>
+		`}],
+		"blank",
+		"blank",
+		"blank",
+		["row", [
+			["column",[
+				["bar", "hpbar"],
+				["bar", "dehpbar"],
+			]],
+			["bar", "moneybar"],
+		]],
+		"blank",
+		"blank",
+		"blank",
+		["clickable", 4],
+		"blank",
+		"blank",
+		"blank",
+		["row", [["clickable", 2],["clickable", 3],["clickable", 99]]],
+		["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013]]],
+	],
+})
+
+addLayer("map", {
+    name: "map",
+    symbol: "<h6>地图",
+	tooltip() { 
+		return `地图`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+		x:new Decimal(5),
+		y:new Decimal(1),
+		
+		mapy1x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+		mapy2x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+		mapy3x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+		mapy4x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+		mapy5x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+		mapy6x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+		mapy7x:[
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)
+		],
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{		
+		11:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		12:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		13:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		14:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		15:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		16:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		17:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		18:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		19:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		21:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		22:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		23:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		24:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		25:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		26:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		27:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		28:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		29:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		31:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		32:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		33:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		34:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		35:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		36:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+			
+		},
+		37:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		38:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		39:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		41:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		42:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		43:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		44:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		45:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		46:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		47:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		48:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		49:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		51:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		52:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		53:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		54:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		55:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		56:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		57:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		58:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		59:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		61:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		62:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		63:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		64:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		65:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		66:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		67:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		68:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		69:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		71:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		72:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		73:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		74:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		75:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		76:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		77:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		78:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+		79:{
+			title(){return maptit(this.id)},
+			display(){return },
+			canClick(){return mapcan(player.map.x,player.map.y,this.id)},
+			unlocked(){return true},
+			onClick(){return maponc(this.id)},
+			style(){return {'border-color': mapsty(this.id)}}
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return `
+			<div id="treeOverlay" v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen || !readData(layoutInfo.showTree))" class="treeOverlay" onscroll="resizeCanvas()"
+			v-bind:class="{ 
+			fullWidth: (player.tab == 'none' || player.navTab == 'none'), 
+			col: (player.tab !== 'none' && player.navTab !== 'none'), 
+			left: (player.tab !== 'none' && player.navTab !== 'none')}"
+			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
+			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
+				v0.1.5.50b</div>
+			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
+			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
+			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
+			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
+			<img id="afdian" class="overlayThing" src="png/afdian.png" onclick="showTab('afdian')"></img>
+			<img id="trophy" class="overlayThing" src="png/trophy.png" onclick="showTab('a')"></img>
+			</div>
+		`}],
+		["row", [["clickable", 71],["clickable", 72],["clickable", 73],["clickable", 74],["clickable", 75],["clickable", 76],["clickable", 77],["clickable", 78],["clickable", 79]]],
+		["row", [["clickable", 61],["clickable", 62],["clickable", 63],["clickable", 64],["clickable", 65],["clickable", 66],["clickable", 67],["clickable", 68],["clickable", 69]]],
+		["row", [["clickable", 51],["clickable", 52],["clickable", 53],["clickable", 54],["clickable", 55],["clickable", 56],["clickable", 57],["clickable", 58],["clickable", 59]]],
+		["row", [["clickable", 41],["clickable", 42],["clickable", 43],["clickable", 44],["clickable", 45],["clickable", 46],["clickable", 47],["clickable", 48],["clickable", 49]]],
+		["row", [["clickable", 31],["clickable", 32],["clickable", 33],["clickable", 34],["clickable", 35],["clickable", 36],["clickable", 37],["clickable", 38],["clickable", 39]]],
+		["row", [["clickable", 21],["clickable", 22],["clickable", 23],["clickable", 24],["clickable", 25],["clickable", 26],["clickable", 27],["clickable", 28],["clickable", 29]]],
+		["row", [["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19]]],
+	],
+})
+
+addLayer("store", {
+    name: "store",
+    symbol: "<h6>商店",
+	tooltip() { 
+		return `商店`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		1:{
+			title:"返回",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){backnone()},
+		},
+		11:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		12:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		13:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		14:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		21:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		22:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		23:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+		24:{
+			title(){return "购买"+retit('store_card',this.id)},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return `这里是商店<br>你可以买些东西<br><big>你有<yellow id="yellow">`+format(player.data.money,0)+`\$`}],
+		"blank",
+		["row", [["clickable", 1]]],
+		"blank",
+		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14]]],
+		"blank",
+		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24]]],
+	]
+})
+
+addLayer("mil", {
+    name: "mil",
+    position: 12,
+    startData() { return {
+        unlocked: true,
+		m1:new Decimal(1),
+		m2:new Decimal(1),
+		m3:new Decimal(1),
+		m4:new Decimal(1),
+		m5:new Decimal(1),
+		m6:new Decimal(1),
+		m7:new Decimal(1),
+		m8:new Decimal(1),
+		m9:new Decimal(1),
+		m10:new Decimal(1),
+		m11:new Decimal(1),
+		m12:new Decimal(1),
+		m13:new Decimal(1),
+		m14:new Decimal(1),
+		m15:new Decimal(1),
+		m16:new Decimal(1),
+		m17:new Decimal(1),
+		m18:new Decimal(1),
+		m19:new Decimal(1),
+    }},
+	update(diff) {
+		if(hasMilestone("mil",1)){
+			player.mil.milestones = deleter(player.mil.milestones,["1"])
+			player.mil.m1 = player.mil.m1.add(1)
+		}
+		if(hasMilestone("mil",2)){
+			player.mil.milestones = deleter(player.mil.milestones,["2"])
+			player.mil.m2 = player.mil.m2.add(1)
+		}
+		if(hasMilestone("mil",3)){
+			player.mil.milestones = deleter(player.mil.milestones,["3"])
+			player.mil.m3 = player.mil.m3.add(1)
+		}
+		if(hasMilestone("mil",4)){
+			player.mil.milestones = deleter(player.mil.milestones,["4"])
+			player.mil.m4 = player.mil.m4.add(1)
+		}
+		if(hasMilestone("mil",5)){
+			player.mil.milestones = deleter(player.mil.milestones,["5"])
+			player.mil.m5 = player.mil.m5.add(1)
+		}
+		if(hasMilestone("mil",6)){
+			player.mil.milestones = deleter(player.mil.milestones,["6"])
+			player.mil.m6 = player.mil.m6.add(1)
+		}
+		if(hasMilestone("mil",7)){
+			player.mil.milestones = deleter(player.mil.milestones,["7"])
+			player.mil.m7 = player.mil.m7.add(1)
+		}
+		if(hasMilestone("mil",8)){
+			player.mil.milestones = deleter(player.mil.milestones,["8"])
+			player.mil.m8 = player.mil.m8.add(1)
+		}
+		if(hasMilestone("mil",9)){
+			player.mil.milestones = deleter(player.mil.milestones,["9"])
+			player.mil.m9 = player.mil.m9.add(1)
+		}
+		if(hasMilestone("mil",10)){
+			player.mil.milestones = deleter(player.mil.milestones,["10"])
+			player.mil.m10 = player.mil.m10.add(1)
+		}
+		if(hasMilestone("mil",11)){
+			player.mil.milestones = deleter(player.mil.milestones,["11"])
+			player.mil.m11 = player.mil.m11.add(1)
+		}
+		if(hasMilestone("mil",12)){
+			player.mil.milestones = deleter(player.mil.milestones,["12"])
+			player.mil.m12 = player.mil.m12.add(1)
+		}
+		if(hasMilestone("mil",13)){
+			player.mil.milestones = deleter(player.mil.milestones,["13"])
+			player.mil.m13 = player.mil.m13.add(1)
+		}
+		if(hasMilestone("mil",14)){
+			player.mil.milestones = deleter(player.mil.milestones,["14"])
+			player.mil.m14 = player.mil.m14.add(1)
+		}
+		if(hasMilestone("mil",15)){
+			player.mil.milestones = deleter(player.mil.milestones,["15"])
+			player.mil.m15 = player.mil.m15.add(1)
+		}
+		if(hasMilestone("mil",16)){
+			player.mil.milestones = deleter(player.mil.milestones,["16"])
+			player.mil.m16 = player.mil.m16.add(1)
+		}
+		if(hasMilestone("mil",17)){
+			player.mil.milestones = deleter(player.mil.milestones,["17"])
+			player.mil.m17 = player.mil.m17.add(1)
+		}
+		if(hasMilestone("mil",18)){
+			player.mil.milestones = deleter(player.mil.milestones,["18"])
+			player.mil.m18 = player.mil.m18.add(1)
+		}
+		if(hasMilestone("mil",19)){
+			player.mil.milestones = deleter(player.mil.milestones,["19"])
+			player.mil.m19 = player.mil.m19.add(1)
+		}
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	milestones: {
+		1: {
+			requirementDescription: "红苹果<br><h6>+45血上限",
+			done() {
+				return player.data.Normal_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		2: {
+			requirementDescription: "绿苹果<br><h6>开局+6恢复",
+			done() {
+				return player.data.Normal_Artifacts[1].gte(player.mil['m'+this.id])
+			},
+		},
+		3: {
+			requirementDescription: "蓝苹果<br><h6>+9魔力上限",
+			done() {
+				return player.data.Normal_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
+		4: {
+			requirementDescription: "黄苹果<br><h6>每有10$存于手上+1血上限",
+			done() {
+				return player.data.Normal_Artifacts[3].gte(player.mil['m'+this.id])
+			},
+		},
+		5: {
+			requirementDescription: "智慧大脑<br><h6>智慧效果+1",
+			done() {
+				return player.data.Rare_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		6: {
+			requirementDescription: "预备攻击<br><h6>开局造成35物理伤害",
+			done() {
+				return player.data.Rare_Artifacts[1].gte(player.mil['m'+this.id])
+			},
+		},
+		19: {
+			requirementDescription: "预备防御<br><h6>开局获得35护甲",
+			done() {
+				return player.data.Rare_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
+		7: {
+			requirementDescription: "圣盾<br><h6>回合结束每有2护甲恢复1血",
+			done() {
+				return player.data.Rare_Artifacts[3].gte(player.mil['m'+this.id])
+			},
+		},
+		8: {
+			requirementDescription: "蓝色药剂<br><h6>每回合恢复3魔力",
+			done() {
+				return player.data.Rare_Artifacts[4].gte(player.mil['m'+this.id])
+			},
+		},
+		9: {
+			requirementDescription: "死尸(唯一)<br><h6>中毒受到的伤害减半",
+			done() {
+				return player.data.Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
+			},
+		},
+		10: {
+			requirementDescription: "牌套(唯一)<br><h6>手牌上限+4",
+			done() {
+				return player.data.Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
+			},
+		},
+		11: {
+			requirementDescription: "体力药剂<br><h6>+1体力上限",
+			done() {
+				return player.data.Super_Rare_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		12: {
+			requirementDescription: "吸血鬼尖牙<br><h6>物理攻击每造成2伤害恢复1血",
+			done() {
+				return player.data.Super_Rare_Artifacts[1].gte(player.mil['m'+this.id])
+			},
+		},
+		13: {
+			requirementDescription: "感染性疾病<br><h6>开局给敌方2感染",
+			done() {
+				return player.data.Super_Rare_Artifacts[2].gte(player.mil['m'+this.id])
+			},
+		},
+		14: {
+			requirementDescription: "感染性抗体(唯一)<br><h6>感染会直接对你造成伤害而不会获得中毒",
+			done() {
+				return player.data.Super_Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
+			},
+		},
+		15: {
+			requirementDescription: "坚毅之盾<br><h6>护甲每回合只减少1",
+			done() {
+				return player.data.Super_Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
+			},
+		},
+		16: {
+			requirementDescription: "吸血鬼之心<br><h6>每杀死1名敌人+35血上限(此效果最大1000)并恢复50血",
+			done() {
+				return player.data.Ultra_Rare_Artifacts[0].gte(player.mil['m'+this.id])
+			},
+		},
+		17: {
+			requirementDescription: "再生生命体<br><h6>恢复效果在最大生命的15%前不会减少且每回合获得4恢复",
+			done() {
+				return player.data.Ultra_Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
+			},
+		},
+		18: {
+			requirementDescription: "顽强生命体<br><h6>死亡时以50%的血上限的血恢复",
+			done() {
+				return player.data.Ultra_Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
+			},
+		},
+	},
+})
+
+addLayer("a", {
+    name: "Achievement",
+    symbol: "A",
+    position: 3,
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+		hpmax: new Decimal(0),
+		mpmax: new Decimal(0),
+		cheap: new Decimal(0),
+		gain_point: new Decimal(0),
+		ha1:new Decimal(0),
+		ha2:new Decimal(0),
+		ha5:new Decimal(0),
+    }},
+    color: "FFFFFF",
+    resource: "Achievement",
+    type: "none",
+    row: "side", 
+    layerShown(){return true},
+	achievementPopups: true,
+	clickables: {
+		1:{
+			title:"返回游戏",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){backnone()},
+		},
+	},
+    achievements: {
+        11: {
+            name: "血牛I",
+            done() {
+                return player.data.hpmax.gte(150)
+				},
+            tooltip() {
+                return "血牛I<br>血上限达到150";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		12: {
+            name: "血牛II",
+            done() {
+                return player.data.hpmax.gte(300)
+				},
+            tooltip() {
+                return "血牛II<br>血上限达到300";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		13: {
+            name: "血牛III",
+            done() {
+                return player.data.hpmax.gte(750)
+				},
+            tooltip() {
+                return "血牛III<br>血上限达到750";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		14: {
+            name: "血牛IV",
+            done() {
+                return player.data.hpmax.gte(800)
+				},
+            tooltip() {
+                return "血牛IV<br>血上限达到800";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		15: {
+            name: "血牛V",
+            done() {
+                return player.data.hpmax.gte(1500)
+				},
+            tooltip() {
+                return "血牛V<br>血上限达到1500";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+        21: {
+            name: "魔法池I",
+            done() {
+                return player.data.mpmax.gte(35)
+				},
+            tooltip() {
+                return "魔法池I<br>魔力上限达到35";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+        22: {
+            name: "魔法池II",
+            done() {
+                return player.data.mpmax.gte(50)
+				},
+            tooltip() {
+                return "魔法池II<br>魔力上限达到50";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+        23: {
+            name: "魔法池III",
+            done() {
+                return player.data.mpmax.gte(70)
+				},
+            tooltip() {
+                return "魔法池III<br>魔力上限达到70";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+        24: {
+            name: "魔法池IV",
+            done() {
+                return player.data.mpmax.gte(100)
+				},
+            tooltip() {
+                return "魔法池IV<br>魔力上限达到100";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+        25: {
+            name: "魔法池V",
+            done() {
+                return player.data.mpmax.gte(250)
+				},
+            tooltip() {
+                return "魔法池V<br>魔力上限达到250";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+		31: {
+            name: "腰缠万贯I",
+            done() {
+                return player.data.money.gte(500)
+				},
+            tooltip() {
+                return "腰缠万贯I<br>获得500$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		32: {
+            name: "腰缠万贯II",
+            done() {
+                return player.data.money.gte(1000)
+				},
+            tooltip() {
+                return "腰缠万贯II<br>获得1000$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		33: {
+            name: "腰缠万贯III",
+            done() {
+                return player.data.money.gte(2000)
+				},
+            tooltip() {
+                return "腰缠万贯III<br>获得2000$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		34: {
+            name: "腰缠万贯IV",
+            done() {
+                return player.data.money.gte(5000)
+				},
+            tooltip() {
+                return "腰缠万贯IV<br>获得5000$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		35: {
+            name: "腰缠万贯V",
+            done() {
+                return player.data.money.gte(10000)
+				},
+            tooltip() {
+                return "腰缠万贯V<br>获得10000$";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+		41: {
+            name: "高手I",
+            done() {
+                return player.point.tob_points.gte(5000)
+				},
+            tooltip() {
+                return "高手I<br>最高分达到5000";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		42: {
+            name: "高手II",
+            done() {
+                return player.point.tob_points.gte(10000)
+				},
+            tooltip() {
+                return "高手I<br>最高分达到10000";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		43: {
+            name: "高手III",
+            done() {
+                return player.point.tob_points.gte(25000)
+				},
+            tooltip() {
+                return "高手III<br>最高分达到25000";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		44: {
+            name: "高手IV",
+            done() {
+                return player.point.tob_points.gte(50000)
+				},
+            tooltip() {
+                return "高手IV<br>最高分达到50000";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+        },
+		45: {
+            name: "高手V",
+            done() {
+                return player.point.tob_points.gte(100000)
+				},
+            tooltip() {
+                return "高手V<br>最高分达到100000";
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#f75056" }}
+        },
+		//你知道吗，你正在偷看隐藏成就，停下！说实话你这样有意义吗，我做隐藏成就就是为了让你们去琢磨这个游戏，算了随你吧，我知道我即使说了这话你也不可能改变你的主意。
+		//You know what, you're peeking at hidden achievements, stop!To be honest, does it make sense to you?
+		//I made the hidden achievement just to let you guys think about this game. Forget it, it's up to you, I know you can't change your mind even if I say this.
+		101: {
+            name: "第一个总是很简单",
+            done() {
+                return player.a.ha1.gte(1)
+			},
+            tooltip() {
+                return hasAchievement("a",101) ? "第一个总是很简单<br>你只需要点击一下这个成就" : "这是个隐藏成就"
+            },
+			canClick(){return true},
+			onClick(){return player.a.ha1 = player.a.ha1.add(1)},
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		102: {
+            name: "第二个就不那么简单了",
+            done() {
+                return player.a.ha2.gte(100)
+			},
+            tooltip() {
+                return hasAchievement("a",102) ? "第二个就不那么简单了<br>你只需要点击100下这个成就" : "这是个隐藏成就"
+            },
+			canClick(){return true},
+			onClick(){return player.a.ha2 = player.a.ha2.add(1)},
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		103: {
+            name: "图鉴是个谎言",
+            done() {
+                return player.tab=="pokedex"
+			},
+            tooltip() {
+                return hasAchievement("a",103) ? "图鉴是个谎言<br>看看图鉴<br>事实上图鉴和实际卡牌属性并不相同" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		104: {
+            name: "你是认真的吗?",
+            done() {
+                return player.data.level.eq(0) && player.data.hp.lte(0)
+			},
+            tooltip() {
+                return hasAchievement("a",104) ? "你是认真的吗?<br>在关卡0时死亡<br>你可知道你可以使用牌?还是说你故意这么做的" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		105: {
+            name: "嗜血成疾",
+            done() {
+                return player.a.ha5.gte(200) && player.data.Super_Rare_Artifacts[1].gte(2)
+			},
+            tooltip() {
+                return hasAchievement("a",105) ? "嗜血成疾<br>用嗜血斩打出200攻击并通过吸血鬼尖牙吸取至少等量的血量" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+    },
+	tabFormat: [
+        ["display-text",
+            function() { return `你总共获得了 ${player.a.achievements.length} 个成就` },
+            { "color": 'yellow', "font-size": "32px", "font-family": "Comic Sans MS" }],
+		["display-text",function(){return `<big>你可以在设置打开/关闭成就加成`},],
+        ["row", [["clickable", 1]]],
+        "blank",
+        "blank",
+        "blank",
+		["row", [["achievement", 11],["achievement", 12],["achievement", 13],["achievement", 14],["achievement", 15]]],
+		["row", [["achievement", 21],["achievement", 22],["achievement", 23],["achievement", 24],["achievement", 25]]],
+		["row", [["achievement", 31],["achievement", 32],["achievement", 33],["achievement", 34],["achievement", 35]]],
+		["row", [["achievement", 41],["achievement", 42],["achievement", 43],["achievement", 44],["achievement", 45]]],
+		["row", [["achievement", 101],["clickable", 101],["achievement", 102],["clickable", 102],["achievement", 103],["achievement", 104],["achievement", 105]]],
+    ],
 })
 
 addLayer("point", {
@@ -1545,998 +3013,14 @@ addLayer("bag", {
 			let SP = "<br>SP(特殊/Special):<br>"
 			let SP0 = player.data.Special_Artifacts[0].gte(1) ? "不死者进度条:在你血量的下方获得一个特殊的进度条,每杀死一个敌人将累计1格.你死亡的时候将用5格进度抵消本次死亡并恢复20%的血量<br>" : ""
 			let SP1 = player.data.Special_Artifacts[1].gte(1) ? "不死者进度条:不死者进度条上限+5,死亡只会消耗4格进度<br>" : ""
+			let SP2 = player.data.Special_Artifacts[2].gte(1) ? "银色十字架:每次物理攻击附加5点真实伤害...可能不止这些用处<br>" : ""
 			return artifact
 			+N+N0+N1+N2+N3+ON0
 			+R+R0+R1+R2+R3+R4+OR0+OR1
 			+SR+SR0+SR1+SR2+OSR0+OSR1
 			+UR+UR0+OUR0+OUR1
-			+SP+SP0+SP1
+			+SP+SP0+SP1+SP2
 			}],
 		]],
 	],
 })
-
-addLayer("over", {
-    name: "over",
-    symbol: "<h6>过度",
-	tooltip() { 
-		return `过度`
-	},
-    position: 12,
-    startData() { return {
-        unlocked: true,
-    }},
-	update(diff) {
-	},
-    color: "#FFFFFF",
-    type: "none",
-    row: "side",
-    layerShown(){return true},
-	clickables:{
-		2:{
-			title: "钱!",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return player.data.moneyaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardmoney()},
-		},
-		3:{
-			title: "牌!",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return player.data.cardaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardcard("cardget",3)},
-		},
-		4:{
-			title: "下一关!<br><h6>到达下一关无法再获得本关的钱和牌",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return levelnew()},
-		},
-		5:{
-			title: "前往商店",
-			display() {
-			},
-			canClick(){return true},
-			unlocked(){return player.data.storeaward == true && player.data.hp.gt(0)},
-			onClick(){return showTab("store")},
-		},
-		1011:{
-			title(){return "获得"+retit("cardget",this.id-1010)},
-			display(){return redis("cardget",this.id-1010)},
-			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return recardonc(this.id-1010)},
-			style() {return {'height': "200px",'width': '150px'}},
-		},
-		1012:{
-			title(){return "获得"+retit("cardget",this.id-1010)},
-			display(){return redis("cardget",this.id-1010)},
-			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return recardonc(this.id-1010)},
-			style() {return {'height': "200px",'width': '150px'}},
-		},
-		1013:{
-			title(){return "获得"+retit("cardget",this.id-1010)},
-			display(){return redis("cardget",this.id-1010)},
-			canClick(){return true},
-			unlocked(){return !player.data['cardget'+(this.id-1010)].eq(0) && player.data.cardaward == false && player.data.newlevel == true && player.data.hp.gt(0)},
-			onClick(){return recardonc(this.id-1010)},
-			style() {return {'height': "200px",'width': '150px'}},
-		},
-		99:{
-			title(){return "宝箱!"},
-			canClick(){return true},
-			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardartifacts()},
-		},
-	},
-	bars:{
-		hpbar:{
-			display() {
-				let dis1 = "你的血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0)
-				return dis1
-			},	
-			direction: RIGHT,
-			width: 500,
-			height: 25,
-			unlocked(){return true},
-			progress(){return player.data.effect[11].lte(0) ? (player.data.hp.div(player.data.hpmax)).toNumber() : true},
-			baseStyle: {"background-color": "#FFFFFF"},
-			fillStyle: {"background-color": "#ec1c24"},
-			textStyle: {"color": "#000000"}
-		},
-		dehpbar:{
-			display() {return "敌方血量 "+format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)},	
-			direction: RIGHT,
-			width: 500,
-			height: 25,
-			unlocked(){return true},
-			progress(){return (player.data.dehp.div(player.data.dehpmax)).toNumber()},
-			baseStyle: {"background-color": "#FFFFFF"},
-			fillStyle: {"background-color": "#ec1c24"},
-			textStyle: {"color": "#000000"}
-		},
-		moneybar:{
-			display() {return format(player.data.money,0)+"$"},	
-			direction: RIGHT,
-			width: 76,
-			height: 54,
-			unlocked(){return true},
-			progress(){return true},
-			baseStyle: {"background-color": "#FFFFFF"},
-			fillStyle: {"background-color": "#FFFFFF"},
-			textStyle: {"color": "#000000"}
-		},
-	},
-	tabFormat: [
-		["display-text", function() {return `
-			<div id="treeOverlay" v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen || !readData(layoutInfo.showTree))" class="treeOverlay" onscroll="resizeCanvas()"
-			v-bind:class="{ 
-			fullWidth: (player.tab == 'none' || player.navTab == 'none'), 
-			col: (player.tab !== 'none' && player.navTab !== 'none'), 
-			left: (player.tab !== 'none' && player.navTab !== 'none')}"
-			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
-			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.4.47b</div>
-			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
-			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
-			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
-			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
-			<img id="afdian" class="overlayThing" src="png/afdian.png" onclick="showTab('afdian')"></img>
-			<img id="trophy" class="overlayThing" src="png/trophy.png" onclick="showTab('a')"></img>
-			</div>
-		`}],
-		"blank",
-		"blank",
-		"blank",
-		["row", [
-			["column",[
-				["bar", "hpbar"],
-				["bar", "dehpbar"],
-			]],
-			["bar", "moneybar"],
-		]],
-		"blank",
-		"blank",
-		"blank",
-		["clickable", 4],
-		"blank",
-		"blank",
-		"blank",
-		["row", [["clickable", 2],["clickable", 3],["clickable", 99]]],
-		["clickable", 5],
-		["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013]]],
-	],
-})
-
-addLayer("store", {
-    name: "store",
-    symbol: "<h6>商店",
-	tooltip() { 
-		return `商店`
-	},
-    position: 12,
-    startData() { return {
-        unlocked: true,
-    }},
-	update(diff) {
-	},
-    color: "#FFFFFF",
-    type: "none",
-    row: "side",
-    layerShown(){return true},
-	clickables:{
-		1:{
-			title:"返回",
-			canClick(){return true},
-			unlocked(){return true},
-			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
-			onClick(){backnone()},
-		},
-		11:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		12:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		13:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		14:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		21:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		22:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		23:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-		24:{
-			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
-			cao(){return },
-			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
-			unlocked(){return true},
-			style() {return {'height': "200px",'width': '150px'}},
-			onClick(){
-				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
-				player.data['store_card'+this.id+'_canClick'] = false
-				return
-			},
-		},
-	},
-	tabFormat: [
-		["display-text", function() {return `这里是商店<br>你可以买些东西<br><big>你有<yellow id="yellow">`+format(player.data.money,0)+`\$`}],
-		"blank",
-		["row", [["clickable", 1]]],
-		"blank",
-		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14]]],
-		"blank",
-		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24]]],
-	]
-})
-
-addLayer("mil", {
-    name: "mil",
-    position: 12,
-    startData() { return {
-        unlocked: true,
-		m1:new Decimal(1),
-		m2:new Decimal(1),
-		m3:new Decimal(1),
-		m4:new Decimal(1),
-		m5:new Decimal(1),
-		m6:new Decimal(1),
-		m7:new Decimal(1),
-		m8:new Decimal(1),
-		m9:new Decimal(1),
-		m10:new Decimal(1),
-		m11:new Decimal(1),
-		m12:new Decimal(1),
-		m13:new Decimal(1),
-		m14:new Decimal(1),
-		m15:new Decimal(1),
-		m16:new Decimal(1),
-		m17:new Decimal(1),
-		m18:new Decimal(1),
-		m19:new Decimal(1),
-    }},
-	update(diff) {
-		if(hasMilestone("mil",1)){
-			player.mil.milestones = deleter(player.mil.milestones,["1"])
-			player.mil.m1 = player.mil.m1.add(1)
-		}
-		if(hasMilestone("mil",2)){
-			player.mil.milestones = deleter(player.mil.milestones,["2"])
-			player.mil.m2 = player.mil.m2.add(1)
-		}
-		if(hasMilestone("mil",3)){
-			player.mil.milestones = deleter(player.mil.milestones,["3"])
-			player.mil.m3 = player.mil.m3.add(1)
-		}
-		if(hasMilestone("mil",4)){
-			player.mil.milestones = deleter(player.mil.milestones,["4"])
-			player.mil.m4 = player.mil.m4.add(1)
-		}
-		if(hasMilestone("mil",5)){
-			player.mil.milestones = deleter(player.mil.milestones,["5"])
-			player.mil.m5 = player.mil.m5.add(1)
-		}
-		if(hasMilestone("mil",6)){
-			player.mil.milestones = deleter(player.mil.milestones,["6"])
-			player.mil.m6 = player.mil.m6.add(1)
-		}
-		if(hasMilestone("mil",7)){
-			player.mil.milestones = deleter(player.mil.milestones,["7"])
-			player.mil.m7 = player.mil.m7.add(1)
-		}
-		if(hasMilestone("mil",8)){
-			player.mil.milestones = deleter(player.mil.milestones,["8"])
-			player.mil.m8 = player.mil.m8.add(1)
-		}
-		if(hasMilestone("mil",9)){
-			player.mil.milestones = deleter(player.mil.milestones,["9"])
-			player.mil.m9 = player.mil.m9.add(1)
-		}
-		if(hasMilestone("mil",10)){
-			player.mil.milestones = deleter(player.mil.milestones,["10"])
-			player.mil.m10 = player.mil.m10.add(1)
-		}
-		if(hasMilestone("mil",11)){
-			player.mil.milestones = deleter(player.mil.milestones,["11"])
-			player.mil.m11 = player.mil.m11.add(1)
-		}
-		if(hasMilestone("mil",12)){
-			player.mil.milestones = deleter(player.mil.milestones,["12"])
-			player.mil.m12 = player.mil.m12.add(1)
-		}
-		if(hasMilestone("mil",13)){
-			player.mil.milestones = deleter(player.mil.milestones,["13"])
-			player.mil.m13 = player.mil.m13.add(1)
-		}
-		if(hasMilestone("mil",14)){
-			player.mil.milestones = deleter(player.mil.milestones,["14"])
-			player.mil.m14 = player.mil.m14.add(1)
-		}
-		if(hasMilestone("mil",15)){
-			player.mil.milestones = deleter(player.mil.milestones,["15"])
-			player.mil.m15 = player.mil.m15.add(1)
-		}
-		if(hasMilestone("mil",16)){
-			player.mil.milestones = deleter(player.mil.milestones,["16"])
-			player.mil.m16 = player.mil.m16.add(1)
-		}
-		if(hasMilestone("mil",17)){
-			player.mil.milestones = deleter(player.mil.milestones,["17"])
-			player.mil.m17 = player.mil.m17.add(1)
-		}
-		if(hasMilestone("mil",18)){
-			player.mil.milestones = deleter(player.mil.milestones,["18"])
-			player.mil.m18 = player.mil.m18.add(1)
-		}
-		if(hasMilestone("mil",19)){
-			player.mil.milestones = deleter(player.mil.milestones,["19"])
-			player.mil.m19 = player.mil.m19.add(1)
-		}
-	},
-    color: "#FFFFFF",
-    type: "none",
-    row: "side",
-    layerShown(){return true},
-	milestones: {
-		1: {
-			requirementDescription: "红苹果<br><h6>+45血上限",
-			done() {
-				return player.data.Normal_Artifacts[0].gte(player.mil['m'+this.id])
-			},
-		},
-		2: {
-			requirementDescription: "绿苹果<br><h6>开局+6恢复",
-			done() {
-				return player.data.Normal_Artifacts[1].gte(player.mil['m'+this.id])
-			},
-		},
-		3: {
-			requirementDescription: "蓝苹果<br><h6>+9魔力上限",
-			done() {
-				return player.data.Normal_Artifacts[2].gte(player.mil['m'+this.id])
-			},
-		},
-		4: {
-			requirementDescription: "黄苹果<br><h6>每有10$存于手上+1血上限",
-			done() {
-				return player.data.Normal_Artifacts[3].gte(player.mil['m'+this.id])
-			},
-		},
-		5: {
-			requirementDescription: "智慧大脑<br><h6>智慧效果+1",
-			done() {
-				return player.data.Rare_Artifacts[0].gte(player.mil['m'+this.id])
-			},
-		},
-		6: {
-			requirementDescription: "预备攻击<br><h6>开局造成35物理伤害",
-			done() {
-				return player.data.Rare_Artifacts[1].gte(player.mil['m'+this.id])
-			},
-		},
-		19: {
-			requirementDescription: "预备防御<br><h6>开局获得35护甲",
-			done() {
-				return player.data.Rare_Artifacts[2].gte(player.mil['m'+this.id])
-			},
-		},
-		7: {
-			requirementDescription: "圣盾<br><h6>回合结束每有2护甲恢复1血",
-			done() {
-				return player.data.Rare_Artifacts[3].gte(player.mil['m'+this.id])
-			},
-		},
-		8: {
-			requirementDescription: "蓝色药剂<br><h6>每回合恢复3魔力",
-			done() {
-				return player.data.Rare_Artifacts[4].gte(player.mil['m'+this.id])
-			},
-		},
-		9: {
-			requirementDescription: "死尸(唯一)<br><h6>中毒受到的伤害减半",
-			done() {
-				return player.data.Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
-			},
-		},
-		10: {
-			requirementDescription: "牌套(唯一)<br><h6>手牌上限+4",
-			done() {
-				return player.data.Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
-			},
-		},
-		11: {
-			requirementDescription: "体力药剂<br><h6>+1体力上限",
-			done() {
-				return player.data.Super_Rare_Artifacts[0].gte(player.mil['m'+this.id])
-			},
-		},
-		12: {
-			requirementDescription: "吸血鬼尖牙<br><h6>物理攻击每造成2伤害恢复1血",
-			done() {
-				return player.data.Super_Rare_Artifacts[1].gte(player.mil['m'+this.id])
-			},
-		},
-		13: {
-			requirementDescription: "感染性疾病<br><h6>开局给敌方2感染",
-			done() {
-				return player.data.Super_Rare_Artifacts[2].gte(player.mil['m'+this.id])
-			},
-		},
-		14: {
-			requirementDescription: "感染性抗体(唯一)<br><h6>感染会直接对你造成伤害而不会获得中毒",
-			done() {
-				return player.data.Super_Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
-			},
-		},
-		15: {
-			requirementDescription: "坚毅之盾<br><h6>护甲每回合只减少1",
-			done() {
-				return player.data.Super_Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
-			},
-		},
-		16: {
-			requirementDescription: "吸血鬼之心<br><h6>每杀死1名敌人+35血上限(此效果最大1000)并恢复50血",
-			done() {
-				return player.data.Ultra_Rare_Artifacts[0].gte(player.mil['m'+this.id])
-			},
-		},
-		17: {
-			requirementDescription: "再生生命体<br><h6>恢复效果在最大生命的15%前不会减少且每回合获得4恢复",
-			done() {
-				return player.data.Ultra_Rare_Artifacts_Sole[0].gte(player.mil['m'+this.id])
-			},
-		},
-		18: {
-			requirementDescription: "顽强生命体<br><h6>死亡时以50%的血上限的血恢复",
-			done() {
-				return player.data.Ultra_Rare_Artifacts_Sole[1].gte(player.mil['m'+this.id])
-			},
-		},
-	},
-})
-
-addLayer("a", {
-    name: "Achievement",
-    symbol: "A",
-    position: 3,
-    startData() { return {
-        unlocked: true,
-		points: new Decimal(0),
-		hpmax: new Decimal(0),
-		mpmax: new Decimal(0),
-		cheap: new Decimal(0),
-		gain_point: new Decimal(0),
-		ha1:new Decimal(0),
-		ha2:new Decimal(0),
-		ha5:new Decimal(0),
-    }},
-    color: "FFFFFF",
-    resource: "Achievement",
-    type: "none",
-    row: "side", 
-    layerShown(){return true},
-	achievementPopups: true,
-	clickables: {
-		1:{
-			title:"返回游戏",
-			canClick(){return true},
-			unlocked(){return true},
-			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
-			onClick(){backnone()},
-		},
-	},
-    achievements: {
-        11: {
-            name: "血牛I",
-            done() {
-                return player.data.hpmax.gte(150)
-				},
-            tooltip() {
-                return "血牛I<br>血上限达到150";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		12: {
-            name: "血牛II",
-            done() {
-                return player.data.hpmax.gte(300)
-				},
-            tooltip() {
-                return "血牛II<br>血上限达到300";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		13: {
-            name: "血牛III",
-            done() {
-                return player.data.hpmax.gte(750)
-				},
-            tooltip() {
-                return "血牛III<br>血上限达到750";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		14: {
-            name: "血牛IV",
-            done() {
-                return player.data.hpmax.gte(800)
-				},
-            tooltip() {
-                return "血牛IV<br>血上限达到800";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		15: {
-            name: "血牛V",
-            done() {
-                return player.data.hpmax.gte(1500)
-				},
-            tooltip() {
-                return "血牛V<br>血上限达到1500";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#f75056" }}
-        },
-        21: {
-            name: "魔法池I",
-            done() {
-                return player.data.mpmax.gte(35)
-				},
-            tooltip() {
-                return "魔法池I<br>魔力上限达到35";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-        22: {
-            name: "魔法池II",
-            done() {
-                return player.data.mpmax.gte(50)
-				},
-            tooltip() {
-                return "魔法池II<br>魔力上限达到50";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-        23: {
-            name: "魔法池III",
-            done() {
-                return player.data.mpmax.gte(70)
-				},
-            tooltip() {
-                return "魔法池III<br>魔力上限达到70";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-        24: {
-            name: "魔法池IV",
-            done() {
-                return player.data.mpmax.gte(100)
-				},
-            tooltip() {
-                return "魔法池IV<br>魔力上限达到100";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-        25: {
-            name: "魔法池V",
-            done() {
-                return player.data.mpmax.gte(250)
-				},
-            tooltip() {
-                return "魔法池V<br>魔力上限达到250";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#f75056" }}
-        },
-		31: {
-            name: "腰缠万贯I",
-            done() {
-                return player.data.money.gte(500)
-				},
-            tooltip() {
-                return "腰缠万贯I<br>获得500$";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		32: {
-            name: "腰缠万贯II",
-            done() {
-                return player.data.money.gte(1000)
-				},
-            tooltip() {
-                return "腰缠万贯II<br>获得1000$";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		33: {
-            name: "腰缠万贯III",
-            done() {
-                return player.data.money.gte(2000)
-				},
-            tooltip() {
-                return "腰缠万贯III<br>获得2000$";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		34: {
-            name: "腰缠万贯IV",
-            done() {
-                return player.data.money.gte(5000)
-				},
-            tooltip() {
-                return "腰缠万贯IV<br>获得5000$";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		35: {
-            name: "腰缠万贯V",
-            done() {
-                return player.data.money.gte(10000)
-				},
-            tooltip() {
-                return "腰缠万贯V<br>获得10000$";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#f75056" }}
-        },
-		41: {
-            name: "高手I",
-            done() {
-                return player.point.tob_points.gte(5000)
-				},
-            tooltip() {
-                return "高手I<br>最高分达到5000";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		42: {
-            name: "高手II",
-            done() {
-                return player.point.tob_points.gte(10000)
-				},
-            tooltip() {
-                return "高手I<br>最高分达到10000";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		43: {
-            name: "高手III",
-            done() {
-                return player.point.tob_points.gte(25000)
-				},
-            tooltip() {
-                return "高手III<br>最高分达到25000";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		44: {
-            name: "高手IV",
-            done() {
-                return player.point.tob_points.gte(50000)
-				},
-            tooltip() {
-                return "高手IV<br>最高分达到50000";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-        },
-		45: {
-            name: "高手V",
-            done() {
-                return player.point.tob_points.gte(100000)
-				},
-            tooltip() {
-                return "高手V<br>最高分达到100000";
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#f75056" }}
-        },
-		//你知道吗，你正在偷看隐藏成就，停下！说实话你这样有意义吗，我做隐藏成就就是为了让你们去琢磨这个游戏，算了随你吧，我知道我即使说了这话你也不可能改变你的主意。
-		//You know what, you're peeking at hidden achievements, stop!To be honest, does it make sense to you?
-		//I made the hidden achievement just to let you guys think about this game. Forget it, it's up to you, I know you can't change your mind even if I say this.
-		101: {
-            name: "第一个总是很简单",
-            done() {
-                return player.a.ha1.gte(1)
-			},
-            tooltip() {
-                return hasAchievement("a",101) ? "第一个总是很简单<br>你只需要点击一下这个成就" : "这是个隐藏成就"
-            },
-			canClick(){return true},
-			onClick(){return player.a.ha1 = player.a.ha1.add(1)},
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#04b828" }}
-        },
-		102: {
-            name: "第二个就不那么简单了",
-            done() {
-                return player.a.ha2.gte(100)
-			},
-            tooltip() {
-                return hasAchievement("a",102) ? "第二个就不那么简单了<br>你只需要点击100下这个成就" : "这是个隐藏成就"
-            },
-			canClick(){return true},
-			onClick(){return player.a.ha2 = player.a.ha2.add(1)},
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#04b828" }}
-        },
-		103: {
-            name: "图鉴是个谎言",
-            done() {
-                return player.tab=="pokedex"
-			},
-            tooltip() {
-                return hasAchievement("a",103) ? "图鉴是个谎言<br>看看图鉴<br>事实上图鉴和实际卡牌属性并不相同" : "这是个隐藏成就"
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#04b828" }}
-        },
-		104: {
-            name: "你是认真的吗?",
-            done() {
-                return player.data.level.eq(0) && player.data.hp.lte(0)
-			},
-            tooltip() {
-                return hasAchievement("a",104) ? "你是认真的吗?<br>在关卡0时死亡<br>你可知道你可以使用牌?还是说你故意这么做的" : "这是个隐藏成就"
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#04b828" }}
-        },
-		105: {
-            name: "嗜血成疾",
-            done() {
-                return player.a.ha5.gte(200) && player.data.Super_Rare_Artifacts[1].gte(2)
-			},
-            tooltip() {
-                return hasAchievement("a",105) ? "嗜血成疾<br>用嗜血斩打出200攻击并通过吸血鬼尖牙吸取至少等量的血量" : "这是个隐藏成就"
-            },
-            onComplete() {
-                player.a.points  = player.a.points.add(1)
-            },
-			style() {return {'border-color': "#04b828" }}
-        },
-    },
-	tabFormat: [
-        ["display-text",
-            function() { return `你总共获得了 ${player.a.achievements.length} 个成就` },
-            { "color": 'yellow', "font-size": "32px", "font-family": "Comic Sans MS" }],
-		["display-text",function(){return `<big>你可以在设置打开/关闭成就加成`},],
-        ["row", [["clickable", 1]]],
-        "blank",
-        "blank",
-        "blank",
-		["row", [["achievement", 11],["achievement", 12],["achievement", 13],["achievement", 14],["achievement", 15]]],
-		["row", [["achievement", 21],["achievement", 22],["achievement", 23],["achievement", 24],["achievement", 25]]],
-		["row", [["achievement", 31],["achievement", 32],["achievement", 33],["achievement", 34],["achievement", 35]]],
-		["row", [["achievement", 41],["achievement", 42],["achievement", 43],["achievement", 44],["achievement", 45]]],
-		["row", [["achievement", 101],["clickable", 101],["achievement", 102],["clickable", 102],["achievement", 103],["achievement", 104],["achievement", 105]]],
-    ],
-})
-
-/*
-addLayer("talent_crystal", {
-    name: "talent_crystal",
-    symbol: "<h6>天赋结晶",
-	tooltip() { 
-		return `天赋结晶`
-	},
-    position: 12,
-    startData() { return {
-        unlocked: true,
-		points:new Decimal(10),
-    }},
-	resource: "天赋结晶",
-	update(diff) {
-	},
-	upgrades:{
-		11: {
-			title: "生命提升I",
-			description: "初始生命+10",
-			cost:function(){return new Decimal("1")},
-			req:[21],
-			branches() {
-				let col = hasUpgrade(this.layer, this.id) ? "#e6e6e6" : "#494949"
-				return this.req.map(x => [x, col]) 
-			},
-		},
-		12: {
-			title: "魔法提升I",
-			description: "初始魔法+3",
-			cost:function(){return new Decimal("1")},
-			req:[21],
-			branches() {
-				let col = hasUpgrade(this.layer, this.id) ? "#e6e6e6" : "#494949"
-				return this.req.map(x => [x, col]) 
-			},
-		},
-		13: {
-			title: "财富提升I",
-			description: "初始$+5",
-			cost:function(){return new Decimal("1")},
-		},
-		21: {
-			title: "综合体质I",
-			description: "初始生命+3,魔法+1",
-			cost:function(){return new Decimal("1")},
-		},
-	},
-    color: "#FFFFFF",
-    type: "none",
-    row: "side",
-    layerShown(){return true},
-	tabFormat: [
-		["display-text", function() {return `你有 <talent_crystal id="talent_crystal_id">`+format(player.talent_crystal.points,0)+`天赋结晶</talent_crystal> <img src="png/talent_crystal_thing.png">`}],
-		["display-text", function() {return `天赋系统需要在模式中启用,默认关闭,但无论是否关闭你都可以获得天赋结晶`}],
-		["display-text", function() {return `高级阶层的天赋需要相连接的低级天赋`}],
-		["display-text", function() {return `结算时每10000分都会获得1天赋结晶`}],
-		"blank",
-		"blank",
-		"blank",
-		"blank",
-		["row", [
-			["column",[
-				["row", [["display-text", function() {return `<big><big><big><big>阶层1&nbsp&nbsp&nbsp`}]]],
-				"blank",
-				"blank",
-				"blank",
-				"blank",
-				"blank",
-				"blank",
-				"blank",
-				["row", [["display-text", function() {return `<big><big><big><big>阶层2&nbsp&nbsp&nbsp`}]]],
-			]],
-			["column",[
-				["row", [
-					["upgrade", 11],"blank","blank","blank",["upgrade", 12],"blank","blank","blank",["upgrade", 13]
-				]],
-				"blank",
-				"blank",
-				"blank",
-				["row", [
-					["upgrade", 21],
-				]],
-			]],
-		]],
-	],
-})
-*/

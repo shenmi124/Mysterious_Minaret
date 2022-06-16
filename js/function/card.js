@@ -67,7 +67,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
 		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(8)){return `获得 3 力量<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(8)){return `获得 6 力量<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
@@ -92,7 +92,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(30)){return `恢复20血,获得 5 恢复<br>消耗:13 魔力`}
 		if(player.data[id1+id2].eq(31)){return `恢复4血并获得5恢复,5护甲<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(32)){return `将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:1体力,5 魔力`}
-		if(player.data[id1+id2].eq(33)){return `随机获得以下效果中的其中二个①获得7力量②获得7减伤③获得7体力<br>消耗:42 血`}
+		if(player.data[id1+id2].eq(33)){return `随机获得以下效果中的其中二个①获得11力量②获得11减伤③获得11体力<br>消耗:42 血`}
 		if(player.data[id1+id2].eq(34)){return `按降低的比例重新分配血,魔力,体力<br>移除<br>现在的比例为`+format((player.data.hp/player.data.hpmax+player.data.mp/player.data.mpmax+player.data.ps/player.data.psmax)/3.3,2)+`<br>消耗:无`}
 		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
 		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7 血`}
@@ -236,7 +236,7 @@ function reonc(id){
 		}
 		if(player.data['display'+id].eq(8)){
 			//愤怒
-			player.data.effect[1] = player.data.effect[1].add(3)
+			geteffect(1,6)
 			attributes(0,0,-1,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,8,true,true)
@@ -544,18 +544,18 @@ function reonc(id){
 				}
 			}
 			if(eff1==1){
-				geteffect(1,7)
+				geteffect(1,11)
 			}else if(eff1==2){
-				geteffect(13,7)
+				geteffect(13,11)
 			}else if(eff1==3){
-				attributes(0,0,7,0,0,0)
+				attributes(0,0,11,0,0,0)
 			}
 			if(eff2==1){
-				geteffect(1,7)
+				geteffect(1,11)
 			}else if(eff2==2){
-				geteffect(13,7)
+				geteffect(13,11)
 			}else if(eff2==3){
-				attributes(0,0,7,0,0,0)
+				attributes(0,0,11,0,0,0)
 			}
 			player.data['display'+id] = new Decimal(0)
 			card_usage(id,33,true,true)

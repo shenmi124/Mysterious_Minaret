@@ -1,14 +1,15 @@
 function levelnew(){
 	showTab('none')
-	let monsterup =  Math.floor((Math.random() * 4))
-	let newdehp = new Decimal(30).add(player.data.level.mul(5)).add(Math.random() * player.data.level.mul(6).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
-	let newdemp =  new Decimal(4).add(player.data.level.mul(0.5)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
-	let newdeatk =  new Decimal(6).add(player.data.level.mul(1)).add(Math.random() * player.data.level.mul(1).pow(Decimal.add(1.25).add(player.data.level.div(100)))).floor()
-	if(monsterup==0){
+	//let monsterup =  Math.floor((Math.random() * 4))
+	let newdehp = new Decimal(30).add(player.data.level.mul(4)).add(Math.random() * player.data.level.mul(5.5).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
+	let newdemp =  new Decimal(4).add(player.data.level.mul(0.35)).add(Math.random() * player.data.level.mul(1.1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
+	let newdeatk =  new Decimal(6).add(player.data.level.mul(0.8)).add(Math.random() * player.data.level.mul(1.1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
+	/*/if(monsterup==0){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
 	}else{
 		player.data.monster = new Decimal(0)
 	}
+	*/
 	if(player.data.monster.eq(1)){
 		newdehp = newdehp.mul(1.65).floor()
 	}
@@ -45,6 +46,7 @@ function levelnew(){
 	player.data.remove_removals = false
 	player.data.card40eff14 = false
 	player.data.card40geteff14 = new Decimal(0)
+	player.data.newmap = false
 	for(col=1;col<=player.data.allcard;col++){
 		player.data['cardget'+col] = new Decimal(0)
 	}
@@ -765,7 +767,7 @@ addLayer("tree-tab", {
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			style() {return {'border-color': "rgb(255,255,255,0)",'height': "25px","min-height": "25px",'width': '750px','background-color':"rgb(255,255,255,0)"}},
 			tooltip(){
 				let effde = player.data.de.gt(0) ? format(player.data.de,0)+"护甲<br>":""
 				let eff0 = player.data.effect[0].gt(0) ? format(player.data.effect[0],0)+"智慧<br>":""
@@ -792,7 +794,7 @@ addLayer("tree-tab", {
 			canClick(){return false},
 			unlocked(){return true},
 			onClick(){return},
-			style() {return {'height': "25px","min-height": "25px",'width': '750px','background-color':"#FFFFFF00",'border-color': "#FFFFFF00"}},
+			style() {return {'border-color': "rgb(255,255,255,0)",'height': "25px","min-height": "25px",'width': '750px','background-color':"rgb(255,255,255,0)"}},
 			tooltip(){
 				let effde = player.data.dede.gt(0) ? format(player.data.dede,0)+"护甲<br>":""
 				let eff0 = player.data.deeffect[0].gt(0) ? format(player.data.deeffect[0],0)+"智慧<br>":""
@@ -851,7 +853,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg1)', 'top': 'var(--styleRotateTop1)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		2:{
 			title(){return retit('display',this.id)},
@@ -859,7 +861,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg2)', 'top': 'var(--styleRotateTop2)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		3:{
 			title(){return retit('display',this.id)},
@@ -867,7 +869,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg3)', 'top': 'var(--styleRotateTop3)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		4:{
 			title(){return retit('display',this.id)},
@@ -875,7 +877,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg4)', 'top': 'var(--styleRotateTop4)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		5:{
 			title(){return retit('display',this.id)},
@@ -883,7 +885,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg5)', 'top': 'var(--styleRotateTop5)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		6:{
 			title(){return retit('display',this.id)},
@@ -891,7 +893,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg6)', 'top': 'var(--styleRotateTop6)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		7:{
 			title(){return retit('display',this.id)},
@@ -899,7 +901,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg7)', 'top': 'var(--styleRotateTop7)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		8:{
 			title(){return retit('display',this.id)},
@@ -907,7 +909,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg8)', 'top': 'var(--styleRotateTop8)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		9:{
 			title(){return retit('display',this.id)},
@@ -915,7 +917,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg9)', 'top': 'var(--styleRotateTop9)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		10:{
 			title(){return retit('display',this.id)},
@@ -923,7 +925,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg10)', 'top': 'var(--styleRotateTop10)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		11:{
 			title(){return retit('display',this.id)},
@@ -931,7 +933,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg11)', 'top': 'var(--styleRotateTop11)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		12:{
 			title(){return retit('display',this.id)},
@@ -939,7 +941,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg12)', 'top': 'var(--styleRotateTop12)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		13:{
 			title(){return retit('display',this.id)},
@@ -947,7 +949,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg13)', 'top': 'var(--styleRotateTop13)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		14:{
 			title(){return retit('display',this.id)},
@@ -955,7 +957,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg14)', 'top': 'var(--styleRotateTop14)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		15:{
 			title(){return retit('display',this.id)},
@@ -963,7 +965,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg15)', 'top': 'var(--styleRotateTop15)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		16:{
 			title(){return retit('display',this.id)},
@@ -971,7 +973,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg16)', 'top': 'var(--styleRotateTop16)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		17:{
 			title(){return retit('display',this.id)},
@@ -979,7 +981,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg17)', 'top': 'var(--styleRotateTop17)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		18:{
 			title(){return retit('display',this.id)},
@@ -987,7 +989,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg18)', 'top': 'var(--styleRotateTop18)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		19:{
 			title(){return retit('display',this.id)},
@@ -995,7 +997,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg19)', 'top': 'var(--styleRotateTop19)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 		20:{
 			title(){return retit('display',this.id)},
@@ -1003,7 +1005,7 @@ addLayer("tree-tab", {
 			canClick(){return recan(this.id)},
 			unlocked(){return !player.data['display'+this.id].eq(0) && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){return reonc(this.id)},
-			style() {return {'height': "200px",'width': '150px','transform': 'var(--styleRotateDeg20)', 'top': 'var(--styleRotateTop20)'}},
+			style() {return {'height': "200px",'width': '150px','transform': `var(--styleRotateDeg${this.id})`, 'top': `var(--styleRotateTop${this.id})`}},
 		},
 	},
 	tabFormat: [
@@ -1076,7 +1078,7 @@ addLayer("tree-tab", {
 				}],
 				["display-text", function() {return 'QQ群:688646311|左上角设置,信息,捐助|右上角版本,图鉴,背包,成就'}],
 				["display-text", function() {return '<hr>你的最高分是:'+format(player.point.tob_points,0)+'.你上次的得分是:'+format(player.point.last_points,0)+'.'}],
-				["display-text", function() {return '你在关卡'+format(player.data.level,0)+",怪物会随着关卡提升越来越强."}],
+				["display-text", function() {return '你在层'+format(player.data.level,0)+",怪物会随着层提升越来越强."}],
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
 				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"],["bar", "deeff5bar"],["bar", "deeff6bar"],["bar", "deeff7bar"],["bar", "deeff8bar"],["bar", "deeff9bar"]]],

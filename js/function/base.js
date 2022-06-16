@@ -14,6 +14,9 @@ function attributes(hp,mp,ps,atk,mtk,de,sytlehp){
 function atktode(id){
 	if(id > 0){
 		player.data.atkto = new Decimal(id).add(player.data.effect[1])
+		if(player.data.Special_Artifacts[2].gte(1)){
+			player.data.dehp = player.data.dehp.sub(5)
+		}
 		if(player.data.deeffect[9].gte(1) && player.data.deeffect[8].gte(1)){
 			player.data.atkto = player.data.atkto.add(3)
 			getdeeffect(9,-1)
@@ -150,8 +153,7 @@ function getcard(id1,id2){
 				if(player.data.card[card].lt(1)){
 					col--
 				}
-				for(col2=1;col2<=player.data.allcard;col2++){
-					
+				for(col2=1;col2<=player.data.allcard;col2++){	
 					if(player.data.card[col2].gte(1) && col2==card){
 						player.data[id1+col] = new Decimal(col2)
 						player.data.card[col2] = player.data.card[col2].sub(1)
@@ -218,6 +220,7 @@ function softReset(){
 	if (!!confirm("你确定要软重置吗?那样你本局游戏就会重置.且无法获得分数.成就,总分将保留")){
 		layerDataReset('data')
 		layerDataReset('mil')
+		layerDataReset('map')
 		showTab('none')
 	}
 }
@@ -227,6 +230,7 @@ function rehardReset(){
 		if (!!confirm("这个存档将永远失去!(很长时间!)")){
 			layerDataReset('data')
 			layerDataReset('mil')
+			layerDataReset('map')
 			layerDataReset('point')
 			layerDataReset('a')
 			showTab('none')
@@ -234,16 +238,11 @@ function rehardReset(){
 	}
 }
 
-function a_softReset(){
-	if (!!confirm("改变此选项会进行一次软重置?那样你本局游戏就会重置.且无法获得分数.成就,总分将保留")){
-		layerDataReset('data')
-		layerDataReset('mil')
-		toggleOpt('a_addition')
-	}
-}
 
 function backnone(){
-	if(player.data.dedead == true){
+	if(player.data.newmap == true){
+		showTab("map")
+	}else if(player.data.dedead == true){
 		showTab("over")
 	}else{
 		showTab("none")

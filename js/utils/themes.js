@@ -1,5 +1,5 @@
 // ************ Themes ************
-var themes = ["default","light","lightblue","aqua","TheGameTree"]
+var themes = ["default","light","lightblue","aqua"]
 
 var colors = {
 	default: {
@@ -20,16 +20,6 @@ var colors = {
 		points: "#dfefff",
 		locked: "#c4a7b3",
 		background: "#001f3f",
-		background_tooltip: "rgba(0, 15, 31, 0.75)",
-	},
-	TheGameTree: {
-		1: "#bfdfff",
-		2: "#8fa7bf",
-		3: "#5f6f7f",
-		color: "#ccdff3",
-		points: "#dfefff",
-		locked: "#c4a7b3",
-		background: "#053246",
 		background_tooltip: "rgba(0, 15, 31, 0.75)",
 	},
 	lightblue: {
