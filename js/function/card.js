@@ -97,7 +97,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
 		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7 血`}
 		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的$的物理伤害</red><br>消耗:20% $`}
-		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">10 魔法伤害</blue>,并永久吸取同等血量上限,<br>消耗:15 魔力`}
+		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">15 魔法伤害</blue>,并永久吸取同等血量上限<br>移除<br>消耗:15 魔力`}
 		if(player.data[id1+id2].eq(39)){return `恢复15法力<br>移除<br>消耗:无`}
 		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血`}
 		if(player.data[id1+id2].eq(41)){return `恢复5血和1体力<br>移除<br>消耗:无`}
@@ -604,12 +604,12 @@ function reonc(id){
 		if(player.data['display'+id].eq(38)){
 			//灵魂吸取
 			attributes(0,-10,0,0,10,0,"card")
-			player.data.card38hpmax = player.data.card38hpmax.add(10)
-			player.data.hpmax = player.data.hpmax.add(10)
-			attributes(10,0,0,0,0,0)
-			player.data.dehpmax = player.data.dehpmax.sub(10)
+			player.data.card38hpmax = player.data.card38hpmax.add(15)
+			player.data.hpmax = player.data.hpmax.add(15)
+			attributes(15,0,0,0,0,0)
+			player.data.dehpmax = player.data.dehpmax.sub(15)
 			player.data['display'+id] = new Decimal(0)
-			card_usage(id,38,true,true)
+			card_usage(id,38,false,true)
 			return
 		}
 		if(player.data['display'+id].eq(39)){
