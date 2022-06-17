@@ -1115,7 +1115,7 @@ addLayer("tree-tab", {
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],
 				["blank", '70px'],
 				["row", [["clickable", 1001],["clickable", 1002],["clickable", 99]]],
-				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013],["clickable", 1007],["clickable", 1024]]],
+				["row", [["clickable", 1011],["clickable", 1012],["clickable", 1013],["clickable", 1007],["clickable", 1008],["clickable", 1024]]],
 			]],
 			["display-text", function() {
 			let card0 = "<hr>墓地:<br>"
