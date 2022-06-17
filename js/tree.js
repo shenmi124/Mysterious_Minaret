@@ -28,7 +28,6 @@ function levelnew(){
 	if(player.data.monster.eq(6)){
 		newdehp = newdehp.mul(0.75).floor()
 	}
-	player.data.level = player.data.level.add(1)
 	player.data.dehp = new Decimal(newdehp)
 	player.data.dehpmax = new Decimal(newdehp)
 	player.data.demp = new Decimal(newdemp)
