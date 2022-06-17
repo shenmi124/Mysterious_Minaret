@@ -616,7 +616,7 @@ function reonc(id){
 			//魔法结晶
 			attributes(0,15,0,0,0,0,"card")
 			player.data['display'+id] = new Decimal(0)
-			card_usage(id,15,false,true)
+			card_usage(id,39,false,true)
 			return
 		}
 		if(player.data['display'+id].eq(40)){
