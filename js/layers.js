@@ -168,7 +168,7 @@ addLayer("afdian", {
 		"blank",
         ["display-text", function() {return `<a class="link" href="https://afdian.net/@Mysterious124" target="_blank">点我跳转到捐助页面 Jump directly to the donation page</a>`}],
 		["display-text", function() {return `<br><br><big><big>↑↑↑我唯一的收入来源 my only source of income↑↑↑`}],
-		["display-text", function() {return `<big><big>请给我捐一些钱,谢谢 Please donate some money to me, thank you`}],
+		["display-text", function() {return `<big><big>如果你觉得我的游戏很有趣,可以给我捐些钱,我会很开心的 if you think this game is interesting, you can donald some money to me, i will be very happy`}],
 		["display-text", function() {return `<big><big>感谢游玩的游戏 think you playing`}],
 		["display-text", function() {return `<big><big>邮箱(e-mail) 67265011@qq.com`}],
 		["display-text", function() {return `<big><big>↑你可以在这里把你的想法告诉我(尤其是多语言化,我会帮你找办法) You can tell me what you think here (especially multilingual, I will help you find a way)↑`}],
