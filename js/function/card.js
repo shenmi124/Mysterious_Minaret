@@ -740,6 +740,7 @@ function reonc(id){
 		}
 	}else{
 		player.data.removals = player.data.removals.sub(1)
+		player.data.holdcard = player.data.holdcard.sub(1)
 		player.data['display'+id] = new Decimal(0)
 	}
 }

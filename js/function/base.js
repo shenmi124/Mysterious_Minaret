@@ -172,7 +172,7 @@ function getcard(id1,id2){
 			}
 			if(player.data.backdeckCD){
 				for(col4=1;col4<=player.data.allcard;col4++){
-					player.data.card[col4] = player.data.card[col].add(player.data.cardintermediary[col4])
+					player.data.card[col4] = player.data.card[col4].add(player.data.cardintermediary[col4])
 					player.data.cardintermediary[col4] = new Decimal(0)
 					player.data.carddead[col4] = new Decimal(0)
 				}
