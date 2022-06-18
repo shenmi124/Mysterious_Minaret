@@ -19,7 +19,7 @@ function levelnew(){
 	}
 	if(player.data.monster.eq(4)){
 		newdehp = newdehp.mul(1.45).floor()
-		newdeatk = new Decimal(2)
+		newdeatk = new Decimal(4)
 	}
 	if(player.data.monster.eq(5)){
 		newdehp = newdehp.mul(1.4).floor()
@@ -27,6 +27,9 @@ function levelnew(){
 	}
 	if(player.data.monster.eq(6)){
 		newdehp = newdehp.mul(0.75).floor()
+	}
+	if(player.data.monster.eq(7)){
+		newdehp = newdehp.mul(1.25).floor()
 	}
 	player.data.dehp = new Decimal(newdehp)
 	player.data.dehpmax = new Decimal(newdehp)
@@ -742,6 +745,17 @@ addLayer("tree-tab", {
 			fillStyle: {"background-color": "#b8b8b8"},
 			textStyle: {"color": "#000000"}
 		},
+		eff16bar:{
+			display() {return "禁疗 "+format(player.data.effect[16],0)},	
+			direction: RIGHT,
+			width(){return player.data.barpx},
+			height: 25,
+			unlocked(){return player.data.effect[16].gt(0)},
+			progress(){return true},
+			baseStyle: {"background-color": "#ffdec6"},
+			fillStyle: {"background-color": "#ffdec6"},
+			textStyle: {"color": "#000000"}
+		},
 		moneybar:{
 			display() {return format(player.data.money,0)+"$"},	
 			direction: RIGHT,
@@ -1084,13 +1098,14 @@ addLayer("tree-tab", {
 				["bar", "dedebar"],
 				["display-text", function() {
 					let monster0 = player.data.monster.eq(0) ? "":""
-					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加2感染<br>*1.65血":""
-					let monster2 = player.data.monster.eq(2) ? "蛊梦师:每回合给敌方一张阻梦":""
-					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有25%的几率造成晕眩1在双方行动之后<br>*1.3血,*1.15攻击":""
-					let monster4 = player.data.monster.eq(4) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*1.45血":""
-					let monster5 = player.data.monster.eq(5) ? "狂战士:血量低于30%时每回合格外攻击1次<br>*1.4血,*1.4攻击":""
-					let monster6 = player.data.monster.eq(6) ? "混乱者:每回合给予对方2混乱与3中毒<br>*0.75血":""
-					return monster0 + monster1 + monster2 + monster3 + monster4 + monster5 + monster6
+					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加3感染<br>*1.65血":""
+					let monster2 = player.data.monster.eq(2) ? "蛊梦师:每回合给敌方1~2张阻梦":""
+					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有30%的几率造成晕眩1在双方行动之后<br>*1.3血,*1.15攻击":""
+					let monster4 = player.data.monster.eq(4) ? "截:初始攻击4,每攻击一次攻击翻倍<br>*1.45血":""
+					let monster5 = player.data.monster.eq(5) ? "狂战士:血量低于30%时每回合格外攻击2次<br>*1.4血,*1.4攻击":""
+					let monster6 = player.data.monster.eq(6) ? "混乱者:每回合给予对方2混乱与5中毒<br>*0.75血":""
+					let monster7 = player.data.monster.eq(7) ? "医生:当攻击未别敌方护甲挡下且造成伤害时给予敌方2禁疗<br>*1.25血":""
+					return monster0 + monster1 + monster2 + monster3 + monster4 + monster5 + monster6 + monster7
 				}],
 				["row", [["clickable", 1022]]],
 				["blank", '170px'],
@@ -1109,7 +1124,7 @@ addLayer("tree-tab", {
 				["bar", "debar"],["bar", "eff0bar"],
 				["bar", "eff1bar"],["bar", "eff2bar"],["bar", "eff3bar"],["bar", "eff4bar"],["bar", "eff5bar"],
 				["bar", "eff6bar"],["bar", "eff7bar"],["bar", "eff8bar"],["bar", "eff9bar"],["bar", "eff10bar"],
-				["bar", "eff11bar"],["bar", "eff12bar"],["bar", "eff13bar"],["bar", "eff14bar"],["bar", "eff15bar"]
+				["bar", "eff11bar"],["bar", "eff12bar"],["bar", "eff13bar"],["bar", "eff14bar"],["bar", "eff15bar"],["bar", "eff16bar"]
 				]],
 				["row", [["clickable", 1021]]],
 				["row", [["clickable", 1],["clickable", 2],["clickable", 3],["clickable", 4],["clickable", 5],["clickable", 6],["clickable", 7],["clickable", 8],["clickable", 9],["clickable", 10],["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],["clickable", 16],["clickable", 17],["clickable", 18],["clickable", 19],["clickable", 20]]],

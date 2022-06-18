@@ -67,7 +67,9 @@ function mtktode(id){
 
 function gethp(id,id2){
 	if(id > 0){
-		player.data.hp = player.data.hp.add(id)
+		if(player.data.effect[16].lte(0)){
+			player.data.hp = player.data.hp.add(id)
+		}
 	}else if(id < 0){
 		player.data.subhpto = new Decimal(0).sub(id)
 		if(player.data.effect[13].gt(0)){
@@ -115,8 +117,14 @@ function enemy_attack_action(id){
 			player.data.deatkto = player.data.deatkto.sub(player.data.de)
 			attributes(-player.data.deatkto.floor(),0,0,0,0,0)
 			player.data.de = new Decimal(0)
+			if(player.data.monster.eq(7)){
+				geteffect(16,2)
+			}
 		}else{
 			attributes(-player.data.deatkto.floor(),0,0,0,0,0)
+			if(player.data.monster.eq(7)){
+				geteffect(16,2)
+			}
 		}
 	}
 }

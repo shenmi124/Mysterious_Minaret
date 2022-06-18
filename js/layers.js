@@ -200,15 +200,15 @@ addLayer("data", {
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		deeffect:[
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),
+		new Decimal(0),new Decimal(0),new Decimal(0),
 		],
-		alleffect:new Decimal(17),
+		alleffect:new Decimal(18),
 		
 		barpx:new Decimal(584),
 		haveeff:new Decimal(0),
@@ -490,6 +490,7 @@ addLayer("data", {
 		haveefffunction(13)
 		haveefffunction(14)
 		haveefffunction(15)
+		haveefffunction(16)
 		if(player.data.dede.gt(0)){player.data.haveeff = player.data.dehaveeff.add(1)}
 		dehaveefffunction(0)
 		dehaveefffunction(1)
@@ -507,6 +508,7 @@ addLayer("data", {
 		dehaveefffunction(13)
 		dehaveefffunction(14)
 		dehaveefffunction(15)
+		dehaveefffunction(16)
 		
 		player.data.barpx = new Decimal(584).sub(player.data.haveeff.mul(4)).div(Decimal.max(player.data.haveeff,1)).add(0.5).floor()
 		player.data.debarpx = new Decimal(502).sub(player.data.dehaveeff.mul(4)).div(Decimal.max(player.data.dehaveeff,1)).add(0.5).floor()
@@ -659,7 +661,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.56b</div>
+				v0.1.5.57b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1253,7 +1255,7 @@ addLayer("map", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.56b</div>
+				v0.1.5.57b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
