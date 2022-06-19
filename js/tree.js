@@ -854,7 +854,7 @@ addLayer("tree-tab", {
 		1008:{
 			title: "结束移除",
 			canClick(){return true},
-			unlocked(){return player.data.remove_removals==true},
+			unlocked(){return player.data.remove_removals==true && !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == false},
 			onClick(){
 				player.data.removals = new Decimal(0)
 				player.data.remove_removals == false

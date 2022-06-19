@@ -66,7 +66,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
 		if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
-		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>5次<br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>4次<br>消耗:2 体力`}
 		if(player.data[id1+id2].eq(8)){return `获得 6 力量<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
 		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
@@ -226,7 +226,6 @@ function reonc(id){
 		if(player.data['display'+id].eq(7)){
 			//连斩
 			attributes(0,0,-2,4,0,0,"card")
-			attributes(0,0,0,4,0,0)
 			attributes(0,0,0,4,0,0)
 			attributes(0,0,0,4,0,0)
 			attributes(0,0,0,4,0,0)
