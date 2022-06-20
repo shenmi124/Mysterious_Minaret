@@ -27,7 +27,7 @@ function atktode(id){
 	}else{
 		player.data.atkto = new Decimal(id)
 	}
-	if(player.data.Super_Rare_Artifacts[1]){player.data.hp = player.data.hp.add(player.data.atkto.div(2).floor().mul(player.data.Super_Rare_Artifacts[1]))}
+	if(player.data.Super_Rare_Artifacts[1] && player.data.effect[16].lte(0)){player.data.hp = player.data.hp.add(player.data.atkto.div(2).floor().mul(player.data.Super_Rare_Artifacts[1]))}
 	if(player.data.dede.gte(player.data.atkto)){
 		player.data.dede = player.data.dede.sub(player.data.atk)
 		player.data.atkto = new Decimal(0)
