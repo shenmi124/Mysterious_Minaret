@@ -19,7 +19,7 @@ function levelnew(){
 	}
 	if(player.data.monster.eq(4)){
 		newdehp = newdehp.mul(1.45).floor()
-		newdeatk = new Decimal(4)
+		newdeatk = new Decimal(2)
 	}
 	if(player.data.monster.eq(5)){
 		newdehp = newdehp.mul(1.4).floor()
@@ -1101,7 +1101,7 @@ addLayer("tree-tab", {
 					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加3感染<br>*1.65血":""
 					let monster2 = player.data.monster.eq(2) ? "蛊梦师:每回合给敌方1~2张阻梦":""
 					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有30%的几率造成晕眩1在双方行动之后<br>*1.3血,*1.15攻击":""
-					let monster4 = player.data.monster.eq(4) ? "截:初始攻击4,每攻击一次攻击翻倍<br>*1.45血":""
+					let monster4 = player.data.monster.eq(4) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*1.45血":""
 					let monster5 = player.data.monster.eq(5) ? "狂战士:血量低于30%时每回合格外攻击2次<br>*1.4血,*1.4攻击":""
 					let monster6 = player.data.monster.eq(6) ? "混乱者:每回合给予对方2混乱与5中毒<br>*0.75血":""
 					let monster7 = player.data.monster.eq(7) ? "医生:当攻击未别敌方护甲挡下且造成伤害时给予敌方2禁疗<br>*1.25血":""
