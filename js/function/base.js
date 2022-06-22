@@ -155,17 +155,21 @@ function getcard(id1,id2){
 	for(col=1;col<=cao;col++){
 		if(player.data.holdcard.lt(player.data.maxcard)){
 			if(player.data[id1+col].eq(0)){
-				var card = Math.floor(Math.random() * player.data.allcard)+1
+				var holdallcard = new Decimal(0)
+				for(car=1;car<=player.data.allcard;car++){
+					holdallcard = holdallcard.add(player.data.card[car])
+				}
+				var card = Math.floor(Math.random() * holdallcard)+1
 				var cards = player.data.card
 				var nothing = true
-				if(player.data.card[card].lt(1)){
-					col--
-				}
-				for(col2=1;col2<=player.data.allcard;col2++){	
-					if(player.data.card[col2].gte(1) && col2==card){
+				for(col2=1;col2<=player.data.allcard;col2++){
+					if(card>player.data.card[col2]){
+						card -= player.data.card[col2]
+					}else if(card<=player.data.card[col2]){
 						player.data[id1+col] = new Decimal(col2)
 						player.data.card[col2] = player.data.card[col2].sub(1)
 						player.data.holdcard = player.data.holdcard.add(1)
+						col2 = 999
 					}
 				}
 				for(i in cards){if(cards[i].gt(0)){nothing = false}}

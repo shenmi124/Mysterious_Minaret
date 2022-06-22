@@ -132,9 +132,10 @@ var systemComponents = {
 		南徒awsler(画师)<br>
 		<br><br>
 		捐助感谢(按金额)(如要改名联系作者):<br>
+		爱发电用户_5XbC<br>
+		钢炼菜狗 镇魂曲<br>
 		奶他酱<br>
 		南徒awsler<br>
-		爱发电用户_5XbC<br>
 		从来不虚何必兄<br>
 		<br><br>
     `
