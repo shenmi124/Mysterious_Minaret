@@ -661,7 +661,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.62b</div>
+				v0.1.5.66b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1255,7 +1255,7 @@ addLayer("map", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.62b</div>
+				v0.1.5.66b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1421,6 +1421,57 @@ addLayer("store", {
 		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24]]],
 	]
 })
+
+addLayer("campfire", {
+    name: "campfire",
+    symbol: "<h6>营火",
+	tooltip() { 
+		return `营火`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+		hpmax:new Decimal(0),
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		11:{
+			title(){return "烤火"},
+			display(){return "这使你充满决心<br>(恢复50%血,10%血上限(相加))<br>"+`目前:+${format(player.campfire.hpmax,0)}%`},
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "150px",'width': '200px'}},
+			onClick(){
+				player.data.hp = player.data.hp.add(player.data.hpmax.mul(0.5))
+				player.campfire.hpmax = player.campfire.hpmax.add(10)
+				backnone()
+				return
+			},
+		},
+		12:{
+			title(){return "升级"},
+			display(){return "用你在塔中所找<br>(升级一张卡)<br>"},
+			canClick(){return true},
+			unlocked(){return false},
+			style() {return {'height': "150px",'width': '200px'}},
+			onClick(){
+				return
+			},
+		},
+	},
+	tabFormat: [
+		["display-text", function() {return `你只可以选择其中的一个`}],
+		"blank",
+		["row", [["clickable", 11],"blank",["clickable", 12]]],
+		"blank",
+	]
+})
+
 
 addLayer("mil", {
     name: "mil",
@@ -1627,7 +1678,7 @@ addLayer("mil", {
 			},
 		},
 		16: {
-			requirementDescription: "吸血鬼之心<br><h6>每杀死1名敌人+35血上限(此效果最大1000)并恢复50血",
+			requirementDescription: "吸血鬼之心<br><h6>每杀死1名敌人+35血上限并恢复50血",
 			done() {
 				return player.data.Ultra_Rare_Artifacts[0].gte(player.mil['m'+this.id])
 			},
@@ -3009,7 +3060,7 @@ addLayer("bag", {
 			let OSR0 = player.data.Super_Rare_Artifacts_Sole[0].gte(1) ? "感染性抗体(唯一):感染会直接对你造成伤害而不会获得中毒<br>" : ""
 			let OSR1 = player.data.Super_Rare_Artifacts_Sole[1].gte(1) ? "坚毅之盾(唯一):护甲每回合只减少1<br>" : ""
 			let UR = "<br>UR(极少/Ultra Rare):<br>"
-			let UR0 = player.data.Ultra_Rare_Artifacts[0].gte(1) ? "吸血鬼之心("+format(player.data.Ultra_Rare_Artifacts[0],0)+"):每杀死1名敌人+"+format(player.data.Ultra_Rare_Artifacts[0].mul(35),0)+"血上限(此效果最大1000)并恢复"+format(player.data.Ultra_Rare_Artifacts[0].mul(50),0)+"血<br>" : ""
+			let UR0 = player.data.Ultra_Rare_Artifacts[0].gte(1) ? "吸血鬼之心("+format(player.data.Ultra_Rare_Artifacts[0],0)+"):每杀死1名敌人+"+format(player.data.Ultra_Rare_Artifacts[0].mul(35),0)+"血上限并恢复"+format(player.data.Ultra_Rare_Artifacts[0].mul(50),0)+"血<br>" : ""
 			let OUR0 = player.data.Ultra_Rare_Artifacts_Sole[0].gte(1) ? "再生生命体(唯一):恢复效果在最大生命的15%前不会减少且每回合获得4恢复<br>" : ""
 			let OUR1 = player.data.Ultra_Rare_Artifacts_Sole[1].gte(1) ? player.data.Ultra_Rare_Artifacts_Sole1==false ? "顽强生命体(唯一)(未使用):死亡时以50%的血上限的血恢复<br>" : "顽强生命体(唯一)(已使用):死亡时以50%的血上限的血恢复<br>" : ""
 			let SP = "<br>SP(特殊/Special):<br>"

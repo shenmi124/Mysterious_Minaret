@@ -7,96 +7,61 @@ function remap(){
 	for(row=1;row<=7;row++){
 		for(col=1;col<=9;col++){
 			let map = Math.floor((Math.random() * 100))+1
-			if(map<=86){
+			if(map<=82){
 				player.map['mapy'+row+'x'][col] = new Decimal(0)
-			}else if(map<=94){
+				//怪物82%
+			}else if(map<=90){
 				player.map['mapy'+row+'x'][col] = new Decimal(1)
+				//精英怪8%
+			}else if(map<=94){
+				player.map['mapy'+row+'x'][col] = new Decimal(4)
+				//营火4%
 			}else if(map<=98){
 				player.map['mapy'+row+'x'][col] = new Decimal(2)
+				//商店4%
 			}else if(map<=100){
 				player.map['mapy'+row+'x'][col] = new Decimal(3)
+				//宝箱2%
 			}
 		}
 	}
 }
 
+function mapfirst(id,id2,id3){
+	if(player.map['mapy'+id+'x'][id2-id3].eq(0)){
+		return '怪物'
+	}else if(player.map['mapy'+id+'x'][id2-id3].eq(1)){
+		return '精英怪'
+	}else if(player.map['mapy'+id+'x'][id2-id3].eq(2)){
+		return '宝箱'
+	}else if(player.map['mapy'+id+'x'][id2-id3].eq(3)){
+		return '商店'
+	}else if(player.map['mapy'+id+'x'][id2-id3].eq(4)){
+		return '营火'
+	}
+}
+
 function maptit(id){
 	if(id>=10 && id<20){
-		if(player.map['mapy1x'][id-10].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy1x'][id-10].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy1x'][id-10].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy1x'][id-10].eq(3)){
-			return '商店'
-		}
+		return mapfirst(1,id,10)
 	}
 	if(id>=20 && id<30){
-		if(player.map['mapy2x'][id-20].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy2x'][id-20].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy2x'][id-20].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy2x'][id-20].eq(3)){
-			return '商店'
-		}
+		return mapfirst(2,id,20)
 	}
 	if(id>=30 && id<40){
-		if(player.map['mapy3x'][id-30].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy3x'][id-30].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy3x'][id-30].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy3x'][id-30].eq(3)){
-			return '商店'
-		}
+		return mapfirst(3,id,30)
 	}
 	if(id>=40 && id<50){
-		if(player.map['mapy4x'][id-40].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy4x'][id-40].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy4x'][id-40].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy4x'][id-40].eq(3)){
-			return '商店'
-		}
+		return mapfirst(4,id,40)
 	}
 	if(id>=50 && id<60){
-		if(player.map['mapy5x'][id-50].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy5x'][id-50].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy5x'][id-50].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy5x'][id-50].eq(3)){
-			return '商店'
-		}
+		return mapfirst(5,id,50)
 	}
 	if(id>=60 && id<70){
-		if(player.map['mapy6x'][id-60].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy6x'][id-60].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy6x'][id-60].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy6x'][id-60].eq(3)){
-			return '商店'
-		}
+		return mapfirst(6,id,60)
 	}
 	if(id>=70 && id<80){
-		if(player.map['mapy7x'][id-70].eq(0)){
-			return '怪物'
-		}else if(player.map['mapy7x'][id-70].eq(1)){
-			return '精英怪'
-		}else if(player.map['mapy7x'][id-70].eq(2)){
-			return '宝箱'
-		}else if(player.map['mapy7x'][id-70].eq(3)){
-			return '商店'
-		}
+		return mapfirst(7,id,70)
 	}
 }
 
@@ -117,6 +82,8 @@ function maponc(id){
 	}else if(player.map['mapy2x'][id-20].eq(3)){
 		store_card()
 		showTab('store')
+	}else if(player.map['mapy2x'][id-20].eq(4)){
+		showTab('campfire')
 	}
 	if((id-20)==(player.map.x)){
 		
@@ -134,12 +101,19 @@ function maponc(id){
 		let map = Math.floor((Math.random() * 100))+1
 		if(map<=82){
 			player.map['mapy7x'][col] = new Decimal(0)
-		}else if(map<=92){
+			//怪物82%
+		}else if(map<=90){
 			player.map['mapy7x'][col] = new Decimal(1)
-		}else if(map<=97){
+			//精英怪8%
+		}else if(map<=94){
+			player.map['mapy7x'][col] = new Decimal(4)
+			//营火4%
+		}else if(map<=98){
 			player.map['mapy7x'][col] = new Decimal(2)
+			//商店4%
 		}else if(map<=100){
 			player.map['mapy7x'][col] = new Decimal(3)
+			//宝箱2%
 		}
 	}
 }
@@ -183,6 +157,8 @@ function mapsty(id){
 		return "#00ff88"
 	}else if(player.map['mapy'+realy+'x'][realx].eq(1)){
 		return "#801b1b"
+	}else if(player.map['mapy'+realy+'x'][realx].eq(4)){
+		return "#fe9750"
 	}else{
 		return player.data.themes_light==true ? mapcan(player.map.x,player.map.y,id) ? '#000000' : '#aaaaaa' : mapcan(player.map.x,player.map.y,id) ? '#FFFFFF' : '#666666'
 	}

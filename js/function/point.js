@@ -38,5 +38,6 @@ function ResetPoint(){
 	/*player.talent_crystal.points = player.talent_crystal.points.add(player.point.points.div(10000).floor())*/
 	layerDataReset('data')
 	layerDataReset('mil')
+	layerDataReset('map')
 	showTab('none')
 }
