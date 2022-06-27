@@ -661,7 +661,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.66b</div>
+				v0.1.5.67b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1255,7 +1255,7 @@ addLayer("map", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.66b</div>
+				v0.1.5.67b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1712,6 +1712,9 @@ addLayer("a", {
 		ha1:new Decimal(0),
 		ha2:new Decimal(0),
 		ha5:new Decimal(0),
+		ha6:new Decimal(0),
+		ha7:new Decimal(0),
+		ha8:new Decimal(0),
     }},
     color: "FFFFFF",
     resource: "Achievement",
@@ -2045,6 +2048,75 @@ addLayer("a", {
             },
 			style() {return {'border-color': "#04b828" }}
         },
+		111: {
+            name: "行星坍塌",
+            done() {
+                return player.a.ha6.gte(1)
+			},
+            tooltip() {
+                return hasAchievement("a",101) ? "行星坍塌<br>进入黑洞" : "这是个隐藏成就"
+            },
+			canClick(){return true},
+			onClick(){return player.a.ha1 = player.a.ha1.add(1)},
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		112: {
+            name: "折跃门",
+            done() {
+                return player.a.ha7.gte(1)
+			},
+            tooltip() {
+                return hasAchievement("a",102) ? "折跃门<br>进入白洞<br>并不会进入末地" : "这是个隐藏成就"
+            },
+			canClick(){return true},
+			onClick(){return player.a.ha2 = player.a.ha2.add(1)},
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		113: {
+            name: "命悬一线",
+            done() {
+                return player.a.ha8.gte(1) && player.data.hp.eq(1)
+			},
+            tooltip() {
+                return hasAchievement("a",103) ? "命悬一线<br>血量仅剩1时在篝火进行烤火" : "这是个隐藏成就"
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		114: {
+            name: "",
+            done() {
+                return false
+			},
+            tooltip() {
+                return ' '
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
+		115: {
+            name: "",
+            done() {
+                return false
+			},
+            tooltip() {
+                return ' '
+            },
+            onComplete() {
+                player.a.points  = player.a.points.add(1)
+            },
+			style() {return {'border-color': "#04b828" }}
+        },
     },
 	tabFormat: [
         ["display-text",
@@ -2059,7 +2131,8 @@ addLayer("a", {
 		["row", [["achievement", 21],["achievement", 22],["achievement", 23],["achievement", 24],["achievement", 25]]],
 		["row", [["achievement", 31],["achievement", 32],["achievement", 33],["achievement", 34],["achievement", 35]]],
 		["row", [["achievement", 41],["achievement", 42],["achievement", 43],["achievement", 44],["achievement", 45]]],
-		["row", [["achievement", 101],["clickable", 101],["achievement", 102],["clickable", 102],["achievement", 103],["achievement", 104],["achievement", 105]]],
+		["row", [["achievement", 101],["achievement", 102],["achievement", 103],["achievement", 104],["achievement", 105]]],
+		["row", [["achievement", 111],["achievement", 112],["achievement", 113],["achievement", 114],["achievement", 115]]],
     ],
 })
 

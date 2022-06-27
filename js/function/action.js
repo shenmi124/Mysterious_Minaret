@@ -6,7 +6,6 @@ function enemy_action(){
 function our_action(){
 	getcard("display",3)
 	player.data.ps = new Decimal(player.data.ps).add(3)
-	player.data.ha5 = new Decimal(0)
 	if(player.data.initialize==false){
 		remap()
 		player.data.initialize = true
