@@ -233,6 +233,7 @@ function softReset(){
 		layerDataReset('data')
 		layerDataReset('mil')
 		layerDataReset('map')
+		layerDataReset('campfire')
 		showTab('none')
 	}
 }
@@ -245,6 +246,7 @@ function rehardReset(){
 			layerDataReset('map')
 			layerDataReset('point')
 			layerDataReset('a')
+			layerDataReset('campfire')
 			showTab('none')
 		}
 	}

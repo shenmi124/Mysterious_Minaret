@@ -39,5 +39,6 @@ function ResetPoint(){
 	layerDataReset('data')
 	layerDataReset('mil')
 	layerDataReset('map')
+	layerDataReset('campfire')
 	showTab('none')
 }

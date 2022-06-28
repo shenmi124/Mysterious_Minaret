@@ -194,3 +194,4 @@ function mapsty(id){
 		return player.data.themes_light==true ? mapcan(player.map.x,player.map.y,id) ? '#000000' : '#aaaaaa' : mapcan(player.map.x,player.map.y,id) ? '#FFFFFF' : '#666666'
 	}
 }
+
