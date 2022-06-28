@@ -86,7 +86,7 @@ function maponc(id){
 	player.data.level = player.data.level.add(1)
 	if(player.map['mapy2x'][id-20].eq(0)){
 		player.data.monster = new Decimal(0)
-
+	levelnew()
 	}else if(player.map['mapy2x'][id-20].eq(1)){
 		player.data.monster = new Decimal(Math.floor((Math.random() * 7)) + 1)
 		levelnew()
