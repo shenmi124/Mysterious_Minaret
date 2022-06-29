@@ -252,7 +252,6 @@ function rehardReset(){
 	}
 }
 
-
 function backnone(){
 	if(player.data.newmap == true){
 		showTab("map")
@@ -261,4 +260,12 @@ function backnone(){
 	}else{
 		showTab("none")
 	}
+}
+
+if((window.event.ctrlKey)&&(window.event.keyCode==82)){
+	layerDataReset('data')
+	layerDataReset('mil')
+	layerDataReset('map')
+	layerDataReset('campfire')
+	showTab('none')
 }
