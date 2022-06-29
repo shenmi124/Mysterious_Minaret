@@ -106,6 +106,9 @@ function store_card(){
 	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card14_canClick = true
+	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
+	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(400)))).add(200)
+	player.data.store_card14_canClick = true
 	player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card21_canClick = true
@@ -384,6 +387,9 @@ addLayer("data", {
 		store_card14:new Decimal(0),
 		store_card14_cost:new Decimal(0),
 		store_card14_canClick:true,
+		store_card15:new Decimal(0),
+		store_card15_cost:new Decimal(0),
+		store_card15_canClick:true,
 		store_card21:new Decimal(0),
 		store_card21_cost:new Decimal(0),
 		store_card21_canClick:true,
@@ -661,7 +667,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.70b</div>
+				v0.1.5.72b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1255,7 +1261,7 @@ addLayer("map", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.70b</div>
+				v0.1.5.72b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1356,14 +1362,15 @@ addLayer("store", {
 		},
 		15:{
 			title(){return "盲盒"},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? "<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
 			style() {return {'height': "200px",'width': '150px'}},
 			onClick(){
 				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				awardartifacts()
+				player.data.money = player.data.money.add(Math.floor(Math.random() * 300))
 				player.data['store_card'+this.id+'_canClick'] = false
 				return
 			},
@@ -1430,7 +1437,7 @@ addLayer("store", {
 		"blank",
 		["row", [["clickable", 1]]],
 		"blank",
-		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14],["clickable", 15]]],
+		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14],"blank",["clickable", 15]]],
 		"blank",
 		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24],["clickable", 25]]],
 	]
