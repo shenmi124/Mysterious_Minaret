@@ -1354,6 +1354,20 @@ addLayer("store", {
 				return
 			},
 		},
+		15:{
+			title(){return "盲盒"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				player.data.cardmax[player.data['store_card'+this.id]] = player.data.cardmax[player.data['store_card'+this.id]].add(1)
+				player.data['store_card'+this.id+'_canClick'] = false
+				return
+			},
+		},
 		21:{
 			title(){return "购买"+retit('store_card',this.id)},
 			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
@@ -1416,9 +1430,9 @@ addLayer("store", {
 		"blank",
 		["row", [["clickable", 1]]],
 		"blank",
-		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14]]],
+		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14],["clickable", 15]]],
 		"blank",
-		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24]]],
+		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24],["clickable", 25]]],
 	]
 })
 
