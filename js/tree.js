@@ -127,7 +127,7 @@ function carddeg(i){
 function cardtop(i){
 	var all_amount = player.data.holdcard
 	var deg = i
-	if(tmp[this.layer].clickables[i].unlocked){
+	if(tmp[this.layer].clickables[i].unlocked || false){
 		for(col3=1;col3<=20;col3++){
 			if(col3 == i){
 				col3 = 999
