@@ -261,11 +261,3 @@ function backnone(){
 		showTab("none")
 	}
 }
-
-if((window.event.ctrlKey)&&(window.event.keyCode==82)){
-	layerDataReset('data')
-	layerDataReset('mil')
-	layerDataReset('map')
-	layerDataReset('campfire')
-	showTab('none')
-}
