@@ -106,9 +106,9 @@ function store_card(){
 	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card14_canClick = true
-	player.data.store_card14 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
-	player.data.store_card14_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(400)))).add(200)
-	player.data.store_card14_canClick = true
+	player.data.store_card15 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
+	player.data.store_card15_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(400)))).add(200)
+	player.data.store_card15_canClick = true
 	player.data.store_card21 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card21_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card21_canClick = true
