@@ -1114,9 +1114,7 @@ addLayer("tree-tab", {
 						["bar", "hpbar"],
 						["row", [["bar", "deadbar1"],["bar", "deadbar2"],["bar", "deadbar3"],["bar", "deadbar4"],["bar", "deadbar5"]]],
 						["row", [["bar", "deadbar6"],["bar", "deadbar7"],["bar", "deadbar8"],["bar", "deadbar9"],["bar", "deadbar10"]]],
-							["row", [
-								["bar", "mpbar"],["bar", "psbar"]
-							]],
+						["row", [["bar", "mpbar"],["bar", "psbar"]]],
 					]],
 				["bar", "moneybar"]
 				]],

@@ -13,13 +13,24 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.5.72b",
+	num: "0.1.6.72b",
 	name: "神秘尖塔",
 }
 
 let changelog = `
 	<div class="link" onclick="backnone()"><big><big>返回游戏</big></big></div><br>
 	<h1>更新日志:</h1><br>
+	<br><h3>v0.1.6.72β 缤纷更新</h3><br>
+	<li>地图拥有更多类型<br>
+	<li>添加营地<br>
+	<li>添加黑白洞<br>
+	<li>添加新隐藏成就<br>
+	<li>添加商店中的盲盒和删牌<br>
+	<li>更改更新日志<br>
+	<li>更改游戏操作细节<br>
+	<li>加大力度英化<br>
+	<li>新图标<br>
+	<li>修复bug<br>
 	<br><h3>v0.1.5.50β 地图更新</h3><br>
 	<li>增加了地图,现在你可以选择去往的地点<br>
 	<li>现在精英怪死亡一定会掉落宝箱<br>

@@ -125,10 +125,9 @@ var systemComponents = {
 		<big>↑你可以在这里把你的想法告诉我(尤其是多语言化,我会帮你找办法) You can tell me what you think here (especially multilingual, I will help you find a way)</big><br>
 		<br><br>
 		特别感谢(排名不分先后)(如要改名联系作者):<br>
-		屑见手青 (为图鉴子项补全内容)<br>
+		屑见手青 (最应该感谢的人,为图鉴子项补全内容,帮忙英化)<br>
 		QwQe308 (虽然本作没有实际他的帮助,但他教会了我很多)<br>
-		Dr丶晨曦公主        ~喵‭ (英化(结果全是我英化的,气逝我了))<br>
-		南徒awsler(画师)<br>
+		南徒awsler(画师,但是还没开始画)<br>
 		<br><br>
 		捐助感谢(按金额)(如要改名联系作者):<br>
 		爱发电用户_5XbC<br>

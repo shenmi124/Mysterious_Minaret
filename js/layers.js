@@ -84,6 +84,59 @@ function card2display(id){
 	if(id==0){return "阻梦:<br>每有1张在手上就少抽一张牌<br>消耗:1 体力<br><br>"}
 }
 
+function delete_card(id){
+	if(id==1){return "攻击("+format(player.data.cardmax[id],0)+")"}
+	if(id==2){return "防御("+format(player.data.cardmax[id],0)+")"}
+	if(id==3){return "治疗("+format(player.data.cardmax[id],0)+")"}
+	if(id==4){return "魔力飞弹("+format(player.data.cardmax[id],0)+")"}
+	if(id==7){return "连斩("+format(player.data.cardmax[id],0)+")"}
+	if(id==8){return "愤怒("+format(player.data.cardmax[id],0)+")"}
+	if(id==9){return "传染("+format(player.data.cardmax[id],0)+")"}
+	if(id==10){return "病原体("+format(player.data.cardmax[id],0)+")"}
+	if(id==11){return "思考("+format(player.data.cardmax[id],0)+")"}
+	if(id==12){return "重击("+format(player.data.cardmax[id],0)+")"}
+	if(id==13){return "回旋镖("+format(player.data.cardmax[id],0)+")"}
+	if(id==14){return "无中生有("+format(player.data.cardmax[id],0)+")"}
+	if(id==15){return "烨("+format(player.data.cardmax[id],0)+")"}
+	if(id==16){return "灵能冲击("+format(player.data.cardmax[id],0)+")"}
+	if(id==17){return "破魂打击("+format(player.data.cardmax[id],0)+")"}
+	if(id==18){return "魔能调换("+format(player.data.cardmax[id],0)+")"}
+	if(id==19){return "阻梦("+format(player.data.cardmax[id],0)+")"}
+	if(id==20){return "毒素扩散("+format(player.data.cardmax[id],0)+")"}
+	if(id==21){return "血清("+format(player.data.cardmax[id],0)+")"}
+	if(id==22){return "隐秘扩散("+format(player.data.cardmax[id],0)+")"}
+	if(id==23){return "病毒爆发("+format(player.data.cardmax[id],0)+")"}
+	if(id==24){return "墓地增生("+format(player.data.cardmax[id],0)+")"}
+	if(id==25){return "肉体再生("+format(player.data.cardmax[id],0)+")"}
+	if(id==26){return "重构("+format(player.data.cardmax[id],0)+")"}
+	if(id==27){return "嗜血斩("+format(player.data.cardmax[id],0)+")"}
+	if(id==28){return "自信("+format(player.data.cardmax[id],0)+")"}
+	if(id==29){return "魔力源泉("+format(player.data.cardmax[id],0)+")"}
+	if(id==30){return "治疗术("+format(player.data.cardmax[id],0)+")"}
+	if(id==31){return "绷带("+format(player.data.cardmax[id],0)+")"}
+	if(id==32){return "卡牌魔法("+format(player.data.cardmax[id],0)+")"}
+	if(id==33){return "献祭("+format(player.data.cardmax[id],0)+")"}
+	if(id==34){return "天平("+format(player.data.cardmax[id],0)+")"}
+	if(id==35){return "墓地衍生("+format(player.data.cardmax[id],0)+")"}
+	if(id==36){return "滴血("+format(player.data.cardmax[id],0)+")"}
+	if(id==37){return "破财消灾("+format(player.data.cardmax[id],0)+")"}
+	if(id==38){return "灵魂吸取("+format(player.data.cardmax[id],0)+")"}
+	if(id==39){return "魔法结晶("+format(player.data.cardmax[id],0)+")"}
+	if(id==40){return "提取器("+format(player.data.cardmax[id],0)+")"}
+	if(id==41){return "应急干粮("+format(player.data.cardmax[id],0)+")"}
+	if(id==42){return "老千("+format(player.data.cardmax[id],0)+")"}
+	if(id==43){return "破釜沉舟("+format(player.data.cardmax[id],0)+")"}
+	if(id==44){return "能量护盾("+format(player.data.cardmax[id],0)+")"}
+	if(id==45){return "不定性病毒("+format(player.data.cardmax[id],0)+")"}
+	if(id==46){return "格挡("+format(player.data.cardmax[id],0)+")"}
+	if(id==47){return "急救("+format(player.data.cardmax[id],0)+")"}
+	if(id==48){return "背刺("+format(player.data.cardmax[id],0)+")"}
+	if(id==49){return "蔓延("+format(player.data.cardmax[id],0)+")"}
+	if(id==50){return "聚集("+format(player.data.cardmax[id],0)+")"}
+	if(id==51){return "再生("+format(player.data.cardmax[id],0)+")"}
+}
+
+
 function haveefffunction(id){
 	if(player.data.effect[id].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 }
@@ -121,6 +174,9 @@ function store_card(){
 	player.data.store_card24 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
 	player.data.store_card24_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(200)))).add(100)
 	player.data.store_card24_canClick = true
+	player.data.store_card25 = new Decimal(Math.floor((Math.random() * player.data.allcard))).add(1)
+	player.data.store_card25_cost = new Decimal(Math.floor((Math.random() * player.data.allcard.add(500)))).add(500)
+	player.data.store_card25_canClick = true
 }
 
 function restore_card(){
@@ -233,56 +289,74 @@ addLayer("data", {
 		
 		//卡牌
 		card:[new Decimal(0),
-		new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),
+			new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),
 		],
 		carddead:[new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),
 		],
 		cardintermediary:[new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),
 		],
 		cardmax:[new Decimal(0),
-		new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
-		new Decimal(0),
+			new Decimal(12),new Decimal(5),new Decimal(3),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
+			new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),
 		],
 		allcard:new Decimal(51),
 		maxcard:new Decimal(10),
@@ -402,6 +476,9 @@ addLayer("data", {
 		store_card24:new Decimal(0),
 		store_card24_cost:new Decimal(0),
 		store_card24_canClick:true,
+		store_card25:new Decimal(0),
+		store_card25_cost:new Decimal(0),
+		store_card25_canClick:true,
 		
 		artifactsawardrandom:new Decimal(0),
 		
@@ -434,6 +511,7 @@ addLayer("data", {
 		themes_light:false,
 		
 		initialize:false,
+		fps:new Decimal(0),
     }},
 	update(diff) {
 		save()
@@ -1431,6 +1509,19 @@ addLayer("store", {
 				return
 			},
 		},
+		25:{
+			title(){return "删牌"},
+			display(){return "删除一张卡(可重复购买)"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$`},
+			cao(){return },
+			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
+			unlocked(){return true},
+			style() {return {'height': "200px",'width': '150px'}},
+			onClick(){
+				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
+				showTab('store_delete_card')
+				return
+			},
+		},
 	},
 	tabFormat: [
 		["display-text", function() {return `这里是商店<br>你可以买些东西<br><big>你有<yellow id="yellow">`+format(player.data.money,0)+`\$`}],
@@ -1439,7 +1530,63 @@ addLayer("store", {
 		"blank",
 		["row", [["clickable", 11],"blank",["clickable", 12],"blank",["clickable", 13],"blank",["clickable", 14],"blank",["clickable", 15]]],
 		"blank",
-		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24],["clickable", 25]]],
+		["row", [["clickable", 21],"blank",["clickable", 22],"blank",["clickable", 23],"blank",["clickable", 24],"blank",["clickable", 25]]],
+	]
+})
+
+addLayer("store_delete_card", {
+    name: "store",
+    symbol: "<h6>商店删牌",
+	tooltip() { 
+		return `商店删牌`
+	},
+    position: 12,
+    startData() { return {
+        unlocked: true,
+    }},
+	update(diff) {
+	},
+    color: "#FFFFFF",
+    type: "none",
+    row: "side",
+    layerShown(){return true},
+	clickables:{
+		1:{
+			title:"返回商店(钱不会返还)",
+			canClick(){return true},
+			unlocked(){return true},
+			style() {return {'height': "25px","min-height": "25px",'width': '225px'}},
+			onClick(){showTab("store")},
+		},
+	},
+	grid: {
+		rows: 6,
+		cols: 9,
+		getStartData(id) {
+			return 0
+		},
+		getUnlocked(id) {
+			let a = id-Math.floor(id/100)*100+Math.floor(id/100)*10-10
+			return player.data.cardmax[a].gte(1)
+		},
+		getCanClick(data, id) {
+			return true
+		},
+		onClick(data, id) { 
+			player.data.cardmax[id-Math.floor(id/100)*100+Math.floor(id/100)*10-10] = player.data.cardmax[id-Math.floor(id/100)*100+Math.floor(id/100)*10-10].sub(1)
+			showTab("store")
+		},
+		getTitle(data, id) {
+			return delete_card(id-Math.floor(id/100)*100+Math.floor(id/100)*10-10)
+		},
+		getStyle() {return {'height': "200px",'width': '150px'}},
+	},
+	tabFormat: [
+		["display-text", function() {return `选择一张牌移出你本局游戏`}],
+		"blank",
+		["row", [["clickable", 1]]],
+		"blank",
+		"grid",
 	]
 })
 
