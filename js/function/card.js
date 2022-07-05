@@ -92,7 +92,7 @@ function redis(id1,id2){
 		if(player.data[id1+id2].eq(34)){return `按降低的比例重新分配血,魔力,体力<br>移除<br>现在的比例为`+format((player.data.hp/player.data.hpmax+player.data.mp/player.data.mpmax+player.data.ps/player.data.psmax)/3.3,2)+`<br>消耗:无`}
 		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
 		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7 血`}
-		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的$的物理伤害</red><br>消耗:20% $`}
+		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的<img id="money" src="png/money.gif">的物理伤害</red><br>消耗:20% <img id="money" src="png/money.gif">`}
 		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">15 物理伤害</blue>,并永久吸取同等血量上限<br>移除<br>消耗:10 魔力`}
 		if(player.data[id1+id2].eq(39)){return `恢复15法力<br>移除<br>消耗:无`}
 		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血`}

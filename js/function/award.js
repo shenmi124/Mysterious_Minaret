@@ -1,9 +1,11 @@
 function awardmoney(){
 	if(player.data.monster!=0){
 		let money = Math.floor(Math.random() * 150)+40
+		player.data.money_gif = new Decimal(money)
 		player.data.money = player.data.money.add(money)
 	}else{
 		let money = Math.floor(Math.random() * 50)+20
+		player.data.money_gif = new Decimal(money)
 		player.data.money = player.data.money.add(money)
 	}
 	player.data.moneyaward = false

@@ -59,6 +59,13 @@
 	transform: scale(1.2, 1.2);
 }
 
+#money {
+}
+
+#money:hover {
+	transform: rotate(7200deg) scale(2, 2);
+}
+
 #trophy {
 	height: 100px;
 	width: 100px;

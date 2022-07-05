@@ -136,7 +136,6 @@ function delete_card(id){
 	if(id==51){return "再生("+format(player.data.cardmax[id],0)+")"}
 }
 
-
 function haveefffunction(id){
 	if(player.data.effect[id].gt(0)){player.data.haveeff = player.data.haveeff.add(1)}
 }
@@ -242,6 +241,7 @@ addLayer("data", {
         unlocked: true,
 		
 		money:new Decimal(0),
+		money_gif:new Decimal(0),
 		
 		hp:new Decimal(100),
 		hpmax:new Decimal(100),
@@ -649,7 +649,26 @@ addLayer("over", {
 			},
 			canClick(){return true},
 			unlocked(){return player.data.moneyaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardmoney()},
+			onClick(){
+				awardmoney()
+				makeParticles({		
+					image:"png/money.gif",								
+					gravity() {
+						return (Math.random() + 0.25) * 2
+					},
+					angle() {return Math.random()*180 - 90},
+					speed() {
+						return (Math.random() + 1.2) * 14 + 4 
+					},
+					rotation() {
+						return (Math.random() + 360)
+					},
+					width:10,
+					height:10,
+					time:4,
+					spread:0,
+				}, player.data.money_gif)
+			},
 		},
 		3:{
 			title: "牌!",
@@ -725,7 +744,7 @@ addLayer("over", {
 			textStyle: {"color": "#000000"}
 		},
 		moneybar:{
-			display() {return format(player.data.money,0)+"$"},	
+			display() {return format(player.data.money,0)+`<img id="money" src="png/money.gif">`},	
 			direction: RIGHT,
 			width: 76,
 			height: 54,
@@ -745,7 +764,7 @@ addLayer("over", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.72b</div>
+				v0.1.6.74b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1339,7 +1358,7 @@ addLayer("map", {
 			left: (player.tab !== 'none' && player.navTab !== 'none')}"
 			 :style="{'margin-top': !readData(layoutInfo.showTree) && player.tab == 'info-tab' ? '50px' : ''}">
 			<div id="version" onclick="showTab('changelog-tab')" class="overlayThing" style="margin-right: 13px" >
-				v0.1.5.72b</div>
+				v0.1.6.74b</div>
 			<img id="optionWheel" class="overlayThing"  src="png/options_wheel.png" onclick="showTab('options-tab')"></img>
 			<div id="info" class="overlayThing" onclick="showTab('info-tab')"><br>i</div>
 			<img id="pokedex" class="overlayThing" src="png/pokedex.png" onclick="showTab('pokedex')"></img>
@@ -1384,7 +1403,7 @@ addLayer("store", {
 		},
 		11:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1398,7 +1417,7 @@ addLayer("store", {
 		},
 		12:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1412,7 +1431,7 @@ addLayer("store", {
 		},
 		13:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1426,7 +1445,7 @@ addLayer("store", {
 		},
 		14:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1440,7 +1459,7 @@ addLayer("store", {
 		},
 		15:{
 			title(){return "盲盒"},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? "<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? "<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1455,7 +1474,7 @@ addLayer("store", {
 		},
 		21:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1469,7 +1488,7 @@ addLayer("store", {
 		},
 		22:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1483,7 +1502,7 @@ addLayer("store", {
 		},
 		23:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1497,7 +1516,7 @@ addLayer("store", {
 		},
 		24:{
 			title(){return "购买"+retit('store_card',this.id)},
-			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$` : "已购买"},
+			display(){return player.data['store_card'+this.id+'_canClick'] == true ? redis('store_card',this.id)+"<br>"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">` : "已购买"},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1511,7 +1530,7 @@ addLayer("store", {
 		},
 		25:{
 			title(){return "删牌"},
-			display(){return "删除一张卡(可重复购买)"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`\$`},
+			display(){return "删除一张卡(可重复购买)"+"<big><big><big><big>"+format(player.data['store_card'+this.id+'_cost'],0)+`<img id="money" src="png/money.gif">`},
 			cao(){return },
 			canClick(){return player.data['store_card'+this.id+'_canClick'] == true && player.data.money.gte(player.data['store_card'+this.id+'_cost'])},
 			unlocked(){return true},
@@ -1524,7 +1543,7 @@ addLayer("store", {
 		},
 	},
 	tabFormat: [
-		["display-text", function() {return `这里是商店<br>你可以买些东西<br><big>你有<yellow id="yellow">`+format(player.data.money,0)+`\$`}],
+		["display-text", function() {return `这里是商店<br>你可以买些东西<br><big>你有<yellow id="yellow">`+format(player.data.money,0)+`<img id="money" src="png/money.gif">`}],
 		"blank",
 		["row", [["clickable", 1]]],
 		"blank",
@@ -1639,7 +1658,6 @@ addLayer("campfire", {
 		"blank",
 	]
 })
-
 
 addLayer("mil", {
     name: "mil",
@@ -2222,7 +2240,7 @@ addLayer("a", {
                 return player.a.ha6.gte(1)
 			},
             tooltip() {
-                return hasAchievement("a",101) ? "行星坍塌<br>进入黑洞" : "这是个隐藏成就"
+                return hasAchievement("a",111) ? "行星坍塌<br>进入黑洞" : "这是个隐藏成就"
             },
 			canClick(){return true},
 			onClick(){return player.a.ha1 = player.a.ha1.add(1)},
@@ -2237,7 +2255,7 @@ addLayer("a", {
                 return player.a.ha7.gte(1)
 			},
             tooltip() {
-                return hasAchievement("a",102) ? "折跃门<br>进入白洞<br>并不会进入末地" : "这是个隐藏成就"
+                return hasAchievement("a",112) ? "折跃门<br>进入白洞<br>并不会进入末地" : "这是个隐藏成就"
             },
 			canClick(){return true},
 			onClick(){return player.a.ha2 = player.a.ha2.add(1)},
@@ -2252,7 +2270,7 @@ addLayer("a", {
                 return player.a.ha8.gte(1) && player.data.hp.eq(1)
 			},
             tooltip() {
-                return hasAchievement("a",103) ? "命悬一线<br>血量仅剩1时在篝火进行烤火" : "这是个隐藏成就"
+                return hasAchievement("a",113) ? "命悬一线<br>血量仅剩1时在篝火进行烤火" : "这是个隐藏成就"
             },
             onComplete() {
                 player.a.points  = player.a.points.add(1)

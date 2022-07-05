@@ -757,7 +757,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		moneybar:{
-			display() {return format(player.data.money,0)+"$"},	
+			display() {return format(player.data.money,0)+`<img id="money" src="png/money.gif">`},	
 			direction: RIGHT,
 			width: 76,
 			height(){
