@@ -269,7 +269,7 @@ addLayer("tree-tab", {
     leftTab: true,
 	bars:{
 		dehpbar:{
-			display() {return "血量 "+format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)},	
+			display() {return format(player.data.dehp,0)+" / "+format(player.data.dehpmax,0)+`<img src="png/HP.png">`},	
 			direction: RIGHT,
 			width: 500,
 			height: 25,
@@ -280,7 +280,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		dempbar:{
-			display() {return "魔力 "+format(player.data.demp,0)+" / "+format(player.data.dempmax,0)},	
+			display() {return format(player.data.demp,0)+" / "+format(player.data.dempmax,0)+`<img src="png/MP.png">`},	
 			direction: RIGHT,
 			width: 248,
 			height: 25,
@@ -392,7 +392,7 @@ addLayer("tree-tab", {
 		//↑敌方 ↓我方
 		hpbar:{
 			display() {
-				let dis1 = player.data.effect[11].lte(0) ? "血量 "+format(player.data.hp,0)+" / "+format(player.data.hpmax,0) : "血量 ??? / ???"
+				let dis1 = player.data.effect[11].lte(0) ? format(player.data.hp,0)+" / "+format(player.data.hpmax,0)+`<img src="png/HP.png">` : "??? / ???"+`<img src="png/HP.png">`
 				let dis2 = player.data.card40eff14 == true ? "("+format(player.data.card40geteff14,0)+")" : ""
 				return dis1+dis2
 			},	
@@ -536,7 +536,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		mpbar:{
-			display() {return player.data.effect[11].lte(0) ? "魔力 "+format(player.data.mp,0)+" / "+format(player.data.mpmax,0) : "魔力 ??? / ???"},	
+			display() {return player.data.effect[11].lte(0) ? format(player.data.mp,0)+" / "+format(player.data.mpmax,0)+`<img src="png/MP.png">` : "??? / ???"+`<img src="png/MP.png">`},	
 			direction: RIGHT,
 			width: 248,
 			height: 25,
@@ -547,7 +547,7 @@ addLayer("tree-tab", {
 			textStyle: {"color": "#000000"}
 		},
 		psbar:{
-			display() {return player.data.effect[11].lte(0) ? "体力 "+format(player.data.ps,0)+" / "+format(player.data.psmax,0) : "体力 ??? / ???"},	
+			display() {return player.data.effect[11].lte(0) ? format(player.data.ps,0)+" / "+format(player.data.psmax,0)+`<img src="png/PS.png">` : "??? / ???"+`<img src="png/PS.png">`},	
 			direction: RIGHT,
 			width: 248,
 			height: 25,

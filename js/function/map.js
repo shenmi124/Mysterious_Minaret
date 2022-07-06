@@ -100,7 +100,7 @@ function maponc(id){
 		player.a.ha8 = new Decimal(1)
 	}else if(player.map['mapy2x'][id-20].eq(5)){
 		let a =  new Decimal(Math.floor((Math.random() * 4)))
-		player.data.level = player.data.level.sub(a).min(0)
+		player.data.level = player.data.level.sub(a).max(0)
 		player.a.ha6 = new Decimal(1)
 	}else if(player.map['mapy2x'][id-20].eq(6)){
 		remap()
