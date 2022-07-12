@@ -68,7 +68,7 @@ function mtktode(id){
 function gethp(id,id2){
 	if(id > 0){
 		if(player.data.effect[16].lte(0)){
-			player.data.hp = player.data.hp.add(id).max(player.data.hpmax)
+			player.data.hp = player.data.hp.add(id).min(player.data.hpmax)
 		}
 	}else if(id < 0){
 		player.data.subhpto = new Decimal(0).sub(id)
