@@ -13,14 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.6.72b",
+	num: "0.1.6.76b",
 	name: "神秘尖塔",
 }
 
 let changelog = `
 	<div class="link" onclick="backnone()"><big><big>返回游戏</big></big></div><br>
 	<h1>更新日志:</h1><br>
-	<br><h3>v0.1.6.72β 缤纷更新</h3><br>
+	<br><h3>v0.1.6.76β 缤纷更新</h3><br>
 	<li>地图拥有更多类型<br>
 	<li>添加营地<br>
 	<li>添加黑白洞<br>

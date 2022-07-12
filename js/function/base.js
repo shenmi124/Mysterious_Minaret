@@ -5,7 +5,7 @@ function card_consumption(ps,mp,hp){
 function attributes(hp,mp,ps,atk,mtk,de,sytlehp){
 	gethp(hp,sytlehp)
 	getmp(mp)
-	player.data.ps = player.data.ps.add(ps)
+	player.data.ps = player.data.ps.add(ps).min(player.data.psmax)
 	atktode(atk)
 	mtktode(mtk)
 	player.data.de = player.data.de.add(de)
@@ -15,7 +15,7 @@ function atktode(id){
 	if(id > 0){
 		player.data.atkto = new Decimal(id).add(player.data.effect[1])
 		if(player.data.Special_Artifacts[2].gte(1)){
-			player.data.dehp = player.data.dehp.sub(5)
+			player.data.dehp = player.data.dehp.sub(5).max(0)
 		}
 		if(player.data.deeffect[9].gte(1) && player.data.deeffect[8].gte(1)){
 			player.data.atkto = player.data.atkto.add(3)
@@ -33,13 +33,13 @@ function atktode(id){
 		player.data.atkto = new Decimal(0)
 	}else if(player.data.dede.gt(0)){
 		player.data.atkto = player.data.atkto.sub(player.data.dede)
-		player.data.dehp = player.data.dehp.sub(player.data.atkto)
+		player.data.dehp = player.data.dehp.sub(player.data.atkto).max(0)
 		if(player.data.card40eff14 == true){
 			player.data.card40geteff14 = player.data.card40geteff14.add(player.data.atkto)
 		}
 		player.data.dede = new Decimal(0)
 	}else{
-		player.data.dehp = player.data.dehp.sub(player.data.atkto)
+		player.data.dehp = player.data.dehp.sub(player.data.atkto).max(0)
 		if(player.data.card40eff14 == true){
 			player.data.card40geteff14 = player.data.card40geteff14.add(player.data.atkto)
 		}
@@ -59,7 +59,7 @@ function mtktode(id){
 	}else{
 		player.data.mtkto = new Decimal(id)
 	}
-	player.data.dehp = player.data.dehp.sub(player.data.mtkto)
+	player.data.dehp = player.data.dehp.sub(player.data.mtkto).max(0)
 	if(player.data.card40eff14 == true){
 		player.data.card40geteff14 = player.data.card40geteff14.add(player.data.mtkto)
 	}
@@ -68,7 +68,7 @@ function mtktode(id){
 function gethp(id,id2){
 	if(id > 0){
 		if(player.data.effect[16].lte(0)){
-			player.data.hp = player.data.hp.add(id)
+			player.data.hp = player.data.hp.add(id).max(player.data.hpmax)
 		}
 	}else if(id < 0){
 		player.data.subhpto = new Decimal(0).sub(id)
@@ -85,10 +85,10 @@ function gethp(id,id2){
 			player.data.subhpto = new Decimal(0)
 		}else if(player.data.effect[14].gt(0)&&id2=="card"){
 			player.data.effect[14] = player.data.effect[14].sub(player.data.subhpto)
-			player.data.hp = player.data.hp.sub(player.data.subhpto)
+			player.data.hp = player.data.hp.sub(player.data.subhpto).max(0)
 			player.data.subhpto = new Decimal(0)
 		}else{
-			player.data.hp = player.data.hp.sub(player.data.subhpto)
+			player.data.hp = player.data.hp.sub(player.data.subhpto).max(0)
 		}
 		if(player.data.card40eff14 == true){
 			player.data.card40geteff14 = player.data.card40geteff14.add(player.data.subhpto)

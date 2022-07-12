@@ -56,57 +56,57 @@ function retit(id1,id2){
 
 function redis(id1,id2){
 	if(player.data.effect[11].lte(0)){
-		if(player.data[id1+id2].eq(1)){return `对敌方造成 <red id="red">13 物理伤害</red><br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(3)){return `恢复 13 血,获得 3 恢复<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5 魔力`}
-		if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(1)){return `对敌方造成 <red id="red">13 物理伤害</red><br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(2)){return `增加 15 护甲<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(3)){return `恢复 13 血,获得 3 恢复<br>消耗:<img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(4)){return `对敌方造成 <blue id="blue">15 魔法伤害</blue><br>消耗:5<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(5)){return `先获得 2 智慧,再增加 1 体力, 2 魔力<br>消耗:<img src="png/PS.png">`}
 		if(player.data[id1+id2].eq(6)){return `恢复 7 魔力<br>消耗:无`}
-		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>4次<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(8)){return `获得 6 力量<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">28 物理伤害</red>并附带 1 眩晕<br>移除<br>消耗:3 体力`}
-		if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>移除<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 <red id="red">1 物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:1 体力,1 魔力`}
-		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 4 魔力枯竭.给敌方 2 焱<br>移除<br>消耗:x 魔力`}
-		if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17 魔力`}
-		if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x 魔力`}
+		if(player.data[id1+id2].eq(7)){return `对敌方造成 <red id="red">4 物理伤害</red>4次<br>消耗:<img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(8)){return `获得 6 力量<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(9)){return `给敌方 6 中毒<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(10)){return `给敌方 3 感染,我方 2 感染<br>消耗:<img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(11)){return `抽一张牌,恢复 1 体力,如果有智慧效果则再触发一次<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(12)){return `对敌方造成 <red id="red">28 物理伤害</red>并附带 1 眩晕<br>移除<br>消耗:<img src="png/PS.png"><img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(13)){return `对敌方造成 <red id="red">10 物理伤害</red>并获得 1 回旋镖<br>移除<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(14)){return `恢复 1 体力,1 魔力和 1 血,造成 <red id="red">1 物理伤害</red>和 <blue id="blue">1 魔法伤害</blue>,给敌方恢复 2 血,自己减少 1 血<br>消耗:<img src="png/PS.png"><img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(15)){return `造成 <blue id="blue">x 魔法伤害</blue>,获得 4 魔力枯竭.给敌方 2 焱<br>移除<br>消耗:x<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(16)){return `造成 <blue id="blue">36 魔法伤害</blue>,敌方获得 2 魔力枯竭<br>消耗:17<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(17)){return `造成 <blue id="blue">3x+8 魔法伤害</blue>,获得 2 魔力枯竭<br>消耗:x<img src="png/MP.png">`}
 		if(player.data[id1+id2].eq(18)){return `恢复 1 体力<br>消耗:10 魔力`}
-		if(player.data[id1+id2].eq(19)){return `每有一张阻梦在手上就少抽一种牌<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(20)){return `使敌人中毒层数翻倍,抽1张牌<br>消耗:3 体力`}
-		if(player.data[id1+id2].eq(21)){return `为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(22)){return `为敌人添加5层中毒,如果敌人中毒层数≥15则抽2张牌<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(23)){return `清除敌人所有中毒层数,每清除1层造成<red id="red"> 4 物理伤害</red><br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(24)){return `先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6 魔力`}
-		if(player.data[id1+id2].eq(25)){return `恢复自己损失血量/3的生命<br>消耗:11 魔力`}
-		if(player.data[id1+id2].eq(26)){return `将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3护甲<br>消耗:15 魔力`}
-		if(player.data[id1+id2].eq(27)){return `造成<red id="red">min((自己损失血量*敌方损失血量)/150的物理伤害,200)</red><br>现在能造成 <red id="red">`+format(Decimal.min(player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150),200).floor(),0)+` 物理伤害</red><br>消耗:3 体力`}
-		if(player.data[id1+id2].eq(28)){return `造成<red id="red">8*持有手牌的物理伤害</red><br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(19)){return `每有一张阻梦在手上就少抽一种牌<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(20)){return `使敌人中毒层数翻倍,抽1张牌<br>消耗:<img src="png/PS.png"><img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(21)){return `为敌人添加3层中毒,然后恢复等同于敌人中毒层数的生命值<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(22)){return `为敌人添加5层中毒,如果敌人中毒层数≥15则抽2张牌<br>消耗:<img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(23)){return `清除敌人所有中毒层数,每清除1层造成<red id="red"> 4 物理伤害</red><br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(24)){return `先将一张当前墓地里最多的牌的复制至手上<br>移除<br>消耗:6<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(25)){return `恢复自己损失血量/3的生命<br>消耗:11<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(26)){return `将手牌移回牌库并重新抽取等量的手牌且每移回一张牌+3护甲<br>消耗:15<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(27)){return `造成<red id="red">min((自己损失血量*敌方损失血量)/150的物理伤害,200)</red><br>现在能造成 <red id="red">`+format(Decimal.min(player.data.hpmax.sub(player.data.hp).mul(player.data.dehpmax.sub(player.data.dehp)).div(150),200).floor(),0)+` 物理伤害</red><br>消耗:<img src="png/PS.png"><img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(28)){return `造成<red id="red">8*持有手牌的物理伤害</red><br>消耗:<img src="png/PS.png">`}
 		if(player.data[id1+id2].eq(29)){return `获得2魔力恢复效果<br>消耗:无`}
-		if(player.data[id1+id2].eq(30)){return `恢复20血,获得 5 恢复<br>消耗:13 魔力`}
-		if(player.data[id1+id2].eq(31)){return `恢复4血并获得5恢复,5护甲<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(32)){return `将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:1 体力,5 魔力`}
-		if(player.data[id1+id2].eq(33)){return `随机获得以下效果中的其中二个①获得11力量②获得11减伤③获得11体力<br>消耗:42 血`}
+		if(player.data[id1+id2].eq(30)){return `恢复20血,获得 5 恢复<br>消耗:13<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(31)){return `恢复4血并获得5恢复,5护甲<br>消耗:<img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(32)){return `将手上所有的牌移到墓地并获得等量的布朗魔术<br>消耗:<img src="png/PS.png">,5<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(33)){return `随机获得以下效果中的其中二个①获得11力量②获得11减伤③获得11体力<br>消耗:42<img src="png/HP.png">`}
 		if(player.data[id1+id2].eq(34)){return `按降低的比例重新分配血,魔力,体力<br>移除<br>现在的比例为`+format((player.data.hp/player.data.hpmax+player.data.mp/player.data.mpmax+player.data.ps/player.data.psmax)/3.3,2)+`<br>消耗:无`}
-		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1 体力,8 魔力`}
-		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7 血`}
-		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的<img id="money" src="png/money.gif">的物理伤害</red><br>消耗:20% <img id="money" src="png/money.gif">`}
-		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">15 物理伤害</blue>,并永久吸取同等血量上限<br>移除<br>消耗:10 魔力`}
+		if(player.data[id1+id2].eq(35)){return `使墓地中的牌*2<br>消耗:1<img src="png/PS.png">,8<img src="png/MP.png">`}
+		if(player.data[id1+id2].eq(36)){return `移除任意最多3张牌<br>消耗:7<img src="png/HP.png">`}
+		if(player.data[id1+id2].eq(37)){return `造成 <red id="red">15%拥有的<img id="money" src="png/money.gif">的物理伤害</red><br>消耗:20%<img id="money" src="png/money.gif">`}
+		if(player.data[id1+id2].eq(38)){return `造成 <blue id="blue">15 物理伤害</blue>,并永久吸取同等血量上限<br>移除<br>消耗:10<img src="png/MP.png">`}
 		if(player.data[id1+id2].eq(39)){return `恢复15法力<br>移除<br>消耗:无`}
-		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5 血`}
+		if(player.data[id1+id2].eq(40)){return `使用后开始记录,之后本回合你受到/造成的伤害都会增加到效果凝血,回合结束取消记录<br>移除<br>消耗:5<img src="png/HP.png">`}
 		if(player.data[id1+id2].eq(41)){return `恢复5血和1体力<br>移除<br>消耗:无`}
-		if(player.data[id1+id2].eq(42)){return `50%获得抽取3张卡,50%减去15血<br>消耗:1 体力`}
+		if(player.data[id1+id2].eq(42)){return `50%获得抽取3张卡,50%减去15血<br>消耗:<img src="png/PS.png">`}
 		if(player.data[id1+id2].eq(43)){return `血量低于5%时可以使用,造成 <red id="red">300 物理伤害</red><br>永久移除这张卡<br>消耗:无`}
-		if(player.data[id1+id2].eq(44)){return `获得20护甲<br>消耗:8 魔力`}
+		if(player.data[id1+id2].eq(44)){return `获得20护甲<br>消耗:8<img src="png/MP.png">`}
 		if(player.data[id1+id2].eq(45)){return `50%给敌方+5感染,50%给我方+3感染<br>消耗:无`}
 		if(player.data[id1+id2].eq(46)){return `获得24防御,2易伤<br>消耗:1 体力`}
-		if(player.data[id1+id2].eq(47)){return `恢复50血<br>永久移除这张卡<br>消耗:2 体力`}
-		if(player.data[id1+id2].eq(48)){return `75%造成 <red id="red">36 物理伤害</red>,25%造成 <red id="red">4 物理伤害</red><br>消耗:2 体力`}
+		if(player.data[id1+id2].eq(47)){return `恢复50血<br>永久移除这张卡<br>消耗:<img src="png/PS.png"><img src="png/PS.png">`}
+		if(player.data[id1+id2].eq(48)){return `75%造成 <red id="red">36 物理伤害</red>,25%造成 <red id="red">4 物理伤害</red><br>消耗:<img src="png/PS.png"><img src="png/PS.png">`}
 		if(player.data[id1+id2].eq(49)){return `在手牌中添加一张蔓延,此卡不会使用后进入墓地<br>消耗:无`}
-		if(player.data[id1+id2].eq(50)){return `恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>当前恢复量`+format(player.data.hp.mul(player.data.mp).mul(player.data.ps).div(500).floor(),0)+`%<br>消耗:1 体力,3 魔力,10 血`}
-		if(player.data[id1+id2].eq(51)){return `恢复层数*2,恢复恢复层数的血量<br>消耗:10 魔力`}
+		if(player.data[id1+id2].eq(50)){return `恢复[(当前血*当前魔力*当前体力)/500]%的血,魔力,体力<br>当前恢复量`+format(player.data.hp.mul(player.data.mp).mul(player.data.ps).div(500).floor(),0)+`%<br>消耗:<img src="png/PS.png">,3<img src="png/MP.png">,10<img src="png/HP.png">`}
+		if(player.data[id1+id2].eq(51)){return `恢复层数*2,恢复恢复层数的血量<br>消耗:10<img src="png/MP.png">`}
 	}else{
 		return `???`
 	}
