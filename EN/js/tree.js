@@ -810,7 +810,10 @@ addLayer("tree-tab", {
 			},
 			canClick(){return true},
 			unlocked(){return !player.data.dehp.lte(0) && player.data.hp.gt(0) && player.data.start == true},
-			onClick(){return getcard("display",3)},
+			onClick(){
+				getcard("display",3)
+				if(player.data.newmap==true){remap()}
+			},
 		},
 		1002:{
 			title: "下一回合!<br><h6>+3体力<br>÷2护甲",

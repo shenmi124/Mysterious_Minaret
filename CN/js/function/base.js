@@ -238,6 +238,7 @@ function softReset(){
 		layerDataReset('map')
 		layerDataReset('campfire')
 		showTab('none')
+		remap()
 	}
 }
 
@@ -251,12 +252,13 @@ function rehardReset(){
 			layerDataReset('a')
 			layerDataReset('campfire')
 			showTab('none')
+			remap()
 		}
 	}
 }
 
 function backnone(){
-	if(player.data.newmap == true){
+	if(player.data.inmap == true){
 		showTab("map")
 	}else if(player.data.dedead == true){
 		showTab("over")

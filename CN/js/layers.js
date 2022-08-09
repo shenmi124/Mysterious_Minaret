@@ -517,6 +517,7 @@ addLayer("data", {
 		
 		newlevel:false,
 		newmap:false,
+		inmap:false,
 		backdeckCD:false,
 		level:new Decimal(0),
 		
@@ -736,7 +737,7 @@ addLayer("over", {
 			title(){return "宝箱!"},
 			canClick(){return true},
 			unlocked(){return player.data.artifactsaward == true && player.data.start == false && player.data.hp.gt(0)},
-			onClick(){return awardartifacts()},
+			onClick(){return awardartifacts(1)},
 		},
 	},
 	bars:{
@@ -1488,7 +1489,7 @@ addLayer("store", {
 			style() {return {'height': "200px",'width': '150px'}},
 			onClick(){
 				player.data.money = player.data.money.sub(player.data['store_card'+this.id+'_cost'])
-				awardartifacts()
+				awardartifacts(0)
 				player.data.money = player.data.money.add(Math.floor(Math.random() * 300))
 				player.data['store_card'+this.id+'_canClick'] = false
 				return

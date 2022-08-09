@@ -1,6 +1,6 @@
 function layernew(){
 	showTab('map')
-	player.data.newmap = true
+	player.inmap = true
 }
 
 function remap(){
@@ -104,7 +104,7 @@ function maponc(id){
 			player.data['affix_'+c] = true
 		}
 	}else if(player.map['mapy2x'][id-20].eq(2)){
-		awardartifacts()
+		awardartifacts(0)
 	}else if(player.map['mapy2x'][id-20].eq(3)){
 		store_card()
 		showTab('store')

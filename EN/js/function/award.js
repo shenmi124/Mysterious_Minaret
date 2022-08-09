@@ -25,8 +25,8 @@ function awardcard(id1,id2){
 	player.data.cardaward = false
 }
 
-function awardartifacts(){
-	for(cao=0;cao<=0;cao++){
+function awardartifacts(id){
+	for(cao=0;cao<=id;cao++){
 		let fabric = Math.floor((Math.random() * 100))+1
 		if(fabric<=50){
 			let sole = Math.floor((Math.random() * 1))
