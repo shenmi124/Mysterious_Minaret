@@ -1,0 +1,55 @@
+#other1 {
+	color: white;
+	text-shadow: 0 0 var(--px) var(--points);
+}
+
+#red {
+	color: red;
+	text-shadow: 0 0 var(--px) red;
+}
+
+#blue {
+	color: blue;
+	text-shadow: 0 0 var(--px) blue;
+}
+
+#yellow {
+	color: yellow;
+	text-shadow: 0 0 var(--px) yellow;
+}
+
+#talent_crystal_id {
+	color: purple;
+	text-shadow: 0 0 var(--px) purple;
+	font-size: 25px;
+}
+
+#news {
+    color: #FFFFFF;
+    /*position: relative;*/
+    /*display: inline-block;*/
+    text-align: right;
+    font-size: 15px;
+    white-space: nowrap;
+    font-weight: bold
+}
+
+.white_content {
+	display:none;
+	top:25%;
+	left:25%;
+	width:70%;
+	height:70%;
+	padding:20px;
+	border:20px blue;
+	z-index:1002;
+	overflow:auto;
+}
+
+body {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
