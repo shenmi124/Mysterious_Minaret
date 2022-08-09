@@ -85,11 +85,12 @@ function maponc(id){
 	player.a.ha8 = new Decimal(0)
 	player.data.level = player.data.level.add(1)
 	if(player.map['mapy2x'][id-20].eq(0)){
-		player.data.monster = new Decimal(0)
 		levelnew()
 	}else if(player.map['mapy2x'][id-20].eq(1)){
-		player.data.monster = new Decimal(Math.floor((Math.random() * 7)) + 1)
 		levelnew()
+		let a = Math.floor((Math.random() * 26))+1
+		player.data.artifactsaward = true
+		player.data['affix_'+a] = true
 	}else if(player.map['mapy2x'][id-20].eq(2)){
 		awardartifacts()
 	}else if(player.map['mapy2x'][id-20].eq(3)){
@@ -99,7 +100,7 @@ function maponc(id){
 		showTab('campfire')
 		player.a.ha8 = new Decimal(1)
 	}else if(player.map['mapy2x'][id-20].eq(5)){
-		let a =  new Decimal(Math.floor((Math.random() * 4)))
+		let a = new Decimal(Math.floor((Math.random() * 4)))
 		player.data.level = player.data.level.sub(a).max(0)
 		player.a.ha6 = new Decimal(1)
 	}else if(player.map['mapy2x'][id-20].eq(6)){

@@ -13,11 +13,11 @@ function our_action(){
 }
 
 function typemoster(){
-	if(player.data.monster.eq(1)){
-		player.data.effect[4] = player.data.effect[4].add(2)
+	if(player.data.affix_1==true){
+		player.data.effect[4] = player.data.effect[4].add(4)
 	}
 	
-	if(player.data.monster.eq(2)){
+	if(player.data.affix_2==true){
 		let cao = 1
 		let tow = Math.floor((Math.random() * 2))
 		if(tow==1){cao = 2}
@@ -33,22 +33,26 @@ function typemoster(){
 		}
 	}
 	
-	if(player.data.monster.eq(3)){
+	if(player.data.affix_3==true){
 
 	}
 	
-	if(player.data.monster.eq(4)){
-		player.data.deatk = player.data.deatk.mul(2)
+	if(player.data.affix_4==true){
+		player.data.deatk = player.data.deatk.mul(1.2).floor()
 	}
 	
-	if(player.data.monster.eq(5)){
+	if(player.data.affix_5==true){
 		if(player.data.dehp.lte(player.data.dehpmax.mul(0.3))){
 			enemy_attack_action(2)
 		}
 	}
 	
-	if(player.data.monster.eq(6)){
+	if(player.data.affix_6==true){
 		player.data.effect[11] = player.data.effect[11].add(2)
 		player.data.effect[3] = player.data.effect[3].add(5)
+	}
+	
+	if(player.data.affix_7==true){
+
 	}
 }

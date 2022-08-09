@@ -1,36 +1,8 @@
 function levelnew(){
 	showTab('none')
-	//let monsterup =  Math.floor((Math.random() * 4))
 	let newdehp = new Decimal(30).add(player.data.level.mul(4)).add(Math.random() * player.data.level.mul(5.5).pow(Decimal.add(1).add(player.data.level.div(100)))).mul(Decimal.add(1).sub(player.data.Normal_Artifacts_Sole[0].mul(5))).floor()
 	let newdemp =  new Decimal(4).add(player.data.level.mul(0.35)).add(Math.random() * player.data.level.mul(1.1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
 	let newdeatk =  new Decimal(6).add(player.data.level.mul(0.8)).add(Math.random() * player.data.level.mul(1.1).pow(Decimal.add(1).add(player.data.level.div(100)))).floor()
-	/*/if(monsterup==0){
-		player.data.monster = new Decimal(Math.floor((Math.random() * 6)) + 1)
-	}else{
-		player.data.monster = new Decimal(0)
-	}
-	*/
-	if(player.data.monster.eq(1)){
-		newdehp = newdehp.mul(1.65).floor()
-	}
-	if(player.data.monster.eq(3)){
-		newdehp = newdehp.mul(1.3).floor()
-		newdeatk = newdeatk.mul(1.15).floor()
-	}
-	if(player.data.monster.eq(4)){
-		newdehp = newdehp.mul(1.45).floor()
-		newdeatk = new Decimal(2)
-	}
-	if(player.data.monster.eq(5)){
-		newdehp = newdehp.mul(1.4).floor()
-		newdeatk = newdeatk.mul(1.4).floor()
-	}
-	if(player.data.monster.eq(6)){
-		newdehp = newdehp.mul(0.75).floor()
-	}
-	if(player.data.monster.eq(7)){
-		newdehp = newdehp.mul(1.25).floor()
-	}
 	player.data.dehp = new Decimal(newdehp)
 	player.data.dehpmax = new Decimal(newdehp)
 	player.data.demp = new Decimal(newdemp)
@@ -67,6 +39,9 @@ function levelnew(){
 	for(col=1;col<=player.data.allcard;col++){
 		player.data.card[col] = new Decimal(player.data.cardmax[col])
 		player.data.carddead[col] = new Decimal(0)
+	}
+	for(col=1;col<=26;col++){
+		player.data['affix_'+col] = new Decimal(0)
 	}
 	player.data.cardmax[19] = new Decimal(0)
 	player.data.eff10times = new Decimal(0)
@@ -1079,33 +1054,41 @@ addLayer("tree-tab", {
 			return card0 + card1 + card2 + card3 + card4 + card5 + card6 + card7 + card8 + card9 + card10 + card11 + card12 + card13 + card14 + card15 + card16 + card17 + card18 + card19 + card20 + card21 + card22 + card23 + card24 + card25 + card26 + card27 + card28 + card29 + card30 + card31 + card32 + card33 + card34 + card35 + card36 + card37 + card38 + card39 + card40 + card41 + card42 + card43 + card44 + card45 + card46 + card47 + card48 + card49 + card50 + card51
 			}],
 			["column",[
-				["display-text", function() {
-					let themestart = '<h6>(tip:你有5种不同的背景可以换(包括亮色),当前背景:'
-					let themelast = ')'
-					let theme0 = options.theme=="default" ? "经典" : ""
-					let theme1 = options.theme=="aqua" ? "海蓝" : ""
-					let theme2 = options.theme=="TheGameTree" ? "游戏树特殊页面" : ""
-					let theme3 = options.theme=="lightblue" ? "亮蓝" : ""
-					let theme4 = options.theme=="light" ? "纯白" : ""
-					return themestart + theme0 + theme1 + theme2 + theme3 + theme4 + themelast
-				}],
-				["display-text", function() {return 'QQ群:688646311|左上角设置,信息,捐助|右上角版本,图鉴,背包,成就'}],
-				["display-text", function() {return '<hr>你的最高分是:'+format(player.point.tob_points,0)+'.你上次的得分是:'+format(player.point.last_points,0)+'.'}],
-				["display-text", function() {return '你在层'+format(player.data.level,0)+",怪物会随着层提升越来越强."}],
+				["display-text", function() {return '你在层'+format(player.data.level,0)+"."}],
+				["display-text", function() {return 'QQ群:688646311'}],
+				["display-text", function() {return '你的最高分是:'+format(player.point.tob_points,0)+'.你上次的得分是:'+format(player.point.last_points,0)+'.<hr>'}],
 				["bar", "dehpbar"],
 				["row", [["bar", "dempbar"],["bar", "deatkbar"]]],
 				["row", [["bar", "dedebar"],["bar", "deeff3bar"],["bar", "deeff4bar"],["bar", "deeff5bar"],["bar", "deeff6bar"],["bar", "deeff7bar"],["bar", "deeff8bar"],["bar", "deeff9bar"]]],
 				["bar", "dedebar"],
 				["display-text", function() {
-					let monster0 = player.data.monster.eq(0) ? "":""
-					let monster1 = player.data.monster.eq(1) ? "感染者:每回合给敌方附加3感染<br>*1.65血":""
-					let monster2 = player.data.monster.eq(2) ? "蛊梦师:每回合给敌方1~2张阻梦":""
-					let monster3 = player.data.monster.eq(3) ? "野蛮人:攻击有30%的几率造成晕眩1在双方行动之后<br>*1.3血,*1.15攻击":""
-					let monster4 = player.data.monster.eq(4) ? "截:初始攻击2,每攻击一次攻击翻倍<br>*1.45血":""
-					let monster5 = player.data.monster.eq(5) ? "狂战士:血量低于30%时每回合格外攻击2次<br>*1.4血,*1.4攻击":""
-					let monster6 = player.data.monster.eq(6) ? "混乱者:每回合给予对方2混乱与5中毒<br>*0.75血":""
-					let monster7 = player.data.monster.eq(7) ? "医生:当攻击未别敌方护甲挡下且造成伤害时给予敌方2禁疗<br>*1.25血":""
-					return monster0 + monster1 + monster2 + monster3 + monster4 + monster5 + monster6 + monster7
+					let monster1 = player.data.affix_1==true ? "感染:每回合给敌方附加4感染<br>":""
+					let monster2 = player.data.affix_2==true ? "蛊梦:每回合给敌方1~2张阻梦<br>":""
+					let monster3 = player.data.affix_3==true ? "莽夫:攻击有30%的几率造成晕眩1在双方行动之后<br>":""
+					let monster4 = player.data.affix_4==true ? "狂怒:每攻击一次攻击使攻击*1.2<br>":""
+					let monster5 = player.data.affix_5==true ? "野蛮:血量低于30%时每回合格外攻击2次<br>":""
+					let monster6 = player.data.affix_6==true ? "混乱:每回合给予对方2混乱与5中毒<br>":""
+					let monster7 = player.data.affix_7==true ? "医生:当攻击未被护甲挡下且造成伤害时给予敌方2禁疗<br>":""
+					let monster8 = player.data.affix_8==true ? "限制:你手上只能拥有最多6张牌<br>":""
+					let monster9 = player.data.affix_9==true ? "复生:死亡时恢复10%血量一次<br>":""
+					let monster10 = player.data.affix_10==true ? "反制:你每回合的第一张牌无效<br>":""
+					let monster11 = player.data.affix_11==true ? "偷窃:你每回合结束时随机失去一张手牌<br>":""
+					let monster12 = player.data.affix_12==true ? "平衡:我方回合开始时,以3/4的比例重新分配血,魔力,体力<br>":""
+					let monster13 = player.data.affix_13==true ? "嗜血:血量越低,伤害越高<br>":""
+					let monster14 = player.data.affix_14==true ? "迅捷:有10%免疫任何伤害<br>":""
+					let monster15 = player.data.affix_15==true ? "钢铁:受到的物理伤害最多为15<br>":""
+					let monster16 = player.data.affix_16==true ? "条码:自身属性为乱码<br>":""
+					let monster17 = player.data.affix_17==true ? "恶灵:开局给予一层窒息,每2回合获得一层隐身<br>":""
+					let monster18 = player.data.affix_18==true ? "机械:每回合获得1机械能,机械能会提升含有机械能词条的怪物5%攻击,结束战斗时机械能不会清除<br>":""
+					let monster19 = player.data.affix_19==true ? "未来:开局时获得等同于自身血量上限的护甲<br>":""
+					let monster20 = player.data.affix_20==true ? "古代种:攻击未被被护甲挡下且造成伤害时替换全部手牌为攻击<br>":""
+					let monster21 = player.data.affix_21==true ? "保护:伤害减免35%<br>":""
+					let monster22 = player.data.affix_22==true ? "杀手:攻击有75%的几率造成1.5倍伤害<br>":""
+					let monster23 = player.data.affix_23==true ? "聚合:血量低于自身血上限15%时不再攻击且获得等同于剩余血量的护甲,在3回合后若自身未死亡自爆造成25%自身血上限的物理伤害<br>":""
+					let monster24 = player.data.affix_24==true ? "暴怒:每回合获得5层愤怒<br>":""
+					let monster25 = player.data.affix_25==true ? "歹毒:攻击施加3层易伤<br>":""
+					let monster26 = player.data.affix_26==true ? "陨切:每回合攻击4次但每次只能造成自身30%的伤害<br>":""
+					return monster1 + monster2 + monster3 + monster4 + monster5 + monster6 + monster7 + monster8 + monster9 + monster10 + monster11 + monster12 + monster13 + monster14 + monster15 + monster16 + monster17 + monster18 + monster19 + monster20 + monster21 + monster22 + monster23 + monster24 + monster25 + monster26
 				}],
 				["row", [["clickable", 1022]]],
 				["blank", '170px'],

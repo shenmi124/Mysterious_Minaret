@@ -117,12 +117,12 @@ function enemy_attack_action(id){
 			player.data.deatkto = player.data.deatkto.sub(player.data.de)
 			attributes(-player.data.deatkto.floor(),0,0,0,0,0)
 			player.data.de = new Decimal(0)
-			if(player.data.monster.eq(7)){
+			if(player.data.affix_7==true){
 				geteffect(16,2)
 			}
 		}else{
 			attributes(-player.data.deatkto.floor(),0,0,0,0,0)
-			if(player.data.monster.eq(7)){
+			if(player.data.affix_7==true){
 				geteffect(16,2)
 			}
 		}

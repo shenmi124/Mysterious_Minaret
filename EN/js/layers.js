@@ -285,7 +285,32 @@ addLayer("data", {
 		
 		
 		//怪物
-		monster:new Decimal(0),
+		affix_1:false,
+		affix_2:false,
+		affix_3:false,
+		affix_4:false,
+		affix_5:false,
+		affix_6:false,
+		affix_7:false,
+		affix_8:false,
+		affix_9:false,
+		affix_10:false,
+		affix_11:false,
+		affix_12:false,
+		affix_13:false,
+		affix_14:false,
+		affix_15:false,
+		affix_16:false,
+		affix_17:false,
+		affix_18:false,
+		affix_19:false,
+		affix_20:false,
+		affix_21:false,
+		affix_22:false,
+		affix_23:false,
+		affix_24:false,
+		affix_25:false,
+		affix_26:false,
 		
 		//卡牌
 		card:[new Decimal(0),
@@ -541,9 +566,6 @@ addLayer("data", {
 				player.data.Special_Artifacts0 = player.data.Special_Artifacts0.add(1)
 			}
 			player.data.effect[11] = new Decimal(0)
-			if(!player.data.monster.eq(0)){
-				player.data.artifactsaward = true
-			}
 		}
 		if(player.data.hp.lte(0) && player.data.Special_Artifacts0.gte(4) && player.data.Special_Artifacts[0].gt(0) && player.data.Special_Artifacts[1].gt(0)){
 			player.data.Special_Artifacts0 = player.data.Special_Artifacts0.sub(4)

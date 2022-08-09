@@ -135,7 +135,7 @@ function recard(){
 	}
 	
 	//怪物
-	if(player.data.deeffect[5].lte(0) && player.data.effect10effect == false && player.data.monster.eq(3)){
+	if(player.data.deeffect[5].lte(0) && player.data.effect10effect == false && player.data.affix_3==true){
 		let eff5 = new Decimal(Math.floor((Math.random() * 100)) + 1)
 		if(eff5<=30){geteffect(5,1)}
 	}

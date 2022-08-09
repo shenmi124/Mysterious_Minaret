@@ -88,7 +88,7 @@ function maponc(id){
 		levelnew()
 	}else if(player.map['mapy2x'][id-20].eq(1)){
 		levelnew()
-		let a = Math.floor((Math.random() * 26))+1
+		let a = Math.floor((Math.random() * 7))+1
 		player.data.artifactsaward = true
 		player.data['affix_'+a] = true
 	}else if(player.map['mapy2x'][id-20].eq(2)){
