@@ -86,11 +86,23 @@ function maponc(id){
 	player.data.level = player.data.level.add(1)
 	if(player.map['mapy2x'][id-20].eq(0)){
 		levelnew()
+		let a = Math.floor((Math.random() * 5))+1
+		if(a==1){
+			let b = Math.floor((Math.random() * 7))+1
+			player.data.artifactsaward = true
+			player.data['affix_'+b] = true
+		}
 	}else if(player.map['mapy2x'][id-20].eq(1)){
 		levelnew()
 		let a = Math.floor((Math.random() * 7))+1
 		player.data.artifactsaward = true
 		player.data['affix_'+a] = true
+		let b = Math.floor((Math.random() * 2))+1
+		if(b==1){
+			let c = Math.floor((Math.random() * 7))+1
+			player.data.artifactsaward = true
+			player.data['affix_'+c] = true
+		}
 	}else if(player.map['mapy2x'][id-20].eq(2)){
 		awardartifacts()
 	}else if(player.map['mapy2x'][id-20].eq(3)){
