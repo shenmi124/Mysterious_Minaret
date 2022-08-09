@@ -13,13 +13,17 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.6.78b",
+	num: "0.1.6.79b",
 	name: "神秘尖塔",
 }
 
 let changelog = `
 	<div class="link" onclick="backnone()"><big><big>返回游戏</big></big></div><br>
 	<h1>更新日志:</h1><br>
+	<br><h3>v0.1.7.79β 词缀更新</h3><br>
+	<li>将精英怪改成了以词缀的形式出现(未实装:新的19个词缀,普通怪0~1词缀,精英怪1~2词缀)<br>
+	<li>将中英文的网址合在了一起<br>
+	<li>修复bug<br>
 	<br><h3>v0.1.6.78β 缤纷更新</h3><br>
 	<li>地图拥有更多类型<br>
 	<li>添加营地<br>
