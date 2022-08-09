@@ -126,6 +126,9 @@ function enemy_attack_action(id){
 				geteffect(16,2)
 			}
 		}
+		if(player.data.affix_4==true){
+			player.data.deatk = player.data.deatk.mul(1.2).floor()
+		}
 	}
 }
 

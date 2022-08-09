@@ -37,13 +37,9 @@ function typemoster(){
 
 	}
 	
-	if(player.data.affix_4==true){
-		player.data.deatk = player.data.deatk.mul(1.2).floor()
-	}
-	
 	if(player.data.affix_5==true){
 		if(player.data.dehp.lte(player.data.dehpmax.mul(0.3))){
-			enemy_attack_action(2)
+			enemy_attack_action(1)
 		}
 	}
 	
