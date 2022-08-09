@@ -53,8 +53,10 @@
 <body onload="load()" onmousemove="updateMouse(event)">
 	<div id="app">
 	<div v-if="false" id="loadingSection" class="fullWidth">
-			<h1>加载中<br>(左上角分别是设置,信息,捐助.)<br>(右上角分别是版本,图鉴,背包,成就.)<br>QQ群:688646311</h1>
+			<h1>加载中<br>(左上角分别是设置,信息,捐助.)<br>(右上角分别是版本,图鉴,背包.)<br>QQ群:688646311</h1>
 		</div>
+		<script src="chs.js"></script>
+		<script src="core.js"></script>
 		<div id="treeOverlay" v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen || !readData(layoutInfo.showTree))" class="treeOverlay" onscroll="resizeCanvas()"
 			v-bind:class="{ 
 			fullWidth: (player.tab == 'none' || player.navTab == 'none'), 
@@ -69,6 +71,7 @@
 			<img id="bag" class="overlayThing" src="png/bag.png" onclick="showTab('bag')"></img>
 			<img id="afdian" class="overlayThing" src="png/afdian.png" onclick="showTab('afdian')"></img>
 			<img id="trophy" class="overlayThing" src="png/trophy.png" onclick="showTab('a')"></img>
+			
 		</div>
 		
 		<div v-if="!(tmp.gameEnded && !player.keepGoing) && (player.tab === 'none' || tmp.other.splitScreen)" id="treeTab"  onscroll="resizeCanvas()" 
@@ -106,5 +109,6 @@
 
 		</div>
 		<div class = "bg2" v-bind:style = "tmp.backgroundStyle"></div>
+
 	</div>   
 </body>
